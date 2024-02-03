@@ -85,7 +85,7 @@
   position: relative;
   padding: 11px 35px;
   background: #fff;
-  color: #03d7f8;
+  color: #00796b;
   border: 2px solid #fff;
   font-weight: 600;
   font-size: 15px;
@@ -97,7 +97,7 @@
 
 /* .readme:hover{
   color: white;
-  background-color: #03d7f8;
+  background-color: #00796b;
 } */
 
 .contactme {
@@ -116,7 +116,7 @@
 }
 
 .contactme:hover{
-  color: #03d7f8;
+  color: #00796b;
   background-color: white;
 }
 /* main body */
@@ -549,7 +549,7 @@ small {
 /* main .teal-text */
 
 .teal-text {
-  color: #28d8ec !important;
+  color: #008073 !important;
 }
 
 /* .teal-text {
@@ -559,7 +559,7 @@ small {
 /* .teal */
 
 .teal {
-  background-color: #28d8ec !important;
+  background-color: #008073 !important;
 }
 
 /* .teal {
@@ -602,7 +602,7 @@ small {
     position: absolute;
   }
   nav a.button-collapse, nav a.button-collapse i {
-    color: #3fcad4;
+    color: #009688;
     height: 56px;
     line-height: 56px;
   }
