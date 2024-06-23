@@ -1,0 +1,104 @@
+[
+  {
+    "url": "https://arxiv.org/abs/2406.13129",
+    "title": "M3T: Multi-Modal Medical Transformer to Bridge Clinical Context with Visual Insights for Retinal Image Medical Description Generation",
+    "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP)",
+    "year": "2024"
+  },
+  {
+    "url": "https://arxiv.org/abs/2406.13126v1",
+    "title": "Guided Context Gating: Learning to Leverage Salient Lesions in Retinal Fundus Images",
+    "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP)",
+    "year": "2024"
+  },
+  {
+    "url": "https://link.springer.com/article/10.1007/s00138-024-01542-2",
+    "title": "Medtransnet: advanced gating transformer network for medical image classification",
+    "medium": "Machine Vision and Applications, Springer Berlin Heidelberg Berlin/Heidelberg",
+    "year": "2024"
+  },
+  {
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S0262885624000490",
+    "title": "Gated contextual transformer network for multi-modal retinal image clinical description generation",
+    "medium": "Image and Vision Computing, Elsevier B.V.",
+    "year": "2024"
+  },
+  {
+    "url": "https://arxiv.org/abs/2406.12683",
+    "title": "Spatial Sequence Attention Network for Schizophrenia Classification from Structural Brain MR Images",
+    "medium": "Proceedings of the 21st IEEE International Symposium on Biomedical Imaging",
+    "year": "2024"
+  },
+  {
+    "url": "https://link.springer.com/article/10.1007/s12652-022-03843-8",
+    "title": "Visual attention based composite dense neural network for facial expression recognition",
+    "medium": "Journal of Ambient Intelligence and Humanized Computing, Springer Berlin Heidelberg Berlin/Heidelberg",
+    "year": "2022"
+  },
+  {
+    "url": "https://link.springer.com/article/10.1007/s10489-021-03043-5",
+    "title": "Hinge attention network: A joint model for diabetic retinopathy severity grading",
+    "medium": "Applied Intelligence, Springer US New York",
+    "year": "2022"
+  },
+  {
+    "url": "https://www.sciencedirect.com/science/article/pii/S0010482521009215",
+    "title": "Transfer learning based novel ensemble classifier for COVID-19 detection from chest CT-scans",
+    "medium": "Computers in Biology and Medicine, Elsevier B.V.",
+    "year": "2021"
+  },
+  {
+    "url": "https://link.springer.com/article/10.1007/s00138-021-01253-y",
+    "title": "Lesion-aware attention with neural support vector machine for retinopathy diagnosis",
+    "medium": "Machine Vision and Applications, Springer Berlin Heidelberg Berlin/Heidelberg",
+    "year": "2021"
+  },
+  {
+    "url": "https://link.springer.com/article/10.1007/s11760-021-02022-0",
+    "title": "Multi-level attention network: application to brain tumor classification",
+    "medium": "Signal Image and Video Processing, Springer London",
+    "year": "2021"
+  },
+  {
+    "url": "https://www.worldscientific.com/doi/10.1142/S0218001421570056",
+    "title": "MSENet: Multi-Modal Squeeze-and-Excitation Network for Brain Tumor Severity Prediction",
+    "medium": "International Journal of Pattern Recognition and Artificial Intelligence (IJPRAI), World Scientific",
+    "year": "2021"
+  },
+  {
+    "url": "https://link.springer.com/article/10.1007/s11760-020-01816-y",
+    "title": "Deep convolution feature aggregation: an application to diabetic retinopathy severity level prediction",
+    "medium": "Signal Image and Video Processing, Springer London",
+    "year": "2021"
+  },
+  {
+    "url": "https://link.springer.com/article/10.1007/s12652-020-02727-z",
+    "title": "Composite deep neural network with gated-attention mechanism for diabetic retinopathy severity classification",
+    "medium": "Journal of Ambient Intelligence and Humanized Computing, Springer Berlin Heidelberg Berlin/Heidelberg",
+    "year": "2021"
+  },
+  {
+    "url": "https://link.springer.com/article/10.1007/s11760-020-01793-2",
+    "title": "Joint training of two-channel deep neural network for brain tumor classification",
+    "medium": "Signal Image and Video Processing, Springer London",
+    "year": "2021"
+  },
+  {
+    "url": "https://www.iieta.org/journals/ria/paper/10.18280/ria.340308",
+    "title": "Deep Convolution Features in Non-linear Embedding Space for Fundus Image Classification",
+    "medium": "Revue d'Intelligence Artificielle, International Information and Engineering Technology Association (IIETA)",
+    "year": "2020"
+  },
+  {
+    "url": "https://www.mdpi.com/2079-9292/9/6/914",
+    "title": "Blended multi-modal deep convnet features for diabetic retinopathy severity prediction",
+    "medium": "Electronics, Multidisciplinary Digital Publishing Institute (MDPI)",
+    "year": "2020"
+  },
+  {
+    "url": "https://www.iieta.org/journals/isi/paper/10.18280/isi.240119",
+    "title": "Sentiment Analysis from Movie Reviews Using LSTMs.",
+    "medium": "Ingénierie des Systèmes d Inf., International Information and Engineering Technology Association (IIETA)",
+    "year": "2019"
+  }
+]
