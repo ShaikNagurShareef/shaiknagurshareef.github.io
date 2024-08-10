@@ -1,5 +1,11 @@
 [
   {
+    "url": "https://arxiv.org/pdf/2407.19385",
+    "title": "Multi-modal Imaging Genomics Transformer: Attentive Integration of Imaging with Genomic Biomarkers for Schizophrenia Classification",
+    "medium": "Proceedings of the First MICCAI Workshop on AI for Imaging Genomic Learning (AIIG 2024)",
+    "year": "2024"
+  },
+  {
     "url": "https://arxiv.org/abs/2406.13129",
     "title": "M3T: Multi-Modal Medical Transformer to Bridge Clinical Context with Visual Insights for Retinal Image Medical Description Generation",
     "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP)",
