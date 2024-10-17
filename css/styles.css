@@ -10970,3 +10970,11 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+
+.team-img {
+  width: 100%; /* Fills the width of the card */
+  height: 350px; /* Sets a uniform height for all images */
+  object-fit: cover; /* Ensures the image fits the container, cropped if necessary */
+  border-radius: 5px; /* Optional: rounded corners for a polished look */
+}
+
