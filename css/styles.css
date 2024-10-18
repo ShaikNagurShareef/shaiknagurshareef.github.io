@@ -10971,7 +10971,7 @@ section.resume-section .resume-section-content {
   }
 }
 
-.team-img {
+.collaborator-img {
   width: 100%; /* Fills the width of the card */
   height: 350px; /* Sets a uniform height for all images */
   object-fit: cover; /* Ensures the image fits the container, cropped if necessary */
