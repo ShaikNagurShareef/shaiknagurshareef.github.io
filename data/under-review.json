@@ -5,7 +5,7 @@
         "medium": "Proceedings of the 50th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)",
         "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Bodapati, Jyostna Devi; Ye, Dong Hye",
         "year": "2025",
-        "new": true
+        "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
     },
     {
         "url": "https://arxiv.org/pdf/2407.19385",
@@ -13,7 +13,7 @@
         "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI)",
         "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
         "year": "2025",
-        "new": false
+        "new": ""
     },
     {
         "url": "https://biomedicalimaging.org/2025/",
@@ -21,7 +21,7 @@
         "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
         "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI)",
         "year": "2025",
-        "new": false
+        "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
     },
     {
         "url": "https://conferences.miccai.org/2025/en/default.asp",
@@ -29,6 +29,6 @@
         "medium": "Proceedings of the 28th International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)",
         "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
         "year": "2025",
-        "new": true
+        "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
     }
 ]

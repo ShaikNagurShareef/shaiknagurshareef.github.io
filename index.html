@@ -8,6 +8,7 @@
         gtag('js', new Date());
         gtag('config', 'UA-55120145-4');
       </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="Personal Portfolio of Nagur Shareef Shaik" />
@@ -382,43 +383,19 @@
 
         <div class="subheading mb-3" id="conferences"><i class="fas fa-edit"></i> Conference Proceedings</div>
         <ul class="fa-ul mb-0">
-          <li point-component="conferences"><i class="fa-li">&#128196</i>
-          <!-- Check if 'new' is true to display the badge -->
-          {{#if new}}
-            <span class="new-badge">
-              <img src="img/new.png" alt="badge-icon" class="badge-icon" />
-              New
-            </span>
-          {{/if}}
-        <a href="{{url}}" target="_blank">{{title}}</a><br/>{{authors}}<br/>{{medium}}, {{year}}</li>
+          <li point-component="conferences"><i class="fa-li">&#128196</i>{{new}}<a href="{{url}}" target="_blank">{{title}}</a><br/>{{authors}}<br/>{{medium}}, {{year}}</li>
         </ul>
         <br/>
 
         <div class="subheading mb-3" id="journals"><i class="fas fa-file-alt"></i> Journal Papers</div>
         <ul class="fa-ul mb-0">
-          <li point-component="journals"><i class="fa-li">&#128196</i>
-          <!-- Check if 'new' is true to display the badge -->
-          {{#if new}}
-            <span class="new-badge">
-              <img src="img/new.png" alt="badge-icon" class="badge-icon" />
-              New
-            </span>
-          {{/if}}
-          <a href="{{url}}" target="_blank">{{title}}</a><br/>{{authors}}<br/> {{medium}}, {{year}}</li>
+          <li point-component="journals"><i class="fa-li">&#128196</i>{{new}}<a href="{{url}}" target="_blank">{{title}}</a><br/>{{authors}}<br/> {{medium}}, {{year}}</li>
         </ul>
         <br/>
 
         <div class="subheading mb-3" id="under-review"><i class="fas fa-book-reader"></i> Under Review</div>
         <ul class="fa-ul mb-0">
-          <li point-component="review"><i class="fa-li">&#128196</i>
-          <!-- Check if 'new' is true to display the badge -->
-          {{#if new}}
-            <span class="new-badge">
-              <img src="img/new.png" alt="badge-icon" class="badge-icon" />
-              New
-            </span>
-          {{/if}}
-          <a href="{{url}}" target="_blank">{{title}}</a><br/>{{authors}}<br/> {{medium}}, {{year}}</li>
+          <li point-component="review"><i class="fa-li">&#128196</i>{{new}}<a href="{{url}}" target="_blank">{{title}}</a><br/>{{authors}}<br/> {{medium}}, {{year}}</li>
         </ul>
         <br/>
 
