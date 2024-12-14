@@ -10978,3 +10978,10 @@ section.resume-section .resume-section-content {
   border-radius: 5px; /* Optional: rounded corners for a polished look */
 }
 
+.badge {
+  background-color: blue;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
+}
