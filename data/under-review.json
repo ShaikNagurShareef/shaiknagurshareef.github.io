@@ -3,20 +3,20 @@
         "url": "https://2025.ieeeicassp.org/",
         "title": "GCS-M3VLT: Guided Context Self-Attention based Multi-modal Medical Vision Language Transformer for Retinal Image Captioning",
         "medium": "Proceedings of the 50th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)",
-        "authors": "Shaik, Nagur Shareef; Cherukuri, Teja Krishna; Bodapati, Jyostna Devi; Ye, Dong Hye",
+        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Bodapati, Jyostna Devi; Ye, Dong Hye",
         "year": "2025"
     },
     {
         "url": "https://arxiv.org/pdf/2407.19385",
         "title": "Multi-modal Imaging Genomics Transformer: Attentive Integration of Imaging with Genomic Biomarkers for Schizophrenia Classification",
         "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI)",
-        "authors": "Shaik, Nagur Shareef; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
+        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
         "year": "2025"
     },
     {
         "url": "https://biomedicalimaging.org/2025/",
         "title": "Dynamic Contextual Attention Network: Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis",
-        "authors": "Shaik, Nagur Shareef; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
+        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
         "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI)",
         "year": "2025"
     },
@@ -24,7 +24,7 @@
         "url": "https://conferences.miccai.org/2025/en/default.asp",
         "title": "MedVLT: Focus & Fusion in Vision Language Transformer Yield Expert Precision in Medical Image Captioning",
         "medium": "Proceedings of the 28th International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)",
-        "authors": "Shaik, Nagur Shareef; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
+        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
         "year": "2025"
     }
 ]
