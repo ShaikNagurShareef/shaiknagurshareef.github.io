@@ -10991,3 +10991,8 @@ section.resume-section .resume-section-content {
   width: 25px; /* Adjust size of the icon */
   height: 25px;
 }
+
+.oral-icon {
+  width: 50px; /* Adjust size of the icon */
+  height: 50px;
+}
