@@ -1,26 +1,34 @@
 [
-    {
-      "url": "https://ieeexplore.ieee.org/document/10647584",
-      "title": "M3T: Multi-Modal Medical Transformer to Bridge Clinical Context with Visual Insights for Retinal Image Medical Description Generation",
-      "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP) - <span style='color: blue;'>Oral</span>",
-      "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
+  {
+    "url": "https://2025.ieeeicassp.org/",
+    "title": "GCS-M3VLT: Guided Context Self-Attention based Multi-modal Medical Vision Language Transformer for Retinal Image Captioning",
+    "medium": "Proceedings of the 50th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)",
+    "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Bodapati, Jyostna Devi; Ye, Dong Hye",
+    "year": "2025",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+  },  
+  {
+    "url": "https://ieeexplore.ieee.org/document/10647584",
+    "title": "M3T: Multi-Modal Medical Transformer to Bridge Clinical Context with Visual Insights for Retinal Image Medical Description Generation",
+    "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP) - <span style='color: blue;'>Oral</span>",
+    "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
+    "year": "2024",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+  },
+  {
+    "url": "https://ieeexplore.ieee.org/document/10647604",
+    "title": "Guided Context Gating: Learning to Leverage Salient Lesions in Retinal Fundus Images",
+    "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP) - Poster",
+    "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Ye, Dong Hye",
+    "year": "2024",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+  },
+  {
+      "url": "https://ieeexplore.ieee.org/document/10635528",
+      "title": "Spatial Sequence Attention Network for Schizophrenia Classification from Structural Brain MR Images",
+      "medium": "Proceedings of the 21st IEEE International Symposium on Biomedical Imaging (ISBI) - <span style='color: blue;'>Oral</span>",
+      "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
       "year": "2024",
-      "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
-    },
-    {
-      "url": "https://ieeexplore.ieee.org/document/10647604",
-      "title": "Guided Context Gating: Learning to Leverage Salient Lesions in Retinal Fundus Images",
-      "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP) - Poster",
-      "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Ye, Dong Hye",
-      "year": "2024",
-      "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
-    },
-    {
-        "url": "https://ieeexplore.ieee.org/document/10635528",
-        "title": "Spatial Sequence Attention Network for Schizophrenia Classification from Structural Brain MR Images",
-        "medium": "Proceedings of the 21st IEEE International Symposium on Biomedical Imaging (ISBI) - <span style='color: blue;'>Oral</span>",
-        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
-        "year": "2024",
-        "new": ""
-    }
+      "new": ""
+  }
 ]
