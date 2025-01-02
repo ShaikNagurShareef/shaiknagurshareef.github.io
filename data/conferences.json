@@ -1,5 +1,13 @@
 [
   {
+    "url": "https://arxiv.org/pdf/2407.19385",
+    "title": "Multi-modal Imaging Genomics Transformer: Attentive Integration of Imaging with Genomic Biomarkers for Schizophrenia Classification",
+    "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI )- Accepted",
+    "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
+    "year": "2025",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+  },
+  {
     "url": "https://arxiv.org/pdf/2412.17251",
     "title": "GCS-M3VLT: Guided Context Self-Attention based Multi-modal Medical Vision Language Transformer for Retinal Image Captioning",
     "medium": "Proceedings of the 50th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP) - Accepted",

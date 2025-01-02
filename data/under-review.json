@@ -1,17 +1,9 @@
 [
     {
-        "url": "https://arxiv.org/pdf/2407.19385",
-        "title": "Multi-modal Imaging Genomics Transformer: Attentive Integration of Imaging with Genomic Biomarkers for Schizophrenia Classification",
-        "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI)",
-        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
-        "year": "2025",
-        "new": ""
-    },
-    {
-        "url": "https://biomedicalimaging.org/2025/",
+        "url": "https://2025.ieeeicip.org/",
         "title": "Dynamic Contextual Attention Network: Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis",
         "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Yellu, Sribhuvan Reddy; Chung, Jun-Won; Ye, Dong Hye",
-        "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI)",
+        "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP)",
         "year": "2025",
         "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
     },
