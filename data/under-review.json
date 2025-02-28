@@ -7,12 +7,20 @@
         "year": "2025",
         "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
     },
-    // {
-    //     "url": "https://conferences.miccai.org/2025/en/default.asp",
-    //     "title": "MedVLT: Focus & Fusion in Vision Language Transformer Yield Expert Precision in Medical Image Captioning",
-    //     "medium": "Proceedings of the 28th International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)",
-    //     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
-    //     "year": "2025",
-    //     "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
-    // }
+    {
+        "url": "https://conferences.miccai.org/2025/en/default.asp",
+        "title": "DiVA: Disentangled Vision-Language Alignment for Context-Aware Radiology Report Generation",
+        "medium": "Proceedings of the 28th International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)",
+        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
+        "year": "2025",
+        "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    },
+    {
+        "url": "https://conferences.miccai.org/2025/en/default.asp",
+        "title": "MedVLT: Focus & Fusion in Vision Language Transformer Yield Expert Precision in Medical Image Captioning",
+        "medium": "Proceedings of the IEEE-EMBS International Conference on Biomedical and Health Informatics (BHI)",
+        "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Ye, Dong Hye",
+        "year": "2025",
+        "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    }
 ]
