@@ -1,13 +1,5 @@
 [
     {
-        "url": "https://embc.embs.org/2025/",
-        "title": "Dynamic Contextual Attention Network: Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis",
-        "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Yellu, Sribhuvan Reddy; Chung, Jun-Won; Ye, Dong Hye",
-        "medium": "47th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)",
-        "year": "2025",
-        "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
-    },
-    {
         "url": "https://conferences.miccai.org/2025/en/default.asp",
         "title": "DiVA: Disentangled Vision-Language Alignment for Context-Aware Radiology Report Generation",
         "medium": "Proceedings of the 28th International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)",

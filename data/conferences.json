@@ -1,5 +1,13 @@
 [
   {
+    "url": "https://embc.embs.org/2025/",
+    "title": "Dynamic Contextual Attention Network: Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis",
+    "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Yellu, Sribhuvan Reddy; Chung, Jun-Won; Ye, Dong Hye",
+    "medium": "47th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)- Accepted",
+    "year": "2025",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+  },
+  {
     "url": "https://arxiv.org/pdf/2407.19385",
     "title": "Multi-modal Imaging Genomics Transformer: Attentive Integration of Imaging with Genomic Biomarkers for Schizophrenia Classification",
     "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI) - Poster",
