@@ -1,26 +1,27 @@
 [
     {
-        "url": "https://bhi.embs.org/2025/",
-        "title": "Region-Affinity Attention for Whole-Slide Breast Cancer Classification in Deep Ultraviolet Imaging",
-        "medium": "Proceedings of the IEEE-EMBS International Conference on Biomedical and Health Informatics (BHI)",
-        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
-        "year": "2025",
+        "url": "https://aaai.org/conference/aaai/aaai-26/",
+        "title": "DiA-gnostic VLVAE: Disentangled Alignment-Constrained Vision Language Variational AutoEncoder for Robust Radiology Reporting with Missing Modalities",
+        "medium": "Proceedings of the The 40th Annual Conference on Association for the Advancement of Artificial Intelligence (AAAI 2026)",
+        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Masood, Adnan; Ye, Dong Hye",
+        "year": "2026",
         "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
     },
     {
-        "url": "https://bhi.embs.org/2025/",
+        "url": "https://2026.ieeeicassp.org/",
         "title": "DREAM: Dynamic Retinal Enhancement with Adaptive Multi-modal Fusion for Expert Precision Medical Report Generation",
-        "medium": "Proceedings of the IEEE-EMBS International Conference on Biomedical and Health Informatics (BHI)",
-        "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Ye, Dong Hye",
-        "year": "2025",
+        "medium": "Proceedings of the 51st IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)",
+        "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
+        "year": "2026",
         "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
     },
     {
-        "url": "https://conferences.miccai.org/2025/en/default.asp",
-        "title": "DiVA: Disentangled Vision-Language Alignment for Context-Aware Radiology Report Generation",
-        "medium": "Proceedings of the 28th International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI)",
+        "url": "https://biomedicalimaging.org/2026/",
+        "title": "Region-Affinity Attention for Whole-Slide Breast Cancer Classification in Deep Ultraviolet Imaging",
+        "medium": "Proceedings of the 23rd IEEE International Symposium on Biomedical Imaging (ISBI)",
         "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
-        "year": "2025",
+        "year": "2026",
         "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
     }
+    
 ]
