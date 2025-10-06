@@ -423,6 +423,12 @@
         </ul>
         <br/>
 
+        <div class="subheading mb-3" id="workshops"><i class="fas fa-edit"></i> Workshop Papers</div>
+        <ul class="fa-ul mb-0">
+          <li point-component="journals"><i class="fa-li">&#128196</i><a href="{{url}}" target="_blank">{{title}}</a>{{new}}<br/>{{authors}}<br/> {{medium}}, {{year}}</li>
+        </ul>
+        <br/>
+
         <div class="subheading mb-3" id="under-review"><i class="fas fa-book-reader"></i> Under Review</div>
         <ul class="fa-ul mb-0">
           <li point-component="review"><i class="fa-li">&#128196</i><a href="{{url}}" target="_blank">{{title}}</a>{{new}}<br/>{{authors}}<br/> {{medium}}, {{year}}</li>
@@ -673,7 +679,7 @@
           // point.attachJSON("https://shaiknagurshareef.github.io/data/publications.json", "publications");
           point.attachJSON("https://shaiknagurshareef.github.io/data/conferences.json", "conferences");
           point.attachJSON("https://shaiknagurshareef.github.io/data/journals.json", "journals");
-          point.attachJSON("https://shaiknagurshareef.github.io/data/under-review.json", "workshop");
+          point.attachJSON("https://shaiknagurshareef.github.io/data/workshops.json", "workshops");
           point.attachJSON("https://shaiknagurshareef.github.io/data/under-review.json", "review");
         </script>
     </body>
