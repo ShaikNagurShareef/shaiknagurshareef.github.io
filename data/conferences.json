@@ -1,5 +1,13 @@
 [
   {
+    "url": "https://aaai.org/conference/aaai/aaai-26/",
+    "title": "DiA-gnostic VLVAE: Disentangled Alignment-Constrained Vision Language Variational AutoEncoder for Robust Radiology Reporting with Missing Modalities",
+    "medium": "Proceedings of the The 40th Annual Conference on Association for the Advancement of Artificial Intelligence (AAAI 2026) - <span style='color: blue;'>Oral</span>",
+    "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Masood, Adnan; Ye, Dong Hye",
+    "year": "2026",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+  },
+  {
     "url": "https://arxiv.org/pdf/2504.20306",
     "title": "Dynamic Contextual Attention Network: Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis",
     "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Yellu, Sribhuvan Reddy; Chung, Jun-Won; Ye, Dong Hye",
@@ -13,7 +21,7 @@
     "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI) - Poster",
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
     "year": "2025",
-    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    "new": ""
   },
   {
     "url": "https://ieeexplore.ieee.org/document/10890310",
@@ -21,7 +29,7 @@
     "medium": "Proceedings of the 50th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP) - Poster",
     "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Bodapati, Jyostna Devi; Ye, Dong Hye",
     "year": "2025",
-    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    "new": ""
   },  
   {
     "url": "https://ieeexplore.ieee.org/document/10647584",
