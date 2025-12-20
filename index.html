@@ -9,6 +9,8 @@
           pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
       </script>
       <!-- End PDF.js -->
+      <!-- Markdown Parser -->
+      <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -944,49 +946,66 @@
                 if (e.key === 'Enter') sendMessage();
             }
 
-            window.sendMessage = async function() {
-                if (!isAgentReady) {
-                    alert("Please wait a moment, I am still reading the resume files...");
-                    return;
-                }
-
+        window.sendMessage = async function() {
+            if (!isAgentReady) {
                 const inputField = document.getElementById('user-input');
-                const userText = inputField.value.trim();
-
-                if (!userText) return;
-
-                // UI Updates
-                addMessage(userText, 'user');
-                inputField.value = '';
-                inputField.disabled = true;
-                const loadingId = addMessage("Thinking...", 'ai');
-
-                try {
-                    // Generate Content
-                    const result = await model.generateContent(userText);
-                    const response = await result.response;
-                    const text = response.text();
-
-                    document.getElementById(loadingId).innerText = text;
-                } catch (error) {
-                    console.error(error);
-                    document.getElementById(loadingId).innerText = "Sorry, I encountered an error. Please try again.";
-                } finally {
-                    inputField.disabled = false;
-                    inputField.focus();
-                }
+                inputField.placeholder = "Loading knowledge base... please wait.";
+                return;
             }
 
-            function addMessage(text, sender) {
-                const messageContainer = document.getElementById('chat-messages');
-                const msgDiv = document.createElement('div');
-                msgDiv.id = 'msg-' + Date.now();
-                msgDiv.classList.add('message', sender);
+            const inputField = document.getElementById('user-input');
+            const userText = inputField.value.trim();
+            if (!userText) return;
+
+            // Add User Message (Plain text is fine for user input)
+            addMessage(userText, 'user');
+            
+            inputField.value = '';
+            inputField.disabled = true;
+            
+            // Create a loading bubble
+            const loadingId = addMessage("Thinking...", 'ai');
+            const loadingElement = document.getElementById(loadingId);
+
+            try {
+                const result = await model.generateContent(userText);
+                const response = await result.response;
+                const rawMarkdown = response.text();
+
+                // CONVERT MARKDOWN TO HTML HERE
+                const htmlContent = marked.parse(rawMarkdown);
+                
+                // Inject HTML instead of plain text
+                loadingElement.innerHTML = htmlContent;
+
+            } catch (error) {
+                console.error(error);
+                loadingElement.innerText = "I encountered a connection error. Please try again.";
+            } finally {
+                inputField.disabled = false;
+                inputField.focus();
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messageContainer = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.id = 'msg-' + Date.now();
+            msgDiv.classList.add('message', sender);
+            
+            // For the user, we use innerText to prevent XSS (security)
+            if (sender === 'user') {
                 msgDiv.innerText = text;
-                messageContainer.appendChild(msgDiv);
-                messageContainer.scrollTop = messageContainer.scrollHeight;
-                return msgDiv.id;
+            } else {
+                // For AI, we initially set text (e.g., "Thinking...")
+                // This will be overwritten by innerHTML later in sendMessage
+                msgDiv.innerText = text; 
             }
+            
+            messageContainer.appendChild(msgDiv);
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+            return msgDiv.id;
+        }
       </script>
 
     </body>

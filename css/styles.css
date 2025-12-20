@@ -11064,3 +11064,26 @@ section.resume-section .resume-section-content {
   border-top: 1px solid #ddd;
   display: flex;
 }
+
+/* Chat Markdown Styling */
+.message p {
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+}
+.message ul, .message ol {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem; /* Space for bullets */
+}
+.message li {
+    list-style-type: disc; /* Ensure bullets show */
+}
+.message strong {
+    font-weight: 700;
+}
+.message a {
+    color: #ffd700; /* Yellow links for contrast on blue bubbles, or blue on white */
+    text-decoration: underline;
+}
+/* Specific colors based on sender */
+.message.user a { color: white; }
+.message.ai a { color: #007bff; }
