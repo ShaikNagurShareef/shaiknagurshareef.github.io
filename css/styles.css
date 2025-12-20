@@ -10996,3 +10996,71 @@ section.resume-section .resume-section-content {
   width: 20px; /* Adjust size of the icon */
   height: 20px;
 }
+
+/* Chatbot Styles */
+#chat-widget-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+#chat-widget-window {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 350px;
+  height: 500px;
+  z-index: 1000;
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  border: 1px solid #ddd;
+}
+
+#chat-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  font-size: 0.9rem;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background-color: #BD5D38; /* Uses your theme primary color */
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.message.ai {
+  background-color: #e9ecef;
+  color: #333;
+  align-self: flex-start;
+}
+
+.chat-input-area {
+  padding: 10px;
+  background: white;
+  border-top: 1px solid #ddd;
+  display: flex;
+}

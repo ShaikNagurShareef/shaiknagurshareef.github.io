@@ -2,6 +2,13 @@
 <html lang="en">
     <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55120145-4"></script>
+      <!-- PDF.js for reading PDF files in the browser -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+      <script>
+          // Set the worker source for pdf.js
+          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      </script>
+      <!-- End PDF.js -->
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -768,6 +775,310 @@
           point.attachJSON("https://shaiknagurshareef.github.io/data/workshops.json", "workshops");
           point.attachJSON("https://shaiknagurshareef.github.io/data/under-review.json", "review");
         </script>
+
+        <!-- Chat Widget HTML -->
+        <button id="chat-widget-btn" class="btn btn-primary" onclick="toggleChat()">
+          <i class="fas fa-robot"></i>
+        </button>
+
+        <div id="chat-widget-window">
+          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <span class="m-0">Ask about Shareef</span>
+            <button type="button" class="btn-close btn-close-white" aria-label="Close" onclick="toggleChat()"></button>
+          </div>
+          <div id="chat-messages" class="d-flex flex-column">
+            <div class="message ai">Hello! I am Shareef's AI assistant. Ask me anything about his research, skills, or experience.</div>
+          </div>
+          <div class="chat-input-area">
+            <input type="text" id="user-input" class="form-control me-2" placeholder="Type a message..." onkeypress="handleEnter(event)">
+            <button class="btn btn-primary" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+
+        <script type="module">
+            import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+            // --- CONFIGURATION ---
+            const API_KEY = "AIzaSyDNpEVbMSlvX1GtcdlWZmKwUBaZPFCwGuE"; // Be careful exposing this
+            
+            // Define your data sources
+            const DATA_SOURCES = {
+                resume: "https://shaiknagurshareef.github.io/data/NagurShareefShaik_Resume.pdf",
+                research_statement: "https://shaiknagurshareef.github.io/data/NagurShareefShaik_ResearchStatement.pdf",
+                jsons: [
+                    "https://shaiknagurshareef.github.io/data/conferences.json",
+                    "https://shaiknagurshareef.github.io/data/journals.json",
+                    "https://shaiknagurshareef.github.io/data/workshops.json",
+                    "https://shaiknagurshareef.github.io/data/under-review.json"
+                ]
+            };
+
+            let model = null;
+            let isAgentReady = false;
+
+            // --- HELPER: Extract Text from PDF ---
+            async function getPdfText(url) {
+                try {
+                    const loadingTask = pdfjsLib.getDocument(url);
+                    const pdf = await loadingTask.promise;
+                    let fullText = "";
+                    
+                    for (let i = 1; i <= pdf.numPages; i++) {
+                        const page = await pdf.getPage(i);
+                        const textContent = await page.getTextContent();
+                        const pageText = textContent.items.map(item => item.str).join(" ");
+                        fullText += `\n--- Page ${i} ---\n${pageText}`;
+                    }
+                    return fullText;
+                } catch (error) {
+                    console.error("Error reading PDF:", error);
+                    return "";
+                }
+            }
+
+            // --- HELPER: Fetch JSON Data ---
+            async function getJsonContext(urls) {
+                let context = "";
+                for (const url of urls) {
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        // Extract filename for context label
+                        const filename = url.split('/').pop();
+                        context += `\n\n--- DATA SOURCE: ${filename} ---\n${JSON.stringify(data, null, 2)}`;
+                    } catch (error) {
+                        console.error(`Error fetching ${url}:`, error);
+                    }
+                }
+                return context;
+            }
+
+            // --- HELPER 3: Scrape HTML Sections (Awards, Interests, etc.) ---
+            function getWebsiteContent() {
+              // List of HTML IDs to scrape text from
+              const sectionsToScrape = ['about', 'skills', 'certifications', 'interests', 'awards', 'projects'];
+              let webText = "";
+
+              sectionsToScrape.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                  // clean up extra whitespace
+                  const cleanText = element.innerText.replace(/\n\s*\n/g, '\n').trim();
+                  webText += `\n=== SECTION: ${id.toUpperCase()} ===\n${cleanText}\n`;
+                }
+              });
+              return webText;
+            }
+
+            // --- INITIALIZATION ---
+            async function initAgent() {
+                try {
+                    // 1.1 Load Data concurrently
+                    const [resumeText, researchStatementText, jsonContext] = await Promise.all([
+                        getPdfText(DATA_SOURCES.resume),
+                        getPdfText(DATA_SOURCES.research_statement),
+                        getJsonContext(DATA_SOURCES.jsons)
+                    ]);
+
+                    // 1.2. Get content directly from the Webpage HTML
+                    const websiteContext = getWebsiteContent();
+
+                    // 2. Build the System Instruction
+                    const SYSTEM_INSTRUCTION = `
+                        You are an AI assistant representing Nagur Shareef Shaik.
+                        
+                        **YOUR KNOWLEDGE BASE:**
+                        The following is the strict context about Shareef. Answer purely based on this.
+                        
+                        === RESUME CONTENT ===
+                        ${resumeText}
+
+                        === RESEARCH STATEMENT CONTENT ===
+                        ${researchStatementText}
+                        
+                        === PUBLICATIONS & RESEARCH DATA ===
+                        ${jsonContext}
+
+                        === PORTFOLIO WEBSITE DETAILS (Awards, Interests, Skills) ===
+                        ${websiteContext}
+                        
+                       **INSTRUCTIONS:**
+                        - You are Shareef's digital avatar. Speak professionally but warmly.
+                        - If asked about research, cite specific papers from the provided JSON data.
+                        - If asked about personal interests, awards, or certifications, refer to the PORTFOLIO WEBSITE DETAILS section.
+                        - If asked about contact info, use the details from the resume or website.
+                        - If the user asks something NOT in this context (e.g., "What is the capital of France?"), do not answer, pivot back to Shareef's expertise.
+                    `;
+
+                    // 3. Initialize Gemini
+                    const genAI = new GoogleGenerativeAI(API_KEY);
+                    model = genAI.getGenerativeModel({ 
+                        model: "gemini-3-flash-preview", // Using flash for speed & large context
+                        systemInstruction: SYSTEM_INSTRUCTION
+                    });
+
+                    isAgentReady = true;
+                    console.log("Agent initialized with PDF and JSON context.");
+                    
+                    // Update UI to show ready state (Optional)
+                    const aiMsg = document.querySelector('.message.ai');
+                    if(aiMsg) aiMsg.innerText = "Hello! I have read Shareef's resume and publications. Ask me anything!";
+
+                } catch (error) {
+                    console.error("Failed to initialize Agent:", error);
+                    const aiMsg = document.querySelector('.message.ai');
+                    if(aiMsg) aiMsg.innerText = "Error loading knowledge base. Please refresh.";
+                }
+            }
+
+            // Run Initialization immediately
+            initAgent();
+
+            // --- CHAT UI LOGIC ---
+            window.toggleChat = function() {
+                const chatWindow = document.getElementById('chat-widget-window');
+                chatWindow.style.display = (chatWindow.style.display === 'none' || chatWindow.style.display === '') ? 'flex' : 'none';
+            }
+
+            window.handleEnter = function(e) {
+                if (e.key === 'Enter') sendMessage();
+            }
+
+            window.sendMessage = async function() {
+                if (!isAgentReady) {
+                    alert("Please wait a moment, I am still reading the resume files...");
+                    return;
+                }
+
+                const inputField = document.getElementById('user-input');
+                const userText = inputField.value.trim();
+
+                if (!userText) return;
+
+                // UI Updates
+                addMessage(userText, 'user');
+                inputField.value = '';
+                inputField.disabled = true;
+                const loadingId = addMessage("Thinking...", 'ai');
+
+                try {
+                    // Generate Content
+                    const result = await model.generateContent(userText);
+                    const response = await result.response;
+                    const text = response.text();
+
+                    document.getElementById(loadingId).innerText = text;
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById(loadingId).innerText = "Sorry, I encountered an error. Please try again.";
+                } finally {
+                    inputField.disabled = false;
+                    inputField.focus();
+                }
+            }
+
+            function addMessage(text, sender) {
+                const messageContainer = document.getElementById('chat-messages');
+                const msgDiv = document.createElement('div');
+                msgDiv.id = 'msg-' + Date.now();
+                msgDiv.classList.add('message', sender);
+                msgDiv.innerText = text;
+                messageContainer.appendChild(msgDiv);
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+                return msgDiv.id;
+            }
+      </script>
+
+        <!-- <script type="module">
+        // Import the Google AI SDK from CDN
+        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+        // --- CONFIGURATION ---
+        // ⚠️ WARNING: Your API Key will be visible to anyone who inspects the code.
+        // For a portfolio, you can restrict the API Key in Google Cloud Console to only allow requests from your specific domain (e.g., shaiknagurshareef.github.io).
+        const API_KEY = "AIzaSyDNpEVbMSlvX1GtcdlWZmKwUBaZPFCwGuE"; 
+        
+        const SYSTEM_INSTRUCTION = `
+          You are an AI assistant representing Nagur Shareef Shaik, a CS PhD student and Machine Learning specialist.
+          Your goal is to answer questions about Shareef's background, research, skills, and projects based on the portfolio data.
+          
+          Key Facts about Shareef:
+          - Currently a PhD Student at Georgia State University (GSU) and Researcher at TReNDS Center.
+          - Expert in Machine Learning, Generative AI (RAG, Agentic AI), and Computer Vision.
+          - 20+ peer-reviewed publications, 1120+ citations.
+          - Has experience at UST Global, Carelon Global Solutions, and TCS.
+          - Education: PhD (ongoing) and MS from GSU, B.Tech from Vignan's University.
+          - Wins: D3CODE Hackathon Global Winner, Chairman's Gold Medal.
+          
+          Keep answers professional, concise, and helpful. Do not hallucinate personal information not provided here.
+        `;
+
+        // Initialize Gemini
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ 
+          model: "gemini-3-flash-preview", // Using 1.5-flash as it is stable and fast for browser use
+          systemInstruction: SYSTEM_INSTRUCTION
+        });
+
+        // Chat Logic
+        window.toggleChat = function() {
+          const chatWindow = document.getElementById('chat-widget-window');
+          if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
+            chatWindow.style.display = 'flex';
+          } else {
+            chatWindow.style.display = 'none';
+          }
+        }
+
+        window.handleEnter = function(e) {
+          if (e.key === 'Enter') sendMessage();
+        }
+
+        window.sendMessage = async function() {
+          const inputField = document.getElementById('user-input');
+          const messageContainer = document.getElementById('chat-messages');
+          const userText = inputField.value.trim();
+
+          if (!userText) return;
+
+          // 1. Add User Message
+          addMessage(userText, 'user');
+          inputField.value = '';
+          inputField.disabled = true;
+
+          // 2. Add Loading Indicator
+          const loadingId = addMessage("Thinking...", 'ai');
+
+          try {
+            // 3. Call Gemini API
+            const result = await model.generateContent(userText);
+            const response = await result.response;
+            const text = response.text();
+
+            // 4. Update UI with AI Response
+            document.getElementById(loadingId).innerText = text;
+          } catch (error) {
+            console.error(error);
+            document.getElementById(loadingId).innerText = "I'm sorry, I encountered an error. Please try again.";
+          } finally {
+            inputField.disabled = false;
+            inputField.focus();
+          }
+        }
+
+        function addMessage(text, sender) {
+          const messageContainer = document.getElementById('chat-messages');
+          const msgDiv = document.createElement('div');
+          const id = 'msg-' + Date.now();
+          msgDiv.id = id;
+          msgDiv.classList.add('message', sender);
+          msgDiv.innerText = text;
+          messageContainer.appendChild(msgDiv);
+          messageContainer.scrollTop = messageContainer.scrollHeight;
+          return id;
+        } -->
+      </script>
+
     </body>
 
 </html>
