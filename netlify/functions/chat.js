@@ -1,6 +1,14 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 exports.handler = async function(event, context) {
+
+  // Allow requests from your GitHub URL
+  const headers = {
+    "Access-Control-Allow-Origin": "https://shaiknagurshareef.github.io", 
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS"
+  };
+
   // Only allow POST requests
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
@@ -33,6 +41,7 @@ exports.handler = async function(event, context) {
     // 5. Return result to frontend
     return {
       statusCode: 200,
+      headers: headers,
       body: JSON.stringify({ reply: text }),
     };
 
