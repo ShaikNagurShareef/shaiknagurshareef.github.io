@@ -798,10 +798,10 @@
         </div>
 
         <script type="module">
-            // import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+            import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-            // // --- CONFIGURATION ---
-            // const API_KEY = "AIzaSyDPOiyxPf3g9V-tY8SGh_r-r1UABGUh8Ns"; // Be careful exposing this
+            // --- CONFIGURATION ---
+            const API_KEY = "AIzaSyDPOiyxPf3g9V-tY8SGh_r-r1UABGUh8Ns"; // Be careful exposing this
             
             // Define your data sources
             const DATA_SOURCES = {
@@ -816,7 +816,7 @@
             };
 
             let model = null;
-            // let isAgentReady = false;
+            let isAgentReady = false;
 
             // --- HELPER: Extract Text from PDF ---
             async function getPdfText(url) {
@@ -871,48 +871,67 @@
               });
               return webText;
             }
-            
-            // We process the PDF/Text here, but send it to our backend to talk to AI.
-
-            let collectedContext = ""; // Store the big context string globally
-            let isAgentReady = false;
 
             // --- INITIALIZATION ---
             async function initAgent() {
                 try {
-                    // 1. Load Data (Keep your existing scrape/PDF logic)
+                    // 1.1 Load Data concurrently
                     const [resumeText, researchStatementText, jsonContext] = await Promise.all([
                         getPdfText(DATA_SOURCES.resume),
                         getPdfText(DATA_SOURCES.research_statement),
                         getJsonContext(DATA_SOURCES.jsons)
                     ]);
+
+                    // 1.2. Get content directly from the Webpage HTML
                     const websiteContext = getWebsiteContent();
 
-                    // 2. Store the context in a variable to send later
-                    collectedContext = `
+                    // 2. Build the System Instruction
+                    const SYSTEM_INSTRUCTION = `
                         You are an AI assistant representing Nagur Shareef Shaik.
+                        
                         **YOUR KNOWLEDGE BASE:**
+                        The following is the strict context about Shareef. Answer purely based on this.
+                        
+                        === RESUME CONTENT ===
                         ${resumeText}
+
+                        === RESEARCH STATEMENT CONTENT ===
                         ${researchStatementText}
+                        
+                        === PUBLICATIONS & RESEARCH DATA ===
                         ${jsonContext}
+
+                        === PORTFOLIO WEBSITE DETAILS (Awards, Interests, Skills) ===
                         ${websiteContext}
-                        **INSTRUCTIONS:**
-                        - Speak professionally but warmly.
-                        - Answer purely based on the context provided.
+                        
+                       **INSTRUCTIONS:**
+                        - You are Shareef's digital avatar. Speak professionally but warmly.
+                        - If asked about research, cite specific papers from the provided JSON data.
+                        - If asked about personal interests, awards, or certifications, refer to the PORTFOLIO WEBSITE DETAILS section.
+                        - If asked about contact info, use the details from the resume or website.
+                        - If the user asks something NOT in this context (e.g., "What is the capital of France?"), do not answer, pivot back to Shareef's expertise.
                     `;
 
+                    // 3. Initialize Gemini
+                    const genAI = new GoogleGenerativeAI(API_KEY);
+                    model = genAI.getGenerativeModel({ 
+                        model: "gemini-3-flash-preview", // Using flash for speed & large context
+                        systemInstruction: SYSTEM_INSTRUCTION
+                    });
+
                     isAgentReady = true;
-                    console.log("Context loaded. Ready to send to backend.");
+                    console.log("Agent initialized with PDF and JSON context.");
                     
+                    // Update UI to show ready state (Optional)
                     const aiMsg = document.querySelector('.message.ai');
                     if(aiMsg) aiMsg.innerText = "Hello! I'm Shareef's digital avatar. How can I assist you today?";
 
                 } catch (error) {
                     console.error("Failed to initialize Agent:", error);
+                    const aiMsg = document.querySelector('.message.ai');
+                    if(aiMsg) aiMsg.innerText = "Error loading knowledge base. Please refresh.";
                 }
             }
-
-
 
             // Run Initialization immediately
             initAgent();
@@ -927,41 +946,37 @@
                 if (e.key === 'Enter') sendMessage();
             }
 
-        // --- SEND MESSAGE ---
         window.sendMessage = async function() {
-            if (!isAgentReady) return;
+            if (!isAgentReady) {
+                const inputField = document.getElementById('user-input');
+                inputField.placeholder = "Loading knowledge base... please wait.";
+                return;
+            }
 
             const inputField = document.getElementById('user-input');
             const userText = inputField.value.trim();
             if (!userText) return;
 
+            // Add User Message (Plain text is fine for user input)
             addMessage(userText, 'user');
+            
             inputField.value = '';
             inputField.disabled = true;
             
+            // Create a loading bubble
             const loadingId = addMessage("Thinking...", 'ai');
             const loadingElement = document.getElementById(loadingId);
 
             try {
-                // --- SECURE CALL TO NETLIFY BACKEND ---
-                // We send the user question AND the system instruction to our backend
-                const response = await fetch('/.netlify/functions/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
-                        message: userText,
-                        systemInstruction: collectedContext 
-                    })
-                });
+                const result = await model.generateContent(userText);
+                const response = await result.response;
+                const rawMarkdown = response.text();
 
-                const data = await response.json();
-
-                if (response.ok) {
-                    const htmlContent = marked.parse(data.reply);
-                    loadingElement.innerHTML = htmlContent;
-                } else {
-                    throw new Error(data.error || "Server Error");
-                }
+                // CONVERT MARKDOWN TO HTML HERE
+                const htmlContent = marked.parse(rawMarkdown);
+                
+                // Inject HTML instead of plain text
+                loadingElement.innerHTML = htmlContent;
 
             } catch (error) {
                 console.error(error);

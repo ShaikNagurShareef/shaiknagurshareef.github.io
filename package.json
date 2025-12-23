@@ -1,0 +1,23 @@
+{
+  "name": "shaiknagurshareef.github.io",
+  "version": "1.0.0",
+  "description": "Welcome to my personal portfolio repository. This project showcases my skills, projects, and professional information in a simple, yet elegant format using HTML, CSS, and JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShaikNagurShareef/shaiknagurshareef.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShaikNagurShareef/shaiknagurshareef.github.io/issues"
+  },
+  "homepage": "https://github.com/ShaikNagurShareef/shaiknagurshareef.github.io#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1"
+  }
+}
