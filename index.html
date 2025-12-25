@@ -797,7 +797,7 @@
           </div>
         </div>
 
-        <script type="module">
+        <!-- <script type="module">
             import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
             // --- CONFIGURATION ---
@@ -1006,7 +1006,203 @@
             messageContainer.scrollTop = messageContainer.scrollHeight;
             return msgDiv.id;
         }
-      </script>
+      </script> -->
+
+      <script type="module">
+            // --- CONFIGURATION ---
+            // Your verified Backend URL
+            const API_ENDPOINT = "https://nagur-shareef-shaik-portfolio-chat-api.hf.space/chat";
+            
+            const DATA_SOURCES = {
+                resume: "https://shaiknagurshareef.github.io/data/NagurShareefShaik_Resume.pdf",
+                research_statement: "https://shaiknagurshareef.github.io/data/NagurShareefShaik_ResearchStatement.pdf",
+                jsons: [
+                    "https://shaiknagurshareef.github.io/data/conferences.json",
+                    "https://shaiknagurshareef.github.io/data/journals.json",
+                    "https://shaiknagurshareef.github.io/data/workshops.json",
+                    "https://shaiknagurshareef.github.io/data/under-review.json"
+                ]
+            };
+
+            let systemContext = "";
+            let isAgentReady = false;
+
+            // --- HELPER: Extract Text from PDF ---
+            async function getPdfText(url) {
+                try {
+                    const loadingTask = pdfjsLib.getDocument(url);
+                    const pdf = await loadingTask.promise;
+                    let fullText = "";
+                    
+                    for (let i = 1; i <= pdf.numPages; i++) {
+                        const page = await pdf.getPage(i);
+                        const textContent = await page.getTextContent();
+                        const pageText = textContent.items.map(item => item.str).join(" ");
+                        fullText += `\n--- Page ${i} ---\n${pageText}`;
+                    }
+                    return fullText;
+                } catch (error) {
+                    console.error("Error reading PDF:", error);
+                    return "";
+                }
+            }
+
+            // --- HELPER: Fetch JSON Data ---
+            async function getJsonContext(urls) {
+                let context = "";
+                for (const url of urls) {
+                    try {
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        const filename = url.split('/').pop();
+                        context += `\n\n--- DATA SOURCE: ${filename} ---\n${JSON.stringify(data, null, 2)}`;
+                    } catch (error) {
+                        console.error(`Error fetching ${url}:`, error);
+                    }
+                }
+                return context;
+            }
+
+            // --- HELPER: Scrape HTML Sections ---
+            function getWebsiteContent() {
+              const sectionsToScrape = ['about', 'skills', 'certifications', 'interests', 'awards', 'projects'];
+              let webText = "";
+
+              sectionsToScrape.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                  const cleanText = element.innerText.replace(/\n\s*\n/g, '\n').trim();
+                  webText += `\n=== SECTION: ${id.toUpperCase()} ===\n${cleanText}\n`;
+                }
+              });
+              return webText;
+            }
+
+            // --- INITIALIZATION ---
+            async function initAgent() {
+                try {
+                    // 1. Load Data
+                    const [resumeText, researchStatementText, jsonContext] = await Promise.all([
+                        getPdfText(DATA_SOURCES.resume),
+                        getPdfText(DATA_SOURCES.research_statement),
+                        getJsonContext(DATA_SOURCES.jsons)
+                    ]);
+
+                    const websiteContext = getWebsiteContent();
+
+                    // 2. Build Context String (to send to backend)
+                    systemContext = `
+                        You are an AI assistant representing Nagur Shareef Shaik.
+                        
+                        **YOUR KNOWLEDGE BASE:**
+                        The following is the strict context about Shareef. Answer purely based on this.
+                        
+                        === RESUME CONTENT ===
+                        ${resumeText}
+
+                        === RESEARCH STATEMENT CONTENT ===
+                        ${researchStatementText}
+                        
+                        === PUBLICATIONS & RESEARCH DATA ===
+                        ${jsonContext}
+
+                        === PORTFOLIO WEBSITE DETAILS ===
+                        ${websiteContext}
+                        
+                        **INSTRUCTIONS:**
+                        - You are Shareef's digital avatar. Speak professionally but warmly.
+                        - If asked about research, cite specific papers from the provided JSON data.
+                        - If asked about contact info, use the details from the resume or website.
+                        - Keep answers concise and helpful.
+                    `;
+
+                    isAgentReady = true;
+                    console.log("Agent context prepared.");
+                    
+                    const aiMsg = document.querySelector('.message.ai');
+                    if(aiMsg) aiMsg.innerText = "Hello! I'm Shareef's digital avatar. How can I assist you today?";
+
+                } catch (error) {
+                    console.error("Failed to initialize Agent:", error);
+                    const aiMsg = document.querySelector('.message.ai');
+                    if(aiMsg) aiMsg.innerText = "Error loading knowledge base. Please refresh.";
+                }
+            }
+
+            initAgent();
+
+            // --- CHAT UI LOGIC ---
+            window.toggleChat = function() {
+                const chatWindow = document.getElementById('chat-widget-window');
+                chatWindow.style.display = (chatWindow.style.display === 'none' || chatWindow.style.display === '') ? 'flex' : 'none';
+            }
+
+            window.handleEnter = function(e) {
+                if (e.key === 'Enter') sendMessage();
+            }
+
+            window.sendMessage = async function() {
+                if (!isAgentReady) {
+                    const inputField = document.getElementById('user-input');
+                    inputField.placeholder = "Loading knowledge base... please wait.";
+                    return;
+                }
+
+                const inputField = document.getElementById('user-input');
+                const userText = inputField.value.trim();
+                if (!userText) return;
+
+                addMessage(userText, 'user');
+                
+                inputField.value = '';
+                inputField.disabled = true;
+                
+                const loadingId = addMessage("Thinking...", 'ai');
+                const loadingElement = document.getElementById(loadingId);
+
+                try {
+                    // Send request to Hugging Face Backend
+                    const response = await fetch(API_ENDPOINT, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            message: userText,
+                            context: systemContext
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+
+                    const data = await response.json();
+                    
+                    // Convert Markdown to HTML
+                    const htmlContent = marked.parse(data.reply);
+                    loadingElement.innerHTML = htmlContent;
+
+                } catch (error) {
+                    console.error(error);
+                    loadingElement.innerText = "I encountered a connection error. Please try again later.";
+                } finally {
+                    inputField.disabled = false;
+                    inputField.focus();
+                }
+            }
+
+            function addMessage(text, sender) {
+                const messageContainer = document.getElementById('chat-messages');
+                const msgDiv = document.createElement('div');
+                msgDiv.id = 'msg-' + Date.now();
+                msgDiv.classList.add('message', sender);
+                msgDiv.innerText = text; 
+                messageContainer.appendChild(msgDiv);
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+                return msgDiv.id;
+            }
+        </script>
 
     </body>
 
