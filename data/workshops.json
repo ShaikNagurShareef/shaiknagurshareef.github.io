@@ -1,10 +1,26 @@
 [
   {
+    "url": "https://arxiv.org/pdf/2608.09774",
+    "title": "C<sup>2</sup>A: Coupling Spatial Evidence with Clinical Priors via Co-occurrence Aware Class Attention for Multi-Label Chest X-Ray Classification",
+    "authors": "Gogineni, Akash; <strong>Shaik, Nagur Shareef</strong>; Mandava, Aasrith; Masood, Adnan; Ye, Dong Hye",
+    "medium": "Proceedings of the 36th IEEE International Workshop on Machine Learning for Signal Processing (MLSP 2026) - <span style='color: blue;'>Oral</span>",
+    "year": "2026",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+  },
+  {
+    "url": "https://arxiv.org/pdf/2608.09752",
+    "title": "Disentangling Co-Occurring Retinal Pathologies with Saliency-Guided Sparse Expert Routing",
+    "authors": "<strong>Shaik, Nagur Shareef</strong>; Park, Jeongwoo; Kim, Yeong-Jin; Jung, Jaeuk; Oh, Hyunjung; Ye, Dong Hye",
+    "medium": "Proceedings of the 36th IEEE International Workshop on Machine Learning for Signal Processing (MLSP 2026) - <span style='color: blue;'>Oral</span>",
+    "year": "2026",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+  },
+  {
     "url": "https://openreview.net/pdf?id=hatzHLfYtF",
     "title": "Ordinal Label-Distribution Learning with Constrained Asymmetric Priors for Imbalanced Retinal Grading",
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna, Masood, Adnan; Adeli, Ehsan, Ye, Dong Hye;",
     "medium": "39th Conference on Neural Information Processing Systems (NeurIPS 2025) Workshop: The Second Workshop on GenAI for Health: Potential, Trust, and Policy Compliance - <span>Poster</span>",
     "year": "2025",
-    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    "new": ""
   }
 ]

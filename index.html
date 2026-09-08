@@ -117,6 +117,9 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#awards">Awards</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#participations">Participations</a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -654,6 +657,10 @@
         <ul class="fa-ul mb-0">
           <li>
             <span class="fa-li"><i class="fas fa-certificate text-warning"></i></span>
+            <a href="data/certifications/CCAR-P.pdf" target="_blank"><b>Claude Certified Architect - Professional</b></a> - Certification offered by <b>Anthropic</b>.
+          </li>
+          <li>
+            <span class="fa-li"><i class="fas fa-certificate text-warning"></i></span>
             <a href="data/certifications/Intro-to-LangGraph.pdf" target="_blank"><b>Introduction to LangGraph</b></a> - Course offered by <b>LangChain Academy</b>.
           </li>
           <li>
@@ -779,6 +786,29 @@
       </div>
     </section>
 
+    <hr class="m-0">
+
+    <!-- Participations -->
+    <section class="resume-section" id="participations">
+      <div class="resume-section-content">
+        <h2 class="mb-5">Participations &#129309</h2>
+        <ul class="fa-ul mb-0">
+          <li>
+            <span class="fa-li"><i class="fas fa-users text-warning"></i></span>
+            Participant at the <a href="https://www.csail.mit.edu/event/agentic-ai-hackathon" target="_blank"><b>CSAIL Agentic AI Hackathon</b></a> hosted by <b>MIT CSAIL</b>, Cambridge, MA - building autonomous agents that plan, use tools, and recover from failure, alongside 35 teams. <i>April 25-26, 2026</i>.
+          </li>
+          <li>
+            <span class="fa-li"><i class="fas fa-users text-warning"></i></span>
+            Participant at the <a href="https://cap.csail.mit.edu/members/events/2026-csail-alliances-annual-meeting-0" target="_blank"><b>2026 CSAIL Alliances Annual Meeting</b></a> hosted by <b>MIT CSAIL Alliances</b> at the Stata Center &amp; Schwarzman College of Computing, Cambridge, MA - research updates, student poster sessions, and startup pitches. <i>April 27-29, 2026</i>.
+          </li>
+          <li>
+            <span class="fa-li"><i class="fas fa-users text-warning"></i></span>
+            Participant at the <a href="https://rdi.berkeley.edu/events/agentic-ai-summit-2026" target="_blank"><b>2nd Agentic AI Summit 2026</b></a> hosted by <b>Berkeley RDI</b>, UC Berkeley, CA - 5,000+ attendees, 200+ speakers across 4 stages, and 200+ poster presentations spanning agent frameworks, evaluation, and deployment. <i>August 1-2, 2026</i>.
+          </li>
+        </ul>
+      </div>
+    </section>
+
   </div>
 
         <!-- Bootstrap core JS-->
@@ -874,7 +904,7 @@
             // --- HELPER 3: Scrape HTML Sections (Awards, Interests, etc.) ---
             function getWebsiteContent() {
               // List of HTML IDs to scrape text from
-              const sectionsToScrape = ['about', 'skills', 'certifications', 'interests', 'awards', 'projects'];
+              const sectionsToScrape = ['about', 'skills', 'certifications', 'interests', 'awards', 'participations', 'projects'];
               let webText = "";
 
               sectionsToScrape.forEach(id => {
@@ -1081,7 +1111,7 @@
 
             // --- HELPER: Scrape HTML Sections ---
             function getWebsiteContent() {
-              const sectionsToScrape = ['about', 'skills', 'certifications', 'interests', 'awards', 'projects'];
+              const sectionsToScrape = ['about', 'skills', 'certifications', 'interests', 'awards', 'participations', 'projects'];
               let webText = "";
 
               sectionsToScrape.forEach(id => {
