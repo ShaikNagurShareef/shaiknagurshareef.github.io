@@ -274,7 +274,7 @@ for Multi-Modal Mobile Oculomics.Submitted, ISBI 2027.
 [16] N. S. Shaik, J. Park, Y.-J. Kim, Y. Jo, D. H. Ye. Oculo-MoE: Retina-Anchored, Interaction-Gated Mixture-of-Experts
 for Bilateral Multimodal Oculomics.Submitted, ISBI 2027.
 [17] N. S. Shaiket al. Evidence That Can Contradict: What Report-Auditing Metrics Actually Measure in Medical Vision
-Language Models.Under review.
+Language Models.Under review, ICLR 2027.
 * equal contribution. Full list of 29 peer-reviewed papers (including journal articles): Google Scholar. Dissertation:From Perception to
 Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting(expected
 December 2026). M.S. thesis: GSU ScholarWorks.
@@ -319,7 +319,7 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 - "Dist-RRG: Distributional Change Modeling on Statistical Manifolds for Longitudinal Radiology Report Generation" — Shaik, Nagur Shareef et al.. Under review (ICLR 2027), 2026. Link: #under-review
 - "STRIDE: Stochastic Trajectory Reasoning via Iterative Distributional Evolution in Longitudinal Radiology Report Generation" — Shaik, Nagur Shareef et al.. Under review (AAAI 2027), 2026. Link: #under-review
 - "Claims You Can See: Differential-Evidence Learning of Temporal Assertions for Longitudinal Radiology Report Generation" — Shaik, Nagur Shareef et al.. Under review (CVPR 2027), 2026. Link: #under-review
-- "Evidence That Can Contradict: What Report-Auditing Metrics Actually Measure in Medical Vision Language Models" — Shaik, Nagur Shareef et al.. Under review, 2026. Link: #under-review
+- "Evidence That Can Contradict: What Report-Auditing Metrics Actually Measure in Medical Vision Language Models" — Shaik, Nagur Shareef et al.. Under review (ICLR 2027), 2026. Link: #under-review
 - "Oculo-MoE: Retina-Anchored, Interaction-Gated Mixture-of-Experts for Bilateral Multimodal Oculomics" — Shaik, Nagur Shareef; Park, J.; Kim, Y.-J.; Jo, Y.; Ye, Dong Hye. Submitted to the IEEE International Symposium on Biomedical Imaging (ISBI) 2027, 2026. Link: #under-review
 
 ## WEBSITE SECTIONS
