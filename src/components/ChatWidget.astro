@@ -147,6 +147,9 @@ const API = "https://nagur-shareef-shaik-portfolio-chat-api.hf.space";
 
     const body = (m: string) => JSON.stringify({ message: m, history: history.slice(-MAX_HISTORY) });
     const readError = async (res: Response) => {
+      if (res.status === 404 || res.status >= 500) {
+        return "The assistant is unavailable right now. Please try again later, or use the Contact page.";
+      }
       try {
         const b = await res.json();
         if (typeof b.detail === "string") return b.detail;
