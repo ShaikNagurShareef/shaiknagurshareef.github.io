@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import Icon from "../../components/Icon.astro";
 import { getCollection, getEntry } from "astro:content";
 import { getPublications } from "../../lib/pubs";
-import { range, STATUS_LABEL, byOrder } from "../../lib/format";
+import { range, STATUS_LABEL, byOrder, yearSpan } from "../../lib/format";
 
 const me = (await getEntry("profile", "me"))!.data;
 const { dissertation, thesis } = (await getEntry("research", "research"))!.data;
@@ -101,7 +101,7 @@ const mark = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").repla
           {awards.map((a) => (
             <li class="cv-row">
               <span><span class="font-semibold text-ink">{a.data.title}</span>, {a.data.org}</span>
-              <span class="cv-date">{a.data.year ?? ""}</span>
+              <span class="cv-date">{yearSpan(a.data)}</span>
             </li>
           ))}
         </ul>

@@ -30,5 +30,9 @@ export function byRecency<T extends { data: { year: number | null; presentation:
   return (b.data.year ?? 0) - (a.data.year ?? 0) || Number(b.data.presentation === "oral") - Number(a.data.presentation === "oral");
 }
 
+/** "2026", or "2023–2026" for a range. */
+export const yearSpan = (d: { year: number | null; startYear?: number }) =>
+  d.year ? (d.startYear ? `${d.startYear}–${d.year}` : String(d.year)) : "";
+
 /** Keep the order the entries have in their JSON file. */
 export const byOrder = <T extends { data: { order: number } }>(a: T, b: T) => a.data.order - b.data.order;

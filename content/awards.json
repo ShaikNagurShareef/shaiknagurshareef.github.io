@@ -35,7 +35,7 @@
     "id": "ust-awards",
     "title": "STELLER, NOVA Star and Super Star Awards",
     "org": "UST Global Inc.",
-    "year": null,
+    "year": 2026,
     "category": "industry",
     "detail": null
   },
@@ -43,15 +43,16 @@
     "id": "gsu-scholarship",
     "title": "100% graduate scholarship",
     "org": "Georgia State University",
-    "year": null,
+    "year": 2026,
     "category": "academic",
-    "detail": null
+    "detail": null,
+    "startYear": 2023
   },
   {
     "id": "go-above",
     "title": "Go Above – Impact Award",
     "org": "Elevance Health (Carelon Global Solutions)",
-    "year": null,
+    "year": 2023,
     "category": "industry",
     "detail": "For fixing a critical production issue in the commissions calculation flow."
   },
@@ -59,7 +60,7 @@
     "id": "tcs-star",
     "title": "Star Performer Award",
     "org": "Tata Consultancy Services",
-    "year": null,
+    "year": 2022,
     "category": "industry",
     "detail": null
   },
@@ -83,8 +84,9 @@
     "id": "academic-excellence",
     "title": "Academic Excellence Awards (all four years)",
     "org": "VFSTR University",
-    "year": null,
+    "year": 2020,
     "category": "academic",
-    "detail": "Top-5 rank holder in CSE each year."
+    "detail": "Top-5 rank holder in CSE each year.",
+    "startYear": 2016
   }
 ]

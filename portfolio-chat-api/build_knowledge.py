@@ -5,6 +5,7 @@ Sources (all relative to the repo root):
   - data/NagurShareefShaik_ResearchResume.pdf
   - data/NagurShareefShaik_ResearchStatement.pdf
   - data/{conferences,journals,workshops,under-review}.json
+  - content/awards.json (honors, with years)
   - selected <section> blocks of index.html
 
 Run from anywhere:  python3 portfolio-chat-api/build_knowledge.py
@@ -34,7 +35,7 @@ PUB_FILES = [
 ]
 SECTIONS = [
     "about", "education", "experience", "skills", "projects", "certifications",
-    "interests", "awards", "participations", "services", "team",
+    "interests", "participations", "services", "team",
 ]
 
 
@@ -122,6 +123,19 @@ def publications() -> str:
     return "\n".join(parts).strip()
 
 
+def awards() -> str:
+    """Honors from content/awards.json, the same source the website renders."""
+    lines = []
+    for a in json.loads((ROOT / "content/awards.json").read_text()):
+        year = a.get("year")
+        span = f"{a['startYear']}–{year}" if a.get("startYear") and year else (str(year) if year else "")
+        line = f"- {a['title']}, {a['org']}" + (f" ({span})" if span else "")
+        if a.get("detail"):
+            line += f". {a['detail']}"
+        lines.append(line)
+    return "\n".join(lines)
+
+
 def main() -> int:
     blocks = ["# Knowledge base: Nagur Shareef Shaik", ""]
     for label, path in PDFS:
@@ -131,6 +145,7 @@ def main() -> int:
         blocks += [f"## {label}", pdf_text(path), ""]
 
     blocks += ["## PUBLICATIONS", publications(), ""]
+    blocks += ["## HONORS AND AWARDS", awards(), ""]
 
     html = (ROOT / "index.html").read_text()
     # Ignore commented-out markup so stale content never leaks into the knowledge base.

@@ -322,6 +322,19 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 - "Evidence That Can Contradict: What Report-Auditing Metrics Actually Measure in Medical Vision Language Models" — Shaik, Nagur Shareef et al.. Under review (ICLR 2027), 2026. Link: #under-review
 - "Oculo-MoE: Retina-Anchored, Interaction-Gated Mixture-of-Experts for Bilateral Multimodal Oculomics" — Shaik, Nagur Shareef; Park, J.; Kim, Y.-J.; Jo, Y.; Ye, Dong Hye. Submitted to the IEEE International Symposium on Biomedical Imaging (ISBI) 2027, 2026. Link: #under-review
 
+## HONORS AND AWARDS
+- Graduate Research Award, Department of Computer Science, Georgia State University (2026)
+- Winner, D3CODE Hackathon (US Region & Global), UST Global Inc. (2025). Ahead of teams from the UK, Mexico, Malaysia and India.
+- NeurIPS 2025 GenAI4Health Travel Grant, NeurIPS 2025 GenAI4Health Workshop (2025)
+- IEEE SPS Travel Grant (ICIP 2024), IEEE Signal Processing Society (2024)
+- STELLER, NOVA Star and Super Star Awards, UST Global Inc. (2026)
+- 100% graduate scholarship, Georgia State University (2023–2026)
+- Go Above – Impact Award, Elevance Health (Carelon Global Solutions) (2023). For fixing a critical production issue in the commissions calculation flow.
+- Star Performer Award, Tata Consultancy Services (2022)
+- Chairman's Gold Medal, VFSTR University (2020). For overall excellence throughout the B.Tech.
+- Best Outgoing Student of CSE, VFSTR University (2020)
+- Academic Excellence Awards (all four years), VFSTR University (2016–2020). Top-5 rank holder in CSE each year.
+
 ## WEBSITE SECTIONS
 ### ABOUT
 Nagur Shareef
@@ -480,20 +493,6 @@ Interests
 Apart from my work and research, I have a diverse range of interests that keep me engaged and inspired. I am passionate about music, with a particular love for classical genre. I find great pleasure in watching television shows and movies, immersing myself in different narratives and perspectives.
 I am also an aspiring chef, constantly experimenting with new recipes and culinary techniques. My curiosity and love for learning extend to the digital world, where I spend a significant amount of my free time exploring the latest advancements in Artificial Intelligence and Machine Learning.
 Additionally, I enjoy staying active by playing badminton and working out at the gym, which helps me maintain a healthy lifestyle. These activities not only provide a physical outlet but also help me maintain a balanced and well-rounded lifestyle.
-
-### AWARDS
-Awards 🏆
-Received the Graduate Research Award from Georgia State University’s Computer Science Department in recognition of strong research accomplishments in 2025.
-Received the GenAI4Health Workshop Travel Grant (NeurIPS 2025) in recognition of the quality of my work and active engagement in advancing generative AI for healthcare.
-US Region & Global Winner of the D3CODE Hackathon by UST Global Inc, competing against top teams from the UK, Mexico, Malaysia, and India.
-Received the IEEE Signal Processing Society (SPS) Travel Grant for ICIP 2024 in recognition of my outstanding contributions and commitment to advancing the image processing research.
-Recipient of a 100% scholarship for master's studies at Georgia State University, recognizing dedication to academic excellence and commitment to Reserach.
-Received Go Above - Impact Award for analyzing the complete code-base and fixing a critical issue from Elevance Health while working at Carelon Global Solutions.
-Received Star Performer Award for extreme Contributions in Project Work from Tata Consultancy Services.
-Received Chairman's Gold Medal Award for overall excellence throughout B.Tech from Vignan's Foundation for Science, Technology & Research University.
-Received Best Outgoing Student of CSE Award for academic and research excellence throughout B.Tech from Vignan's Foundation for Science, Technology & Research University.
-Received Academic Excellence Award continuously for all four years during Bachelors degree, as a recognition for being one of the top 5 rank holders of CSE, from Vignan's Foundation for Science, Technology & Research University.
-Bagged multiple prizes in Technical Project Expo & Paper Presentation events at National-level Inter University Competitions throughout four years of my Bachelors.
 
 ### PARTICIPATIONS
 Participations 🤝

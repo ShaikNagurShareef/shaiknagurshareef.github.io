@@ -152,6 +152,8 @@ const awards = defineCollection({
   loader: fromArray("content/awards.json"),
   schema: z.object({ order,
     title: z.string(), org: z.string(), year: z.number().int().nullable(),
+    /** First year, for awards held over a range (shown as start–year). */
+    startYear: z.number().int().optional(),
     category: z.enum(["research", "industry", "academic"]), detail: z.string().nullable(),
   }),
 });

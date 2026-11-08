@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import Icon from "../../components/Icon.astro";
 import { getCollection, getEntry } from "astro:content";
-import { byOrder } from "../../lib/format";
+import { byOrder, yearSpan } from "../../lib/format";
 
 const service = (await getEntry("service", "service"))!.data;
 const awards = (await getCollection("awards")).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0) || byOrder(a, b));
@@ -67,7 +67,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
           </span>
           <div>
             <p class="font-semibold text-ink">{a.data.title}</p>
-            <p class="text-sm text-muted">{a.data.org}{a.data.year ? ` · ${a.data.year}` : ""} · {CATEGORY[a.data.category]}</p>
+            <p class="text-sm text-muted">{a.data.org}{a.data.year ? ` · ${yearSpan(a.data)}` : ""} · {CATEGORY[a.data.category]}</p>
             {a.data.detail && <p class="mt-1 text-sm text-ink-2">{a.data.detail}</p>}
           </div>
         </li>
