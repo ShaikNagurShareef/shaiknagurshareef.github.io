@@ -1,0 +1,84 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection, getEntry } from "astro:content";
+
+const me = (await getEntry("profile", "me"))!.data;
+const projects = (await getCollection("projects")).sort(
+  (a, b) => Number(b.data.featured) - Number(a.data.featured) || b.data.date.localeCompare(a.data.date),
+);
+const TAG_LABEL: Record<string, string> = {
+  agents: "Agents", "medical-ai": "Medical AI", rag: "RAG", llm: "LLMs", ml: "ML", vision: "Vision",
+  data: "Data", geospatial: "Geospatial", accessibility: "Accessibility", tooling: "Tooling",
+  healthcare: "Healthcare", web: "Web",
+};
+const counts = new Map<string, number>();
+for (const p of projects) for (const t of p.data.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+const tags = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+---
+<Base title="Projects" description="Agentic systems, medical AI tools and data products, from hackathon builds to production prototypes.">
+  <PageHeader eyebrow="Projects" title="Things I have built"
+    lead="Agentic systems, medical AI tools and data products, from hackathon builds to production prototypes. Most are open source.">
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href={me.links.github!} target="_blank" rel="noopener" class="btn"><Icon brand="github" />GitHub</a>
+      <a href={me.links.huggingface!} target="_blank" rel="noopener" class="btn"><Icon brand="huggingface" />Hugging Face</a>
+    </div>
+  </PageHeader>
+
+  <div class="container-page py-8">
+    <div data-tag-filter hidden role="group" aria-label="Filter projects by topic" class="flex flex-wrap gap-2">
+      <button type="button" data-tag="" aria-pressed="true" class="tag-btn">All <span class="text-muted">{projects.length}</span></button>
+      {tags.map(([t, n]) => (
+        <button type="button" data-tag={t} aria-pressed="false" class="tag-btn">{TAG_LABEL[t] ?? t} <span class="text-muted">{n}</span></button>
+      ))}
+    </div>
+    <p class="sr-only" aria-live="polite" data-project-count></p>
+
+    <div class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .tag-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    min-height: 2.25rem; padding: 0.25rem 0.85rem; border-radius: 999px;
+    border: 1px solid var(--border-strong); background: var(--surface);
+    font-size: 0.875rem; font-weight: 600; color: var(--ink-2);
+  }
+  .tag-btn:hover { background: var(--surface-2); }
+  .tag-btn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .tag-btn[aria-pressed="true"] span { color: inherit; opacity: 0.75; }
+</style>
+
+<script>
+  const bar = document.querySelector<HTMLElement>("[data-tag-filter]");
+  const cards = [...document.querySelectorAll<HTMLElement>("[data-project]")];
+  const live = document.querySelector<HTMLElement>("[data-project-count]");
+  if (bar) {
+    bar.hidden = false;
+    const buttons = [...bar.querySelectorAll<HTMLButtonElement>("button[data-tag]")];
+    const select = (tag: string) => {
+      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.tag === tag)));
+      let n = 0;
+      for (const c of cards) {
+        const ok = !tag || c.dataset.tags!.split(" ").includes(tag);
+        c.hidden = !ok;
+        if (ok) n++;
+      }
+      if (live) live.textContent = `${n} project${n === 1 ? "" : "s"} shown`;
+      const url = new URL(location.href);
+      tag ? url.searchParams.set("tag", tag) : url.searchParams.delete("tag");
+      history.replaceState(null, "", url);
+    };
+    bar.addEventListener("click", (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>("button[data-tag]");
+      if (b) select(b.dataset.tag!);
+    });
+    const initial = new URLSearchParams(location.search).get("tag") ?? "";
+    if (initial && buttons.some((b) => b.dataset.tag === initial)) select(initial);
+  }
+</script>

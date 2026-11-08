@@ -1,0 +1,160 @@
+---
+import Base from "../../layouts/Base.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection, getEntry } from "astro:content";
+import { getPublications } from "../../lib/pubs";
+import { range, STATUS_LABEL, byOrder } from "../../lib/format";
+
+const me = (await getEntry("profile", "me"))!.data;
+const { dissertation, thesis } = (await getEntry("research", "research"))!.data;
+const service = (await getEntry("service", "service"))!.data;
+const byStart = <T extends { data: { start: string } }>(a: T, b: T) => b.data.start.localeCompare(a.data.start);
+const jobs = (await getCollection("experience")).sort(byStart);
+const schools = (await getCollection("education")).sort((a, b) => b.data.end.localeCompare(a.data.end));
+const awards = (await getCollection("awards")).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0) || byOrder(a, b));
+const skills = (await getCollection("skills")).sort(byOrder);
+const pubs = await getPublications();
+const published = pubs.filter((p) => p.data.status === "published");
+const manuscripts = pubs.filter((p) => p.data.status !== "published");
+const site = Astro.site!.host;
+const mark = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/(Shaik, Nagur Shareef)/, "<strong>$1</strong>");
+---
+<Base title="CV" description={`Curriculum vitae of ${me.name}: education, experience, publications, honors and service.`}>
+  <div class="container-page py-10 md:py-14">
+    <div data-no-print class="mb-8 flex flex-wrap items-center justify-between gap-3">
+      <p class="eyebrow">Curriculum vitae</p>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" data-print class="btn"><Icon name="printer" />Print or save as PDF</button>
+        <a href={me.documents.research_resume} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="download" />Research CV (PDF)</a>
+        <a href={me.documents.resume} target="_blank" rel="noopener" class="btn"><Icon name="download" />Industry resume (PDF)</a>
+      </div>
+    </div>
+
+    <article class="cv mx-auto max-w-[52rem]">
+      <header class="border-b border-border-strong pb-5">
+        <h1 class="text-4xl font-semibold">{me.name}</h1>
+        <p class="mt-1 text-lg text-ink-2">{me.role}</p>
+        <p class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink-2">
+          <a href={`mailto:${me.email}`}>{me.email}</a>
+          <a href={`tel:${me.phone.replace(/[^\d+]/g, "")}`}>{me.phone}</a>
+          <span>{me.location}</span>
+          <a href={`https://${site}`}>{site}</a>
+          <a href={me.links.scholar!}>Google Scholar</a>
+          <a href={me.links.orcid!}>ORCID</a>
+        </p>
+      </header>
+
+      <section aria-labelledby="cv-edu">
+        <h2 id="cv-edu">Education</h2>
+        {schools.map((s) => (
+          <div class="cv-entry">
+            <p class="cv-date">{range(s.data.start, s.data.end, s.data.expected)}</p>
+            <div>
+              <p class="font-semibold text-ink">{s.data.degree}</p>
+              <p>{s.data.school}, {s.data.location} · GPA {s.data.gpa}</p>
+              {s.id === "phd" && <p class="text-ink-2">Dissertation: <em>{dissertation.title}</em>. {dissertation.status}.</p>}
+              {s.id === "ms" && <p class="text-ink-2">Thesis: <em>{thesis.title}</em>.</p>}
+              {s.id === "btech" && s.data.note && <p class="text-ink-2">{s.data.note}</p>}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section aria-labelledby="cv-exp">
+        <h2 id="cv-exp">Experience</h2>
+        {jobs.map((j) => (
+          <div class="cv-entry">
+            <p class="cv-date">{range(j.data.start, j.data.end)}</p>
+            <div>
+              <p class="font-semibold text-ink">{j.data.role}</p>
+              <p>{j.data.org}, {j.data.location}</p>
+              <ul class="mt-1 list-disc pl-5 text-ink-2">{j.data.highlights.map((h) => <li>{h}</li>)}</ul>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section aria-labelledby="cv-pubs">
+        <h2 id="cv-pubs">Publications</h2>
+        <p class="text-sm text-muted">{me.stats.citations} citations · h-index {me.stats.h_index} ({me.stats.source}, {me.stats.as_of})</p>
+        <ol class="cv-pubs">
+          {published.map((p) => (
+            <li>
+              <span set:html={mark(p.data.authors)} />. {p.data.title}. <em>{p.data.venue}</em>{p.data.year ? `, ${p.data.year}` : ""}.
+              {p.data.presentation === "oral" && <strong> (Oral)</strong>}
+            </li>
+          ))}
+        </ol>
+        <h3 class="mt-5 font-sans text-base font-semibold">Manuscripts</h3>
+        <ol class="cv-pubs">
+          {manuscripts.map((p) => (
+            <li>
+              <span set:html={mark(p.data.authors)} />. {p.data.title}. <em>{p.data.venue || STATUS_LABEL[p.data.status]}</em>.
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section aria-labelledby="cv-honors">
+        <h2 id="cv-honors">Honors and awards</h2>
+        <ul class="grid gap-1">
+          {awards.map((a) => (
+            <li class="cv-row">
+              <span><span class="font-semibold text-ink">{a.data.title}</span>, {a.data.org}</span>
+              <span class="cv-date">{a.data.year ?? ""}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="cv-service">
+        <h2 id="cv-service">Service</h2>
+        <p>{service.summary}</p>
+        <p class="mt-1 text-ink-2">
+          <span class="font-semibold text-ink">Conferences:</span> {service.conferences.map((c) => c.name).join(", ")}.
+          <span class="font-semibold text-ink"> Journals:</span> {service.journals.map((j) => j.name.replace(/\s*\([^)]*\)$/, "")).join(", ")}.
+        </p>
+      </section>
+
+      <section aria-labelledby="cv-skills">
+        <h2 id="cv-skills">Skills</h2>
+        <dl class="grid gap-1 sm:grid-cols-[11rem_1fr]">
+          {skills.map((g) => (<><dt class="font-semibold text-ink">{g.data.group}</dt><dd class="text-ink-2">{g.data.items.join(", ")}</dd></>))}
+        </dl>
+      </section>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .cv { font-size: 0.9375rem; color: var(--ink-2); }
+  .cv section { margin-top: 1.75rem; }
+  .cv h2 {
+    font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent-ink);
+    border-bottom: 1px solid var(--border); padding-bottom: 0.35rem; margin-bottom: 0.75rem;
+  }
+  .cv-row { display: grid; grid-template-columns: 1fr auto; gap: 0.25rem 1.5rem; margin-bottom: 0.75rem; }
+  .cv-entry { margin-bottom: 0.9rem; display: flow-root; }
+  .cv-entry > .cv-date { float: right; margin-left: 1rem; }
+  .cv-date { white-space: nowrap; font-size: 0.875rem; color: var(--muted); text-align: right; }
+  .cv-pubs { list-style: decimal; padding-left: 1.75rem; display: grid; gap: 0.4rem; margin-top: 0.5rem; }
+  .cv-pubs :global(strong) { color: var(--ink); }
+  @media (max-width: 639px) {
+    .cv-row { grid-template-columns: 1fr; }
+    .cv-date { text-align: left; grid-row: 1; }
+    .cv-entry > .cv-date { float: none; margin-left: 0; }
+  }
+  @media print {
+    .cv { font-size: 10pt; color: #000; max-width: none; }
+    .cv h1 { font-size: 20pt; }
+    .cv h2 { color: #000; border-color: #999; }
+    .cv section { break-inside: auto; }
+    .cv-row, .cv-pubs li, .cv-entry > div > p { break-inside: avoid; }
+    .cv a { text-decoration: none; }
+  }
+</style>
+
+<script>
+  document.querySelector("[data-print]")?.addEventListener("click", () => window.print());
+</script>

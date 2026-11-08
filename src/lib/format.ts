@@ -29,3 +29,6 @@ export const KIND_LABEL: Record<string, string> = {
 export function byRecency<T extends { data: { year: number | null; presentation: string | null } }>(a: T, b: T) {
   return (b.data.year ?? 0) - (a.data.year ?? 0) || Number(b.data.presentation === "oral") - Number(a.data.presentation === "oral");
 }
+
+/** Keep the order the entries have in their JSON file. */
+export const byOrder = <T extends { data: { order: number } }>(a: T, b: T) => a.data.order - b.data.order;

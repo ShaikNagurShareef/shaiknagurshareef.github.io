@@ -1,0 +1,164 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import PubItem from "../../components/PubItem.astro";
+import Icon from "../../components/Icon.astro";
+import { getEntry } from "astro:content";
+import { getPublications } from "../../lib/pubs";
+import { KIND_LABEL, STATUS_LABEL } from "../../lib/format";
+
+const me = (await getEntry("profile", "me"))!.data;
+const pubs = await getPublications();
+const inReview = pubs.filter((p) => p.data.status !== "published");
+const published = pubs.filter((p) => p.data.status === "published");
+const years = [...new Set(published.map((p) => p.data.year ?? 0))].sort((a, b) => b - a);
+const allYears = [...new Set(pubs.map((p) => p.data.year).filter(Boolean))].sort((a, b) => b! - a!);
+const kinds = [...new Set(pubs.map((p) => p.data.kind))];
+const statuses = [...new Set(pubs.map((p) => p.data.status))];
+const orals = published.filter((p) => p.data.presentation === "oral").length;
+
+const site = Astro.site!.toString().replace(/\/$/, "");
+const jsonLd = published.map((p) => ({
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  headline: p.data.title,
+  name: p.data.title,
+  author: p.data.authors.split(";").map((a) => {
+    const [last, first] = a.split(",").map((s) => s.trim());
+    return { "@type": "Person", name: first ? `${first} ${last}` : last };
+  }),
+  datePublished: p.data.year ? String(p.data.year) : undefined,
+  isPartOf: { "@type": p.data.kind === "journal" ? "Periodical" : "PublicationEvent", name: p.data.venue },
+  url: p.data.url ?? `${site}/publications/#${p.id}`,
+}));
+---
+<Base title="Publications" description={`${published.length} peer-reviewed papers and ${inReview.length} manuscripts in review on multimodal medical AI, report generation and vision-language models.`} jsonLd={jsonLd}>
+  <PageHeader eyebrow="Publications" title="Papers and manuscripts"
+    lead={`${published.length} peer-reviewed papers listed here (${orals} oral presentations) and ${inReview.length} manuscripts in review. Google Scholar counts ${me.stats.papers} papers, ${me.stats.citations} citations and an h-index of ${me.stats.h_index}.`}>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href={me.links.scholar!} target="_blank" rel="noopener" class="btn"><Icon brand="googlescholar" />Google Scholar</a>
+      <a href="/publications.bib" class="btn" download><Icon name="download" />All BibTeX (.bib)</a>
+    </div>
+  </PageHeader>
+
+  <div class="container-page py-8">
+    <!-- Filters (progressive enhancement: without JS everything is listed) -->
+    <form data-pub-filters role="search" aria-label="Filter publications" class="card z-10 grid grid-cols-3 gap-3 p-3 sm:sticky sm:top-[4.5rem] sm:grid-cols-[1fr_auto_auto_auto] sm:items-end" hidden>
+      <label class="col-span-3 grid gap-1 text-sm sm:col-span-1">
+        <span class="font-semibold text-ink-2">Search</span>
+        <span class="relative">
+          <Icon name="search" size={16} class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+          <input name="q" type="search" placeholder="Title, co-author, venue…" autocomplete="off"
+                 class="h-10 w-full rounded-[var(--radius)] border border-border-strong bg-surface pl-9 pr-3 text-[0.9375rem] text-ink placeholder:text-muted" />
+        </span>
+      </label>
+      <label class="grid min-w-0 gap-1 text-sm">
+        <span class="font-semibold text-ink-2">Year</span>
+        <select name="year" class="h-10 w-full min-w-0 rounded-[var(--radius)] border border-border-strong bg-surface px-2 text-ink">
+          <option value="">All years</option>
+          {allYears.map((y) => <option value={y}>{y}</option>)}
+        </select>
+      </label>
+      <label class="grid min-w-0 gap-1 text-sm">
+        <span class="font-semibold text-ink-2">Type</span>
+        <select name="kind" class="h-10 w-full min-w-0 rounded-[var(--radius)] border border-border-strong bg-surface px-2 text-ink">
+          <option value="">All types</option>
+          {kinds.map((k) => <option value={k}>{KIND_LABEL[k]}</option>)}
+        </select>
+      </label>
+      <label class="grid min-w-0 gap-1 text-sm">
+        <span class="font-semibold text-ink-2">Status</span>
+        <select name="status" class="h-10 w-full min-w-0 rounded-[var(--radius)] border border-border-strong bg-surface px-2 text-ink">
+          <option value="">Any status</option>
+          {statuses.map((s) => <option value={s}>{STATUS_LABEL[s]}</option>)}
+          <option value="oral">Oral presentations</option>
+        </select>
+      </label>
+      <div class="col-span-3 flex items-center justify-between gap-3 sm:col-span-4">
+        <p class="text-sm text-muted" data-pub-count aria-live="polite"></p>
+        <button type="reset" class="text-sm font-semibold text-accent-ink hover:underline">Clear filters</button>
+      </div>
+    </form>
+
+    <section data-pub-group aria-labelledby="review-h" class="mt-10">
+      <h2 id="review-h" class="flex items-baseline gap-3 border-b border-border pb-2 text-2xl font-semibold">
+        In review <span class="font-sans text-sm font-medium text-muted" data-group-count>{inReview.length}</span>
+      </h2>
+      <div class="divide-y divide-border">
+        {inReview.map((p) => <PubItem pub={p} bibtex={p.bibtex} />)}
+      </div>
+    </section>
+
+    {years.map((y) => {
+      const items = published.filter((p) => (p.data.year ?? 0) === y);
+      return (
+        <section data-pub-group aria-labelledby={`y-${y}`} class="mt-10">
+          <h2 id={`y-${y}`} class="flex items-baseline gap-3 border-b border-border pb-2 text-2xl font-semibold">
+            {y || "Undated"} <span class="font-sans text-sm font-medium text-muted" data-group-count>{items.length}</span>
+          </h2>
+          <div class="divide-y divide-border">
+            {items.map((p) => <PubItem pub={p} bibtex={p.bibtex} />)}
+          </div>
+        </section>
+      );
+    })}
+
+    <p data-pub-empty hidden class="mt-10 rounded-[var(--radius)] border border-dashed border-border-strong p-8 text-center text-muted">
+      No publications match these filters.
+    </p>
+  </div>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-pub-filters]");
+  const items = [...document.querySelectorAll<HTMLElement>("[data-pub]")];
+  const groups = [...document.querySelectorAll<HTMLElement>("[data-pub-group]")];
+  const countEl = document.querySelector<HTMLElement>("[data-pub-count]");
+  const empty = document.querySelector<HTMLElement>("[data-pub-empty]");
+
+  if (form) {
+    form.hidden = false;
+    const fields = ["q", "year", "kind", "status"] as const;
+    const get = (n: string) => (form.elements.namedItem(n) as HTMLInputElement | HTMLSelectElement).value.trim();
+
+    // Restore filters from the URL so filtered views are shareable.
+    const params = new URLSearchParams(location.search);
+    for (const f of fields) {
+      const v = params.get(f);
+      if (v) (form.elements.namedItem(f) as HTMLInputElement).value = v;
+    }
+
+    const apply = () => {
+      const q = get("q").toLowerCase().split(/\s+/).filter(Boolean);
+      const year = get("year"), kind = get("kind"), status = get("status");
+      let shown = 0;
+      for (const el of items) {
+        const ok =
+          q.every((t) => el.dataset.search!.includes(t)) &&
+          (!year || el.dataset.year === year) &&
+          (!kind || el.dataset.kind === kind) &&
+          (!status || (status === "oral" ? el.dataset.presentation === "oral" : el.dataset.status === status));
+        el.hidden = !ok;
+        if (ok) shown++;
+      }
+      for (const g of groups) {
+        const n = g.querySelectorAll("[data-pub]:not([hidden])").length;
+        g.hidden = n === 0;
+        const c = g.querySelector<HTMLElement>("[data-group-count]");
+        if (c) c.textContent = String(n);
+      }
+      if (countEl) countEl.textContent = `Showing ${shown} of ${items.length}`;
+      if (empty) empty.hidden = shown !== 0;
+
+      const next = new URLSearchParams();
+      for (const f of fields) { const v = get(f); if (v) next.set(f, v); }
+      const qs = next.toString();
+      history.replaceState(null, "", (qs ? `?${qs}` : location.pathname) + location.hash);
+    };
+
+    form.addEventListener("input", apply);
+    form.addEventListener("submit", (e) => e.preventDefault());
+    form.addEventListener("reset", () => setTimeout(apply));
+    apply();
+  }
+</script>

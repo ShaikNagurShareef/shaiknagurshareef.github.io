@@ -1,0 +1,77 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection, getEntry } from "astro:content";
+import { range, byOrder } from "../../lib/format";
+
+const me = (await getEntry("profile", "me"))!.data;
+const byStart = <T extends { data: { start: string } }>(a: T, b: T) => b.data.start.localeCompare(a.data.start);
+const jobs = (await getCollection("experience")).sort(byStart);
+const schools = (await getCollection("education")).sort((a, b) => b.data.end.localeCompare(a.data.end));
+const skills = (await getCollection("skills")).sort(byOrder);
+---
+<Base title="Experience" description="Research and industry experience: Georgia State University, UST, Carelon Global Solutions and Tata Consultancy Services.">
+  <PageHeader eyebrow="Experience" title="Research and industry"
+    lead="Doctoral research at Georgia State University's TReNDS Center, alongside industry roles building and shipping ML, analytics and agentic systems at UST, Carelon and TCS.">
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href={me.documents.resume} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="file-text" />Resume (PDF)</a>
+      <a href={me.links.linkedin!} target="_blank" rel="noopener" class="btn">LinkedIn</a>
+    </div>
+  </PageHeader>
+
+  <section aria-labelledby="work-h" class="container-page py-12">
+    <h2 id="work-h" class="text-3xl font-semibold">Work</h2>
+    <ol class="mt-8 grid gap-0">
+      {jobs.map((j, i) => (
+        <li class="relative grid gap-2 pb-10 pl-8 md:grid-cols-[11rem_1fr] md:gap-8 md:pl-0">
+          <span aria-hidden="true" class:list={["absolute left-[0.4375rem] top-2 w-px bg-border-strong md:left-[11.9375rem]", i === jobs.length - 1 ? "h-0" : "h-full"]}></span>
+          <span aria-hidden="true" class:list={["absolute left-0 top-1.5 h-[0.9375rem] w-[0.9375rem] rounded-full border-2 md:left-[11.5rem]", j.data.end ? "border-border-strong bg-bg" : "border-accent bg-accent"]}></span>
+          <p class="text-sm font-semibold text-muted md:pt-0.5 md:text-right md:pr-4">{range(j.data.start, j.data.end)}</p>
+          <div class="md:pl-8">
+            <h3 class="font-sans text-lg font-semibold">{j.data.role}</h3>
+            <p class="text-[0.9375rem] text-ink-2">
+              {j.data.orgUrl ? <a href={j.data.orgUrl} target="_blank" rel="noopener">{j.data.org}</a> : j.data.org}
+              <span class="text-muted"> · {j.data.location}</span>
+            </p>
+            <ul class="mt-3 grid list-disc gap-1.5 pl-5 text-[0.9375rem] text-ink-2 marker:text-border-strong prose-measure">
+              {j.data.highlights.map((h) => <li>{h}</li>)}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section aria-labelledby="edu-h" class="container-page py-8">
+    <h2 id="edu-h" class="text-3xl font-semibold">Education</h2>
+    <div class="mt-6 grid gap-4 lg:grid-cols-3">
+      {schools.map((s) => (
+        <article class="card flex flex-col p-5">
+          <p class="text-sm font-semibold text-muted">{range(s.data.start, s.data.end, s.data.expected)}</p>
+          <h3 class="mt-1 font-sans text-lg font-semibold leading-snug">{s.data.degree}</h3>
+          <p class="text-[0.9375rem] text-ink-2">
+            {s.data.schoolUrl ? <a href={s.data.schoolUrl} target="_blank" rel="noopener">{s.data.school}</a> : s.data.school}
+          </p>
+          <p class="text-sm text-muted">{s.data.location} · GPA {s.data.gpa}</p>
+          {s.data.note && <p class="mt-3 text-sm text-ink-2">{s.data.note}</p>}
+          <ul class="mt-4 flex flex-wrap gap-1.5" aria-label={`Coursework, ${s.data.degree}`}>
+            {s.data.coursework.map((c) => <li class="chip">{c}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="skills-h" class="container-page py-12">
+    <h2 id="skills-h" class="text-3xl font-semibold">Skills</h2>
+    <dl class="mt-6 grid gap-x-8 gap-y-5 md:grid-cols-2">
+      {skills.map((g) => (
+        <div>
+          <dt class="eyebrow">{g.data.group}</dt>
+          <dd class="mt-2 flex flex-wrap gap-1.5">{g.data.items.map((i) => <span class="chip">{i}</span>)}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+</Base>

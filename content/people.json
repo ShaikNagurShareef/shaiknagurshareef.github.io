@@ -48,7 +48,7 @@
     "name": "Dr. Hemanth D. Venkateswara",
     "role": "Committee Member",
     "group": "committee",
-    "photo": null,
+    "photo": "/img/venkateswara.jpg",
     "links": [],
     "note": null
   },
@@ -57,7 +57,7 @@
     "name": "Dr. Mario Michael Kubek",
     "role": "Committee Member",
     "group": "committee",
-    "photo": null,
+    "photo": "/img/kubek.jpg",
     "links": [],
     "note": null
   },

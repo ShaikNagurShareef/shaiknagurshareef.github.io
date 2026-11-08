@@ -4,24 +4,42 @@ import Icon from "./Icon.astro";
 interface Props {
   pub: { id: string; data: { title: string; authors: string; venue: string; year: number | null; kind: string; status: string; presentation: string | null; url: string | null } };
   headingLevel?: "h3" | "h4";
+  /** When given, renders a "Cite" disclosure with copyable BibTeX. */
+  bibtex?: string;
 }
-const { pub, headingLevel = "h3" } = Astro.props;
+const { pub, headingLevel = "h3", bibtex } = Astro.props;
 const d = pub.data;
 const H = headingLevel;
-// Bold the owner's name in the author list.
-const authors = d.authors.replace(/(Shaik, Nagur Shareef)/, "<strong class=\"text-ink\">$1</strong>");
+// Bold the owner's name in the author list (authors are plain text, so escape before injecting markup).
+const escapeHtml = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const authors = escapeHtml(d.authors).replace(/(Shaik, Nagur Shareef)/, "<strong class=\"text-ink\">$1</strong>");
 const statusClass = d.status === "published" ? "chip-ok" : d.status === "in-preparation" ? "chip" : "chip-info";
+const search = `${d.title} ${d.authors} ${d.venue} ${d.year ?? ""}`.toLowerCase();
 ---
-<article class="py-4" data-pub data-year={d.year ?? ""} data-kind={d.kind} data-status={d.status} data-presentation={d.presentation ?? ""}>
+<article class="py-4" id={pub.id} data-pub data-year={d.year ?? ""} data-kind={d.kind} data-status={d.status}
+         data-presentation={d.presentation ?? ""} data-search={search}>
   <H class="font-sans text-[1.0625rem] font-semibold leading-snug text-ink">
     {d.url ? <a href={d.url} target="_blank" rel="noopener" class="text-ink no-underline hover:text-accent-ink hover:underline">{d.title}<Icon name="arrow-up-right" size={14} class="ml-1 inline align-[-1px] text-muted" /></a> : d.title}
   </H>
   <p class="mt-1 text-sm text-muted" set:html={authors} />
-  <p class="mt-1 text-sm text-ink-2">{d.venue}{d.year ? `, ${d.year}` : ""}</p>
-  <div class="mt-2 flex flex-wrap gap-1.5">
+  <p class="mt-1 text-sm text-ink-2">{d.venue}{d.year && d.status === "published" ? `, ${d.year}` : ""}</p>
+  <div class="mt-2 flex flex-wrap items-center gap-1.5">
     <span class={`chip ${statusClass}`}>{STATUS_LABEL[d.status]}</span>
     <span class="chip">{KIND_LABEL[d.kind]}</span>
     {d.presentation === "oral" && <span class="chip chip-accent">Oral</span>}
     {d.presentation === "poster" && <span class="chip">Poster</span>}
   </div>
+  {bibtex && (
+    <details class="group mt-2">
+      <summary class="inline-flex cursor-pointer list-none items-center gap-1 rounded text-sm font-semibold text-accent-ink [&::-webkit-details-marker]:hidden">
+        <Icon name="quote" size={14} />Cite<span class="sr-only"> {d.title}</span>
+      </summary>
+      <div class="relative mt-2">
+        <pre class="overflow-x-auto rounded-[var(--radius)] border border-border bg-surface-2 p-3 pr-20 font-mono text-xs leading-relaxed text-ink-2"><code>{bibtex}</code></pre>
+        <button type="button" data-copy={bibtex} class="btn absolute right-2 top-2 min-h-0 px-2 py-1 text-xs">
+          <Icon name="copy" size={13} /><span data-copy-label>Copy</span>
+        </button>
+      </div>
+    </details>
+  )}
 </article>

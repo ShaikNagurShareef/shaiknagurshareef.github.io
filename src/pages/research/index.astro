@@ -1,0 +1,152 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import PersonCard from "../../components/PersonCard.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection, getEntry } from "astro:content";
+import { getPublications } from "../../lib/pubs";
+import { STATUS_LABEL, byOrder } from "../../lib/format";
+
+const me = (await getEntry("profile", "me"))!.data;
+const { dissertation: diss, thesis, themes } = (await getEntry("research", "research"))!.data;
+const people = (await getCollection("people")).sort(byOrder);
+const committee = people.filter((p) => p.data.group === "committee");
+const collaborators = people.filter((p) => p.data.group === "collaborator");
+const pubs = await getPublications();
+
+// Link each pathway method to the paper(s) whose title names it. Some papers are titled without the
+// method's acronym; these aliases come from the dissertation and research statement.
+const ALIASES: Record<string, string[]> = {
+  DCAN: ["Dynamic Contextual Attention Network"],
+  "CAP-WAE": ["Ordinal Label-Distribution Learning with Constrained Asymmetric Priors"],
+  DELTA: ["Claims You Can See"],
+};
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9²]+/g, "");
+const papersFor = (method: string) =>
+  pubs.filter((p) => [method, ...(ALIASES[method] ?? [])].some((m) => norm(p.data.title).includes(norm(m))));
+const stages = diss.stages.map((s) => ({
+  ...s,
+  methods: s.methods.map((m) => ({ name: m, papers: papersFor(m) })),
+}));
+---
+<Base title="Research" description={diss.summary}>
+  <PageHeader eyebrow="Research" title="From perception to clinical reasoning" lead={diss.summary} />
+
+  <!-- Dissertation -->
+  <section aria-labelledby="diss-h" class="container-page py-12">
+    <div class="card grid gap-8 p-6 md:grid-cols-[1.6fr_1fr] md:p-8">
+      <div>
+        <p class="eyebrow">Ph.D. dissertation</p>
+        <h2 id="diss-h" class="mt-2 text-2xl font-semibold sm:text-[1.75rem]">{diss.title}</h2>
+        <dl class="mt-5 grid gap-2 text-[0.9375rem] sm:grid-cols-[7rem_1fr]">
+          <dt class="text-muted">Status</dt><dd class="text-ink-2">{diss.status}</dd>
+          <dt class="text-muted">Advisor</dt><dd class="text-ink-2">Dr. {diss.advisor}</dd>
+          <dt class="text-muted">Institution</dt><dd class="text-ink-2">Georgia State University, Department of Computer Science</dd>
+        </dl>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={me.documents.research_statement} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="file-text" />Research statement</a>
+          <a href="/publications/" class="btn">Publications</a>
+        </div>
+      </div>
+      <dl class="grid grid-cols-3 gap-3 self-start md:grid-cols-1">
+        {[
+          { v: diss.scale.domains, l: "clinical domains" },
+          { v: diss.scale.benchmarks, l: "benchmarks" },
+          { v: diss.scale.architectures, l: "architectures" },
+        ].map((s) => (
+          <div class="rounded-[var(--radius)] bg-surface-2 p-4">
+            <dt class="text-sm text-muted">{s.l}</dt>
+            <dd class="font-serif text-3xl font-semibold text-ink">{s.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Pathway, with papers per method -->
+  <section aria-labelledby="path-h" class="container-page py-8">
+    <p class="eyebrow">The five-stage interpretation pathway</p>
+    <h2 id="path-h" class="mt-2 text-3xl font-semibold">One question per stage</h2>
+    <ol class="mt-8 grid gap-4">
+      {stages.map((s) => (
+        <li class="card grid gap-4 p-5 md:grid-cols-[14rem_1fr] md:p-6" id={`stage-${s.id}`}>
+          <div class="flex items-start gap-3">
+            <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent font-bold text-on-accent" aria-hidden="true">{s.n}</span>
+            <div>
+              <h3 class="text-xl font-semibold"><span class="sr-only">Stage {s.n}: </span>{s.name}</h3>
+              <p class="mt-1 text-sm text-ink-2">{s.question}</p>
+            </div>
+          </div>
+          <ul class="grid gap-3">
+            {s.methods.map((m) => (
+              <li>
+                <p class="font-semibold text-ink">{m.name}</p>
+                {m.papers.length > 0 ? (
+                  <ul class="mt-1 grid gap-1">
+                    {m.papers.map((p) => (
+                      <li class="text-sm text-ink-2">
+                        {p.data.url ? <a href={p.data.url} target="_blank" rel="noopener">{p.data.title}</a> : <span>{p.data.title}</span>}
+                        <span class="text-muted"> · {p.data.status === "published" ? p.data.venue.replace(/^Proceedings of (the )?/i, "") : STATUS_LABEL[p.data.status]}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p class="mt-1 text-sm text-muted">Dissertation chapter; publication forthcoming.</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- Themes -->
+  <section aria-labelledby="themes-h" class="container-page py-12">
+    <p class="eyebrow">Threads that run through the work</p>
+    <h2 id="themes-h" class="mt-2 text-3xl font-semibold">Research themes</h2>
+    <div class="mt-6 grid gap-4 md:grid-cols-3">
+      {themes.map((t) => (
+        <article class="card p-5">
+          <h3 class="text-lg font-semibold">{t.title}</h3>
+          <p class="mt-2 text-[0.9375rem] text-ink-2">{t.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Committee -->
+  <section aria-labelledby="committee-h" class="container-page py-8">
+    <p class="eyebrow">Dissertation committee</p>
+    <h2 id="committee-h" class="mt-2 text-3xl font-semibold">Committee</h2>
+    <div class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {committee.map((p) => <PersonCard person={p} />)}
+    </div>
+  </section>
+
+  <!-- M.S. thesis -->
+  <section aria-labelledby="thesis-h" class="container-page py-12">
+    <div class="card p-6 md:p-8">
+      <p class="eyebrow">M.S. thesis · {thesis.year}</p>
+      <h2 id="thesis-h" class="mt-2 text-2xl font-semibold">{thesis.title}</h2>
+      <p class="mt-1 text-sm text-muted">Advisor: Dr. {thesis.advisor} · Georgia State University</p>
+      <p class="mt-4 text-ink-2 prose-measure">{thesis.summary}</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        {thesis.links.map((l, i) => (
+          <a href={l.url} target="_blank" rel="noopener" class:list={["btn", i === 0 && "btn-primary"]}>
+            <Icon name={i === 0 ? "file-text" : "arrow-up-right"} />{l.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Collaborators -->
+  <section aria-labelledby="collab-h" class="container-page py-8">
+    <p class="eyebrow">People I work with</p>
+    <h2 id="collab-h" class="mt-2 text-3xl font-semibold">Research collaborators</h2>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      {collaborators.map((p) => <PersonCard person={p} />)}
+    </div>
+  </section>
+</Base>

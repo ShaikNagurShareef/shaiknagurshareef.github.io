@@ -55,6 +55,8 @@
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
+  /* Anchor jumps to a heading keep its eyebrow label visible below the sticky header. */
+  .eyebrow + h2[id] { scroll-margin-top: 2.5rem; }
   a { color: var(--accent-ink); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
   a:hover { text-decoration-thickness: 2px; }
   :focus-visible {

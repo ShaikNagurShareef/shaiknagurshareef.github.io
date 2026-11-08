@@ -18,7 +18,13 @@ const yearMonth = z.string().regex(/^\d{4}(-\d{2})?(-\d{2})?$/, "use YYYY, YYYY-
 
 const slug = (s: string) =>
   s.toLowerCase().normalize("NFKD").replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-").slice(0, 80);
-const stripHtml = (s = "") => s.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+const SUPERSCRIPT: Record<string, string> = { "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹" };
+const stripHtml = (s = "") =>
+  s
+    .replace(/<sup>(\d+)<\/sup>/g, (_, d: string) => [...d].map((c) => SUPERSCRIPT[c]).join("")) // C<sup>2</sup>A -> C²A
+    .replace(/<[^>]+>/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 
 /* ---------------- publications (normalized from the legacy JSON files) ---------------- */
 const PUB_SOURCES = [
@@ -112,11 +118,14 @@ const profile = defineCollection({
 });
 
 /* ---------------- locked facts ---------------- */
-const fromArray = (file: string) => () => readJson(file) as Array<{ id: string }>;
+/** Loads an array file; `order` keeps the file's order (collections are otherwise returned sorted by id). */
+const fromArray = (file: string) => () =>
+  (readJson(file) as Array<{ id: string }>).map((e, order) => ({ ...e, order }));
+const order = z.number().int().nonnegative();
 
 const experience = defineCollection({
   loader: fromArray("content/experience.json"),
-  schema: z.object({
+  schema: z.object({ order,
     role: z.string(), org: z.string(), orgUrl: z.string().optional(), location: z.string(),
     start: yearMonth, end: yearMonth.nullable(), highlights: z.array(z.string()).min(1),
   }),
@@ -124,7 +133,7 @@ const experience = defineCollection({
 
 const education = defineCollection({
   loader: fromArray("content/education.json"),
-  schema: z.object({
+  schema: z.object({ order,
     degree: z.string(), school: z.string(), schoolUrl: z.string().optional(), location: z.string(),
     start: yearMonth, end: yearMonth, expected: z.boolean(), gpa: z.string(),
     coursework: z.array(z.string()), note: z.string().optional(),
@@ -133,7 +142,7 @@ const education = defineCollection({
 
 const people = defineCollection({
   loader: fromArray("content/people.json"),
-  schema: z.object({
+  schema: z.object({ order,
     name: z.string(), role: z.string(), group: z.enum(["committee", "collaborator"]),
     photo: z.string().nullable(), links: z.array(link), note: z.string().nullable(),
   }),
@@ -141,7 +150,7 @@ const people = defineCollection({
 
 const awards = defineCollection({
   loader: fromArray("content/awards.json"),
-  schema: z.object({
+  schema: z.object({ order,
     title: z.string(), org: z.string(), year: z.number().int().nullable(),
     category: z.enum(["research", "industry", "academic"]), detail: z.string().nullable(),
   }),
@@ -149,12 +158,12 @@ const awards = defineCollection({
 
 const certifications = defineCollection({
   loader: fromArray("content/certifications.json"),
-  schema: z.object({ title: z.string(), issuer: z.string(), url: z.string().nullable() }),
+  schema: z.object({ order, title: z.string(), issuer: z.string(), url: z.string().nullable() }),
 });
 
 const participations = defineCollection({
   loader: fromArray("content/participations.json"),
-  schema: z.object({
+  schema: z.object({ order,
     title: z.string(), host: z.string(), location: z.string(), date: yearMonth,
     dateLabel: z.string(), url: z.string(), detail: z.string(),
   }),
@@ -162,12 +171,12 @@ const participations = defineCollection({
 
 const news = defineCollection({
   loader: fromArray("content/news.json"),
-  schema: z.object({ date: yearMonth, text: z.string() }),
+  schema: z.object({ order, date: yearMonth, text: z.string() }),
 });
 
 const skills = defineCollection({
-  loader: () => (readJson("content/skills.json") as Array<{ group: string }>).map((g) => ({ id: slug(g.group), ...g })),
-  schema: z.object({ group: z.string(), items: z.array(z.string()) }),
+  loader: () => (readJson("content/skills.json") as Array<{ group: string }>).map((g, order) => ({ id: slug(g.group), order, ...g })),
+  schema: z.object({ order, group: z.string(), items: z.array(z.string()) }),
 });
 
 const research = defineCollection({

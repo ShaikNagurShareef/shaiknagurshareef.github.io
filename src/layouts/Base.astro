@@ -3,6 +3,7 @@ import "../styles/global.css";
 import { getEntry } from "astro:content";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import CommandPalette from "../components/CommandPalette.astro";
 
 interface Props {
   title?: string;
@@ -86,5 +87,20 @@ const person = {
       <slot />
     </main>
     <Footer />
+    <CommandPalette />
+    <script>
+      // Shared copy-to-clipboard for any [data-copy] button (BibTeX, email, ...).
+      document.addEventListener("click", async (e) => {
+        const btn = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-copy]");
+        if (!btn) return;
+        const label = btn.querySelector<HTMLElement>("[data-copy-label]");
+        try {
+          await navigator.clipboard.writeText(btn.dataset.copy ?? "");
+          if (label) { label.textContent = "Copied"; setTimeout(() => (label.textContent = "Copy"), 1600); }
+        } catch {
+          if (label) label.textContent = "Press Ctrl+C";
+        }
+      });
+    </script>
   </body>
 </html>

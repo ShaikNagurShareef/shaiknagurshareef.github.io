@@ -1,0 +1,33 @@
+---
+import Icon from "./Icon.astro";
+interface Props {
+  person: { id: string; data: { name: string; role: string; photo: string | null; links: { label: string; url: string }[]; note: string | null } };
+}
+const { id } = Astro.props.person;
+const d = Astro.props.person.data;
+const initials = d.name.replace(/^Dr\.\s*/, "").split(/\s+/).filter((w) => /^[A-Z]/.test(w)).map((w) => w[0]).slice(0, 2).join("");
+---
+<article id={`person-${id}`} class="card flex gap-4 p-4">
+  {d.photo ? (
+    <img src={d.photo} alt={`Photo of ${d.name}`} width="72" height="72" loading="lazy" decoding="async"
+         class="h-18 w-18 shrink-0 rounded-full border border-border object-cover" />
+  ) : (
+    <span aria-hidden="true" class="inline-flex h-18 w-18 shrink-0 items-center justify-center rounded-full bg-accent-soft font-serif text-xl font-semibold text-accent-ink">{initials}</span>
+  )}
+  <div class="min-w-0">
+    <h3 class="font-sans text-base font-semibold leading-snug">{d.name}</h3>
+    <p class="mt-0.5 text-sm text-muted">{d.role}</p>
+    {d.note && <p class="mt-1.5 text-sm text-ink-2">{d.note}</p>}
+    {d.links.length > 0 && (
+      <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm font-semibold">
+        {d.links.map((l) => (
+          <li>
+            <a href={l.url} target="_blank" rel="noopener" class="inline-flex items-center gap-0.5 no-underline hover:underline">
+              {l.label}<Icon name="arrow-up-right" size={13} /><span class="sr-only"> ({d.name})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</article>

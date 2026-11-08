@@ -27,6 +27,12 @@ const path = Astro.url.pathname;
     </nav>
 
     <div class="flex items-center gap-1">
+      <button type="button" data-cmdk-open aria-label="Search (Ctrl or Command + K)"
+              class="inline-flex h-10 items-center gap-2 rounded-md px-2.5 text-ink-2 hover:bg-surface-2 hover:text-ink xl:border xl:border-border xl:bg-surface xl:pr-2">
+        <Icon name="search" />
+        <span class="hidden text-sm text-muted xl:inline">Search</span>
+        <kbd class="hidden rounded border border-border px-1.5 text-xs font-sans text-muted xl:inline" data-cmdk-hint>Ctrl K</kbd>
+      </button>
       <button type="button" data-theme-toggle class="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink-2 hover:bg-surface-2 hover:text-ink"
               aria-label="Toggle dark mode" aria-pressed="false">
         <span data-icon-light><Icon name="moon" /></span>
@@ -72,7 +78,13 @@ const path = Astro.url.pathname;
   });
   paint();
 
-  const menuBtn = document.querySelector<HTMLButtonElement>("[data-menu-button]");
+  // Show the right shortcut hint on Apple platforms.
+  if (/Mac|iPhone|iPad/.test(navigator.userAgent)) {
+    const hint = document.querySelector<HTMLElement>("[data-cmdk-hint]");
+    if (hint) hint.textContent = "⌘K";
+  }
+
+  const menuBtn =document.querySelector<HTMLButtonElement>("[data-menu-button]");
   const menu = document.getElementById("mobile-menu");
   const setMenu = (open: boolean) => {
     if (!menuBtn || !menu) return;
