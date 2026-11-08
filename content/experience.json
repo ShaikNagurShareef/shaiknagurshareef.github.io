@@ -1,0 +1,76 @@
+[
+  {
+    "id": "gsu-gra-2025",
+    "role": "Graduate Research Assistant",
+    "org": "TReNDS Center, Georgia State University",
+    "orgUrl": "https://trendscenter.org/",
+    "location": "Atlanta, GA",
+    "start": "2025-08",
+    "end": null,
+    "highlights": [
+      "Lead my doctoral research on multimodal medical AI that holds up when data is incomplete: modality-aware perception, latent disentanglement under missing modalities, and longitudinal clinical reasoning that keeps track of uncertainty.",
+      "Developed a probabilistic multimodal framework (HSIC-constrained latent factorization plus a Self-Critiquing Mixture-of-Experts) that set state of the art across 7 systemic and ocular conditions.",
+      "Developed uncertainty-aware longitudinal reasoning that treats disease progression as distributional change on statistical manifolds (Fisher-Rao), so diagnostic ambiguity survives and claims stay tied to image evidence; state of the art with +7.4% CE-F1 on Longitudinal MIMIC-CXR (Dist-RRG, STRIDE, DELTA)."
+    ]
+  },
+  {
+    "id": "ust",
+    "role": "Machine Learning Engineer II",
+    "org": "UST Global Inc., AI Center of Excellence",
+    "orgUrl": "https://www.ust.com/",
+    "location": "Remote · Aliso Viejo, CA",
+    "start": "2024-07",
+    "end": null,
+    "highlights": [
+      "Lead an 18-person AI team in the AI-CoE building UST Alpha AI, UST's one-stop shop for AI workloads, and its platform-modernization tools. Led development of CodeCrafter; designed and built Orbit.",
+      "Run delivery on an AI-DLC approach: agents migrate legacy .NET 4→8 and COBOL monoliths to React/Java Spring Boot, generating NX monorepos from specs that land 95% functional, with delivery 70% faster at 60% of the cost. Now reimagining a NextGen Reinsurance Platform with SpecKit; the MVP already works.",
+      "Built PathForce, an AI-assisted anatomic-pathology LIS (rules-first eligibility checks, effort-weighted case distribution, HL7/FHIR/X12, Part 11-grade audit trail), plus RiskIQ for ICD-10 coding and risk adjustment, and PolicyIQ, which turns CMS/payer policy into SME-approved claim edits in minutes, not weeks.",
+      "Modernized a payer's claims adjudication by re-engineering its extracts and reporting, improving payment accuracy and audit-readiness. Architected and led Call Analytics Agents that raise First-Call Resolution, reduce repeat contacts, and flag quality and compliance issues.",
+      "Architected BSA DataMap (agentic profiling into BigQuery, saving 2 FTEs/$250K) and an ETL Test Agent validated with LLM-as-a-Judge. Delivered RegView, natural-language search over regulatory documents, and a RAG-powered RFI/RFP engine that cut proposal time by 60%.",
+      "Collaborated with Dr. Tatsunori Hashimoto (Stanford AI Lab) on AxisSQL, an inference-time-scaling Text-to-SQL framework ranked #12 on the BIRD leaderboard at submission; submitted to EACL (Industry Track)."
+    ]
+  },
+  {
+    "id": "gsu-gra-2023",
+    "role": "Graduate Research Assistant",
+    "org": "TReNDS Center, Georgia State University",
+    "orgUrl": "https://trendscenter.org/",
+    "location": "Atlanta, GA",
+    "start": "2023-09",
+    "end": "2025-05",
+    "highlights": [
+      "Customized multimodal LLMs in PyTorch to generate reports from medical images and text: 13.4% higher BLEU-4 than VisionGPT, with inference down to 1.6 s per image.",
+      "Built TensorFlow/Keras image classifiers for retinopathy, schizophrenia, breast cancer and colon cancer, cutting false negatives by 5–7%.",
+      "Multi-modal Imaging Genomics Transformer: fused genomics with sMRI and fMRI, improving schizophrenia diagnosis accuracy by 2.12%.",
+      "Guided Context Gating and Spatial Sequence Attention: attention mechanisms for retinal images and structural brain MRI.",
+      "Medical Vision Language Transformer: an Abstractor-Adaptor framework for resource-constrained medical image captioning."
+    ]
+  },
+  {
+    "id": "carelon",
+    "role": "Software Engineer III",
+    "org": "Carelon Global Solutions (Elevance Health)",
+    "orgUrl": "https://www.elevancehealth.com/",
+    "location": "Hyderabad, India",
+    "start": "2022-09",
+    "end": "2023-08",
+    "highlights": [
+      "Built REST APIs for the COmpensation INcentive System, a microservices application that validates, computes and speeds up incentive payments, cutting processing time by 10%. Wrote Python/SQL clean-up scripts that stopped over $500K in overpayments.",
+      "Fixed critical production issues in the commissions calculation flow (agent advance computation), saving $1.5 million in historical overpayments; earned the Go Above – Impact Award."
+    ]
+  },
+  {
+    "id": "tcs",
+    "role": "Systems Engineer, Analytics & Insights",
+    "org": "Tata Consultancy Services",
+    "orgUrl": "https://www.tcs.com/",
+    "location": "Hyderabad, India",
+    "start": "2020-08",
+    "end": "2022-09",
+    "highlights": [
+      "Designed a log-based Bug Root Cause Prediction System with an Attention LSTM in Azure ML Studio, cutting debugging effort and saving 3 full-time equivalents a year.",
+      "Set up an Azure DevOps model-deployment pipeline that took deployment from 2 to 1.2 hours and raised system availability by 25%; named team Star Performer.",
+      "Optimized order-orchestration data pipelines, reducing fallouts by 30%, and built operational dashboards for data-driven decisions."
+    ]
+  }
+]

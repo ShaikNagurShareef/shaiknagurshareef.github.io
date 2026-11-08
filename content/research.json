@@ -1,0 +1,99 @@
+{
+  "dissertation": {
+    "title": "From Perception to Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting",
+    "advisor": "Dong Hye Ye",
+    "status": "Proposal defended April 2026 · expected December 2026",
+    "summary": "Reading a medical image involves five judgments: locating a finding, grading it, weighing it against clinical context, comparing it with earlier studies, and committing to a claim. This dissertation builds methods for each stage on two ideas: every stage carries a distribution rather than a point estimate, and evidence from different sources is represented separately so that losing one source does not corrupt the others. It is evaluated across endoscopy, whole-slide histology, retinal photography, brain MRI with genomics, and chest radiography.",
+    "scale": {
+      "domains": 7,
+      "benchmarks": 13,
+      "architectures": 8
+    },
+    "stages": [
+      {
+        "id": "localization",
+        "n": 1,
+        "name": "Localization",
+        "question": "Where is the evidence?",
+        "methods": [
+          "DCAN"
+        ]
+      },
+      {
+        "id": "characterization",
+        "n": 2,
+        "name": "Characterization",
+        "question": "What grade? What co-occurs?",
+        "methods": [
+          "CAP-WAE",
+          "Sparse expert routing",
+          "C²A"
+        ]
+      },
+      {
+        "id": "contextualization",
+        "n": 3,
+        "name": "Contextualization",
+        "question": "Which source supports the reading, and what if context is missing?",
+        "methods": [
+          "DREAM",
+          "DiA-gnostic VLVAE",
+          "SC-CoMoE"
+        ]
+      },
+      {
+        "id": "comparison",
+        "n": 4,
+        "name": "Comparison",
+        "question": "How has the finding changed since the prior study?",
+        "methods": [
+          "Dist-RRG",
+          "STRIDE"
+        ]
+      },
+      {
+        "id": "commitment",
+        "n": 5,
+        "name": "Commitment",
+        "question": "Can the claim be checked against the image?",
+        "methods": [
+          "DELTA"
+        ]
+      }
+    ]
+  },
+  "thesis": {
+    "title": "Attentive Multi-modal Learning: Unifying Visual and Clinical Insights for Medical Image Classification and Report Generation",
+    "advisor": "Dong Hye Ye",
+    "year": 2025,
+    "summary": "Integrates medical images, clinical text and genetics through scalable attention networks and vision-language models. Introduces Spatial Sequence Attention (SSA) for schizophrenia diagnosis from structural MRI, the Multi-modal Imaging Genomics Transformer (MIGTrans) that adds functional connectivity and SNP genomics, and the Multi-Modal Medical Transformer (M3T) for retinal report generation.",
+    "links": [
+      {
+        "label": "PDF",
+        "url": "/data/thesis/NagurShareefShaik_MS_Thesis.pdf"
+      },
+      {
+        "label": "GSU ScholarWorks",
+        "url": "https://hdl.handle.net/20.500.14694/15456"
+      },
+      {
+        "label": "DOI",
+        "url": "https://doi.org/10.57709/tw0z-py92"
+      }
+    ]
+  },
+  "themes": [
+    {
+      "title": "Structured multimodal perception",
+      "text": "Modality-aware attention and fusion that respect how clinical data is structured."
+    },
+    {
+      "title": "Robust latent disentanglement",
+      "text": "Probabilistic factorization so models degrade gracefully under missing modalities, class imbalance and representation collapse."
+    },
+    {
+      "title": "Uncertainty-aware longitudinal reasoning",
+      "text": "Disease progression as distributional change, with temporal claims tied to image evidence."
+    }
+  ]
+}

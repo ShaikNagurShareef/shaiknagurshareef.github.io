@@ -1,0 +1,301 @@
+[
+  {
+    "id": "pathpro",
+    "title": "PathPro",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "React",
+      "LightGBM",
+      "MapLibre"
+    ],
+    "description": "Explainable pedestrian traffic-risk forecaster for Atlanta (Poisson GLM + LightGBM, Empirical Bayes, weather-aware scoring) with risk-aware routing and citywide maps. Reaches 0.869 ROC-AUC on the 2023 temporal holdout, with exact risk-factor decomposition and validated AI explanations.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/PathPro"
+      },
+      {
+        "label": "Demo",
+        "url": "https://pathpro.tech"
+      }
+    ],
+    "date": "2026-09",
+    "featured": true,
+    "tags": [
+      "ml",
+      "geospatial"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "intune",
+    "title": "InTune",
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "LangGraph.js",
+      "Gemini",
+      "LiveKit"
+    ],
+    "description": "Communication-support community for text, audio and video. LangGraph.js and Gemini handle clarification, meaning-preserving rewrites and private reading aids; exact text-and-audience approval, critical-slot checks and idempotent publishing keep it safe, and LiveKit powers calls with private AI interpretation.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/InTune"
+      },
+      {
+        "label": "Demo",
+        "url": "https://intune-eta.vercel.app"
+      }
+    ],
+    "date": "2026-09",
+    "featured": false,
+    "tags": [
+      "agents",
+      "accessibility"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "insightrx",
+    "title": "InsightRx",
+    "stack": [
+      "DINOv2-L",
+      "LoRA",
+      "FastAPI",
+      "ONNX"
+    ],
+    "description": "Retinal screening and HCP collaboration workspace on a DINOv2-L/LoRA ensemble (0.980 patient-level AUROC for referable DR on 247 held-out mBRSET patients), with quality-gated two-eye assessment, attention maps, clinician-signed referrals, and traceable links to guideline therapy, protein targets and drug evidence.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/InsightRx"
+      },
+      {
+        "label": "Demo",
+        "url": "https://insightrx-hcp.vercel.app"
+      }
+    ],
+    "date": "2026-09",
+    "featured": true,
+    "tags": [
+      "medical-ai",
+      "vision"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "aura",
+    "title": "AURA",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "React/TypeScript",
+      "Vision Transformers",
+      "Gemini",
+      "ChromaDB"
+    ],
+    "description": "Multi-agent healthcare ecosystem where a master intent router hands off to specialist agents (diagnosis, CBT wellbeing, triage, nutrition, visualization), including IRIS, a Vision Transformer that predicts systemic risk from a mobile retinal image, and COMPASS, an Agentic RAG insurance guide. Benchmarked on mBRSET, MIMIC-CXR, DeepEyeNet and ROCO.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/AURA"
+      }
+    ],
+    "date": "2026-02",
+    "featured": true,
+    "tags": [
+      "medical-ai",
+      "agents"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "prism",
+    "title": "PRISM",
+    "stack": [
+      "Python",
+      "FastAPI",
+      "React",
+      "LangGraph",
+      "LLMs",
+      "Vector DB"
+    ],
+    "description": "AI-powered data-intelligence platform that combines NL2SQL, automated ETL, one-click ML pipelines, no-code RAG and auditable agentic workflows.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/PRISM/"
+      }
+    ],
+    "date": "2025-10",
+    "featured": false,
+    "tags": [
+      "agents",
+      "data"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "nl2dash",
+    "title": "NL2Dash",
+    "stack": [
+      "Python",
+      "NL2SQL",
+      "LLMs",
+      "FastAPI",
+      "React"
+    ],
+    "description": "Self-serve analytics tool that turns plain-English questions into governed SQL (NL2SQL) and person-specific dashboards, so ad-hoc reporting no longer waits on the BI team.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/Hacklanta"
+      }
+    ],
+    "date": "2025-09",
+    "featured": false,
+    "tags": [
+      "data",
+      "llm"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "agentkit",
+    "title": "AgentKit",
+    "stack": [
+      "Python",
+      "LangGraph",
+      "Agentic Frameworks",
+      "Observability"
+    ],
+    "description": "Agent-orchestration library that adds a production harness, pluggable memory, observability and evaluation to open-source agentic frameworks, shortening time-to-production across teams.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/agentkit"
+      }
+    ],
+    "date": "2025-08",
+    "featured": false,
+    "tags": [
+      "agents",
+      "tooling"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "insucompass",
+    "title": "InsuCompass",
+    "stack": [
+      "Python",
+      "LangGraph",
+      "Streamlit",
+      "Groq",
+      "Gemini",
+      "ChromaDB"
+    ],
+    "description": "Agentic RAG health-insurance advisor whose self-learning Search Agent retrieves, verifies and ingests new knowledge (CMS.gov, VA.gov); orchestrated in LangGraph on Llama 3 and Gemini.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/InsuCompass"
+      },
+      {
+        "label": "Demo",
+        "url": "https://huggingface.co/spaces/nagur-shareef-shaik/InsuCompass"
+      }
+    ],
+    "date": "2025-05",
+    "featured": false,
+    "tags": [
+      "rag",
+      "healthcare"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "scholarpulse",
+    "title": "ScholarPulse",
+    "stack": [
+      "Python",
+      "LangChain",
+      "Streamlit",
+      "ChromaDB",
+      "SentenceTransformers"
+    ],
+    "description": "Advanced RAG research assistant (LangChain, Llama-4 Maverick, Qwen-2.5) for paper Q&A, summarization and code generation, cutting research comprehension time by 50%.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/ScholarPulse"
+      },
+      {
+        "label": "Demo",
+        "url": "https://huggingface.co/spaces/nagur-shareef-shaik/ScholarPulse"
+      }
+    ],
+    "date": "2025-04",
+    "featured": false,
+    "tags": [
+      "rag"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "rhd",
+    "title": "Retinal Health Diagnostics",
+    "stack": [
+      "Python",
+      "TensorFlow",
+      "FastAPI",
+      "Streamlit"
+    ],
+    "description": "Novel attention mechanism that uses global context to learn localized, lesion-specific features: 97.5% (cataract), 85.6% (diabetic retinopathy) and 94.6% (macular edema) accuracy.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/RetinalHealthDiagnostics/RHD"
+      },
+      {
+        "label": "Demo",
+        "url": "https://huggingface.co/spaces/nagur-shareef-shaik/RHD"
+      }
+    ],
+    "date": "2024-05",
+    "featured": false,
+    "tags": [
+      "medical-ai",
+      "vision"
+    ],
+    "source": "manual"
+  },
+  {
+    "id": "birthday-greetings",
+    "title": "Birthday Greetings App",
+    "stack": [
+      "Java",
+      "Spring Boot",
+      "JSP",
+      "MySQL",
+      "HTML",
+      "CSS",
+      "JS"
+    ],
+    "description": "Web application that sends customized greeting cards straight to friends' inboxes.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/BirthdayGreetingsApp"
+      }
+    ],
+    "date": "2018-09",
+    "featured": false,
+    "tags": [
+      "web"
+    ],
+    "source": "manual"
+  }
+]

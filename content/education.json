@@ -1,0 +1,67 @@
+[
+  {
+    "id": "phd",
+    "degree": "Ph.D. in Computer Science",
+    "school": "Georgia State University",
+    "schoolUrl": "https://csds.gsu.edu/graduate/",
+    "location": "Atlanta, GA",
+    "start": "2023-08",
+    "end": "2026-12",
+    "expected": true,
+    "gpa": "4.23 / 4.30",
+    "coursework": [
+      "Advanced Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "Natural Language Processing",
+      "Digital Image Processing",
+      "Advanced Image Processing",
+      "Computational Intelligence",
+      "Privacy Aware Computing",
+      "Fundamentals of Data Science"
+    ],
+    "note": "Dissertation: From Perception to Clinical Reasoning (see Research)."
+  },
+  {
+    "id": "ms",
+    "degree": "M.S. in Computer Science (Thesis)",
+    "school": "Georgia State University",
+    "schoolUrl": "https://csds.gsu.edu/graduate/",
+    "location": "Atlanta, GA",
+    "start": "2023-08",
+    "end": "2025-05",
+    "expected": false,
+    "gpa": "4.17 / 4.30",
+    "coursework": [
+      "Advanced Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "Natural Language Processing",
+      "Digital Image Processing",
+      "Computational Intelligence",
+      "Fundamentals of Data Science"
+    ],
+    "note": "Thesis: Attentive Multi-modal Learning (see Research)."
+  },
+  {
+    "id": "btech",
+    "degree": "B.Tech. (Honours) in Computer Science & Engineering",
+    "school": "Vignan's Foundation for Science, Technology & Research",
+    "schoolUrl": "https://vignan.ac.in/csehome.php",
+    "location": "Guntur, India",
+    "start": "2016-06",
+    "end": "2020-05",
+    "expected": false,
+    "gpa": "9.79 / 10 (3.92 / 4.0)",
+    "coursework": [
+      "Data Structures",
+      "Design & Analysis of Algorithms",
+      "Probability & Statistics",
+      "Artificial Intelligence",
+      "Pattern Recognition",
+      "Data Mining",
+      "Optimization Techniques"
+    ],
+    "note": "Chairman's Gold Medal; Best Outgoing Student of CSE."
+  }
+]

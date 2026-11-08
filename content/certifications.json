@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ccar-p",
+    "title": "Claude Certified Architect – Professional",
+    "issuer": "Anthropic",
+    "url": "/data/certifications/CCAR-P.pdf"
+  },
+  {
+    "id": "langgraph",
+    "title": "Introduction to LangGraph",
+    "issuer": "LangChain Academy",
+    "url": "/data/certifications/Intro-to-LangGraph.pdf"
+  },
+  {
+    "id": "azure-ai-900",
+    "title": "Microsoft Certified: Azure AI Fundamentals",
+    "issuer": "Microsoft",
+    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDV0DQAAAAAB28WXUK8N_Lj2xU7CJFv2oQ?e=4yaM7n"
+  },
+  {
+    "id": "ibm-tf",
+    "title": "Building Deep Learning Models with TensorFlow",
+    "issuer": "IBM · Coursera",
+    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDVzDQAAAAABvEYbYoipfb5laFSYA-oAcQ?e=jXQ0y3"
+  },
+  {
+    "id": "nptel-dl",
+    "title": "Deep Learning Part 1 (Elite – Silver)",
+    "issuer": "IIT Madras · NPTEL",
+    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDVxDQAAAAABWC-rWLtKT093gM0BCc4g8A?e=9xiSre"
+  },
+  {
+    "id": "dl-nn",
+    "title": "Neural Networks and Deep Learning",
+    "issuer": "DeepLearning.AI · Coursera",
+    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDV2DQAAAAAB49pyC2mOEeEzOLQYs-J9Mw?e=lv8V31"
+  },
+  {
+    "id": "dl-cnn",
+    "title": "Convolutional Neural Networks",
+    "issuer": "DeepLearning.AI · Coursera",
+    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDV1DQAAAAABIVK5DPtQLKXAoUREl6dz6w?e=4Xc4pr"
+  },
+  {
+    "id": "dl-structuring",
+    "title": "Structuring Machine Learning Projects",
+    "issuer": "DeepLearning.AI · Coursera",
+    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDVyDQAAAAABHXEZrsPMbY8FaY0mF-d2AQ?e=wPJTPZ"
+  },
+  {
+    "id": "py4e",
+    "title": "Python for Everybody Specialization",
+    "issuer": "University of Michigan · Coursera",
+    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDV3DQAAAAABhfjUvxLSv5miMm4gAAFhJQ?e=h56jaG"
+  }
+]

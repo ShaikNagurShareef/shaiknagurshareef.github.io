@@ -1,0 +1,78 @@
+[
+  {
+    "group": "Languages",
+    "items": [
+      "Python",
+      "Java",
+      "SQL"
+    ]
+  },
+  {
+    "group": "ML & research",
+    "items": [
+      "PyTorch",
+      "torchtune",
+      "TensorFlow",
+      "Keras",
+      "scikit-learn",
+      "OpenCV",
+      "NLTK",
+      "NumPy",
+      "Pandas",
+      "Matplotlib"
+    ]
+  },
+  {
+    "group": "Agents & LLM apps",
+    "items": [
+      "LangGraph",
+      "LangChain",
+      "Google ADK",
+      "RAG",
+      "FastAPI",
+      "Flask",
+      "Streamlit"
+    ]
+  },
+  {
+    "group": "Agentic tools",
+    "items": [
+      "Claude Code",
+      "Codex",
+      "Cursor",
+      "Windsurf",
+      "GitHub Copilot"
+    ]
+  },
+  {
+    "group": "Cloud & MLOps",
+    "items": [
+      "AWS (EC2, Lambda, SageMaker, Bedrock AgentCore)",
+      "Azure (AI Services, DevOps)",
+      "GCP (Agentspace, Gemini Enterprise)",
+      "MLflow",
+      "Docker",
+      "CI/CD",
+      "Git"
+    ]
+  },
+  {
+    "group": "Engineering",
+    "items": [
+      "Spring Boot",
+      "REST APIs",
+      "Microservices",
+      "Tableau"
+    ]
+  },
+  {
+    "group": "Research interests",
+    "items": [
+      "Deep learning",
+      "Multimodal learning",
+      "Attention networks",
+      "Large language models",
+      "Agentic AI"
+    ]
+  }
+]

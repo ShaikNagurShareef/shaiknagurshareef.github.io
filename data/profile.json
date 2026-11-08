@@ -1,0 +1,35 @@
+{
+  "name": "Nagur Shareef Shaik",
+  "headline": "Applied Scientist · Multimodal Medical AI & Agentic Systems",
+  "role": "Ph.D. Candidate in Computer Science, Georgia State University",
+  "summary": "I build medical AI that holds up on messy, incomplete patient data. My Ph.D. research at Georgia State targets what breaks multimodal models in practice: missing modalities, imbalanced classes, and predictions that ignore how a patient changes over time. At UST, I lead an 18-person team that ships agentic and RAG systems across healthcare, retail and finance.",
+  "email": "shaiknagurshareef6@gmail.com",
+  "phone": "+1 (404) 203-9276",
+  "location": "Atlanta, GA",
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/nagur-shareef-shaik/",
+    "github": "https://github.com/ShaikNagurShareef",
+    "scholar": "https://scholar.google.com/citations?user=rkfPEjUAAAAJ&hl=en",
+    "orcid": "https://orcid.org/0000-0002-2432-7409",
+    "huggingface": "https://huggingface.co/nagur-shareef-shaik",
+    "researchgate": "https://www.researchgate.net/profile/Nagur-Shareef-Shaik",
+    "webofscience": "https://www.webofscience.com/wos/author/record/ABG-8568-2021",
+    "kaggle": "https://www.kaggle.com/shareef0612",
+    "medium": "https://medium.com/@shaiknagurshareef",
+    "openreview": null
+  },
+  "stats": {
+    "papers": 29,
+    "citations": "1.4K+",
+    "h_index": 14,
+    "source": "Google Scholar",
+    "as_of": "2026-11"
+  },
+  "documents": {
+    "resume": "/data/NagurShareefShaik_Resume.pdf",
+    "research_resume": "/data/NagurShareefShaik_ResearchResume.pdf",
+    "research_statement": "/data/NagurShareefShaik_ResearchStatement.pdf",
+    "ms_thesis": "/data/thesis/NagurShareefShaik_MS_Thesis.pdf"
+  },
+  "updated": "2026-11-08"
+}

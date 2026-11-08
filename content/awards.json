@@ -1,0 +1,90 @@
+[
+  {
+    "id": "gra-2026",
+    "title": "Graduate Research Award",
+    "org": "Department of Computer Science, Georgia State University",
+    "year": 2026,
+    "category": "research",
+    "detail": null
+  },
+  {
+    "id": "d3code-2025",
+    "title": "Winner, D3CODE Hackathon (US Region & Global)",
+    "org": "UST Global Inc.",
+    "year": 2025,
+    "category": "industry",
+    "detail": "Ahead of teams from the UK, Mexico, Malaysia and India."
+  },
+  {
+    "id": "neurips-travel-2025",
+    "title": "NeurIPS 2025 GenAI4Health Travel Grant",
+    "org": "NeurIPS 2025 GenAI4Health Workshop",
+    "year": 2025,
+    "category": "research",
+    "detail": null
+  },
+  {
+    "id": "sps-travel-2024",
+    "title": "IEEE SPS Travel Grant (ICIP 2024)",
+    "org": "IEEE Signal Processing Society",
+    "year": 2024,
+    "category": "research",
+    "detail": null
+  },
+  {
+    "id": "ust-awards",
+    "title": "STELLER, NOVA Star and Super Star Awards",
+    "org": "UST Global Inc.",
+    "year": null,
+    "category": "industry",
+    "detail": null
+  },
+  {
+    "id": "gsu-scholarship",
+    "title": "100% graduate scholarship",
+    "org": "Georgia State University",
+    "year": null,
+    "category": "academic",
+    "detail": null
+  },
+  {
+    "id": "go-above",
+    "title": "Go Above – Impact Award",
+    "org": "Elevance Health (Carelon Global Solutions)",
+    "year": null,
+    "category": "industry",
+    "detail": "For fixing a critical production issue in the commissions calculation flow."
+  },
+  {
+    "id": "tcs-star",
+    "title": "Star Performer Award",
+    "org": "Tata Consultancy Services",
+    "year": null,
+    "category": "industry",
+    "detail": null
+  },
+  {
+    "id": "gold-medal",
+    "title": "Chairman's Gold Medal",
+    "org": "VFSTR University",
+    "year": 2020,
+    "category": "academic",
+    "detail": "For overall excellence throughout the B.Tech."
+  },
+  {
+    "id": "best-outgoing",
+    "title": "Best Outgoing Student of CSE",
+    "org": "VFSTR University",
+    "year": 2020,
+    "category": "academic",
+    "detail": null
+  },
+  {
+    "id": "academic-excellence",
+    "title": "Academic Excellence Awards (all four years)",
+    "org": "VFSTR University",
+    "year": null,
+    "category": "academic",
+    "detail": "Top-5 rank holder in CSE each year."
+  }
+]

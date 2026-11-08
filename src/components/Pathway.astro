@@ -1,0 +1,24 @@
+---
+interface Stage { id: string; n: number; name: string; question: string; methods: string[] }
+interface Props { stages: Stage[]; compact?: boolean }
+const { stages, compact = false } = Astro.props;
+---
+<ol class="grid gap-3 sm:grid-cols-2 lg:grid-cols-5" aria-label="The five-stage interpretation pathway">
+  {stages.map((s, i) => (
+    <li class="card relative flex flex-col p-4">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-on-accent" aria-hidden="true">{s.n}</span>
+        <h3 class="text-base font-semibold"><span class="sr-only">Stage {s.n}: </span>{s.name}</h3>
+      </div>
+      <p class="mt-2 text-sm text-ink-2">{s.question}</p>
+      {!compact && (
+        <ul class="mt-3 flex flex-wrap gap-1.5" aria-label={`Methods for ${s.name}`}>
+          {s.methods.map((m) => <li class="chip">{m}</li>)}
+        </ul>
+      )}
+      {i < stages.length - 1 && (
+        <span aria-hidden="true" class="pointer-events-none absolute -right-2.5 top-1/2 hidden h-px w-2 bg-border-strong lg:block"></span>
+      )}
+    </li>
+  ))}
+</ol>

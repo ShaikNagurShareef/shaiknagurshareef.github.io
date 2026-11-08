@@ -1,0 +1,32 @@
+[
+  {
+    "id": "csail-hackathon-2026",
+    "title": "CSAIL Agentic AI Hackathon",
+    "host": "MIT CSAIL",
+    "location": "Cambridge, MA",
+    "date": "2026-04-25",
+    "dateLabel": "April 25–26, 2026",
+    "url": "https://www.csail.mit.edu/event/agentic-ai-hackathon",
+    "detail": "Building autonomous agents that plan, use tools and recover from failure, alongside 35 teams."
+  },
+  {
+    "id": "csail-alliances-2026",
+    "title": "2026 CSAIL Alliances Annual Meeting",
+    "host": "MIT CSAIL Alliances",
+    "location": "Cambridge, MA",
+    "date": "2026-04-27",
+    "dateLabel": "April 27–29, 2026",
+    "url": "https://cap.csail.mit.edu/members/events/2026-csail-alliances-annual-meeting-0",
+    "detail": "Research updates, student poster sessions and startup pitches at the Stata Center and Schwarzman College of Computing."
+  },
+  {
+    "id": "berkeley-agentic-2026",
+    "title": "2nd Agentic AI Summit",
+    "host": "Berkeley RDI",
+    "location": "Berkeley, CA",
+    "date": "2026-08-01",
+    "dateLabel": "August 1–2, 2026",
+    "url": "https://rdi.berkeley.edu/events/agentic-ai-summit-2026",
+    "detail": "5,000+ attendees, 200+ speakers across 4 stages, and 200+ posters on agent frameworks, evaluation and deployment."
+  }
+]

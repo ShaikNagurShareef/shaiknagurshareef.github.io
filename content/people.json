@@ -1,0 +1,162 @@
+[
+  {
+    "id": "ye",
+    "name": "Dr. Dong Hye Ye",
+    "role": "Committee Chair · Advisor (Ph.D. & M.S.), GSU / TReNDS Center",
+    "group": "committee",
+    "photo": "/img/donghyeye.jpeg",
+    "links": [
+      {
+        "label": "Scholar",
+        "url": "https://scholar.google.com/citations?user=nRPnkC8AAAAJ&hl=en"
+      },
+      {
+        "label": "Website",
+        "url": "https://sites.google.com/view/donghyeye"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/dong-hye-ye-35a08160/"
+      }
+    ],
+    "note": null
+  },
+  {
+    "id": "calhoun",
+    "name": "Dr. Vince D. Calhoun",
+    "role": "Committee Member · Co-advisor, GSU / TReNDS Center",
+    "group": "committee",
+    "photo": "/img/vince.jpg",
+    "links": [
+      {
+        "label": "Scholar",
+        "url": "https://scholar.google.com/citations?user=WNOoGKIAAAAJ&hl=en"
+      },
+      {
+        "label": "Website",
+        "url": "https://cas.gsu.edu/profile/vince-calhoun/"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/vince-calhoun-1282307/"
+      }
+    ],
+    "note": null
+  },
+  {
+    "id": "venkateswara",
+    "name": "Dr. Hemanth D. Venkateswara",
+    "role": "Committee Member",
+    "group": "committee",
+    "photo": null,
+    "links": [],
+    "note": null
+  },
+  {
+    "id": "kubek",
+    "name": "Dr. Mario Michael Kubek",
+    "role": "Committee Member",
+    "group": "committee",
+    "photo": null,
+    "links": [],
+    "note": null
+  },
+  {
+    "id": "masood",
+    "name": "Dr. Adnan Masood",
+    "role": "Committee Member · Mentor and Chief AI Architect, UST",
+    "group": "committee",
+    "photo": "/img/adnan.jpeg",
+    "links": [
+      {
+        "label": "Scholar",
+        "url": "https://scholar.google.com/citations?user=WgunFCMAAAAJ&hl=en"
+      },
+      {
+        "label": "Website",
+        "url": "https://adnanmasood.com/"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/adnano/"
+      }
+    ],
+    "note": null
+  },
+  {
+    "id": "adeli",
+    "name": "Dr. Ehsan Adeli",
+    "role": "Research collaborator, Stanford University",
+    "group": "collaborator",
+    "photo": "/img/ehsan.jpg",
+    "links": [
+      {
+        "label": "Scholar",
+        "url": "https://scholar.google.com/citations?user=7NX_J_cAAAAJ&hl=en"
+      },
+      {
+        "label": "Website",
+        "url": "https://stanford.edu/~eadeli/"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/eadeli/"
+      }
+    ],
+    "note": "Co-author on work at the NeurIPS 2025 GenAI4Health Workshop."
+  },
+  {
+    "id": "hashimoto",
+    "name": "Dr. Tatsunori Hashimoto",
+    "role": "Research collaborator, Stanford AI Lab",
+    "group": "collaborator",
+    "photo": null,
+    "links": [
+      {
+        "label": "Profile",
+        "url": "https://profiles.stanford.edu/tatsunori-hashimoto"
+      }
+    ],
+    "note": "AxisSQL, inference-time scaling for Text-to-SQL."
+  },
+  {
+    "id": "bodapati",
+    "name": "Dr. Jyostna Devi Bodapati",
+    "role": "Bachelor's advisor, VFSTR University",
+    "group": "collaborator",
+    "photo": "/img/bjd.jpeg",
+    "links": [
+      {
+        "label": "Scholar",
+        "url": "https://scholar.google.co.in/citations?user=rmKAfP8AAAAJ&hl=en"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/dr-jyostna-devi-bodapati-8b332796/"
+      }
+    ],
+    "note": null
+  },
+  {
+    "id": "cherukuri",
+    "name": "Teja Krishna Cherukuri",
+    "role": "Co-author and colleague (VFSTR, TCS, GSU, TReNDS Center)",
+    "group": "collaborator",
+    "photo": "/img/tejacherukuri.jpeg",
+    "links": [
+      {
+        "label": "Scholar",
+        "url": "https://scholar.google.com/citations?user=6S9WmqwAAAAJ&hl=en"
+      },
+      {
+        "label": "Website",
+        "url": "https://tejacherukuri.github.io/"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/teja-krishna-cherukuri-319714135/"
+      }
+    ],
+    "note": null
+  }
+]

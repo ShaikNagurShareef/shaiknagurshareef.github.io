@@ -1,0 +1,87 @@
+---
+import Icon from "./Icon.astro";
+import { NAV, isActive } from "../lib/nav";
+const path = Astro.url.pathname;
+---
+<header data-site-header class="sticky top-0 z-40 border-b border-border bg-bg/85 backdrop-blur supports-[backdrop-filter]:bg-bg/70">
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <a href="/" class="group flex items-baseline gap-2 no-underline" aria-label="Nagur Shareef Shaik, home">
+      <span class="font-serif text-lg font-semibold text-ink group-hover:text-accent-ink">Nagur Shareef Shaik</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {NAV.map((item) => {
+          const active = isActive(path, item.href);
+          return (
+            <li>
+              <a href={item.href} aria-current={active ? "page" : undefined}
+                 class:list={["rounded-md px-3 py-2 text-[0.9375rem] font-medium no-underline transition-colors",
+                   active ? "text-accent-ink bg-accent-soft" : "text-ink-2 hover:text-ink hover:bg-surface-2"]}>
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-1">
+      <button type="button" data-theme-toggle class="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink-2 hover:bg-surface-2 hover:text-ink"
+              aria-label="Toggle dark mode" aria-pressed="false">
+        <span data-icon-light><Icon name="moon" /></span>
+        <span data-icon-dark hidden><Icon name="sun" /></span>
+      </button>
+      <button type="button" data-menu-button class="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink-2 hover:bg-surface-2 lg:hidden"
+              aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span data-open-icon><Icon name="menu" size={20} /></span>
+        <span data-close-icon hidden><Icon name="x" size={20} /></span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" aria-label="Primary" hidden class="border-t border-border bg-bg lg:hidden">
+    <ul class="container-page grid gap-1 py-3">
+      {NAV.map((item) => (
+        <li>
+          <a href={item.href} aria-current={isActive(path, item.href) ? "page" : undefined}
+             class="block rounded-md px-3 py-2.5 font-medium text-ink-2 no-underline hover:bg-surface-2 aria-[current=page]:text-accent-ink aria-[current=page]:bg-accent-soft">
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+  const paint = () => {
+    const dark = root.dataset.theme === "dark";
+    toggle?.setAttribute("aria-pressed", String(dark));
+    toggle?.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    toggle?.querySelector<HTMLElement>("[data-icon-light]")?.toggleAttribute("hidden", dark);
+    toggle?.querySelector<HTMLElement>("[data-icon-dark]")?.toggleAttribute("hidden", !dark);
+  };
+  toggle?.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch { /* storage unavailable */ }
+    paint();
+  });
+  paint();
+
+  const menuBtn = document.querySelector<HTMLButtonElement>("[data-menu-button]");
+  const menu = document.getElementById("mobile-menu");
+  const setMenu = (open: boolean) => {
+    if (!menuBtn || !menu) return;
+    menu.hidden = !open;
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menuBtn.querySelector<HTMLElement>("[data-open-icon]")?.toggleAttribute("hidden", open);
+    menuBtn.querySelector<HTMLElement>("[data-close-icon]")?.toggleAttribute("hidden", !open);
+  };
+  menuBtn?.addEventListener("click", () => setMenu(menu?.hidden ?? true));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menu && !menu.hidden) { setMenu(false); menuBtn?.focus(); } });
+</script>

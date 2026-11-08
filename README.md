@@ -1,15 +1,21 @@
-# Personal Portfolio (shaiknagurshareef.github.io)
+# shaiknagurshareef.github.io
 
-Welcome to my personal portfolio repository. This project showcases my skills, projects, and professional information in a simple, yet elegant format using HTML, CSS, and JavaScript.
+Personal portfolio of Nagur Shareef Shaik, being rebuilt as an Astro + TypeScript static site (GitHub Pages), with a personal Research Copilot (Vercel) and a maintenance agent (Hugging Face Space). The legacy single-page site (`index.html`, `css/`, `js/`) is still what GitHub Pages serves until the cutover.
 
-## Table of Contents
-- [Personal Portfolio (shaiknagurshareef.github.io)](#personal-portfolio-shaiknagurshareefgithubio)
-  - [Table of Contents](#table-of-contents)
-  - [About](#about)
-  - [Technologies Used](#technologies-used)
-  - [Project Structure](#project-structure)
-  - [Setup Instructions](#setup-instructions)
-  - [Features](#features)
+## New site (Astro)
+```sh
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # type-checks content, builds to dist/
+```
+- `data/` machine-maintained data (publications, projects, profile); copied into `public/` at build so `/data/...` URLs keep working.
+- `content/` locked facts (experience, education, research, people, honors, service, skills, news), edited by hand only.
+- `src/content.config.ts` validates every collection; bad data fails the build.
+- `packages/tokens/` design tokens shared with the copilot app.
+- Deploy: `.github/workflows/deploy.yml` (manual until cutover). CI: `.github/workflows/ci.yml` (build + committed-key guard).
+- Secrets: never in the repo. See `.env.example` for names.
+
+## Legacy notes
 
 ## About
 This personal portfolio website is designed to present my professional experience, projects, and skills. It serves as a digital resume and a showcase for potential employers or collaborators.

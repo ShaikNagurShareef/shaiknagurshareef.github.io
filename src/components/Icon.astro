@@ -1,0 +1,32 @@
+---
+/**
+ * Inline SVG icon. `name` = a lucide-static UI icon; `brand` = a simple-icons brand glyph.
+ * Rendered at build time; decorative by default (aria-hidden) unless `label` is given.
+ */
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import * as si from "simple-icons";
+
+interface Props { name?: string; brand?: string; size?: number; label?: string; class?: string }
+const { name, brand, size = 18, label, class: cls = "" } = Astro.props;
+const a11y = label ? `role="img" aria-label="${label.replace(/"/g, "&quot;")}"` : `aria-hidden="true" focusable="false"`;
+
+let svg = "";
+if (brand) {
+  const key = ("si" + brand.charAt(0).toUpperCase() + brand.slice(1)) as keyof typeof si;
+  const icon = si[key] as { path: string } | undefined;
+  if (!icon) throw new Error(`Unknown brand icon: ${brand}`);
+  svg = `<svg ${a11y} class="${cls}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="currentColor"><path d="${icon.path}"/></svg>`;
+} else if (name) {
+  const raw = readFileSync(join(process.cwd(), "node_modules/lucide-static/icons", `${name}.svg`), "utf8");
+  svg = raw
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/class="[^"]*"/, `class="${cls}" ${a11y}`)
+    .replace(/width="24"/, `width="${size}"`)
+    .replace(/height="24"/, `height="${size}"`)
+    .trim();
+} else {
+  throw new Error("Icon needs `name` or `brand`");
+}
+---
+<Fragment set:html={svg} />

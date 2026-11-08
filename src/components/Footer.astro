@@ -1,0 +1,33 @@
+---
+import { getEntry } from "astro:content";
+import SocialLinks from "./SocialLinks.astro";
+import { NAV } from "../lib/nav";
+const me = (await getEntry("profile", "me"))!.data;
+const year = new Date().getFullYear();
+---
+<footer data-site-footer class="mt-24 border-t border-border bg-surface-2/60">
+  <div class="container-page grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
+    <div class="space-y-3">
+      <p class="font-serif text-lg font-semibold text-ink">{me.name}</p>
+      <p class="max-w-sm text-sm text-muted">{me.headline}</p>
+      <SocialLinks links={me.links} size="sm" />
+    </div>
+    <nav aria-label="Footer">
+      <p class="eyebrow mb-3">Explore</p>
+      <ul class="grid gap-1.5 text-sm">
+        {NAV.map((i) => <li><a href={i.href} class="text-ink-2 no-underline hover:text-accent-ink">{i.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="text-sm">
+      <p class="eyebrow mb-3">Contact</p>
+      <p><a href={`mailto:${me.email}`}>{me.email}</a></p>
+      <p class="text-muted">{me.location}</p>
+    </div>
+  </div>
+  <div class="border-t border-border">
+    <div class="container-page flex flex-col gap-1 py-4 text-xs text-muted sm:flex-row sm:justify-between">
+      <p>© {year} {me.name}</p>
+      <p>Data refreshed {me.updated}</p>
+    </div>
+  </div>
+</footer>

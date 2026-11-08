@@ -1,0 +1,147 @@
+{
+  "summary": "Reviewer for 25+ journals and major conferences (AAAI, MICCAI, NeurIPS, EACL, ISBI), with 60+ papers reviewed across AI/ML, biomedical imaging and computer vision.",
+  "conferences": [
+    {
+      "name": "IEEE ISBI 2026",
+      "count": 9,
+      "url": "/data/reviewer/RC_ISBI2026.pdf"
+    },
+    {
+      "name": "AAAI 2026",
+      "count": 4,
+      "url": "/data/reviewer/RC_AAAI2026.png"
+    },
+    {
+      "name": "IEEE ISBI 2025",
+      "count": 9,
+      "url": "/data/reviewer/RC_ISBI2025.pdf"
+    },
+    {
+      "name": "MICCAI 2025",
+      "count": 3,
+      "url": "/data/reviewer/RC_MICCAI2025.png"
+    }
+  ],
+  "journals": [
+    {
+      "name": "Applied Sciences (MDPI)",
+      "count": 2,
+      "url": "/data/reviewer/RC_MDPI.pdf"
+    },
+    {
+      "name": "Artificial Intelligence Review (Springer)",
+      "count": 5,
+      "url": "/data/reviewer/RC_AIR.pdf"
+    },
+    {
+      "name": "BMC Medical Imaging (Springer)",
+      "count": 1,
+      "url": "/data/reviewer/RC_BMCMI.pdf"
+    },
+    {
+      "name": "BMC Cancer (Springer)",
+      "count": 1,
+      "url": "/data/reviewer/RC_BMCC.pdf"
+    },
+    {
+      "name": "Computers in Biology and Medicine (Elsevier)",
+      "count": 1,
+      "url": "/data/reviewer/RC_CBM.pdf"
+    },
+    {
+      "name": "Computer Methods in Biomechanics and Biomedical Engineering: Imaging & Visualization",
+      "count": 1,
+      "url": null
+    },
+    {
+      "name": "Cognitive Computation (Springer)",
+      "count": 1,
+      "url": "/data/reviewer/RC_CC.pdf"
+    },
+    {
+      "name": "Diagnostics (MDPI)",
+      "count": 3,
+      "url": "/data/reviewer/RC_MDPI.pdf"
+    },
+    {
+      "name": "Evolutionary Intelligence (Springer)",
+      "count": 2,
+      "url": "/data/reviewer/RC_EI.pdf"
+    },
+    {
+      "name": "IEEE Access",
+      "count": 1,
+      "url": null
+    },
+    {
+      "name": "IEEE Transactions on Medical Imaging",
+      "count": 1,
+      "url": null
+    },
+    {
+      "name": "IEEE Transactions on Circuits and Systems for Video Technology",
+      "count": 1,
+      "url": null
+    },
+    {
+      "name": "International Journal of Data Science and Analytics (Springer)",
+      "count": 2,
+      "url": "/data/reviewer/RC_IJDSA.pdf"
+    },
+    {
+      "name": "International Journal of Information Management Data Insights (Elsevier)",
+      "count": 2,
+      "url": "/data/reviewer/RC_JJIMEI.pdf"
+    },
+    {
+      "name": "International Journal of Machine Learning and Cybernetics (Springer)",
+      "count": 1,
+      "url": "/data/reviewer/RC_IJMLC.pdf"
+    },
+    {
+      "name": "Journal of Big Data (Springer)",
+      "count": 1,
+      "url": "/data/reviewer/RC_JBD.pdf"
+    },
+    {
+      "name": "Journal of Ambient Intelligence and Humanized Computing (Springer)",
+      "count": 2,
+      "url": null
+    },
+    {
+      "name": "Knowledge and Information Systems (Springer)",
+      "count": 1,
+      "url": "/data/reviewer/RC_KIS.pdf"
+    },
+    {
+      "name": "Machine Vision and Applications (Springer)",
+      "count": 2,
+      "url": null
+    },
+    {
+      "name": "Neural Processing Letters (Springer)",
+      "count": 3,
+      "url": "/data/reviewer/RC_NPL.pdf"
+    },
+    {
+      "name": "Pattern Analysis and Applications (Springer)",
+      "count": 1,
+      "url": "/data/reviewer/RC_PAA.pdf"
+    },
+    {
+      "name": "Scientific Reports (Springer Nature)",
+      "count": 6,
+      "url": "/data/reviewer/RC_SR.pdf"
+    },
+    {
+      "name": "Sensors (MDPI)",
+      "count": 1,
+      "url": "/data/reviewer/RC_MDPI.pdf"
+    },
+    {
+      "name": "Signal, Image and Video Processing (Springer)",
+      "count": 5,
+      "url": "/data/reviewer/RC_SIVP.pdf"
+    }
+  ]
+}

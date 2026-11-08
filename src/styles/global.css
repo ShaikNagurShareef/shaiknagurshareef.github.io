@@ -1,0 +1,124 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/source-serif-4";
+@import "@portfolio/tokens/tokens.css";
+
+/* Expose tokens to Tailwind utilities (bg-surface, text-ink, border-border, ...). */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius-lg);
+  --shadow-card: var(--shadow);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    min-height: 100dvh;
+    line-height: 1.6;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif);
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  a { color: var(--accent-ink); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection { background: var(--accent-soft); color: var(--ink); }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+}
+
+@layer components {
+  .container-page { width: 100%; max-width: var(--page-max); margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 640px) { .container-page { padding-inline: 1.5rem; } }
+  .prose-measure { max-width: var(--measure); }
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    padding: 0.15rem 0.6rem; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 600; line-height: 1.6;
+    background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--border);
+  }
+  .chip-accent { background: var(--accent-soft); color: var(--accent-ink); border-color: transparent; }
+  .chip-ok { background: var(--ok-soft); color: var(--ok); border-color: transparent; }
+  .chip-warn { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+  .chip-info { background: var(--info-soft); color: var(--info); border-color: transparent; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 2.5rem; padding: 0.5rem 1rem; border-radius: var(--radius);
+    font-weight: 600; font-size: 0.9375rem; text-decoration: none;
+    border: 1px solid var(--border-strong); color: var(--ink); background: var(--surface);
+    transition: background-color 120ms, border-color 120ms, color 120ms;
+  }
+  .btn:hover { background: var(--surface-2); text-decoration: none; }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: var(--on-accent); }
+  .skip-link {
+    position: absolute; left: 0.75rem; top: -3rem; z-index: 100;
+    padding: 0.5rem 0.9rem; border-radius: var(--radius);
+    background: var(--ink); color: var(--bg); font-weight: 600; text-decoration: none;
+  }
+  .skip-link:focus { top: 0.75rem; }
+}
+
+@media print {
+  header[data-site-header], footer[data-site-footer], [data-no-print] { display: none !important; }
+  html { background: #fff; color: #000; }
+  a { color: #000; }
+}

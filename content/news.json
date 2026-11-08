@@ -1,0 +1,42 @@
+[
+  {
+    "id": "isbi-2027-submissions",
+    "date": "2026-11",
+    "text": "SC-CoMoE and Oculo-MoE submitted to IEEE ISBI 2027."
+  },
+  {
+    "id": "longitudinal-under-review",
+    "date": "2026-11",
+    "text": "Dist-RRG (ICLR 2027), STRIDE (AAAI 2027) and DELTA (CVPR 2027) under review."
+  },
+  {
+    "id": "mlsp-2026",
+    "date": "2026-08",
+    "text": "Two oral papers at IEEE MLSP 2026: C²A and saliency-guided sparse expert routing."
+  },
+  {
+    "id": "berkeley-summit",
+    "date": "2026-08",
+    "text": "Attended the 2nd Agentic AI Summit at Berkeley RDI."
+  },
+  {
+    "id": "proposal-defense",
+    "date": "2026-04",
+    "text": "Defended my Ph.D. dissertation proposal."
+  },
+  {
+    "id": "embc-2026",
+    "date": "2026-04",
+    "text": "DREAM (oral) and Region-Affinity Attention accepted at IEEE EMBC 2026."
+  },
+  {
+    "id": "gra-2026",
+    "date": "2026",
+    "text": "Received the Graduate Research Award from GSU Computer Science."
+  },
+  {
+    "id": "aaai-26",
+    "date": "2026",
+    "text": "DiA-gnostic VLVAE presented as an oral at AAAI-26."
+  }
+]
