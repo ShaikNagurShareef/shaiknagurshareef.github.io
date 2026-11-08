@@ -30,12 +30,12 @@ const search = `${d.title} ${d.authors} ${d.venue} ${d.year ?? ""}`.toLowerCase(
     <span class="text-muted">{KIND_LABEL[d.kind]}{d.presentation === "poster" ? " · Poster" : ""}</span>
     {d.url && (
       <a href={d.url} target="_blank" rel="noopener" class="pub-action">
-        Paper<span class="sr-only">: {d.title}</span>
+        <Icon name="file-text" size={15} />Paper<span class="sr-only">: {d.title}</span>
       </a>
     )}
     {bibtex && (
       <button type="button" class="pub-action" data-cite-toggle aria-expanded="false" aria-controls={`cite-${pub.id}`}>
-        Cite<span class="sr-only"> {d.title}</span>
+        <Icon name="quote" size={15} />Cite<span class="sr-only"> {d.title}</span>
       </button>
     )}
   </div>
@@ -51,9 +51,11 @@ const search = `${d.title} ${d.authors} ${d.venue} ${d.year ?? ""}`.toLowerCase(
 
 <style>
   .pub-action {
-    display: inline-flex; align-items: center; font-weight: 500; color: var(--ink);
-    text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 0.2em;
+    display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 500; color: var(--ink);
+    text-decoration: none;
   }
-  .pub-action:hover { text-decoration-color: currentColor; }
+  .pub-action :global(svg) { color: var(--muted); transition: color 120ms; }
+  .pub-action:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+  .pub-action:hover :global(svg), .pub-action[aria-expanded="true"] :global(svg) { color: var(--ink); }
   .pub-action:hover, .pub-action[aria-expanded="true"] { color: var(--accent-ink); }
 </style>
