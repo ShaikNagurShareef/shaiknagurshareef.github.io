@@ -128,7 +128,11 @@ def publications() -> str:
 def current_profile() -> str:
     """Summary and roles from the site's structured data, which is updated more often than the PDFs."""
     me = json.loads((ROOT / "data/profile.json").read_text())
-    lines = [f"(Updated {me['updated']}. Where this differs from the PDFs below, this is current.)", "", me["summary"], ""]
+    lines = [
+        f"(Updated {me['updated']}. Where this differs from the PDFs below, this is current.)", "",
+        f"Current title: {me['title']}, {me['titleOrg']}. (His UST role is listed as Machine Learning Engineer II in the experience history.)",
+        f"Also: {me['role']}.", "", me["summary"], "",
+    ]
     for j in json.loads((ROOT / "content/experience.json").read_text()):
         end = j["end"] or "present"
         lines.append(f"- {j['role']}, {j['org']} ({j['start']} to {end}): " + " ".join(j["highlights"]))

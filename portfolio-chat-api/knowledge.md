@@ -3,7 +3,10 @@
 ## CURRENT PROFILE
 (Updated 2026-11-08. Where this differs from the PDFs below, this is current.)
 
-I build medical AI that holds up on messy, incomplete patient data. My Ph.D. research at Georgia State targets what breaks multimodal models in practice: missing modalities, imbalanced classes, and predictions that ignore how a patient changes over time. At UST, I lead a 21-person team that ships agentic and RAG systems across healthcare, retail and finance.
+Current title: Applied Scientist & Sr. Lead, ML Engineering, AI Center of Excellence (AI CoE), UST Global Inc.. (His UST role is listed as Machine Learning Engineer II in the experience history.)
+Also: Ph.D. Candidate in Computer Science, Georgia State University.
+
+I build medical AI that holds up on messy, incomplete patient data. My Ph.D. research at Georgia State targets what breaks multimodal models in practice: missing modalities, imbalanced classes, and predictions that ignore how a patient changes over time. At UST, I'm an Applied Scientist and Sr. Lead, ML Engineering in the AI Center of Excellence, leading a 21-person team that ships agentic and RAG systems across healthcare, retail and finance.
 
 - Graduate Research Assistant, TReNDS Center, Georgia State University (2025-08 to present): Lead my doctoral research on multimodal medical AI that holds up when data is incomplete: modality-aware perception, latent disentanglement under missing modalities, and longitudinal clinical reasoning that keeps track of uncertainty. Developed a probabilistic multimodal framework (HSIC-constrained latent factorization plus a Self-Critiquing Mixture-of-Experts) that set state of the art across 7 systemic and ocular conditions. Developed uncertainty-aware longitudinal reasoning that treats disease progression as distributional change on statistical manifolds (Fisher-Rao), so diagnostic ambiguity survives and claims stay tied to image evidence; state of the art with +7.4% CE-F1 on Longitudinal MIMIC-CXR (Dist-RRG, STRIDE, DELTA).
 - Machine Learning Engineer II, UST Global Inc., AI Center of Excellence (2024-07 to present): Lead a 21-person AI team in the AI-CoE building UST Alpha AI, UST's one-stop shop for AI workloads, and its platform-modernization tools. Led development of CodeCrafter; designed and built Orbit. Run delivery on an AI-DLC approach: agents migrate legacy .NET 4→8 and COBOL monoliths to React/Java Spring Boot, generating NX monorepos from specs that land 95% functional, with delivery 70% faster at 60% of the cost. Now reimagining a NextGen Reinsurance Platform with SpecKit; the MVP already works. Built PathForce, an AI-assisted anatomic-pathology LIS (rules-first eligibility checks, effort-weighted case distribution, HL7/FHIR/X12, Part 11-grade audit trail), plus RiskIQ for ICD-10 coding and risk adjustment, and PolicyIQ, which turns CMS/payer policy into SME-approved claim edits in minutes, not weeks. Modernized a payer's claims adjudication by re-engineering its extracts and reporting, improving payment accuracy and audit-readiness. Architected and led Call Analytics Agents that raise First-Call Resolution, reduce repeat contacts, and flag quality and compliance issues. Architected BSA DataMap (agentic profiling into BigQuery, saving 2 FTEs/$250K) and an ETL Test Agent validated with LLM-as-a-Judge. Delivered RegView, natural-language search over regulatory documents, and a RAG-powered RFI/RFP engine that cut proposal time by 60%. Collaborated with Dr. Tatsunori Hashimoto (Stanford AI Lab) on AxisSQL, an inference-time-scaling Text-to-SQL framework ranked #12 on the BIRD leaderboard at submission; submitted to EACL (Industry Track).
@@ -219,12 +222,13 @@ Foundations and Translation
 My earlier work built the attention and fusion foundations of this agenda: attention networks for retinal, brain-MRI
 and chest-CT diagnosis; the Multi-modal Imaging Genomics Transformer for schizophrenia, which fuses sMRI,
 functional connectivity and SNPs [7]; and vision–language transformers for retinal report generation (M3T, GCS-
-M3VLT) [9, 8], with 29 peer-reviewed papers, 1.4K+ citations and an h-index of 14. Outside the lab, I lead a
-21-person AI team at UST, where I ship agentic and retrieval-augmented systems across healthcare, finance and retail:
-clinical coding and risk adjustment (RiskIQ), payer policy-to-claim-edit automation (PolicyIQ), and an AI-assisted
-anatomic-pathology system (PathForce) with HL7/FHIR/X12 integration and an audit trail. That work taught
-me what a deployed clinical system demands: claims that can be audited, behavior that degrades gracefully, and
-evaluation that cannot be passed by repeating the base rate. These are the properties my dissertation formalizes.
+M3VLT) [9, 8], with 29 peer-reviewed papers, 1.4K+ citations and an h-index of 14. Outside the lab, I am an
+Applied Scientist and Sr. Lead, ML Engineering in UST’s AI Center of Excellence, where I lead a 21-person team
+and ship agentic and retrieval-augmented systems across healthcare, finance and retail: clinical coding and risk
+adjustment (RiskIQ), payer policy-to-claim-edit automation (PolicyIQ), and an AI-assisted anatomic-pathology
+system (PathForce) with HL7/FHIR/X12 integration and an audit trail. That work taught me what a deployed
+clinical system demands: claims that can be audited, behavior that degrades gracefully, and evaluation that cannot
+be passed by repeating the base rate. These are the properties my dissertation formalizes.
 Research Agenda
 Each direction starts from a completed result.
 • Reader studies with radiologists.Dist-RRG specifies a blinded reader-study protocol, fixed before data
@@ -257,9 +261,9 @@ for Expert Precision Medical Report Generation.IEEE EMBC, 2026.Oral.arXiv:2604.1
 Saliency-Guided Sparse Expert Routing.IEEE MLSP, 2026.Oral.arXiv:2608.09752.
 [4] A. Gogineni,N. S. Shaik, A. Mandava, A. Masood, D. H. Ye. C2A: Coupling Spatial Evidence with Clinical Priors via Co-
 occurrence Aware Class Attention for Multi-Label Chest X-Ray Classification.IEEE MLSP, 2026.Oral.arXiv:2608.09774.
-[5] N. S. Shaik, T. K. Cherukuri, A. Masood, E. Adeli, D. H. Ye. Ordinal Label-Distribution Learning with Constrained
 2
 Nagur Shareef Shaik shaiknagurshareef.github.io shaiknagurshareef6@gmail.com
+[5] N. S. Shaik, T. K. Cherukuri, A. Masood, E. Adeli, D. H. Ye. Ordinal Label-Distribution Learning with Constrained
 Asymmetric Priors for Imbalanced Retinal Grading.NeurIPS 2025 Workshop on GenAI for Health, 2025.
 [6] T. K. Cherukuri*,N. S. Shaik*, S. R. Yellu, J.-W. Chung, D. H. Ye. Dynamic Contextual Attention Network:
 Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis.IEEE EMBC, 2025.Oral.

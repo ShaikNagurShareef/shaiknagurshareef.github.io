@@ -100,6 +100,9 @@ const profile = defineCollection({
     name: z.string(),
     headline: z.string(),
     role: z.string(),
+    /** Current title, used in headlines and descriptions; the Experience entry keeps "Machine Learning Engineer II". */
+    title: z.string(),
+    titleOrg: z.string(),
     summary: z.string(),
     email: z.email(),
     phone: z.string(),
