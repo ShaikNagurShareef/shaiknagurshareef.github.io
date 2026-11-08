@@ -5,6 +5,7 @@ Sources (all relative to the repo root):
   - data/NagurShareefShaik_ResearchResume.pdf
   - data/NagurShareefShaik_ResearchStatement.pdf
   - data/{conferences,journals,workshops,under-review}.json
+  - data/profile.json + content/experience.json (CURRENT PROFILE; newer than the PDFs)
   - content/awards.json (honors, with years)
   - content/service.json (peer review, including active reviewing roles)
   - selected <section> blocks of index.html
@@ -124,6 +125,16 @@ def publications() -> str:
     return "\n".join(parts).strip()
 
 
+def current_profile() -> str:
+    """Summary and roles from the site's structured data, which is updated more often than the PDFs."""
+    me = json.loads((ROOT / "data/profile.json").read_text())
+    lines = [f"(Updated {me['updated']}. Where this differs from the PDFs below, this is current.)", "", me["summary"], ""]
+    for j in json.loads((ROOT / "content/experience.json").read_text()):
+        end = j["end"] or "present"
+        lines.append(f"- {j['role']}, {j['org']} ({j['start']} to {end}): " + " ".join(j["highlights"]))
+    return "\n".join(lines)
+
+
 def awards() -> str:
     """Honors from content/awards.json, the same source the website renders."""
     lines = []
@@ -153,6 +164,7 @@ def service() -> str:
 
 def main() -> int:
     blocks = ["# Knowledge base: Nagur Shareef Shaik", ""]
+    blocks += ["## CURRENT PROFILE", current_profile(), ""]
     for label, path in PDFS:
         if not path.exists():
             print(f"missing: {path}", file=sys.stderr)

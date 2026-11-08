@@ -22,7 +22,7 @@
     "start": "2024-07",
     "end": null,
     "highlights": [
-      "Lead an 18-person AI team in the AI-CoE building UST Alpha AI, UST's one-stop shop for AI workloads, and its platform-modernization tools. Led development of CodeCrafter; designed and built Orbit.",
+      "Lead a 21-person AI team in the AI-CoE building UST Alpha AI, UST's one-stop shop for AI workloads, and its platform-modernization tools. Led development of CodeCrafter; designed and built Orbit.",
       "Run delivery on an AI-DLC approach: agents migrate legacy .NET 4→8 and COBOL monoliths to React/Java Spring Boot, generating NX monorepos from specs that land 95% functional, with delivery 70% faster at 60% of the cost. Now reimagining a NextGen Reinsurance Platform with SpecKit; the MVP already works.",
       "Built PathForce, an AI-assisted anatomic-pathology LIS (rules-first eligibility checks, effort-weighted case distribution, HL7/FHIR/X12, Part 11-grade audit trail), plus RiskIQ for ICD-10 coding and risk adjustment, and PolicyIQ, which turns CMS/payer policy into SME-approved claim edits in minutes, not weeks.",
       "Modernized a payer's claims adjudication by re-engineering its extracts and reporting, improving payment accuracy and audit-readiness. Architected and led Call Analytics Agents that raise First-Call Resolution, reduce repeat contacts, and flag quality and compliance issues.",
