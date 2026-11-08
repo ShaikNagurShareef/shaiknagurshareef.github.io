@@ -1,10 +1,18 @@
 name: Deploy site to GitHub Pages
 
 # Builds the Astro site and publishes dist/ to GitHub Pages (Pages source: "GitHub Actions").
+# A push to main publishes main. To publish another branch (e.g. the backup theme), run it manually:
+#   gh workflow run deploy.yml -f ref=backup/first-revamp-bw     # switch to the backup design
+#   gh workflow run deploy.yml -f ref=main                       # switch back
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch to publish (main or backup/first-revamp-bw)"
+        required: false
+        default: main
 
 permissions:
   contents: read
@@ -20,6 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.ref || github.ref }}
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22

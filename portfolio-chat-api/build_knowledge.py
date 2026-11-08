@@ -130,7 +130,8 @@ def current_profile() -> str:
     me = json.loads((ROOT / "data/profile.json").read_text())
     lines = [
         f"(Updated {me['updated']}. Where this differs from the PDFs below, this is current.)", "",
-        f"Current title: {me['title']}, {me['titleOrg']}. (His UST role is listed as Machine Learning Engineer II in the experience history.)",
+        f"Current title at UST: {me['title']}, {me['titleOrg']}.",
+        "Professional identity: Applied Scientist (how he describes himself; it is not his UST job title).",
         f"Also: {me['role']}.", "", me["summary"], "",
     ]
     for j in json.loads((ROOT / "content/experience.json").read_text()):

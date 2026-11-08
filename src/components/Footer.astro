@@ -1,7 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 import SocialLinks from "./SocialLinks.astro";
-import { NAV } from "../lib/nav";
+import { FOOTER_NAV } from "../lib/nav";
 const me = (await getEntry("profile", "me"))!.data;
 const year = new Date().getFullYear();
 ---
@@ -15,7 +15,7 @@ const year = new Date().getFullYear();
     <nav aria-label="Footer">
       <p class="eyebrow mb-3">Explore</p>
       <ul class="grid gap-1.5 text-sm">
-        {NAV.map((i) => <li><a href={i.href} class="text-ink-2 no-underline hover:text-accent-ink">{i.label}</a></li>)}
+        {FOOTER_NAV.map((i) => <li><a href={i.href} class="text-ink-2 no-underline hover:text-accent-ink">{i.label}</a></li>)}
       </ul>
     </nav>
     <div class="text-sm">
@@ -27,7 +27,7 @@ const year = new Date().getFullYear();
   <div class="border-t border-border">
     <div class="container-page flex flex-col gap-1 py-4 text-xs text-muted sm:flex-row sm:justify-between">
       <p>© {year} {me.name}</p>
-      <p>Data refreshed {me.updated}</p>
+      <p>Data refreshed {me.updated} · <a href="/privacy/" class="text-muted">Privacy</a></p>
     </div>
   </div>
 </footer>

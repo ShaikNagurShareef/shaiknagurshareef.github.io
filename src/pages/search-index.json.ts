@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { getCollection, getEntry } from "astro:content";
 import { getPublications } from "../lib/pubs";
-import { NAV } from "../lib/nav";
+import { FOOTER_NAV } from "../lib/nav";
 import { STATUS_LABEL } from "../lib/format";
 
 /**
@@ -30,9 +30,10 @@ export const GET: APIRoute = async () => {
     "/experience/": "work jobs education skills timeline",
     "/service/": "reviewing reviewer awards honors certifications events hackathons",
     "/cv/": "resume curriculum vitae print",
-    "/contact/": "email phone reach",
+    "/contact/": "email phone reach message form",
+    "/feedback/": "testimonials reviews feedback recommend",
   };
-  for (const n of NAV) items.push({ type: "Page", title: n.label, url: n.href, keywords: PAGE_HINTS[n.href] });
+  for (const n of FOOTER_NAV) items.push({ type: "Page", title: n.label, url: n.href, keywords: PAGE_HINTS[n.href] });
 
   for (const s of research.dissertation.stages) {
     items.push({

@@ -5,6 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CommandPalette from "../components/CommandPalette.astro";
 import ChatWidget from "../components/ChatWidget.astro";
+import VisitBeacon from "../components/VisitBeacon.astro";
 
 interface Props {
   title?: string;
@@ -12,10 +13,14 @@ interface Props {
   /** Extra JSON-LD objects for this page (e.g. ScholarlyArticle list). */
   jsonLd?: object[];
   noindex?: boolean;
+  /** Record this page in the visit log (off for the private audit page). */
+  track?: boolean;
+  /** Show the AI assistant button. */
+  chat?: boolean;
 }
 
 const me = (await getEntry("profile", "me"))!.data;
-const { title, description = me.summary, jsonLd = [], noindex = false } = Astro.props;
+const { title, description = me.summary, jsonLd = [], noindex = false, track = true, chat = true } = Astro.props;
 const fullTitle = title ? `${title} · ${me.name}` : `${me.name} · ${me.headline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL("/img/Shareef.png", Astro.site).toString();
@@ -56,8 +61,8 @@ const person = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/img/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
@@ -89,7 +94,8 @@ const person = {
     </main>
     <Footer />
     <CommandPalette />
-    <ChatWidget />
+    {chat && <ChatWidget />}
+    {track && <VisitBeacon />}
     <script>
       // Shared copy-to-clipboard for any [data-copy] button (BibTeX, email, ...).
       document.addEventListener("click", async (e) => {

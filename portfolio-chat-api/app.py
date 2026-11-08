@@ -26,6 +26,9 @@ from google.genai import errors as genai_errors
 from google.genai import types
 from pydantic import BaseModel, Field
 
+import inbox
+import visits
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 log = logging.getLogger("portfolio-chat")
 
@@ -79,14 +82,27 @@ GEN_CONFIG = types.GenerateContentConfig(
 )
 
 # ---------------------------------------------------------------- app + CORS
-app = FastAPI(title="Portfolio Chat API", docs_url=None, redoc_url=None)
+from contextlib import asynccontextmanager
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    task = asyncio.create_task(visits.flush_loop())
+    yield
+    task.cancel()
+    await visits.flush_now()  # save buffered visits before the container stops
+
+
+app = FastAPI(title="Portfolio Chat API", docs_url=None, redoc_url=None, lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
     allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS"],
-    allow_headers=["Content-Type"],
+    allow_headers=["Content-Type", "Authorization"],
 )
+app.include_router(visits.router)
+app.include_router(inbox.router)
 
 
 # ---------------------------------------------------------------- schemas

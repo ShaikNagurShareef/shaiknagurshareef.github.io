@@ -1,0 +1,40 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
+import { getEntry } from "astro:content";
+const me = (await getEntry("profile", "me"))!.data;
+---
+<Base title="Privacy" description="What this site records about visits, why, and how to opt out.">
+  <PageHeader title="Privacy"
+    lead="This is a personal site. It keeps a private log of page views so I can see how the site is used and audit access. Nothing is sold, shared or used for advertising." />
+
+  <Section id="log-h" title="What is recorded">
+    <div class="prose-measure grid gap-4 text-[1.0625rem] leading-relaxed text-ink-2">
+      <p>For each page view: the time, the page and the referring page, your browser, operating system, device type, language, time zone and screen size, and approximate location (city, region, country) and network owner (for example a university or company) derived from your IP address.</p>
+      <p>The IP address itself is stored with its last block removed, plus a one-way salted hash of the full address so repeat visits can be counted without keeping the address. A random identifier is kept in your browser's local storage to tell new and returning visitors apart. No cookies are set and no advertising or cross-site tracking is used.</p>
+      <p>Location and network come from an offline copy of the <a href="https://db-ip.com" target="_blank" rel="noopener">DB-IP Lite</a> databases (CC BY 4.0), so your address is not sent to any lookup service.</p>
+    </div>
+  </Section>
+
+  <Section id="store-h" title="Storage and access">
+    <div class="prose-measure grid gap-4 text-[1.0625rem] leading-relaxed text-ink-2">
+      <p>The log is stored in a private Hugging Face dataset that only I can access, and viewed through a password-protected page. It is used only to understand visits to this site.</p>
+      <p>The site also uses Google Analytics for aggregate traffic statistics. The AI assistant sends your questions to Google's Gemini API to generate answers; conversations are not stored in the visit log.</p>
+    </div>
+  </Section>
+
+  <Section id="forms-h" title="Messages and feedback">
+    <div class="prose-measure grid gap-4 text-[1.0625rem] leading-relaxed text-ink-2">
+      <p>Messages sent through the contact form are delivered to my email through <a href="https://formsubmit.co" target="_blank" rel="noopener">FormSubmit</a> and a copy is kept in the same private dataset, together with the approximate location and network of the sender. Your email address is used only to reply.</p>
+      <p>Feedback is private unless you tick the box allowing it to be shown, and even then it appears on the Feedback page only after I review it. Only your name, how you know me, and the feedback text are ever shown; your email never is.</p>
+    </div>
+  </Section>
+
+  <Section id="optout-h" title="Opting out">
+    <div class="prose-measure grid gap-4 text-[1.0625rem] leading-relaxed text-ink-2">
+      <p>If your browser sends the <a href="https://globalprivacycontrol.org" target="_blank" rel="noopener">Global Privacy Control</a> signal, no page views are recorded. You can also turn recording off for this browser by opening <a href="/?notrack=1">this link</a> (and back on with <a href="/?notrack=0">this one</a>).</p>
+      <p>To ask about or remove data about your visits, email <a href={`mailto:${me.email}`}>{me.email}</a>.</p>
+    </div>
+  </Section>
+</Base>

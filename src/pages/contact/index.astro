@@ -1,7 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
-import SocialLinks from "../../components/SocialLinks.astro";
+import Section from "../../components/Section.astro";
 import Icon from "../../components/Icon.astro";
 import { getEntry } from "astro:content";
 
@@ -18,64 +18,114 @@ const profiles: Array<[string, string]> = [
   ["Web of Science", "webofscience"], ["Kaggle", "kaggle"], ["Medium", "medium"],
 ];
 ---
-<Base title="Contact" description={`Get in touch with ${me.name} about research collaboration, reviewing, speaking or roles in applied AI.`}>
-  <PageHeader eyebrow="Contact" title="Get in touch"
-    lead="I'm glad to hear about research collaborations, reviewing and speaking invitations, and applied-science roles in multimodal and medical AI. Email is the fastest way to reach me." />
+<Base title="Contact" description={`Send ${me.name} a message about research collaboration, reviewing, speaking or roles in applied AI.`}>
+  <PageHeader title="Contact"
+    lead="I welcome research collaborations, reviewing and speaking invitations, and conversations about applied-science roles in multimodal and medical AI. Send a message below and it comes straight to my inbox." />
 
-  <div class="container-page grid gap-6 py-12 lg:grid-cols-[1.3fr_1fr]">
-    <section aria-labelledby="direct-h" class="card p-6 md:p-8">
-      <h2 id="direct-h" class="text-2xl font-semibold">Direct</h2>
-      <dl class="mt-5 grid gap-5">
-        <div class="flex items-start gap-3">
-          <span class="mt-0.5 text-accent-ink"><Icon name="mail" size={20} /></span>
-          <div>
-            <dt class="text-sm text-muted">Email</dt>
-            <dd class="flex flex-wrap items-center gap-3">
-              <a href={`mailto:${me.email}`} class="text-lg font-semibold">{me.email}</a>
-              <button type="button" class="btn min-h-0 px-2.5 py-1 text-sm" data-copy={me.email}>
-                <Icon name="copy" size={14} /><span data-copy-label>Copy</span>
-              </button>
-            </dd>
-          </div>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-0.5 text-accent-ink"><Icon name="phone" size={20} /></span>
-          <div>
-            <dt class="text-sm text-muted">Phone</dt>
-            <dd><a href={`tel:${me.phone.replace(/[^\d+]/g, "")}`} class="font-semibold">{me.phone}</a></dd>
-          </div>
-        </div>
-        <div class="flex items-start gap-3">
-          <span class="mt-0.5 text-accent-ink"><Icon name="map-pin" size={20} /></span>
-          <div>
-            <dt class="text-sm text-muted">Based in</dt>
-            <dd class="font-semibold text-ink">{me.location}</dd>
-          </div>
-        </div>
-      </dl>
-      <div class="mt-8">
-        <h3 class="font-sans text-sm font-semibold text-muted">Documents</h3>
-        <ul class="mt-3 flex flex-wrap gap-2">
-          {docs.map((d) => (
-            <li><a href={d.href} target="_blank" rel="noopener" class="btn"><Icon name="file-text" size={16} />{d.label}</a></li>
-          ))}
-        </ul>
+  <Section id="message-h" title="Send a message" description="I read every message and usually reply within a few days.">
+    <div data-sent hidden class="form-done" role="status" tabindex="-1">
+      <span class="form-done-icon"><Icon name="check" size={22} /></span>
+      <div>
+        <p class="font-display text-[1.5rem] font-semibold text-ink">Message sent</p>
+        <p class="mt-1 text-[1.0625rem] text-ink-2">Thank you, <span data-sent-name></span>. I'll reply to <span data-sent-email class="font-semibold text-ink"></span>.</p>
+        <button type="button" data-again class="link-more mt-4">Send another message</button>
       </div>
-    </section>
+    </div>
 
-    <section aria-labelledby="profiles-h" class="card p-6 md:p-8">
-      <h2 id="profiles-h" class="text-2xl font-semibold">Profiles</h2>
-      <ul class="mt-5 grid gap-1">
-        {profiles.filter(([, k]) => me.links[k]).map(([label, k]) => (
-          <li>
-            <a href={me.links[k]!} target="_blank" rel="noopener me"
-               class="flex items-center justify-between rounded-md px-2 py-2 font-medium text-ink no-underline hover:bg-surface-2">
-              {label}<Icon name="arrow-up-right" size={16} class="text-muted" />
-            </a>
-          </li>
-        ))}
-      </ul>
-      <div class="mt-6 border-t border-border pt-5"><SocialLinks links={me.links} size="sm" /></div>
-    </section>
-  </div>
+    <form data-contact class="form-grid" novalidate>
+      <label class="field-group">
+        <span class="field-label">Name</span>
+        <input name="name" required maxlength="100" autocomplete="name" class="field" />
+      </label>
+      <label class="field-group">
+        <span class="field-label">Email</span>
+        <input name="email" type="email" required maxlength="200" autocomplete="email" class="field" />
+      </label>
+      <label class="field-group sm:col-span-2">
+        <span class="field-label">Subject <span class="font-normal text-muted">(optional)</span></span>
+        <input name="subject" maxlength="150" class="field" placeholder="Collaboration, reviewing, a role, a question about a paper…" />
+      </label>
+      <label class="field-group sm:col-span-2">
+        <span class="field-label flex justify-between">Message <span class="font-normal text-muted tabular" data-count-for="message"></span></span>
+        <textarea name="message" required minlength="10" maxlength="5000" rows="7" data-counter class="field textarea"></textarea>
+      </label>
+      <!-- Honeypot: hidden from people, filled in by bots. -->
+      <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+      <p data-form-status class="form-error sm:col-span-2" role="alert" hidden></p>
+      <div class="flex flex-wrap items-center gap-4 sm:col-span-2">
+        <button type="submit" class="btn btn-primary"><Icon name="send" size={16} />Send message</button>
+        <p class="text-sm text-muted">Or email <a href={`mailto:${me.email}`}>{me.email}</a></p>
+      </div>
+    </form>
+  </Section>
+
+  <Section id="direct-h" title="Direct">
+    <dl class="rows -mt-4">
+      <div class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:items-center sm:gap-8">
+        <dt class="text-sm text-muted">Email</dt>
+        <dd class="flex flex-wrap items-center gap-3">
+          <a href={`mailto:${me.email}`} class="link-quiet text-[1.125rem] font-medium">{me.email}</a>
+          <button type="button" class="btn btn-sm" data-copy={me.email}><Icon name="copy" size={13} /><span data-copy-label>Copy</span></button>
+        </dd>
+      </div>
+      <div class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-8">
+        <dt class="text-sm text-muted">Phone</dt>
+        <dd><a href={`tel:${me.phone.replace(/[^\d+]/g, "")}`} class="link-quiet font-medium">{me.phone}</a></dd>
+      </div>
+      <div class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-8">
+        <dt class="text-sm text-muted">Location</dt>
+        <dd class="font-medium text-ink">{me.location}</dd>
+      </div>
+    </dl>
+  </Section>
+
+  <Section id="docs-h" title="Documents" description="PDFs open in a new tab.">
+    <ul class="rows -mt-3">
+      {docs.map((d) => (
+        <li>
+          <a href={d.href} target="_blank" rel="noopener" class="row-link">
+            <span class="inline-flex items-center gap-3"><Icon name="file-text" size={17} class="text-muted" />{d.label}</span>
+            <span class="mono text-muted">PDF</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section id="profiles-h" title="Profiles">
+    <ul class="-mt-3 grid gap-x-8 sm:grid-cols-2">
+      {profiles.filter(([, k]) => me.links[k]).map(([label, k]) => (
+        <li class="border-b border-border">
+          <a href={me.links[k]!} target="_blank" rel="noopener me" class="row-link">
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
 </Base>
+
+<style>
+  .row-link {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: 0.85rem 0; font-size: 1.0625rem; font-weight: 500; color: var(--ink); text-decoration: none;
+  }
+  .row-link:hover { color: var(--accent-ink); }
+</style>
+
+<script>
+  import { wireForm } from "../../lib/forms";
+  const form = document.querySelector<HTMLFormElement>("[data-contact]")!;
+  const done = document.querySelector<HTMLElement>("[data-sent]")!;
+  wireForm(form, "/v1/contact",
+    (d) => ({ name: d.get("name"), email: d.get("email"), subject: d.get("subject"), message: d.get("message") }),
+    (d) => {
+      done.querySelector("[data-sent-name]")!.textContent = String(d.get("name"));
+      done.querySelector("[data-sent-email]")!.textContent = String(d.get("email"));
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+      form.reset();
+    });
+  done.querySelector("[data-again]")!.addEventListener("click", () => { done.hidden = true; form.hidden = false; form.querySelector("input")?.focus(); });
+</script>

@@ -8,6 +8,6 @@ export default defineConfig({
   output: "static",
   trailingSlash: "ignore",
   build: { format: "directory" },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !/\/audit\/?$/.test(new URL(page).pathname) })],
   vite: { plugins: [tailwindcss()] },
 });
