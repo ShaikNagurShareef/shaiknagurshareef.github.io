@@ -1,29 +1,29 @@
 /*
  * Design tokens shared by the portfolio (Astro) and the Research Copilot (Next.js).
- * Direction: editorial research. Warm paper neutrals, ink text, a terracotta accent for primary
- * actions, links, emphasis and the active state; hairline rules instead of heavy cards. Contrast targets
+ * Direction: monochrome. Black and white with neutral grays; the "accent" tokens are black (white in
+ * dark mode) for primary actions, links and the active state. Color is reserved for status badges. Contrast targets
  * WCAG 2.2 AA; checked by scripts/contrast.mjs.
  */
 :root {
   color-scheme: light;
 
   /* surfaces */
-  --bg: #fbfaf7;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #f4f1ea;
-  --surface-3: #ece7dc;
-  --border: #e6e1d6;
-  --border-strong: #cfc7b8;
+  --surface-2: #f5f5f5;
+  --surface-3: #ebebeb;
+  --border: #e5e5e5;
+  --border-strong: #cfcfcf;
 
   /* text */
-  --ink: #1b1d21;
-  --ink-2: #3d424a;
-  --muted: #5f6670;
+  --ink: #0a0a0a;
+  --ink-2: #383838;
+  --muted: #616161;
 
-  /* accent (terracotta) */
-  --accent: #b0532f;
-  --accent-ink: #9a4423;
-  --accent-soft: #f6e6dd;
+  /* accent (monochrome) */
+  --accent: #111111;
+  --accent-ink: #2b2b2b;
+  --accent-soft: #efefef;
   --on-accent: #ffffff;
 
   /* status */
@@ -35,7 +35,7 @@
   --info-soft: #e3ecf8;
 
   /* focus */
-  --focus: #b8661c;
+  --focus: #111111;
 
   /* type */
   --font-serif: "Source Serif 4 Variable", "Source Serif 4", Georgia, "Times New Roman", serif;
@@ -57,26 +57,26 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #121315;
-  --surface: #181a1d;
-  --surface-2: #1f2226;
-  --surface-3: #272a2f;
-  --border: #2c3036;
-  --border-strong: #3c424a;
-  --ink: #eceae6;
-  --ink-2: #c9c6c0;
-  --muted: #9da3ab;
-  --accent: #e07a52;
-  --accent-ink: #f0a07f;
-  --accent-soft: #3a2219;
-  --on-accent: #1b1d21;
+  --bg: #0a0a0a;
+  --surface: #121212;
+  --surface-2: #1a1a1a;
+  --surface-3: #242424;
+  --border: #262626;
+  --border-strong: #3a3a3a;
+  --ink: #f5f5f5;
+  --ink-2: #c8c8c8;
+  --muted: #9a9a9a;
+  --accent: #f5f5f5;
+  --accent-ink: #dcdcdc;
+  --accent-soft: #262626;
+  --on-accent: #0a0a0a;
   --ok: #7cc79b;
   --ok-soft: #1c2f24;
   --warn: #e7b85a;
   --warn-soft: #33290f;
   --info: #8fb6ec;
   --info-soft: #1b2738;
-  --focus: #f0a35b;
+  --focus: #f5f5f5;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px -12px rgb(0 0 0 / 0.7);
 }
