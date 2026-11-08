@@ -26,6 +26,21 @@ const stats = [
 ];
 ---
 <Base>
+  <script is:inline>
+    // The old one-page site linked to sections by hash; send those links to the new pages.
+    (function () {
+      var map = {
+        education: "/experience/#edu-h", experience: "/experience/", skills: "/experience/#skills-h",
+        interests: "/experience/#skills-h", projects: "/projects/", research: "/research/",
+        team: "/research/#committee-h", publications: "/publications/", conferences: "/publications/?kind=conference",
+        journals: "/publications/?kind=journal", "under-review": "/publications/#review-h", services: "/service/",
+        reviewer: "/service/#review-h", certifications: "/service/#certs-h", awards: "/service/#awards-h",
+        participations: "/service/#events-h"
+      };
+      var t = map[location.hash.slice(1)];
+      if (t) location.replace(t);
+    })();
+  </script>
   <!-- Hero -->
   <section class="border-b border-border">
     <div class="container-page grid gap-10 py-14 md:grid-cols-[1fr_auto] md:items-center md:py-20">

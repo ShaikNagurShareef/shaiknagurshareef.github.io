@@ -43,6 +43,8 @@ PER_IP_LIMIT, PER_IP_WINDOW = int(os.getenv("RATE_PER_IP", "12")), 60  # request
 GLOBAL_LIMIT, GLOBAL_WINDOW = int(os.getenv("RATE_GLOBAL", "600")), 3600
 ALLOWED_ORIGINS = [
     "https://shaiknagurshareef.github.io",
+    "http://localhost:4321",
+    "http://127.0.0.1:4321",
     "http://localhost:5500",
     "http://127.0.0.1:5500",
     "http://localhost:8000",

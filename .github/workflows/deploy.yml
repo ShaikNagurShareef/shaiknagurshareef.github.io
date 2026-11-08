@@ -1,8 +1,9 @@
 name: Deploy site to GitHub Pages
 
-# Manual only until the cutover: GitHub Pages still serves the legacy site from the main branch.
-# At cutover, add `push: branches: [main]` and switch Pages to "GitHub Actions" as its source.
+# Builds the Astro site and publishes dist/ to GitHub Pages (Pages source: "GitHub Actions").
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

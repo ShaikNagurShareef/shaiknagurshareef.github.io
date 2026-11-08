@@ -1,0 +1,248 @@
+---
+/**
+ * "Ask about Shareef" assistant. Talks to the portfolio chat API on the Hugging Face Space
+ * (portfolio-chat-api/app.py); the browser sends only the question and recent history, and all
+ * knowledge lives server-side. Replaced by the Research Copilot API in Phase 4.
+ */
+import Icon from "./Icon.astro";
+const API = "https://nagur-shareef-shaik-portfolio-chat-api.hf.space";
+---
+<div data-no-print>
+  <button type="button" id="chat-btn" class="chat-fab" aria-label="Ask my AI assistant" aria-expanded="false" aria-controls="chat-win">
+    <span data-open><Icon name="message-circle" size={24} /></span>
+    <span data-close hidden><Icon name="x" size={24} /></span>
+  </button>
+
+  <section id="chat-win" class="chat-win" role="dialog" aria-label="Chat with Shareef's AI assistant" data-api={API} hidden>
+    <header class="chat-head">
+      <span class="flex-1">
+        <span class="block font-semibold">Ask about Shareef</span>
+        <span class="block text-xs opacity-85">AI assistant · answers from his public profile</span>
+      </span>
+      <button type="button" data-chat-clear aria-label="Clear conversation" title="Clear conversation"><Icon name="rotate-ccw" size={18} /></button>
+      <button type="button" data-chat-close aria-label="Close chat"><Icon name="x" size={18} /></button>
+    </header>
+    <div data-chat-log class="chat-log" role="log" aria-live="polite" aria-label="Conversation"></div>
+    <div data-chat-chips class="chat-chips" aria-label="Suggested questions"></div>
+    <form data-chat-form class="chat-form" autocomplete="off">
+      <input data-chat-input type="text" maxlength="1000" placeholder="Ask about research, projects, experience…" aria-label="Your question" />
+      <button type="submit" data-chat-send class="btn btn-primary min-h-0 px-3" aria-label="Send"><Icon name="send" size={18} /></button>
+    </form>
+  </section>
+</div>
+
+<style>
+  .chat-fab {
+    position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 50;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 3.5rem; height: 3.5rem; border-radius: 999px;
+    background: var(--accent); color: var(--on-accent); box-shadow: var(--shadow);
+  }
+  .chat-fab:hover { background: var(--accent-ink); }
+  .chat-win {
+    position: fixed; right: 1.25rem; bottom: 5.5rem; z-index: 50;
+    width: min(24rem, calc(100vw - 1.5rem)); height: min(36rem, calc(100dvh - 7.5rem));
+    display: flex; flex-direction: column; overflow: hidden;
+    background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
+    box-shadow: 0 24px 64px -16px rgb(0 0 0 / 0.35);
+  }
+  .chat-win[hidden] { display: none; }
+  @media (max-width: 480px) { .chat-win { right: 0.75rem; } .chat-fab { right: 0.75rem; bottom: 0.75rem; } .chat-win { bottom: 4.75rem; } }
+  .chat-head { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 0.9rem; background: var(--accent); color: var(--on-accent); }
+  .chat-head button { padding: 0.35rem; border-radius: 6px; color: inherit; }
+  .chat-head button:hover { background: rgb(255 255 255 / 0.18); }
+  .chat-log { flex: 1; overflow-y: auto; padding: 0.9rem; display: flex; flex-direction: column; gap: 0.6rem; background: var(--bg); font-size: 0.9rem; }
+  .chat-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.5rem 0.9rem 0; background: var(--bg); }
+  .chat-chips[hidden] { display: none; }
+  .chat-chips :global(button) {
+    border: 1px solid var(--accent); color: var(--accent-ink); background: var(--surface);
+    border-radius: 999px; padding: 0.2rem 0.7rem; font-size: 0.8rem; font-weight: 600;
+  }
+  .chat-chips :global(button:hover) { background: var(--accent); color: var(--on-accent); }
+  .chat-form { display: flex; gap: 0.5rem; padding: 0.65rem; border-top: 1px solid var(--border); background: var(--surface); }
+  .chat-form input {
+    flex: 1; min-width: 0; height: 2.5rem; padding: 0 0.75rem; border-radius: var(--radius);
+    border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink);
+  }
+  .chat-log :global(.msg) { max-width: 88%; padding: 0.55rem 0.75rem; border-radius: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+  .chat-log :global(.msg.user) { align-self: flex-end; background: var(--accent); color: var(--on-accent); white-space: pre-wrap; }
+  .chat-log :global(.msg.ai) { align-self: flex-start; background: var(--surface-2); color: var(--ink); }
+  .chat-log :global(.msg.error) { align-self: flex-start; background: var(--warn-soft); color: var(--warn); }
+  .chat-log :global(.msg p) { margin: 0 0 0.45rem; }
+  .chat-log :global(.msg > :last-child) { margin-bottom: 0; }
+  .chat-log :global(.msg ul), .chat-log :global(.msg ol) { margin: 0 0 0.45rem; padding-left: 1.2rem; }
+  .chat-log :global(.msg ul) { list-style: disc; }
+  .chat-log :global(.msg ol) { list-style: decimal; }
+  .chat-log :global(.msg a) { color: var(--accent-ink); text-decoration: underline; }
+  .chat-log :global(.msg.typing::after) {
+    content: ""; display: inline-block; width: 1.4em; height: 0.5em; vertical-align: middle; margin-left: 4px;
+    background: radial-gradient(circle, currentColor 35%, transparent 40%) 0 0 / 0.5em 0.5em repeat-x;
+    animation: chat-dots 1s steps(4, end) infinite;
+  }
+  @keyframes chat-dots { 0% { width: 0.2em; } 100% { width: 1.5em; } }
+</style>
+
+<script>
+  import { marked } from "marked";
+  import DOMPurify from "dompurify";
+
+  type Msg = { role: "user" | "assistant"; text: string };
+  const win = document.getElementById("chat-win") as HTMLElement | null;
+  const btn = document.getElementById("chat-btn") as HTMLButtonElement | null;
+
+  if (win && btn) {
+    let API = win.dataset.api!;
+    // Local testing only: http://localhost:4321/?chat_api=http://localhost:7861
+    if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+      const o = new URLSearchParams(location.search).get("chat_api");
+      if (o) API = o.replace(/\/$/, "");
+    }
+    const MAX_CHARS = 1000, MAX_HISTORY = 16;
+    const GREETING = "Hi! I'm Shareef's AI assistant. Ask me about his research, dissertation, projects or experience.";
+    const CHIPS: Array<[string, string]> = [
+      ["Research", "What is Shareef's research about?"],
+      ["Dissertation", "Summarize his dissertation and who his advisor is."],
+      ["Projects", "What are his most notable projects?"],
+      ["Experience", "What does he do at UST?"],
+      ["Contact", "How can I contact him?"],
+    ];
+    const log = win.querySelector<HTMLElement>("[data-chat-log]")!;
+    const chips = win.querySelector<HTMLElement>("[data-chat-chips]")!;
+    const form = win.querySelector<HTMLFormElement>("[data-chat-form]")!;
+    const input = win.querySelector<HTMLInputElement>("[data-chat-input]")!;
+    const send = win.querySelector<HTMLButtonElement>("[data-chat-send]")!;
+
+    DOMPurify.addHook("afterSanitizeAttributes", (node) => {
+      if (node.tagName === "A") { node.setAttribute("target", "_blank"); node.setAttribute("rel", "noopener noreferrer"); }
+    });
+    const render = (t: string) => DOMPurify.sanitize(marked.parse(t, { breaks: true, async: false }) as string);
+
+    let history: Msg[] = [];
+    let busy = false;
+    const save = () => { try { sessionStorage.setItem("chat-history", JSON.stringify(history)); } catch { /* optional */ } };
+    const load = (): Msg[] => {
+      try {
+        const d = JSON.parse(sessionStorage.getItem("chat-history") ?? "[]");
+        return Array.isArray(d) ? d.filter((m) => m && (m.role === "user" || m.role === "assistant") && typeof m.text === "string").slice(-MAX_HISTORY) : [];
+      } catch { return []; }
+    };
+
+    const add = (kind: "user" | "ai" | "error", text: string) => {
+      const div = document.createElement("div");
+      div.className = `msg ${kind}`;
+      if (kind === "ai") div.innerHTML = render(text); else div.textContent = text;
+      log.append(div);
+      log.scrollTop = log.scrollHeight;
+      return div;
+    };
+    const reset = () => { history = []; save(); log.textContent = ""; add("ai", GREETING); chips.hidden = false; };
+
+    const setOpen = (open: boolean) => {
+      win.hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+      btn.querySelector<HTMLElement>("[data-open]")!.hidden = open;
+      btn.querySelector<HTMLElement>("[data-close]")!.hidden = !open;
+      if (open) input.focus(); else btn.focus();
+    };
+
+    const body = (m: string) => JSON.stringify({ message: m, history: history.slice(-MAX_HISTORY) });
+    const readError = async (res: Response) => {
+      try {
+        const b = await res.json();
+        if (typeof b.detail === "string") return b.detail;
+        if (res.status === 422) return "That message is too long or invalid. Please shorten it.";
+      } catch { /* not JSON */ }
+      return `Something went wrong (${res.status}). Please try again.`;
+    };
+
+    async function stream(m: string, bubble: HTMLElement) {
+      const res = await fetch(`${API}/chat/stream`, { method: "POST", headers: { "Content-Type": "application/json" }, body: body(m) });
+      if (!res.ok) throw new Error(await readError(res));
+      if (!res.body) throw new Error("__nostream__");
+      const reader = res.body.getReader();
+      const dec = new TextDecoder();
+      let buf = "", text = "", err = "", pending = false;
+      const paint = () => { pending = false; bubble.innerHTML = render(text); log.scrollTop = log.scrollHeight; };
+      for (;;) {
+        const r = await reader.read();
+        if (r.done) break;
+        buf += dec.decode(r.value, { stream: true });
+        const parts = buf.split("\n\n");
+        buf = parts.pop() ?? "";
+        for (const p of parts) {
+          const line = p.replace(/^data: ?/, "");
+          if (!line || line === "[DONE]") continue;
+          try {
+            const e = JSON.parse(line);
+            if (e.t) { text += e.t; bubble.classList.remove("typing"); }
+            if (e.error) err = e.error;
+          } catch { /* malformed event */ }
+        }
+        if (!pending) { pending = true; requestAnimationFrame(paint); }
+      }
+      paint();
+      if (!text && err) throw new Error(err);
+      return text || err;
+    }
+
+    async function plain(m: string) {
+      const res = await fetch(`${API}/chat`, { method: "POST", headers: { "Content-Type": "application/json" }, body: body(m) });
+      if (!res.ok) throw new Error(await readError(res));
+      return (await res.json()).reply as string;
+    }
+
+    async function ask(raw: string) {
+      const m = raw.trim().slice(0, MAX_CHARS);
+      if (busy || !m) return;
+      busy = true; send.disabled = true; input.value = ""; chips.hidden = true;
+      add("user", m);
+      const bubble = add("ai", "");
+      bubble.classList.add("typing");
+      bubble.setAttribute("aria-busy", "true");
+      try {
+        let reply: string;
+        try {
+          reply = await stream(m, bubble);
+        } catch (e) {
+          const msg = (e as Error).message;
+          if (msg && msg !== "__nostream__" && !(e instanceof TypeError)) throw e;
+          reply = await plain(m); // streaming unavailable: non-streaming endpoint
+          bubble.innerHTML = render(reply);
+        }
+        bubble.classList.remove("typing");
+        history.push({ role: "user", text: m }, { role: "assistant", text: reply });
+        history = history.slice(-MAX_HISTORY);
+        save();
+      } catch (e) {
+        const msg = (e as Error).message ?? "";
+        bubble.className = "msg error";
+        bubble.textContent = e instanceof TypeError || /fetch/i.test(msg)
+          ? "The assistant is waking up or unavailable. Please try again in a minute, or use the Contact page."
+          : msg;
+      } finally {
+        bubble.removeAttribute("aria-busy");
+        busy = false; send.disabled = false; input.focus();
+        log.scrollTop = log.scrollHeight;
+      }
+    }
+
+    for (const [label, q] of CHIPS) {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = label;
+      b.addEventListener("click", () => ask(q));
+      chips.append(b);
+    }
+    btn.addEventListener("click", () => setOpen(win.hidden));
+    win.querySelector("[data-chat-close]")!.addEventListener("click", () => setOpen(false));
+    win.querySelector("[data-chat-clear]")!.addEventListener("click", reset);
+    form.addEventListener("submit", (e) => { e.preventDefault(); ask(input.value); });
+    win.addEventListener("keydown", (e) => { if (e.key === "Escape") { e.stopPropagation(); setOpen(false); } });
+
+    history = load();
+    add("ai", GREETING);
+    if (history.length) {
+      chips.hidden = true;
+      for (const m of history) add(m.role === "user" ? "user" : "ai", m.text);
+    }
+  }
+</script>

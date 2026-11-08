@@ -21,7 +21,9 @@
     "@fontsource-variable/source-serif-4": "5.3.1",
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.3.8",
+    "dompurify": "3.4.17",
     "lucide-static": "1.61.0",
+    "marked": "18.1.1",
     "simple-icons": "16.35.0",
     "tailwindcss": "4.3.3"
   },
