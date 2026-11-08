@@ -1,0 +1,101 @@
+% Research Statement - Nagur Shareef Shaik
+% Build:  pdflatex ResearchStatement.tex && pdflatex ResearchStatement.tex
+% Then copy ResearchStatement.pdf to ../data/NagurShareefShaik_ResearchStatement.pdf
+\documentclass[10pt,letterpaper]{article}
+\usepackage[margin=0.78in,top=0.7in,bottom=0.7in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[final]{microtype}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true,urlcolor=blue!60!black,linkcolor=blue!60!black,citecolor=blue!60!black]{hyperref}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4.2pt}
+\linespread{1.02}
+\setlist{nosep,leftmargin=1.4em,itemsep=2pt}
+
+\titleformat{\section}{\large\scshape\color{blue!45!black}}{}{0pt}{}[\vspace{-5pt}\rule{\linewidth}{0.5pt}]
+\titlespacing*{\section}{0pt}{8pt}{3pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\lhead{\small Nagur Shareef Shaik}
+\chead{\small \href{https://shaiknagurshareef.github.io}{shaiknagurshareef.github.io}}
+\rhead{\small \href{mailto:shaiknagurshareef6@gmail.com}{shaiknagurshareef6@gmail.com}}
+\cfoot{\small\thepage}
+
+\newcommand{\m}[1]{\textit{#1}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries Research Statement}\\[3pt]
+{\large Nagur Shareef Shaik}\\[1pt]
+{\small Ph.D.\ Candidate in Computer Science, Georgia State University (TReNDS Center) \;|\; Advisor: Dong Hye Ye\\
+\href{https://scholar.google.com/citations?user=rkfPEjUAAAAJ}{Google Scholar} \;|\;
+\href{https://orcid.org/0000-0002-2432-7409}{ORCID} \;|\;
+\href{https://github.com/ShaikNagurShareef}{GitHub} \;|\; November 2026}
+\end{center}
+
+\section{Research Vision}
+A report on a medical image is a set of claims, and a clinician acts on each one. My research makes the steps behind every claim explicit enough to inspect: where the evidence lies, what it indicates, which source supports it, how it has changed since the last study, and whether the image can bear the claim out. Deep learning systems usually fold these steps into a single prediction, and they fail in recognizable ways: attention drifts to artifacts, rare grades are absorbed by common ones, a missing clinical indication corrupts the output, and a report says ``stable'' because stability is the common case. My work rests on two ideas. First, each step should carry a \textbf{distribution rather than a point estimate}, so that uncertainty survives to the final sentence. Second, \textbf{evidence from different sources should be represented separately}, so that losing one source does not corrupt the others. These ideas come from medicine, where data are incomplete, imbalanced and longitudinal, and they are tested there across endoscopy, whole-slide histology, retinal photography (including handheld oculomics), brain MRI with genomics, and chest radiography.
+
+\section{Doctoral Research: From Perception to Clinical Reasoning}
+My dissertation treats image interpretation as a five-stage \emph{interpretation pathway} (locate, characterize, contextualize, compare, commit) and builds and tests a method for each stage. In all, it is validated across 7 clinical domains, 13 benchmarks and 8 novel architectures.
+
+\textbf{1.\ Perception: locating and structuring visual evidence.} I write attention pooling as an expectation under a learned spatial distribution, with global average pooling as its maximum-entropy case, so that attention mechanisms differ only in how they shape that distribution. Dynamic Contextual Attention shapes it for polyp diagnosis in colonoscopy \cite{dcan}. For labels, ordinal grades receive asymmetric label distributions (CAP-WAE: quadratic weighted kappa 0.87--0.94 across four retinopathy datasets \cite{capwae}), and co-occurring diseases are separated by sparse expert routing whose routing depends on the disease far more than a permutation null predicts \cite{routing}; on a five-class ODIR benchmark it reached 0.912 macro AUC under patient-disjoint cross-validation. For chest radiographs, a learned label graph lends evidence from co-occurring findings \cite{ctwoa}. This builds on earlier attention networks for brain MRI and retinal imaging \cite{ssanet,gcg}.
+
+\textbf{2.\ Context: disentangled vision--language learning when context is missing.} About 45\% of MIMIC-CXR test studies have no clinical indication, yet most report generators silently depend on it. DiA-gnostic VLVAE separates image-specific, context-specific and shared latent factors, with a mixture-of-experts posterior; when the missing indication receives no weight, its objective is a valid lower bound on the image likelihood, with no imputed text \cite{dia}. DREAM handles the case where context is present \cite{dream}. The same decomposition carries to mobile oculomics: SC-CoMoE pairs HSIC-constrained latent factorization with a self-critiquing mixture of experts and sets state of the art across seven systemic and ocular conditions \cite{scomoe}, and Oculo-MoE pursues the goal with a retina-anchored, interaction-gated design \cite{oculomoe}. Both are submitted to ISBI 2027.
+
+\textbf{3.\ Reasoning: tracking change and grounding claims in evidence.} Dist-RRG treats each visit as a distribution and disease progression as distributional change on a statistical manifold (Fisher--Rao); moment-matched aggregation keeps each visit's variance, which flags unreliable comparisons \cite{distrrg}. STRIDE ages each prior by its acquisition interval, can abstain from every prior, and re-reads the history under a progression hypothesis; it reaches 52.88 macro CE-F1 against 51.47 for a reproduced iterative-refinement model ($p<0.05$) \cite{stride}. Together, this longitudinal line of work reaches state of the art on Longitudinal MIMIC-CXR, with a 7.4\% CE-F1 gain. The last step is commitment: DELTA rewards each temporal claim with image-pair evidence, cutting false reassurance from 0.203 to 0.075 at unchanged CE-F1 and, on radiologist-verified MS-CXR-T labels, from 0.121 to 0.029, mostly by withholding unsupported claims at the cost of more false alarms \cite{delta}. A companion study shows what pooled report-auditing metrics actually measure \cite{evidence}.
+
+\textbf{What the stages share.} Three patterns recur. The \emph{second moment carries clinical information}: a model that passes only means forward cannot express the difference between a confident and an equivocal reading. \emph{Sources of evidence should stay apart} until the reason for combining them is clear, which is the same lesson for missing indications, noisy fundus images and copied priors. And \emph{base rates can pass for evidence}, which is why I build tools that separate what the image supports from what the population predicts (image-shuffle and copy-the-prior controls, an image-free ceiling, stratified metrics).
+
+\section{Foundations and Translation}
+My earlier work built the attention and fusion foundations of this agenda: attention networks for retinal, brain-MRI and chest-CT diagnosis; the Multi-modal Imaging Genomics Transformer for schizophrenia, which fuses sMRI, functional connectivity and SNPs \cite{migtrans}; and vision--language transformers for retinal report generation (M3T, GCS-M3VLT) \cite{m3t,gcsm3vlt}, with 29 peer-reviewed papers, 1.4K+ citations and an h-index of 14. Outside the lab, I lead an 18-person AI team at UST, where I ship agentic and retrieval-augmented systems across healthcare, finance and retail: clinical coding and risk adjustment (RiskIQ), payer policy-to-claim-edit automation (PolicyIQ), and an AI-assisted anatomic-pathology system (PathForce) with HL7/FHIR/X12 integration and an audit trail. That work taught me what a deployed clinical system demands: claims that can be audited, behavior that degrades gracefully, and evaluation that cannot be passed by repeating the base rate. These are the properties my dissertation formalizes.
+
+\section{Research Agenda}
+Each direction starts from a completed result.
+\begin{itemize}
+\item \textbf{Reader studies with radiologists.} Dist-RRG specifies a blinded reader-study protocol, fixed before data collection: three radiologists mark every comparative statement as supported, contradicted or unsupported by the images, which tests whether propagated variance tracks error severity. I will run it, and apply the same reads to DELTA's temporal claims.
+\item \textbf{External validation.} The matched comparisons in my work transfer unchanged to other institutions and to MS-CXR-T and CheXpert Plus for cross-site tests; I will also test DiA on its converse case, a degraded image with the indication present.
+\item \textbf{Joining the two abstentions.} Prior abstention decides which earlier studies to trust; claim abstention decides which statements to make. The change variance already links them, so I will set DELTA's support margins from it, requiring more image evidence before ``stable'' is allowed when both films are equivocal.
+\item \textbf{Oculomics on handheld devices.} I will compare SC-CoMoE and Oculo-MoE on one shared mBRSET protocol, with latency and memory measured on a handheld device, bringing the models to the setting that motivated them.
+\item \textbf{Stratified auditing as the default.} Scoring generators against an image-free ceiling, and splitting within-concept from between-concept evidence, should become the standard audit for report generators.
+\item \textbf{Verifiable clinical agents.} The same principles, explicit uncertainty, separated evidence and claims checkable against the source, apply to the agentic clinical workflows I build in industry, and I intend to study them there.
+\end{itemize}
+I am committed to a research career where methods are held to clinical standards of evidence and then built into systems people can use. The models I build are drafting aids for the clinician who reads the image and signs the report; they tie each claim to evidence read from the image and report uncertainty as a signal of difficulty, not as diagnostic confidence.
+
+\small
+\renewcommand{\refname}{Selected Publications}
+\setlength{\parskip}{1pt}
+\setlist[enumerate]{leftmargin=2.2em,itemsep=1.5pt}
+\begin{thebibliography}{99}
+\setlength{\itemsep}{1.5pt}
+\bibitem{dia} \textbf{N. S. Shaik}, T. K. Cherukuri, A. Masood, D. H. Ye. DiA-gnostic VLVAE: Disentangled Alignment-Constrained Vision Language Variational AutoEncoder for Robust Radiology Reporting with Missing Modalities. \textit{AAAI-26}, 2026. \textbf{Oral.}
+\bibitem{dream} \textbf{N. S. Shaik}*, T. K. Cherukuri*, D. H. Ye. DREAM: Dynamic Retinal Enhancement with Adaptive Multi-modal Fusion for Expert Precision Medical Report Generation. \textit{IEEE EMBC}, 2026. \textbf{Oral.} \href{https://arxiv.org/abs/2604.17209}{arXiv:2604.17209}.
+\bibitem{routing} \textbf{N. S. Shaik}, J. Park, Y.-J. Kim, J. Jung, H. Oh, D. H. Ye. Disentangling Co-Occurring Retinal Pathologies with Saliency-Guided Sparse Expert Routing. \textit{IEEE MLSP}, 2026. \textbf{Oral.} \href{https://arxiv.org/abs/2608.09752}{arXiv:2608.09752}.
+\bibitem{ctwoa} A. Gogineni, \textbf{N. S. Shaik}, A. Mandava, A. Masood, D. H. Ye. C$^2$A: Coupling Spatial Evidence with Clinical Priors via Co-occurrence Aware Class Attention for Multi-Label Chest X-Ray Classification. \textit{IEEE MLSP}, 2026. \textbf{Oral.} \href{https://arxiv.org/abs/2608.09774}{arXiv:2608.09774}.
+\bibitem{capwae} \textbf{N. S. Shaik}, T. K. Cherukuri, A. Masood, E. Adeli, D. H. Ye. Ordinal Label-Distribution Learning with Constrained Asymmetric Priors for Imbalanced Retinal Grading. \textit{NeurIPS 2025 Workshop on GenAI for Health}, 2025.
+\bibitem{dcan} T. K. Cherukuri*, \textbf{N. S. Shaik}*, S. R. Yellu, J.-W. Chung, D. H. Ye. Dynamic Contextual Attention Network: Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis. \textit{IEEE EMBC}, 2025. \textbf{Oral.} \href{https://doi.org/10.1109/EMBC58623.2025.11254199}{doi}.
+\bibitem{migtrans} \textbf{N. S. Shaik}, T. K. Cherukuri, V. D. Calhoun, D. H. Ye. Multi-modal Imaging Genomics Transformer: Attentive Integration of Imaging with Genomic Biomarkers for Schizophrenia Classification. \textit{IEEE ISBI}, 2025. \href{https://doi.org/10.1109/ISBI60581.2025.10980651}{doi}.
+\bibitem{gcsm3vlt} T. K. Cherukuri*, \textbf{N. S. Shaik}*, J. D. Bodapati, D. H. Ye. GCS-M3VLT: Guided Context Self-Attention based Multi-modal Medical Vision Language Transformer for Retinal Image Captioning. \textit{IEEE ICASSP}, 2025. \href{https://doi.org/10.1109/ICASSP49660.2025.10890310}{doi}.
+\bibitem{m3t} \textbf{N. S. Shaik}, T. K. Cherukuri, D. H. Ye. M3T: Multi-Modal Medical Transformer to Bridge Clinical Context with Visual Insights for Retinal Image Medical Description Generation. \textit{IEEE ICIP}, 2024. \textbf{Oral.} \href{https://doi.org/10.1109/ICIP51287.2024.10647584}{doi}.
+\bibitem{gcg} T. K. Cherukuri, \textbf{N. S. Shaik}, D. H. Ye. Guided Context Gating: Learning to Leverage Salient Lesions in Retinal Fundus Images. \textit{IEEE ICIP}, 2024. \href{https://doi.org/10.1109/ICIP51287.2024.10647604}{doi}.
+\bibitem{ssanet} \textbf{N. S. Shaik}, T. K. Cherukuri, V. D. Calhoun, D. H. Ye. Spatial Sequence Attention Network for Schizophrenia Classification from Structural Brain MR Images. \textit{IEEE ISBI}, 2024. \textbf{Oral.} \href{https://doi.org/10.1109/ISBI56570.2024.10635528}{doi}.
+\bibitem{distrrg} \textbf{N. S. Shaik} et al. Dist-RRG: Distributional Change Modeling on Statistical Manifolds for Longitudinal Radiology Report Generation. \textit{Under review, ICLR 2027.}
+\bibitem{stride} \textbf{N. S. Shaik} et al. STRIDE: Stochastic Trajectory Reasoning via Iterative Distributional Evolution in Longitudinal Radiology Report Generation. \textit{Under review, AAAI 2027.}
+\bibitem{delta} \textbf{N. S. Shaik} et al. Claims You Can See: Differential-Evidence Learning of Temporal Assertions for Longitudinal Radiology Report Generation (DELTA). \textit{Under review, CVPR 2027.}
+\bibitem{scomoe} \textbf{N. S. Shaik}, J. Park, Y.-J. Kim, J. Jung, H. Oh, D. H. Ye. SC-CoMoE: Self-Critiquing Cooperative Mixture-of-Experts for Multi-Modal Mobile Oculomics. \textit{Submitted, ISBI 2027.}
+\bibitem{oculomoe} \textbf{N. S. Shaik}, J. Park, Y.-J. Kim, Y. Jo, D. H. Ye. Oculo-MoE: Retina-Anchored, Interaction-Gated Mixture-of-Experts for Bilateral Multimodal Oculomics. \textit{Submitted, ISBI 2027.}
+\bibitem{evidence} \textbf{N. S. Shaik} et al. Evidence That Can Contradict: What Report-Auditing Metrics Actually Measure in Medical Vision Language Models. \textit{Under review.}
+\end{thebibliography}
+\vspace{2pt}
+{\footnotesize * equal contribution. Full list of 29 peer-reviewed papers (including journal articles): \href{https://scholar.google.com/citations?user=rkfPEjUAAAAJ}{Google Scholar}. Dissertation: \emph{From Perception to Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting} (expected December 2026). M.S.\ thesis: \href{https://hdl.handle.net/20.500.14694/15456}{GSU ScholarWorks}.}
+
+\end{document}

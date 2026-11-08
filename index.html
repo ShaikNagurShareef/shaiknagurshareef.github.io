@@ -1,52 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55120145-4"></script>
-      <!-- PDF.js for reading PDF files in the browser -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-      <script>
-          // Set the worker source for pdf.js
-          pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-      </script>
-      <!-- End PDF.js -->
-      <!-- Markdown Parser -->
-      <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-55120145-4');
-      </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script>
+      // Apply the saved/preferred theme before first paint (no flash).
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+          if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+        } catch (e) { /* storage unavailable */ }
+      })();
+    </script>
+    <!-- Google Analytics 4 (the old UA-55120145-4 property forwards to this stream) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-48PBMT2KNK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-48PBMT2KNK');
+    </script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Personal Portfolio of Nagur Shareef Shaik" />
+        <meta name="description" content="Nagur Shareef Shaik: Applied Scientist and Ph.D. candidate at Georgia State University building robust multimodal medical AI and agentic systems. Research, dissertation, publications and projects." />
+        <meta name="theme-color" content="#bd5d38" />
+        <link rel="canonical" href="https://shaiknagurshareef.github.io/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Nagur Shareef Shaik" />
+        <meta property="og:title" content="Nagur Shareef Shaik | Multimodal Medical AI & Agentic Systems" />
+        <meta property="og:description" content="Applied Scientist and Ph.D. candidate (Georgia State University). 29 peer-reviewed papers, 1.4K+ citations, h-index 14." />
+        <meta property="og:url" content="https://shaiknagurshareef.github.io/" />
+        <meta property="og:image" content="https://shaiknagurshareef.github.io/img/Shareef.png" />
+        <meta name="twitter:card" content="summary" />
+        <script type="application/ld+json">
+        {"@context":"https://schema.org","@type":"Person","name":"Nagur Shareef Shaik","url":"https://shaiknagurshareef.github.io/","jobTitle":"Applied Scientist; Ph.D. Candidate in Computer Science","email":"mailto:shaiknagurshareef6@gmail.com","alumniOf":[{"@type":"CollegeOrUniversity","name":"Georgia State University"},{"@type":"CollegeOrUniversity","name":"Vignan's Foundation for Science, Technology & Research"}],"worksFor":{"@type":"Organization","name":"UST Global Inc."},"sameAs":["https://www.linkedin.com/in/nagur-shareef-shaik/","https://github.com/ShaikNagurShareef","https://scholar.google.com/citations?user=rkfPEjUAAAAJ","https://orcid.org/0000-0002-2432-7409"]}
+        </script>
         <meta name="author" content="Nagur Shareef Shaik" />
-        <title>Nagur Shareef Shaik - Portfolio</title>
+        <title>Nagur Shareef Shaik | Multimodal Medical AI &amp; Agentic Systems</title>
 
         <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
-        <!-- include Point.js -->
-        <script src="https://cdn.jsdelivr.net/gh/ranaroussi/pointjs/dist/point.js"></script>
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Font Awesome (single version, CSS only) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
         <!-- Flag Icons: https://github.com/lipis/flag-icons -->
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"
         />
         <!-- Academicons: https://jpswalsh.github.io/academicons/ -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css">
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/chat.css" rel="stylesheet" />
+        <link href="css/theme.css" rel="stylesheet" />
         <!-- Devicons -->
-        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-        <!-- Font Awesome CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
-        
-      <style type="text/css">
+        <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/devicon.min.css" />
+<style type="text/css">
         .sidebar li .submenu{ 
           list-style: none; 
           margin: 0; 
@@ -65,6 +75,9 @@
     </head>
 
     <body id="page-top">
+      <a class="skip-link" href="#about">Skip to content</a>
+      <button id="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false"></button>
+      <button id="back-to-top" type="button" aria-label="Back to top"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
           <span class="d-block d-lg-none">Nagur Shareef Shaik</span>
@@ -102,7 +115,7 @@
                 <li><a class="nav-link js-scroll-trigger" href="#under-review">Under Review</a></li>
               </ul>
             <li><a class="nav-link js-scroll-trigger" href="#services">Services</a></li>
-            <li><a class="nav-link js-scroll-trigger" href="#team">Team</a></li>
+            <li><a class="nav-link js-scroll-trigger" href="#team">Collaborators</a></li>
             <li><a class="nav-link js-scroll-trigger" href="data/NagurShareefShaik_ResearchResume.pdf" target="_blank">Resume</a></li>
             <li><a class="nav-link js-scroll-trigger" href="data/NagurShareefShaik_ResearchStatement.pdf" target="_blank">Statement</a></li>
             <!-- <li><a class="nav-link js-scroll-trigger" href="#reviewer">Reviewer</a></li> -->
@@ -138,7 +151,7 @@
             <a href="mailto:shaiknagurshareef6@gmail.com">shaiknagurshareef6@gmail.com</a> ·
             <a href="data/NagurShareefShaik_Resume.pdf" target="_blank">Download Resume</a> 
           </div>   
-          <p class="lead mb-5"> As a CS PhD Student and Machine Learning Specialist with 6.5+ years of experience, I bridge the gap between cutting-edge research and production-grade systems that unlock business value across healthcare, finance, and retail. Backed by 20+ peer-reviewed publications (1120+ citations, h-index 12) at top-tier venues, my expertise spans the full ML stack, from custom neural network design to fine-tuning multimodal LLMs and architecting RAG and Agentic AI workflows. I excel at guiding models from prototype to deployment, collaborating with cross-functional teams to balance accuracy, latency, and cost at scale. Thriving where intellectual curiosity meets pragmatic engineering, I am a research-minded applied scientist who ships dependable products and effectively communicates strategy to both technical and executive audiences. </p>
+          <p class="lead mb-5"> As a CS PhD Student and Machine Learning Specialist with 6.5+ years of experience, I bridge the gap between cutting-edge research and production-grade systems that unlock business value across healthcare, finance, and retail. Backed by 29 peer-reviewed publications (1.4K+ citations, h-index 14) at top-tier venues, my expertise spans the full ML stack, from custom neural network design to fine-tuning multimodal LLMs and architecting RAG and Agentic AI workflows. I excel at guiding models from prototype to deployment, collaborating with cross-functional teams to balance accuracy, latency, and cost at scale. Thriving where intellectual curiosity meets pragmatic engineering, I am a research-minded applied scientist who ships dependable products and effectively communicates strategy to both technical and executive audiences. </p>
           <!-- <p class="lead mb-5"> I'm a Computer Science Graduate Student and Research Assistant at TReNDS Center, Georgia State University, with 4.5+ years of industry and research experience. My passion lies in bridging the gap between cutting-edge Machine Learning research and real-world enterprise solutions. Published innovative research in 15 high-impact journals and presented findings at 6 top-tier conferences, pioneering novel attention networks, multi-modal learning techniques, and transformer-based vision-language models for applications in medical image classification and diagnostic report generation, demonstrating advancements of AI in Medicine.</p> -->
           <!-- <p class="lead mb-5"> Published innovative research in 14 high-impact journals and presented findings at 3 top-tier conferences, pioneering novel attention networks, multi-modal fusion techniques, and transformer-based vision-language models for applications in medical image classification and diagnostic report generation, demonstrating advancements of AI in Medicine.</p> -->
           <div class="social-icons">
@@ -179,12 +192,12 @@
             <h3 class="mb-0"><a href="https://csds.gsu.edu/graduate/" target="_blank">Georgia State University</a> Atlanta, GA, USA</h3>
             <div class="subheading mb-3"><b>Doctor of Philosophy (Ph.D.)</b> in Computer Science</div>
             <div>
-                <b>Expected GPA:</b> 4.21 / 4.3 <br/>
+                <b>GPA:</b> 4.23 / 4.3 <br/>
                 <b>Coursework: </b>Advanced Machine Learning, Deep Learning, Computer Vision, Natural Language Processing, Digital Image Processing, Advanced Image Processing, Computational Intelligence, Privacy Aware Computing, Fundamentals of Data Science. <br/>
-                <b>Dissertation: </b>My Ph.D. research advances multi-modal medical report generation by focusing on clinical robustness and temporal dynamics. My work involves architecting novel attention mechanisms for efficient multi-modal fusion, creating models robust to missing modalities, and training confounder-free systems to ensure causally-sound longitudinal medical reporting, accurately narrating disease progression over time.
+                <b>Dissertation: </b><i>From Perception to Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting</i> (Advisor: <a href="https://sites.google.com/view/donghyeye" target="_blank">Dr. Dong Hye Ye</a>; proposal defended April 2026). Reading a medical image involves five judgments: locating a finding, grading it, weighing it against clinical context, comparing it with earlier studies, and committing to a claim. This dissertation builds methods for each stage on two ideas: every stage carries a <i>distribution rather than a point estimate</i>, and evidence from different sources is represented separately so that losing one source does not corrupt the others. The work spans attention as a learned spatial distribution (DCAN), ordinal and co-occurring label structure (CAP-WAE, sparse expert routing), disentangled vision-language learning under missing context (DREAM, DiA-gnostic VLVAE, SC-CoMoE), and uncertainty-aware longitudinal reporting with evidence-grounded temporal claims (Dist-RRG, STRIDE, DELTA). It is evaluated across endoscopy, whole-slide histology, retinal photography, brain MRI with genomics, and chest radiography.
             </div>
             </div>
-            <div class="flex-shrink-0"><span class="text-primary">August 2025 - December 2026</span></div>
+            <div class="flex-shrink-0"><span class="text-primary">August 2023 - December 2026 (Expected)</span></div>
         </div>
 
         <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -193,7 +206,13 @@
             <div class="subheading mb-3"><b>Master of Science</b> in Computer Science</div>
             <div><b>GPA:</b> 4.17 / 4.3 <br/>
 		        <b>Coursework: </b>Advanced Machine Learning, Deep Learning, Computer Vision, Natural Language Processing, Digital Image Processing, Computational Intelligence, Fundamentals of Data Science</div>
-            <b>Thesis: </b>Integrating multi-modal data - such as medical images, clinical text, and genetics - through scalable attention networks and vision-language models has the potential to significantly enhance diagnostic accuracy and decision-making in schizophrenia diagnosis and medical report generation. By advancing deep learning techniques for multi-modal learning and focusing on explainable AI systems, this research aims to create efficient, robust, and responsible AI solutions that improve diagnostic precision and automate medical report generation, all while ensuring deployment in resource-constrained environments.
+            <div>
+            <b>Thesis: </b><i>Attentive Multi-modal Learning: Unifying Visual and Clinical Insights for Medical Image Classification and Report Generation</i> (Advisor: <a href="https://sites.google.com/view/donghyeye" target="_blank">Dr. Dong Hye Ye</a>, 2025). Integrates medical images, clinical text, and genetics through scalable attention networks and vision-language models to improve diagnosis and automate report generation. Introduces Spatial Sequence Attention (SSA) for schizophrenia diagnosis from structural MRI, the Multi-modal Imaging Genomics Transformer (MIGTrans) that adds functional connectivity and SNP genomics, and the Multi-Modal Medical Transformer (M3T) for retinal report generation.
+            <br/>
+            <a href="data/thesis/NagurShareefShaik_MS_Thesis.pdf" target="_blank"><i class="fas fa-file-pdf"></i> Thesis PDF</a> ·
+            <a href="https://hdl.handle.net/20.500.14694/15456" target="_blank"><i class="fas fa-university"></i> GSU ScholarWorks</a> ·
+            <a href="https://doi.org/10.57709/tw0z-py92" target="_blank">DOI</a>
+            </div>
             </div>
             <div class="flex-shrink-0"><span class="text-primary">August 2023 - May 2025</span></div>
         </div>
@@ -220,22 +239,11 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">Machine Learning Engineer II</h3>
-            <div class="subheading mb-3"><a href="https://www.ust.com/" target="_blank">UST Global Inc.</a>Atlanta, GA, USA</div>
-            <ul>
-              <li><i class="fa-li fa fa-check"></i><b>ETL Testing Agent:</b> Engineered a multi-agent reasoning pipeline powered by Vertex AI Gemini, ADK, A2A, and MCP to synthesize ETL test cases from mapping artifacts and transformation code, enabling automated SQL validation at scale.</li>
-            </ul>
-          </div>
-          <div class="flex-shrink-0"><span class="text-primary">December 2025 - Present</span></div>
-        </div>
-        
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
             <h3 class="mb-0">Graduate Research Assistant</h3>
             <div class="subheading mb-3"><a href="https://trendscenter.org/" target="_blank">TReNDS Center (Georgia Tech, Georgia State & Emory)</a> Atlanta, GA, USA</div>
             <ul>
-              <li><i class="fa-li fa fa-check"></i><b>Causal Longitudinal Reporting:</b> Engineered a Deep Learning framework using EBMs to generate causally-aware reports from longitudinal data while mitigating time-varying confounders.</li>
-              <li><i class="fa-li fa fa-check"></i><b>Disentangled Vision Language Alignment: </b> Developed a Multi-modal Variational Autoencoder with Mixture-of-Experts (MoE) to disentangle modality-specific features from shared features, enabling precise cross-modal alignment in radiology report generation.</li>
+              <li><i class="fa-li fa fa-check"></i><b>Uncertainty-Aware Longitudinal Reporting (Dist-RRG, STRIDE):</b> Developed longitudinal radiology report generation that treats each visit as a distribution and disease progression as distributional change on a statistical manifold (Fisher-Rao), preserving diagnostic ambiguity and tying temporal claims to image evidence; +7.4% CE-F1 on Longitudinal MIMIC-CXR.</li>
+              <li><i class="fa-li fa fa-check"></i><b>Disentangled Vision Language Alignment: </b> Developed a probabilistic multi-modal framework (HSIC-constrained latent factorization with a Self-Critiquing Mixture-of-Experts) that separates modality-specific from shared factors, degrades gracefully under missing modalities, and set SOTA across 7 systemic and ocular conditions.</li>
             </ul>
           </div>
           <div class="flex-shrink-0"><span class="text-primary">August 2025 - Present</span></div>
@@ -243,21 +251,20 @@
 	
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">Associate III, Data Science</h3>
-            <div class="subheading mb-3"><a href="https://www.ust.com/" target="_blank">UST Global Inc.</a> <a href="https://www.elevancehealth.com/" target="_blank">(Client: Elevance Health)</a> Atlanta, GA, USA</div>
+            <h3 class="mb-0">Machine Learning Engineer II</h3>
+            <div class="subheading mb-3"><a href="https://www.ust.com/" target="_blank">UST Global Inc.</a> AI Center of Excellence (Remote), Aliso Viejo, CA, USA</div>
             <ul>
-              <li><i class="fa-li fa fa-check"></i><b>Data Map Co-Pilot:</b> Architected an Agentic AI tool using Google Agentspace to perform data profiling and map to a BigQuery data warehouse on GCP, saving 4 BSA FTEs and $250K annually.</li>
-              <li><i class="fa-li fa fa-check"></i><b>RFI/RFP Response Engine:</b> Delivered a RAG-powered engine on Azure that uses a source-linked knowledge base to generate editable, traceable, and compliance-ready responses, cutting authoring time by 60%.</li>
-              <li><i class="fa-li fa fa-check"></i><b>Code Crafter:</b> Lead a 10-person AI team to architect CodeCrafter, an Agentic AI module for UST Aplha AI platform, securing $18 million in client contracts by delivering impactful POCs.</li>
-              <li><i class="fa-li fa fa-check"></i><b>Code Modernization:</b> Architected GenAI driven code modernization solution to migrate complex legacy systems (.NET4 to .NET8; COBOL to React/Java Spring Boot) from monolithic to scalable, maintainable microservice architectures.</li>
-              <li><i class="fa-li fa fa-check"></i><b>Spes2Code:</b> Engineered a LangGraph-based Agentic Framework to generate 95% functional code by auto-scaffolding enterprise-grade NX Monorepos (React Native, Nest.js), accelerating development by 70% at 60% cost.</li>
-              <li><i class="fa-li fa fa-check"></i><b>NL2SQL:</b> Pioneered advanced data solutions by collaborating with Stanford AI Lab on a Text-to-SQL framework (benchmarked on BIRD) and developing an NL2SQL AgenticRAG POC saving 4 FTEs annually.</li>
-              <li><i class="fa-li fa fa-check"></i><b>Data Clean-up:</b> Developed SQL data clean-up script to resolve commission payment inconsistencies in health insurance policies, preventing over $500K in overpayments and streamlining processing time.</li>
+              <li><i class="fa-li fa fa-check"></i><b>Team &amp; platform:</b> Lead an 18-person AI team in the AI-CoE building UST Alpha AI, UST's one-stop shop for AI workloads, and its platform-modernization tools. Led development of <b>CodeCrafter</b>; designed and built <b>Orbit</b> myself.</li>
+              <li><i class="fa-li fa fa-check"></i><b>AI-DLC delivery:</b> Agents migrate legacy .NET 4&rarr;8 and COBOL monoliths to React/Java Spring Boot, generating NX monorepos from specs that land 95% functional, with delivery 70% faster at 60% of the cost. Now reimagining a NextGen Reinsurance Platform with SpecKit; the MVP already works.</li>
+              <li><i class="fa-li fa fa-check"></i><b>Healthcare products:</b> Built <b>PathForce</b>, an AI-assisted anatomic-pathology LIS (rules-first eligibility checks, effort-weighted case distribution, HL7/FHIR/X12, Part 11-grade audit trail), plus <b>RiskIQ</b> for ICD-10 coding &amp; risk adjustment and <b>PolicyIQ</b>, which turns CMS/payer policy into SME-approved claim edits in minutes, not weeks.</li>
+              <li><i class="fa-li fa fa-check"></i><b>Payer operations:</b> Modernized a payer's claims adjudication by re-engineering its extracts and reporting, improving payment accuracy and audit-readiness and cutting manual reconciliation and reprocessing. Architected and led <b>Call Analytics Agents</b> that raise First-Call Resolution, reduce repeat contacts, and flag quality &amp; compliance issues.</li>
+              <li><i class="fa-li fa fa-check"></i><b>Data &amp; GenAI:</b> Architected <b>BSA DataMap</b> (agentic profiling into BigQuery, saving 2 FTEs/$250K) and an <b>ETL Test Agent</b> validated with LLM-as-a-Judge (Vertex AI Gemini, ADK, A2A, MCP). Delivered <b>RegView</b>, natural-language search over regulatory documents, and a RAG-powered <b>RFI/RFP engine</b> that cut proposal time by 60%.</li>
+              <li><i class="fa-li fa fa-check"></i><b>Text-to-SQL research:</b> Collaborated with <a href="https://profiles.stanford.edu/tatsunori-hashimoto" target="_blank">Dr. Tatsunori Hashimoto</a> (Stanford AI Lab) on <b>AxisSQL</b>, an inference-time-scaling Text-to-SQL framework ranked #12 on the <a href="https://bird-bench.github.io/" target="_blank">BIRD leaderboard</a> at submission; submitted to EACL (Industry Track).</li>
             </ul>
           </div>
-          <div class="flex-shrink-0"><span class="text-primary">July 2024 - August 2025</span></div>
+          <div class="flex-shrink-0"><span class="text-primary">July 2024 - Present</span></div>
         </div>
-        
+
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
             <h3 class="mb-0">Graduate Research Assistant</h3>
@@ -395,31 +402,94 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">InsuCompass - AI Assistant to U.S. Health Insurance</h3>
-            <div class="subheading mb-3">Python, LangGraph, Streamlit, AI Agents, ChromaDB, SentenceTransformers</div>
-            Developed an Agentic RAG system designed to demystify U.S. health insurance by ingesting data from official sources (CMS.gov, VA.gov) and delivering personalized plan recommendations in conversational style. Orchestrated a multi-agent workflow using LangGraph to deliver context-aware insurance advice, leveraging the Groq API for high-speed LlaMA 3 inference & a local ChromaDB vector store for private user experience. <a href="https://github.com/ShaikNagurShareef/ScholarPulse" target="_blank">[GitHub]</a> <a href="https://huggingface.co/spaces/nagur-shareef-shaik/ScholarPulse" target="_blank">[Demo]</a>
+            <h3 class="mb-0">PathPro - Pedestrian Traffic-Risk Forecaster</h3>
+            <div class="subheading mb-3">Python, FastAPI, React, LightGBM, MapLibre</div>
+            Built an explainable pedestrian traffic-risk forecaster for Atlanta (Poisson GLM + LightGBM, Empirical Bayes, weather-aware scoring) with risk-aware routing and citywide maps. Reaches 0.869 ROC-AUC on the 2023 temporal holdout, with exact risk-factor decomposition and validated AI explanations. <a href="https://github.com/ShaikNagurShareef/PathPro" target="_blank" rel="noopener">[GitHub]</a> <a href="https://pathpro.tech" target="_blank" rel="noopener">[Demo]</a>
           </div>
-          <div class="flex-shrink-0"><span class="text-primary">May 2025 - June 2025</span></div>
+          <div class="flex-shrink-0"><span class="text-primary">Sep 2026</span></div>
         </div>
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">ScholarPulse - AI Reserach Assistant</h3>
-            <div class="subheading mb-3">Python, LangChain, Streamlit, AI Agents, ChromaDB, SentenceTransformers</div>
-            Architected the Advanced RAG system to analyze complex academic papers, providing tailored question-answering, summarization, and code generation through LangChain workflow with advanced prompt engineering for LlaMA-4 Maverick insights and Qwen-2.5 code generation, all within a multi-stage RAG pipeline, reducing research comprehension time by 50%. <a href="https://github.com/ShaikNagurShareef/ScholarPulse" target="_blank">[GitHub]</a> <a href="https://huggingface.co/spaces/nagur-shareef-shaik/ScholarPulse" target="_blank">[Demo]</a>
+            <h3 class="mb-0">InTune - Communication-Support Community</h3>
+            <div class="subheading mb-3">Next.js, TypeScript, LangGraph.js, Gemini, LiveKit</div>
+            Built a communication-support community for text, audio, and video. LangGraph.js and Gemini handle clarification, meaning-preserving rewrites, and private reading aids; exact text-and-audience approval, critical-slot checks, and idempotent publishing keep it safe, and LiveKit powers calls with private AI interpretation. <a href="https://github.com/ShaikNagurShareef/InTune" target="_blank" rel="noopener">[GitHub]</a> <a href="https://intune-eta.vercel.app" target="_blank" rel="noopener">[Demo]</a>
           </div>
-          <div class="flex-shrink-0"><span class="text-primary">Feb 2025 - April 2025</span></div>
+          <div class="flex-shrink-0"><span class="text-primary">Sep 2026</span></div>
         </div>
-	
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">InsightRx - Retinal Screening &amp; HCP Collaboration</h3>
+            <div class="subheading mb-3">DINOv2-L, LoRA, FastAPI, ONNX</div>
+            Built a retinal screening and HCP collaboration workspace on a DINOv2-L/LoRA ensemble (0.980 patient-level AUROC for referable DR on 247 held-out mBRSET patients), with quality-gated two-eye assessment, attention maps, clinician-signed referrals, and traceable links to guideline therapy, protein targets, and drug evidence. <a href="https://github.com/ShaikNagurShareef/InsightRx" target="_blank" rel="noopener">[GitHub]</a> <a href="https://insightrx-hcp.vercel.app" target="_blank" rel="noopener">[Demo]</a>
+          </div>
+          <div class="flex-shrink-0"><span class="text-primary">Sep 2026</span></div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">AURA - Multi-Agent Healthcare Ecosystem</h3>
+            <div class="subheading mb-3">Python, FastAPI, React/TypeScript, Vision Transformers, Gemini, ChromaDB</div>
+            Built a multi-agent healthcare ecosystem where a master intent router hands off to specialist agents (diagnosis, CBT wellbeing, triage, nutrition, visualization), including IRIS, a Vision Transformer that predicts systemic risk from a mobile retinal image, and COMPASS, an Agentic RAG insurance guide. Benchmarked on mBRSET, MIMIC-CXR, DeepEyeNet, and ROCO. <a href="https://github.com/ShaikNagurShareef/AURA" target="_blank" rel="noopener">[GitHub]</a>
+          </div>
+          <div class="flex-shrink-0"><span class="text-primary">Feb 2026</span></div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">PRISM - Data-Intelligence Platform</h3>
+            <div class="subheading mb-3">Python, FastAPI, React, LangGraph, LLMs, Vector DB</div>
+            Built an AI-powered data-intelligence platform that combines NL2SQL, automated ETL, one-click ML pipelines, no-code RAG, and auditable agentic workflows. <a href="https://github.com/ShaikNagurShareef/PRISM/" target="_blank" rel="noopener">[GitHub]</a>
+          </div>
+          <div class="flex-shrink-0"><span class="text-primary">Oct 2025</span></div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">NL2Dash - Self-Serve Analytics</h3>
+            <div class="subheading mb-3">Python, NL2SQL, LLMs, FastAPI, React</div>
+            Built a self-serve analytics tool that turns plain-English questions into governed SQL (NL2SQL) and person-specific dashboards, so ad-hoc reporting no longer waits on the BI team. <a href="https://github.com/ShaikNagurShareef/Hacklanta" target="_blank" rel="noopener">[GitHub]</a>
+          </div>
+          <div class="flex-shrink-0"><span class="text-primary">Sep 2025</span></div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">AgentKit - Agent-Orchestration Library</h3>
+            <div class="subheading mb-3">Python, LangGraph, Agentic Frameworks, Observability</div>
+            Built an agent-orchestration library that adds a production harness, pluggable memory, observability, and evaluation to open-source agentic frameworks, shortening time-to-production across teams. <a href="https://github.com/ShaikNagurShareef/agentkit" target="_blank" rel="noopener">[GitHub]</a>
+          </div>
+          <div class="flex-shrink-0"><span class="text-primary">Aug 2025</span></div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">InsuCompass - AI Assistant to U.S. Health Insurance</h3>
+            <div class="subheading mb-3">Python, LangGraph, Streamlit, Groq, Gemini, ChromaDB</div>
+            Built an Agentic RAG health-insurance advisor whose self-learning Search Agent retrieves, verifies, and ingests new knowledge (CMS.gov, VA.gov); orchestrated in LangGraph on Llama 3 and Gemini. <a href="https://github.com/ShaikNagurShareef/InsuCompass" target="_blank" rel="noopener">[GitHub]</a> <a href="https://huggingface.co/spaces/nagur-shareef-shaik/InsuCompass" target="_blank" rel="noopener">[Demo]</a>
+          </div>
+          <div class="flex-shrink-0"><span class="text-primary">May 2025</span></div>
+        </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">ScholarPulse - AI Research Assistant</h3>
+            <div class="subheading mb-3">Python, LangChain, Streamlit, ChromaDB, SentenceTransformers</div>
+            Built an Advanced RAG research assistant (LangChain, Llama-4 Maverick, Qwen-2.5) for paper Q&amp;A, summarization, and code generation, cutting research comprehension time by 50%. <a href="https://github.com/ShaikNagurShareef/ScholarPulse" target="_blank" rel="noopener">[GitHub]</a> <a href="https://huggingface.co/spaces/nagur-shareef-shaik/ScholarPulse" target="_blank" rel="noopener">[Demo]</a>
+          </div>
+          <div class="flex-shrink-0"><span class="text-primary">Apr 2025</span></div>
+        </div>
+
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
             <h3 class="mb-0">Retinal Health Diagnostics - Intelligent CAD System</h3>
-            <div class="subheading mb-3">Python, FastAPI, Streamlit, TensorFlow, Computer Vision, NLP</div>
-            Conceptualized and built a cutting-edge AI-powered diagnostic tool tailored for identifying retinal diseases like cataracts, macular edema, and diabetic retinopathy across various imaging modalities. Our system achieves an impressive 92% accuracy, automating the diagnosis process and generating detailed reports with clinical recommendations. <a href="https://github.com/RetinalHealthDiagnostics/RHD" target="_blank">[GitHub]</a> <a href="https://huggingface.co/spaces/nagur-shareef-shaik/RHD" target="_blank">[Demo]</a>
+            <div class="subheading mb-3">Python, TensorFlow, FastAPI, Streamlit</div>
+            Developed a novel attention mechanism that uses global context to learn localized, lesion-specific features: 97.5% (cataract), 85.6% (diabetic retinopathy), and 94.6% (macular edema) accuracy. <a href="https://github.com/RetinalHealthDiagnostics/RHD" target="_blank" rel="noopener">[GitHub]</a> <a href="https://huggingface.co/spaces/nagur-shareef-shaik/RHD" target="_blank" rel="noopener">[Demo]</a>
           </div>
-          <div class="flex-shrink-0"><span class="text-primary">August 2023 - December 2023</span></div>
+          <div class="flex-shrink-0"><span class="text-primary">May 2024</span></div>
         </div>
-              
+
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
             <h3 class="mb-0">Birthday Greetings App</h3>
@@ -453,8 +523,20 @@
         </div>
 
         <p class="lead mb-5">
-          My research lies at the intersection of machine learning, computer vision, and natural language processing (NLP), with a focus on developing creative, efficient, and responsible AI solutions. I specialize in advancing deep learning methods for multi-modal learning by integrating data from various modalities - such as images, text, and sensor inputs - through scalable attention networks and vision-language models designed for edge deployment. Focused on medical applications, my work aims to develop explainable AI systems that enhance diagnostic accuracy and support decision-making in complex real-world scenarios.
+          My research makes multimodal medical AI hold up on messy, incomplete patient data. Reading a medical image means locating a finding, grading it, weighing it against clinical context, comparing it with earlier studies, and committing to a claim. I build methods for each step on two ideas: every step carries a <i>distribution rather than a point estimate</i>, and evidence from different sources is represented <i>separately</i>, so losing one source does not corrupt the others. The work spans attention and label distributions for perception, disentangled vision-language learning that stays well defined when clinical context is missing, and uncertainty-aware longitudinal reasoning whose temporal claims are grounded in image evidence. It is evaluated across endoscopy, histology, retinal photography, brain MRI with genomics, and chest radiography. <a href="data/NagurShareefShaik_ResearchStatement.pdf" target="_blank">Read my research statement</a>.
         </p>
+
+        <div class="subheading mb-3" id="theses"><i class="fas fa-graduation-cap"></i> Dissertation &amp; Thesis</div>
+        <ul class="fa-ul mb-5">
+          <li><span class="fa-li"><i class="fas fa-book"></i></span>
+            <b>Ph.D. Dissertation (expected Dec 2026):</b> <i>From Perception to Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting</i>. Advisor: <a href="https://sites.google.com/view/donghyeye" target="_blank" rel="noopener">Dr. Dong Hye Ye</a>; committee: Dr. Vince D. Calhoun, Dr. Hemanth D. Venkateswara, Dr. Mario Michael Kubek, Dr. Adnan Masood. Proposal defended April 2026.
+          </li>
+          <li><span class="fa-li"><i class="fas fa-book"></i></span>
+            <b>M.S. Thesis (2025):</b> <i>Attentive Multi-modal Learning: Unifying Visual and Clinical Insights for Medical Image Classification and Report Generation</i>.
+            <a href="data/thesis/NagurShareefShaik_MS_Thesis.pdf" target="_blank" rel="noopener">[PDF]</a>
+            <a href="https://hdl.handle.net/20.500.14694/15456" target="_blank" rel="noopener">[GSU ScholarWorks]</a>
+          </li>
+        </ul>
 
         <!-- Publications -->
 
@@ -463,28 +545,26 @@
           <li point-component="publications"><i class="fa-li">&#128196</i><a href="{{url}}" target="_blank">{{title}}</a><br/> {{medium}}, {{year}}</li>
         </ul> -->
 
+        <div class="pub-tools" role="search">
+          <input type="search" id="pub-search" class="form-control" placeholder="Search papers by title, venue, author or year" aria-label="Search publications" autocomplete="off">
+          <button type="button" id="pub-oral" class="btn btn-outline-secondary" aria-pressed="false">Oral presentations only</button>
+          <span id="pub-status" class="text-muted" role="status" aria-live="polite"></span>
+        </div>
+
         <div class="subheading mb-3" id="conferences"><i class="fas fa-edit"></i> Conference Proceedings</div>
-        <ul class="fa-ul mb-0">
-          <li point-component="conferences"><i class="fa-li">&#128196</i><a href="{{url}}" target="_blank">{{title}}</a>{{new}}<br/>{{authors}}<br/>{{medium}}, {{year}}</li>
-        </ul>
+        <ul class="fa-ul mb-0" id="pub-conferences"><li class="text-muted">Loading&hellip;</li></ul>
         <br/>
 
         <div class="subheading mb-3" id="journals"><i class="fas fa-file-alt"></i> Journal Papers</div>
-        <ul class="fa-ul mb-0">
-          <li point-component="journals"><i class="fa-li">&#128196</i><a href="{{url}}" target="_blank">{{title}}</a>{{new}}<br/>{{authors}}<br/> {{medium}}, {{year}}</li>
-        </ul>
+        <ul class="fa-ul mb-0" id="pub-journals"><li class="text-muted">Loading&hellip;</li></ul>
         <br/>
 
         <div class="subheading mb-3" id="workshops"><i class="fas fa-edit"></i> Workshop Papers</div>
-        <ul class="fa-ul mb-0">
-          <li point-component="workshops"><i class="fa-li">&#128196</i><a href="{{url}}" target="_blank">{{title}}</a>{{new}}<br/>{{authors}}<br/> {{medium}}, {{year}}</li>
-        </ul>
+        <ul class="fa-ul mb-0" id="pub-workshops"><li class="text-muted">Loading&hellip;</li></ul>
         <br/>
 
         <div class="subheading mb-3" id="under-review"><i class="fas fa-book-reader"></i> Under Review</div>
-        <ul class="fa-ul mb-0">
-          <li point-component="review"><i class="fa-li">&#128196</i><a href="{{url}}" target="_blank">{{title}}</a>{{new}}<br/>{{authors}}<br/> {{medium}}, {{year}}</li>
-        </ul>
+        <ul class="fa-ul mb-0" id="pub-review"><li class="text-muted">Loading&hellip;</li></ul>
         <br/>
 
     </section>
@@ -546,16 +626,19 @@
     <!-- Team Section -->
     <section class="resume-section" id="team">
       <div class="resume-section-content">
-        <h2 class="mb-5">Team</h2>
+        <h2 class="mb-5">Research Collaborators</h2>
+
+        <div class="subheading mb-3"><i class="fas fa-user-graduate"></i> Ph.D. Dissertation Committee</div>
+        <p class="mb-4">Georgia State University, Department of Computer Science. Dissertation: <i>From Perception to Clinical Reasoning</i>.</p>
         <div class="row">
 
-          <!-- Advisor Card -->
+          <!-- Committee Chair -->
           <div class="col-lg-4 col-md-6">
             <div class="card mb-4 shadow-sm">
-              <img src="img/donghyeye.jpeg" class="card-img-top team-img" alt="Dr. Dong Hye Ye">
+              <img src="img/donghyeye.jpeg" class="card-img-top team-img" loading="lazy" alt="Dr. Dong Hye Ye">
               <div class="card-body">
                 <h5 class="card-title"><span class="text-primary">Dr. Dong Hye Ye</span></h5>
-                <p class="card-text">Advisor for Ph.D & master's at GSU, TReNDS Center.</p>
+                <p class="card-text"><b>Committee Chair</b> and advisor for Ph.D. &amp; M.S. at GSU, TReNDS Center.</p>
                 <div class="social-icons">
                   <a class="social-icon" href="https://scholar.google.com/citations?user=nRPnkC8AAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i></a>
                   <a class="social-icon" href="https://sites.google.com/view/donghyeye" target="_blank"><i class="fa fa-globe"></i></a>
@@ -565,13 +648,13 @@
             </div>
           </div>
 
-          <!-- Committee Card -->
+          <!-- Committee Member -->
           <div class="col-lg-4 col-md-6">
             <div class="card mb-4 shadow-sm">
-              <img src="img/vince.jpg" class="card-img-top team-img" alt="Dr. Vince D Calhoun">
+              <img src="img/vince.jpg" class="card-img-top team-img" loading="lazy" alt="Dr. Vince D Calhoun">
               <div class="card-body">
                 <h5 class="card-title"><span class="text-primary">Dr. Vince D Calhoun</span></h5>
-                <p class="card-text">Committee & Co-Advisor for Ph.D at GSU, TReNDS Center</p>
+                <p class="card-text"><b>Committee Member</b> and co-advisor for Ph.D. at GSU, TReNDS Center.</p>
                 <div class="social-icons">
                   <a class="social-icon" href="https://scholar.google.com/citations?user=WNOoGKIAAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i></a>
                   <a class="social-icon" href="https://cas.gsu.edu/profile/vince-calhoun/" target="_blank"><i class="fa fa-globe"></i></a>
@@ -581,29 +664,35 @@
             </div>
           </div>
 
-          <!-- Committee Card -->
+          <!-- Committee Member -->
           <div class="col-lg-4 col-md-6">
             <div class="card mb-4 shadow-sm">
-              <img src="img/ehsan.jpg" class="card-img-top team-img" alt="Dr. Ehsan Adeli">
+              <div class="team-img-placeholder" role="img" aria-label="Dr. Hemanth D Venkateswara"><i class="fas fa-user-tie" aria-hidden="true"></i></div>
               <div class="card-body">
-                <h5 class="card-title"><span class="text-primary">Dr. Ehsan Adeli</span></h5>
-                <p class="card-text">Committee & Co-Advisor for Ph.D from Stanford University</p>
-                <div class="social-icons">
-                  <a class="social-icon" href="https://scholar.google.com/citations?user=7NX_J_cAAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i></a>
-                  <a class="social-icon" href="https://stanford.edu/~eadeli/" target="_blank"><i class="fa fa-globe"></i></a>
-                  <a class="social-icon" href="https://www.linkedin.com/in/eadeli/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+                <h5 class="card-title"><span class="text-primary">Dr. Hemanth D Venkateswara</span></h5>
+                <p class="card-text"><b>Committee Member</b>, Ph.D. dissertation, Georgia State University.</p>
               </div>
             </div>
           </div>
 
-          <!-- Manager Card -->
+          <!-- Committee Member -->
           <div class="col-lg-4 col-md-6">
             <div class="card mb-4 shadow-sm">
-              <img src="img/adnan.jpeg" class="card-img-top team-img" alt="Dr. Adnan Masood">
+              <div class="team-img-placeholder" role="img" aria-label="Dr. Mario Michael Kubek"><i class="fas fa-user-tie" aria-hidden="true"></i></div>
+              <div class="card-body">
+                <h5 class="card-title"><span class="text-primary">Dr. Mario Michael Kubek</span></h5>
+                <p class="card-text"><b>Committee Member</b>, Ph.D. dissertation, Georgia State University.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Committee Member -->
+          <div class="col-lg-4 col-md-6">
+            <div class="card mb-4 shadow-sm">
+              <img src="img/adnan.jpeg" class="card-img-top team-img" loading="lazy" alt="Dr. Adnan Masood">
               <div class="card-body">
                 <h5 class="card-title"><span class="text-primary">Dr. Adnan Masood</span></h5>
-                <p class="card-text">Mentor, Manager and Cheif AI Architect at UST Global Inc.</p>
+                <p class="card-text"><b>Committee Member</b>; mentor, manager and Chief AI Architect at UST Global Inc.</p>
                 <div class="social-icons">
                   <a class="social-icon" href="https://scholar.google.com/citations?user=WgunFCMAAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i></a>
                   <a class="social-icon" href="https://adnanmasood.com/" target="_blank"><i class="fa fa-globe"></i></a>
@@ -613,13 +702,34 @@
             </div>
           </div>
 
+        </div>
+
+        <div class="subheading mb-3 mt-3"><i class="fas fa-handshake"></i> Collaborators &amp; Mentors</div>
+        <div class="row">
+
+          <!-- Collaborator -->
+          <div class="col-lg-4 col-md-6">
+            <div class="card mb-4 shadow-sm">
+              <img src="img/ehsan.jpg" class="card-img-top team-img" loading="lazy" alt="Dr. Ehsan Adeli">
+              <div class="card-body">
+                <h5 class="card-title"><span class="text-primary">Dr. Ehsan Adeli</span></h5>
+                <p class="card-text">Research collaborator, Stanford University; co-author on work at the NeurIPS 2025 GenAI4Health Workshop.</p>
+                <div class="social-icons">
+                  <a class="social-icon" href="https://scholar.google.com/citations?user=7NX_J_cAAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i></a>
+                  <a class="social-icon" href="https://stanford.edu/~eadeli/" target="_blank"><i class="fa fa-globe"></i></a>
+                  <a class="social-icon" href="https://www.linkedin.com/in/eadeli/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Advisor Card -->
           <div class="col-lg-4 col-md-6">
             <div class="card mb-4 shadow-sm">
-              <img src="img/bjd.jpeg" class="card-img-top team-img" alt="Dr. Jyostna Devi Bodapati">
+              <img src="img/bjd.jpeg" class="card-img-top team-img" loading="lazy" alt="Dr. Jyostna Devi Bodapati">
               <div class="card-body">
                 <h5 class="card-title"><span class="text-primary">Dr. Jyostna Devi Bodapati</span></h5>
-                <p class="card-text">Advisor during my bachelors's at VFSTR University</p>
+                <p class="card-text">Advisor during my bachelor's at VFSTR University.</p>
                 <div class="social-icons">
                   <a class="social-icon" href="https://scholar.google.co.in/citations?user=rmKAfP8AAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i></a>
                   <a class="social-icon" href="https://www.linkedin.com/in/dr-jyostna-devi-bodapati-8b332796/?originalSubdomain=in" target="_blank"><i class="fab fa-linkedin-in"></i></a>
@@ -631,7 +741,7 @@
           <!-- Friend/Collaborator Card -->
           <div class="col-lg-4 col-md-6">
             <div class="card mb-4 shadow-sm">
-              <img src="img/tejacherukuri.jpeg" class="card-img-top team-img" alt="Mr. Teja Krishna Cherukuri">
+              <img src="img/tejacherukuri.jpeg" class="card-img-top team-img" loading="lazy" alt="Mr. Teja Krishna Cherukuri">
               <div class="card-body">
                 <h5 class="card-title"><span class="text-primary">Mr. Teja Krishna Cherukuri</span></h5>
                 <p class="card-text">Friend, co-author, and colleague from VFSTR, TCS, GSU, and TReNDS Center</p>
@@ -815,440 +925,31 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="js/theme.js"></script>
+        <script src="js/publications.js" defer></script>
 
-        <script>
-          // point.attachJSON("https://shaiknagurshareef.github.io/data/publications.json", "publications");
-          point.attachJSON("https://shaiknagurshareef.github.io/data/conferences.json", "conferences");
-          point.attachJSON("https://shaiknagurshareef.github.io/data/journals.json", "journals");
-          point.attachJSON("https://shaiknagurshareef.github.io/data/workshops.json", "workshops");
-          point.attachJSON("https://shaiknagurshareef.github.io/data/under-review.json", "review");
-        </script>
-
-        <!-- Chat Widget HTML -->
-        <button id="chat-widget-btn" class="btn btn-primary" onclick="toggleChat()">
-          <i class="fas fa-robot"></i>
+        <!-- Chat assistant -->
+        <button id="chat-widget-btn" class="btn btn-primary" type="button" aria-label="Open chat assistant" aria-expanded="false" aria-controls="chat-widget-window">
+          <i class="fas fa-robot" aria-hidden="true"></i>
         </button>
 
-        <div id="chat-widget-window">
-          <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-            <span class="m-0">Ask about Shareef</span>
-            <button type="button" class="btn-close btn-close-white" aria-label="Close" onclick="toggleChat()"></button>
+        <div id="chat-widget-window" role="dialog" aria-label="Chat with Shareef's AI assistant" hidden>
+          <div class="chat-header">
+            <span class="chat-title">Ask about Shareef</span>
+            <button type="button" id="chat-clear" aria-label="Clear conversation" title="Clear conversation"><i class="fas fa-rotate-left" aria-hidden="true"></i></button>
+            <button type="button" id="chat-close" aria-label="Close chat"><i class="fas fa-xmark" aria-hidden="true"></i></button>
           </div>
-          <div id="chat-messages" class="d-flex flex-column">
-            <div class="message ai">Hello! I am Shareef's AI assistant. Ask me anything about his research, skills, or experience.</div>
-          </div>
-          <div class="chat-input-area">
-            <input type="text" id="user-input" class="form-control me-2" placeholder="Type a message..." onkeypress="handleEnter(event)">
-            <button class="btn btn-primary" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-          </div>
+          <div id="chat-messages" role="log" aria-live="polite" aria-label="Conversation"></div>
+          <div id="chat-chips" aria-label="Suggested questions"></div>
+          <form id="chat-form" class="chat-input-area" autocomplete="off">
+            <input type="text" id="user-input" class="form-control" placeholder="Ask a question..." aria-label="Your question" maxlength="1000">
+            <button type="submit" id="chat-send" class="btn btn-primary" aria-label="Send"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+          </form>
         </div>
 
-        <!-- <script type="module">
-            import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
-            // --- CONFIGURATION ---
-            const API_KEY = "AIzaSyDPOiyxPf3g9V-tY8SGh_r-r1UABGUh8Ns"; // Be careful exposing this
-            
-            // Define your data sources
-            const DATA_SOURCES = {
-                resume: "https://shaiknagurshareef.github.io/data/NagurShareefShaik_Resume.pdf",
-                research_statement: "https://shaiknagurshareef.github.io/data/NagurShareefShaik_ResearchStatement.pdf",
-                jsons: [
-                    "https://shaiknagurshareef.github.io/data/conferences.json",
-                    "https://shaiknagurshareef.github.io/data/journals.json",
-                    "https://shaiknagurshareef.github.io/data/workshops.json",
-                    "https://shaiknagurshareef.github.io/data/under-review.json"
-                ]
-            };
-
-            let model = null;
-            let isAgentReady = false;
-
-            // --- HELPER: Extract Text from PDF ---
-            async function getPdfText(url) {
-                try {
-                    const loadingTask = pdfjsLib.getDocument(url);
-                    const pdf = await loadingTask.promise;
-                    let fullText = "";
-                    
-                    for (let i = 1; i <= pdf.numPages; i++) {
-                        const page = await pdf.getPage(i);
-                        const textContent = await page.getTextContent();
-                        const pageText = textContent.items.map(item => item.str).join(" ");
-                        fullText += `\n--- Page ${i} ---\n${pageText}`;
-                    }
-                    return fullText;
-                } catch (error) {
-                    console.error("Error reading PDF:", error);
-                    return "";
-                }
-            }
-
-            // --- HELPER: Fetch JSON Data ---
-            async function getJsonContext(urls) {
-                let context = "";
-                for (const url of urls) {
-                    try {
-                        const response = await fetch(url);
-                        const data = await response.json();
-                        // Extract filename for context label
-                        const filename = url.split('/').pop();
-                        context += `\n\n--- DATA SOURCE: ${filename} ---\n${JSON.stringify(data, null, 2)}`;
-                    } catch (error) {
-                        console.error(`Error fetching ${url}:`, error);
-                    }
-                }
-                return context;
-            }
-
-            // --- HELPER 3: Scrape HTML Sections (Awards, Interests, etc.) ---
-            function getWebsiteContent() {
-              // List of HTML IDs to scrape text from
-              const sectionsToScrape = ['about', 'skills', 'certifications', 'interests', 'awards', 'participations', 'projects'];
-              let webText = "";
-
-              sectionsToScrape.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                  // clean up extra whitespace
-                  const cleanText = element.innerText.replace(/\n\s*\n/g, '\n').trim();
-                  webText += `\n=== SECTION: ${id.toUpperCase()} ===\n${cleanText}\n`;
-                }
-              });
-              return webText;
-            }
-
-            // --- INITIALIZATION ---
-            async function initAgent() {
-                try {
-                    // 1.1 Load Data concurrently
-                    const [resumeText, researchStatementText, jsonContext] = await Promise.all([
-                        getPdfText(DATA_SOURCES.resume),
-                        getPdfText(DATA_SOURCES.research_statement),
-                        getJsonContext(DATA_SOURCES.jsons)
-                    ]);
-
-                    // 1.2. Get content directly from the Webpage HTML
-                    const websiteContext = getWebsiteContent();
-
-                    // 2. Build the System Instruction
-                    const SYSTEM_INSTRUCTION = `
-                        You are an AI assistant representing Nagur Shareef Shaik.
-                        
-                        **YOUR KNOWLEDGE BASE:**
-                        The following is the strict context about Shareef. Answer purely based on this.
-                        
-                        === RESUME CONTENT ===
-                        ${resumeText}
-
-                        === RESEARCH STATEMENT CONTENT ===
-                        ${researchStatementText}
-                        
-                        === PUBLICATIONS & RESEARCH DATA ===
-                        ${jsonContext}
-
-                        === PORTFOLIO WEBSITE DETAILS (Awards, Interests, Skills) ===
-                        ${websiteContext}
-                        
-                       **INSTRUCTIONS:**
-                        - You are Shareef's digital avatar. Speak professionally but warmly.
-                        - If asked about research, cite specific papers from the provided JSON data.
-                        - If asked about personal interests, awards, or certifications, refer to the PORTFOLIO WEBSITE DETAILS section.
-                        - If asked about contact info, use the details from the resume or website.
-                        - If the user asks something NOT in this context (e.g., "What is the capital of France?"), do not answer, pivot back to Shareef's expertise.
-                    `;
-
-                    // 3. Initialize Gemini
-                    const genAI = new GoogleGenerativeAI(API_KEY);
-                    model = genAI.getGenerativeModel({ 
-                        model: "gemini-3-flash-preview", // Using flash for speed & large context
-                        systemInstruction: SYSTEM_INSTRUCTION
-                    });
-
-                    isAgentReady = true;
-                    console.log("Agent initialized with PDF and JSON context.");
-                    
-                    // Update UI to show ready state (Optional)
-                    const aiMsg = document.querySelector('.message.ai');
-                    if(aiMsg) aiMsg.innerText = "Hello! I'm Shareef's digital avatar. How can I assist you today?";
-
-                } catch (error) {
-                    console.error("Failed to initialize Agent:", error);
-                    const aiMsg = document.querySelector('.message.ai');
-                    if(aiMsg) aiMsg.innerText = "Error loading knowledge base. Please refresh.";
-                }
-            }
-
-            // Run Initialization immediately
-            initAgent();
-
-            // --- CHAT UI LOGIC ---
-            window.toggleChat = function() {
-                const chatWindow = document.getElementById('chat-widget-window');
-                chatWindow.style.display = (chatWindow.style.display === 'none' || chatWindow.style.display === '') ? 'flex' : 'none';
-            }
-
-            window.handleEnter = function(e) {
-                if (e.key === 'Enter') sendMessage();
-            }
-
-        window.sendMessage = async function() {
-            if (!isAgentReady) {
-                const inputField = document.getElementById('user-input');
-                inputField.placeholder = "Loading knowledge base... please wait.";
-                return;
-            }
-
-            const inputField = document.getElementById('user-input');
-            const userText = inputField.value.trim();
-            if (!userText) return;
-
-            // Add User Message (Plain text is fine for user input)
-            addMessage(userText, 'user');
-            
-            inputField.value = '';
-            inputField.disabled = true;
-            
-            // Create a loading bubble
-            const loadingId = addMessage("Thinking...", 'ai');
-            const loadingElement = document.getElementById(loadingId);
-
-            try {
-                const result = await model.generateContent(userText);
-                const response = await result.response;
-                const rawMarkdown = response.text();
-
-                // CONVERT MARKDOWN TO HTML HERE
-                const htmlContent = marked.parse(rawMarkdown);
-                
-                // Inject HTML instead of plain text
-                loadingElement.innerHTML = htmlContent;
-
-            } catch (error) {
-                console.error(error);
-                loadingElement.innerText = "I encountered a connection error. Please try again.";
-            } finally {
-                inputField.disabled = false;
-                inputField.focus();
-            }
-        }
-
-        function addMessage(text, sender) {
-            const messageContainer = document.getElementById('chat-messages');
-            const msgDiv = document.createElement('div');
-            msgDiv.id = 'msg-' + Date.now();
-            msgDiv.classList.add('message', sender);
-            
-            // For the user, we use innerText to prevent XSS (security)
-            if (sender === 'user') {
-                msgDiv.innerText = text;
-            } else {
-                // For AI, we initially set text (e.g., "Thinking...")
-                // This will be overwritten by innerHTML later in sendMessage
-                msgDiv.innerText = text; 
-            }
-            
-            messageContainer.appendChild(msgDiv);
-            messageContainer.scrollTop = messageContainer.scrollHeight;
-            return msgDiv.id;
-        }
-      </script> -->
-
-      <script type="module">
-            // --- CONFIGURATION ---
-            // Your verified Backend URL
-            const API_ENDPOINT = "https://nagur-shareef-shaik-portfolio-chat-api.hf.space/chat";
-            
-            const DATA_SOURCES = {
-                resume: "https://shaiknagurshareef.github.io/data/NagurShareefShaik_Resume.pdf",
-                research_statement: "https://shaiknagurshareef.github.io/data/NagurShareefShaik_ResearchStatement.pdf",
-                jsons: [
-                    "https://shaiknagurshareef.github.io/data/conferences.json",
-                    "https://shaiknagurshareef.github.io/data/journals.json",
-                    "https://shaiknagurshareef.github.io/data/workshops.json",
-                    "https://shaiknagurshareef.github.io/data/under-review.json"
-                ]
-            };
-
-            let systemContext = "";
-            let isAgentReady = false;
-
-            // --- HELPER: Extract Text from PDF ---
-            async function getPdfText(url) {
-                try {
-                    const loadingTask = pdfjsLib.getDocument(url);
-                    const pdf = await loadingTask.promise;
-                    let fullText = "";
-                    
-                    for (let i = 1; i <= pdf.numPages; i++) {
-                        const page = await pdf.getPage(i);
-                        const textContent = await page.getTextContent();
-                        const pageText = textContent.items.map(item => item.str).join(" ");
-                        fullText += `\n--- Page ${i} ---\n${pageText}`;
-                    }
-                    return fullText;
-                } catch (error) {
-                    console.error("Error reading PDF:", error);
-                    return "";
-                }
-            }
-
-            // --- HELPER: Fetch JSON Data ---
-            async function getJsonContext(urls) {
-                let context = "";
-                for (const url of urls) {
-                    try {
-                        const response = await fetch(url);
-                        const data = await response.json();
-                        const filename = url.split('/').pop();
-                        context += `\n\n--- DATA SOURCE: ${filename} ---\n${JSON.stringify(data, null, 2)}`;
-                    } catch (error) {
-                        console.error(`Error fetching ${url}:`, error);
-                    }
-                }
-                return context;
-            }
-
-            // --- HELPER: Scrape HTML Sections ---
-            function getWebsiteContent() {
-              const sectionsToScrape = ['about', 'skills', 'certifications', 'interests', 'awards', 'participations', 'projects'];
-              let webText = "";
-
-              sectionsToScrape.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                  const cleanText = element.innerText.replace(/\n\s*\n/g, '\n').trim();
-                  webText += `\n=== SECTION: ${id.toUpperCase()} ===\n${cleanText}\n`;
-                }
-              });
-              return webText;
-            }
-
-            // --- INITIALIZATION ---
-            async function initAgent() {
-                try {
-                    // 1. Load Data
-                    const [resumeText, researchStatementText, jsonContext] = await Promise.all([
-                        getPdfText(DATA_SOURCES.resume),
-                        getPdfText(DATA_SOURCES.research_statement),
-                        getJsonContext(DATA_SOURCES.jsons)
-                    ]);
-
-                    const websiteContext = getWebsiteContent();
-
-                    // 2. Build Context String (to send to backend)
-                    systemContext = `
-                        You are an AI assistant representing Nagur Shareef Shaik.
-                        
-                        **YOUR KNOWLEDGE BASE:**
-                        The following is the strict context about Shareef. Answer purely based on this.
-                        
-                        === RESUME CONTENT ===
-                        ${resumeText}
-
-                        === RESEARCH STATEMENT CONTENT ===
-                        ${researchStatementText}
-                        
-                        === PUBLICATIONS & RESEARCH DATA ===
-                        ${jsonContext}
-
-                        === PORTFOLIO WEBSITE DETAILS ===
-                        ${websiteContext}
-                        
-                        **INSTRUCTIONS:**
-                        - You are Shareef's digital avatar. Speak professionally but warmly.
-                        - If asked about research, cite specific papers from the provided JSON data.
-                        - If asked about contact info, use the details from the resume or website.
-                        - Keep answers concise and helpful.
-                    `;
-
-                    isAgentReady = true;
-                    console.log("Agent context prepared.");
-                    
-                    const aiMsg = document.querySelector('.message.ai');
-                    if(aiMsg) aiMsg.innerText = "Hello! I'm Shareef's digital avatar. How can I assist you today?";
-
-                } catch (error) {
-                    console.error("Failed to initialize Agent:", error);
-                    const aiMsg = document.querySelector('.message.ai');
-                    if(aiMsg) aiMsg.innerText = "Error loading knowledge base. Please refresh.";
-                }
-            }
-
-            initAgent();
-
-            // --- CHAT UI LOGIC ---
-            window.toggleChat = function() {
-                const chatWindow = document.getElementById('chat-widget-window');
-                chatWindow.style.display = (chatWindow.style.display === 'none' || chatWindow.style.display === '') ? 'flex' : 'none';
-            }
-
-            window.handleEnter = function(e) {
-                if (e.key === 'Enter') sendMessage();
-            }
-
-            window.sendMessage = async function() {
-                if (!isAgentReady) {
-                    const inputField = document.getElementById('user-input');
-                    inputField.placeholder = "Loading knowledge base... please wait.";
-                    return;
-                }
-
-                const inputField = document.getElementById('user-input');
-                const userText = inputField.value.trim();
-                if (!userText) return;
-
-                addMessage(userText, 'user');
-                
-                inputField.value = '';
-                inputField.disabled = true;
-                
-                const loadingId = addMessage("Thinking...", 'ai');
-                const loadingElement = document.getElementById(loadingId);
-
-                try {
-                    // Send request to Hugging Face Backend
-                    const response = await fetch(API_ENDPOINT, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            message: userText,
-                            context: systemContext
-                        })
-                    });
-
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-
-                    const data = await response.json();
-                    
-                    // Convert Markdown to HTML
-                    const htmlContent = marked.parse(data.reply);
-                    loadingElement.innerHTML = htmlContent;
-
-                } catch (error) {
-                    console.error(error);
-                    loadingElement.innerText = "I encountered a connection error. Please try again later.";
-                } finally {
-                    inputField.disabled = false;
-                    inputField.focus();
-                }
-            }
-
-            function addMessage(text, sender) {
-                const messageContainer = document.getElementById('chat-messages');
-                const msgDiv = document.createElement('div');
-                msgDiv.id = 'msg-' + Date.now();
-                msgDiv.classList.add('message', sender);
-                msgDiv.innerText = text; 
-                messageContainer.appendChild(msgDiv);
-                messageContainer.scrollTop = messageContainer.scrollHeight;
-                return msgDiv.id;
-            }
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+        <script src="js/chat.js"></script>
 
     </body>
 

@@ -20,13 +20,11 @@ This personal portfolio website is designed to present my professional experienc
 - **JavaScript**: Programming language to add interactivity to the website.
 
 ## Project Structure
-The repository contains the following files and directories:
-
-- `index.html`: The main HTML file for the portfolio.
-- `css/`: Directory containing all CSS files for styling the portfolio.
-- `js/`: Directory containing all JavaScript files for adding interactivity.
-- `img/`: Directory containing images used in the portfolio.
-- `README.md`: This file, providing an overview of the project.
+- `index.html`: the single-page portfolio.
+- `css/styles.css` (Start Bootstrap theme), `css/theme.css` (dark mode, accessibility, publication filter), `css/chat.css` (chat widget).
+- `js/scripts.js` (scrollspy, back-to-top), `js/theme.js` (theme toggle), `js/publications.js` (renders `data/*.json`, search and "oral only" filter), `js/chat.js` (chat widget).
+- `data/`: publication JSON files, resumes, statement, certificates, reviewer certificates, `thesis/` (M.S. thesis PDF).
+- `portfolio-chat-api/`: FastAPI chat backend deployed as a Hugging Face Space (see below).
 
 ## Setup Instructions
 To view and edit the portfolio on your local machine, follow these steps:
@@ -41,13 +39,35 @@ To view and edit the portfolio on your local machine, follow these steps:
     cd shaiknagurshareef.github.io
     ```
 
-3. **Open the `index.html` file in your preferred web browser**:
+3. **Serve the site locally** (the publication lists load JSON with `fetch`, so `file://` will not work):
     ```sh
-    open index.html
+    python3 -m http.server 8000
     ```
+    Then open http://localhost:8000.
 
 ## Features
 - **Responsive Design**: The portfolio is designed to be responsive and look good on all devices, including desktops, tablets, and mobile phones.
 - **Project Showcase**: A section dedicated to showcasing my projects with descriptions and links.
 - **Professional Information**: Sections for my bio, skills, experience, and contact information.
 - **Interactive Elements**: JavaScript is used to add interactivity, such as form submissions and dynamic content.
+## Chat assistant
+
+The widget (`js/chat.js`) sends only the question and the last few turns to the backend; all knowledge lives server-side in `portfolio-chat-api/knowledge.md`.
+
+**Refresh the knowledge file** after changing the research resume, statement, publication JSON or page content:
+```sh
+pip install pypdf
+python3 portfolio-chat-api/build_knowledge.py
+```
+
+**Run the API locally** (needs a Gemini key from Google AI Studio):
+```sh
+cd portfolio-chat-api
+pip install -r requirements.txt
+GOOGLE_API_KEY=... uvicorn app:app --port 7861
+# then browse http://localhost:8000/?chat_api=http://localhost:7861
+```
+
+**Deploy:** push `app.py`, `knowledge.md`, `requirements.txt` and `Dockerfile` to the Hugging Face Space, and set the Space secret `GOOGLE_API_KEY`. Optional Space variables: `CHAT_MODELS` (comma-separated, default `gemini-2.5-flash,gemini-2.5-flash-lite`), `RATE_PER_IP` (per minute, default 12), `RATE_GLOBAL` (per hour, default 600).
+
+Endpoints: `POST /chat/stream` (SSE), `POST /chat`, `GET /health`. The API ignores any client-supplied system prompt, caps input sizes, and rate-limits per IP.

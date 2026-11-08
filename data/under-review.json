@@ -1,11 +1,50 @@
 [
-    {
-    "url": "https://conferences.miccai.org/2026/",
-    "title": "Self-Critiquing Cooperative Mixture-of-Experts for Multi-Modal Mobile Oculomics",
-    "medium": "Proceedings of the 29th International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)",
-    "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Masood, Adnan; Ye, Dong Hye",
+  {
+    "url": "#under-review",
+    "title": "SC-CoMoE: Self-Critiquing Cooperative Mixture-of-Experts for Multi-Modal Mobile Oculomics",
+    "medium": "Submitted to the IEEE International Symposium on Biomedical Imaging (ISBI) 2027",
+    "authors": "<strong>Shaik, Nagur Shareef</strong>; Park, J.; Kim, Y.-J.; Jung, J.; Oh, H.; Ye, Dong Hye",
     "year": "2026",
     "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
-    }
-    
+  },
+  {
+    "url": "#under-review",
+    "title": "Dist-RRG: Distributional Change Modeling on Statistical Manifolds for Longitudinal Radiology Report Generation",
+    "medium": "Under review (ICLR 2027)",
+    "authors": "<strong>Shaik, Nagur Shareef</strong> et al.",
+    "year": "2026",
+    "new": ""
+  },
+  {
+    "url": "#under-review",
+    "title": "STRIDE: Stochastic Trajectory Reasoning via Iterative Distributional Evolution in Longitudinal Radiology Report Generation",
+    "medium": "Under review (AAAI 2027)",
+    "authors": "<strong>Shaik, Nagur Shareef</strong> et al.",
+    "year": "2026",
+    "new": ""
+  },
+  {
+    "url": "#under-review",
+    "title": "Claims You Can See: Differential-Evidence Learning of Temporal Assertions for Longitudinal Radiology Report Generation",
+    "medium": "Under review (CVPR 2027)",
+    "authors": "<strong>Shaik, Nagur Shareef</strong> et al.",
+    "year": "2026",
+    "new": ""
+  },
+  {
+    "url": "#under-review",
+    "title": "Evidence That Can Contradict: What Report-Auditing Metrics Actually Measure in Medical Vision Language Models",
+    "medium": "Under review",
+    "authors": "<strong>Shaik, Nagur Shareef</strong> et al.",
+    "year": "2026",
+    "new": ""
+  },
+  {
+    "url": "#under-review",
+    "title": "Oculo-MoE: Retina-Anchored, Interaction-Gated Mixture-of-Experts for Bilateral Multimodal Oculomics",
+    "medium": "Submitted to the IEEE International Symposium on Biomedical Imaging (ISBI) 2027",
+    "authors": "<strong>Shaik, Nagur Shareef</strong>; Park, J.; Kim, Y.-J.; Jo, Y.; Ye, Dong Hye",
+    "year": "2026",
+    "new": ""
+  }
 ]

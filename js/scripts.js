@@ -31,4 +31,13 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
 
+    // Back-to-top button
+    const toTop = document.getElementById('back-to-top');
+    if (toTop) {
+        const toggle = () => toTop.classList.toggle('visible', window.scrollY > 600);
+        window.addEventListener('scroll', toggle, { passive: true });
+        toTop.addEventListener('click', () => window.scrollTo({ top: 0 }));
+        toggle();
+    }
+
 });

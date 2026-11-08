@@ -1,0 +1,74 @@
+/* Additions on top of the Start Bootstrap theme: dark mode, accessibility, publication filter, small UI bits. */
+
+/* ---- accessibility ---- */
+.skip-link {
+  position: absolute; left: 8px; top: -48px; z-index: 2000;
+  background: #fff; color: #212529; padding: 8px 14px; border-radius: 6px; font-weight: 700;
+}
+.skip-link:focus { top: 8px; }
+a:focus-visible, button:focus-visible, input:focus-visible, .nav-link:focus-visible {
+  outline: 3px solid #ffbf47; outline-offset: 2px;
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+.text-muted, .subheading { color: #5b636b; } /* contrast on white >= 4.5:1 */
+
+/* ---- floating controls ---- */
+#theme-toggle, #back-to-top {
+  position: fixed; z-index: 900; width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15); background: #fff; color: #343a40;
+  display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+#theme-toggle { top: 14px; right: 16px; }
+#back-to-top { bottom: 20px; right: 92px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+#back-to-top.visible { opacity: 1; pointer-events: auto; }
+@media (max-width: 991px) { #theme-toggle { top: 62px; } }
+
+/* ---- publication filter ---- */
+.pub-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 1.25rem; }
+.pub-tools input { max-width: 340px; }
+.pub-tools button[aria-pressed="true"] { background: #bd5d38; color: #fff; border-color: #bd5d38; }
+.pub-count { font-size: 0.7em; opacity: 0.7; }
+.pub-item[hidden], ul[hidden] { display: none; }
+
+/* ---- dark theme ---- */
+:root[data-theme="dark"] { color-scheme: dark; }
+[data-theme="dark"] body { background: #14171a; color: #b9c1c9; }
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] h4,
+[data-theme="dark"] h5, [data-theme="dark"] h6 { color: #eef1f4; }
+[data-theme="dark"] .subheading, [data-theme="dark"] .text-muted, [data-theme="dark"] .lead { color: #aab3bc; }
+[data-theme="dark"] section.resume-section { background: transparent; }
+[data-theme="dark"] hr { color: #3a4047; border-color: #3a4047; opacity: 1; }
+[data-theme="dark"] a { color: #e8926f; }
+[data-theme="dark"] a:hover { color: #f4b79e; }
+[data-theme="dark"] .social-icons .social-icon { background-color: #3a4047; color: #fff; }
+[data-theme="dark"] .social-icons .social-icon:hover { background-color: #bd5d38; }
+[data-theme="dark"] .card, [data-theme="dark"] .card-body { background: #1c2126; color: #b9c1c9; border-color: #323840; }
+[data-theme="dark"] .form-control { background: #1c2126; color: #e9ecef; border-color: #3a4047; }
+[data-theme="dark"] .btn-outline-secondary { color: #b9c1c9; border-color: #4a525a; }
+[data-theme="dark"] #theme-toggle, [data-theme="dark"] #back-to-top { background: #1c2126; color: #e9ecef; border-color: #3a4047; }
+[data-theme="dark"] .skip-link { background: #1c2126; color: #fff; }
+[data-theme="dark"] #chat-widget-window { background: #1c2126; border-color: #3a4047; }
+[data-theme="dark"] #chat-messages, [data-theme="dark"] #chat-chips { background: #14171a; }
+[data-theme="dark"] .message.ai { background: #262c33; color: #e1e6ea; }
+[data-theme="dark"] .message.ai a { color: #8ab4ff; }
+[data-theme="dark"] .message.error { background: #3a1f1c; color: #ffb4ab; }
+[data-theme="dark"] .chat-input-area { background: #1c2126; border-color: #3a4047; }
+[data-theme="dark"] #chat-chips button { background: #1c2126; color: #e8926f; }
+[data-theme="dark"] .pub-tools .btn-outline-secondary[aria-pressed="true"] { color: #fff; }
+
+/* ---- small-screen overflow fixes ---- */
+.resume-section-content { min-width: 0; }
+.fa-ul { max-width: calc(100% - 2.5em); }
+.fa-ul li { overflow-wrap: anywhere; }
+@media (max-width: 991px) {
+  #sideNav { overflow-x: clip; }
+  #sideNav .navbar-toggler { margin-right: 0; }
+}
+
+/* Team cards without a photo */
+.team-img-placeholder { display: flex; align-items: center; justify-content: center; height: 350px; background: #e9ecef; color: #8a929a; font-size: 4.5rem; border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0; }
+[data-theme="dark"] .team-img-placeholder { background: #262c33; color: #6d7680; }
