@@ -1,4 +1,4 @@
-fastapi
-uvicorn
-google-generativeai
-pydantic
+fastapi==0.118.2
+uvicorn==0.37.0
+google-genai==1.66.0
+pydantic==2.12.0
