@@ -22,8 +22,8 @@ const initials = d.name.replace(/^Dr\.\s*/, "").split(/\s+/).filter((w) => /^[A-
       <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[0.875rem]">
         {d.links.map((l) => (
           <li>
-            <a href={l.url} target="_blank" rel="noopener" class="link-more !text-[0.875rem] !text-ink-2 hover:!text-accent-ink">
-              {l.label}<Icon name="arrow-up-right" size={12} class="text-muted" /><span class="sr-only"> ({d.name})</span>
+            <a href={l.url} target="_blank" rel="noopener" class="link-quiet font-medium">
+              {l.label}<span class="sr-only"> ({d.name})</span>
             </a>
           </li>
         ))}

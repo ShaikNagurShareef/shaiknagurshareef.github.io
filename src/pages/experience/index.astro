@@ -16,14 +16,14 @@ const skills = (await getCollection("skills")).sort(byOrder);
   <PageHeader title="Experience"
     lead="Doctoral research at Georgia State University's TReNDS Center, alongside industry roles building and shipping ML, analytics and agentic systems at UST, Carelon and TCS.">
     <a href={me.documents.resume} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="download" size={15} />Resume (PDF)</a>
-    <a href={me.links.linkedin!} target="_blank" rel="noopener" class="btn"><Icon name="arrow-up-right" size={15} />LinkedIn</a>
+    <a href={me.links.linkedin!} target="_blank" rel="noopener" class="btn">LinkedIn</a>
   </PageHeader>
 
   <Section id="work-h" title="Work">
     <ol class="rows -mt-6">
       {jobs.map((j) => (
         <li class="grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8">
-          <p class="text-sm tabular text-muted md:pt-0.5">
+          <p class="mono text-muted md:pt-1">
             {range(j.data.start, j.data.end)}
             {!j.data.end && <span class="badge badge-ok ml-2 md:ml-0 md:mt-2 md:flex md:w-fit">Current</span>}
           </p>
@@ -46,7 +46,7 @@ const skills = (await getCollection("skills")).sort(byOrder);
     <ol class="rows -mt-6">
       {schools.map((s) => (
         <li class="grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8">
-          <p class="text-sm tabular text-muted md:pt-0.5">{range(s.data.start, s.data.end, s.data.expected)}</p>
+          <p class="mono text-muted md:pt-1">{range(s.data.start, s.data.end, s.data.expected)}</p>
           <div>
             <h3 class="text-[1.1875rem] font-semibold">{s.data.degree}</h3>
             <p class="mt-0.5 text-[1.0625rem] text-ink-2">

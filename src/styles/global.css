@@ -1,6 +1,7 @@
 @import "tailwindcss";
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/source-serif-4";
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
 @import "@portfolio/tokens/tokens.css";
 
 /* Expose tokens to Tailwind utilities (bg-surface, text-ink, border-border, ...). */
@@ -24,7 +25,7 @@
   --color-warn-soft: var(--warn-soft);
   --color-info: var(--info);
   --color-info-soft: var(--info-soft);
-  --font-serif: var(--font-serif);
+  --font-display: var(--font-display);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --radius-sm: var(--radius-sm);
@@ -58,14 +59,14 @@
     min-height: 100dvh;
     background: var(--bg);
     line-height: 1.6;
-    font-feature-settings: "cv11", "ss01", "ss03";
+    font-feature-settings: "ss02";
   }
   /* Serif is reserved for display type (page titles, the name); everything else is Inter. */
   h1, .font-display {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-weight: 600;
     color: var(--ink);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.025em;
     line-height: 1.12;
     text-wrap: balance;
   }
@@ -107,23 +108,25 @@
     .section-grid.is-stacked { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
     .section-grid.is-stacked > .section-head { position: static; display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
   }
-  .section-title { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+  .section-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; }
   .section-desc { margin-top: 0.6rem; font-size: 0.9375rem; line-height: 1.55; color: var(--muted); max-width: 40ch; }
   .subhead { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
 
   .meta { font-size: 0.9375rem; color: var(--muted); }
+  /* Dates, counts and identifiers set in Plex Mono. */
+  .mono { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0; font-variant-numeric: tabular-nums; }
 
   /* Badges: rectangular, quiet; used only where a status carries meaning. */
   .badge {
     display: inline-flex; align-items: center; gap: 0.3rem;
-    height: 1.5rem; padding-inline: 0.5rem; border-radius: var(--radius-sm);
-    font-size: 0.8125rem; font-weight: 600; line-height: 1; white-space: nowrap;
-    color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--border);
+    height: 1.375rem; padding-inline: 0.45rem; border-radius: var(--radius-sm);
+    font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+    line-height: 1; white-space: nowrap; color: var(--ink-2); background: transparent; border: 1px solid var(--border-strong);
   }
-  .badge-accent { color: var(--accent-ink); background: var(--accent-soft); border-color: transparent; }
-  .badge-ok { color: var(--ok); background: var(--ok-soft); border-color: transparent; }
-  .badge-info { color: var(--info); background: var(--info-soft); border-color: transparent; }
-  .badge-warn { color: var(--warn); background: var(--warn-soft); border-color: transparent; }
+  .badge-accent { color: var(--ink); border-color: var(--ink); }
+  .badge-ok { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
+  .badge-info { color: var(--info); border-color: color-mix(in srgb, var(--info) 45%, transparent); }
+  .badge-warn { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent); }
   .dot { width: 0.4rem; height: 0.4rem; border-radius: 999px; background: currentColor; }
 
   /* Buttons */

@@ -44,7 +44,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
             <td class="font-medium text-ink">{v.name}</td>
             <td>{v.active ? <span class="badge badge-ok"><span class="dot"></span>Active</span> : <span class="text-muted">Completed</span>}</td>
             <td class="num text-ink-2">{v.count ?? "–"}</td>
-            <td class="num">{v.url && <a href={v.url} target="_blank" rel="noopener" class="link-more !text-[0.875rem]">Record<Icon name="arrow-up-right" size={12} /><span class="sr-only"> for {v.name}</span></a>}</td>
+            <td class="num">{v.url && <a href={v.url} target="_blank" rel="noopener" class="link-more !text-[0.875rem]">Record<span class="sr-only"> for {v.name}</span></a>}</td>
           </tr>
         ))}
       </tbody>
@@ -58,7 +58,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
           <tr>
             <td class="text-ink">{v.name}</td>
             <td class="num text-ink-2">{v.count ?? "–"}</td>
-            <td class="num">{v.url && <a href={v.url} target="_blank" rel="noopener" class="link-more !text-[0.875rem]">Record<Icon name="arrow-up-right" size={12} /><span class="sr-only"> for {v.name}</span></a>}</td>
+            <td class="num">{v.url && <a href={v.url} target="_blank" rel="noopener" class="link-more !text-[0.875rem]">Record<span class="sr-only"> for {v.name}</span></a>}</td>
           </tr>
         ))}
       </tbody>
@@ -69,7 +69,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
     <ol class="rows -mt-3">
       {awards.map((a) => (
         <li class="grid gap-1 py-4 sm:grid-cols-[6.5rem_1fr_auto] sm:gap-6">
-          <span class="text-sm tabular text-muted">{yearSpan(a.data)}</span>
+          <span class="mono pt-0.5 text-muted">{yearSpan(a.data)}</span>
           <div>
             <p class="font-semibold text-ink">{a.data.title}</p>
             <p class="text-sm text-ink-2">{a.data.org}</p>
@@ -104,7 +104,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
             <span class="block text-[1.0625rem] font-medium text-ink">{c.data.title}</span>
             <span class="block text-sm text-muted">{c.data.issuer}</span>
           </span>
-          {c.data.url && <a href={c.data.url} target="_blank" rel="noopener" class="link-more shrink-0 !text-[0.875rem]">Credential<Icon name="arrow-up-right" size={12} /><span class="sr-only"> for {c.data.title}</span></a>}
+          {c.data.url && <a href={c.data.url} target="_blank" rel="noopener" class="link-more shrink-0 !text-[0.875rem]">Credential<span class="sr-only"> for {c.data.title}</span></a>}
         </li>
       ))}
     </ul>

@@ -106,7 +106,7 @@ const stages = diss.stages.map((s) => ({
     <div class="mt-6 flex flex-wrap gap-2">
       {thesis.links.map((l, i) => (
         <a href={l.url} target="_blank" rel="noopener" class:list={["btn", i === 0 && "btn-primary"]}>
-          <Icon name={i === 0 ? "file-text" : "arrow-up-right"} size={15} />{l.label}
+          {i === 0 && <Icon name="file-text" size={15} />}{l.label}
         </a>
       ))}
     </div>

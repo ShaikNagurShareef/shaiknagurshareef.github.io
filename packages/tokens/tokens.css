@@ -38,14 +38,15 @@
   --focus: #111111;
 
   /* type */
-  --font-serif: "Source Serif 4 Variable", "Source Serif 4", Georgia, "Times New Roman", serif;
-  --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: "IBM Plex Sans Variable", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-sans);
+  --font-serif: var(--font-sans); /* legacy alias: there is no serif in this design */
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* shape and depth (depth is reserved for overlays) */
-  --radius-sm: 5px;
-  --radius: 8px;
-  --radius-lg: 12px;
+  --radius-sm: 2px;
+  --radius: 2px;
+  --radius-lg: 4px;
   --shadow-sm: 0 1px 2px rgb(17 18 20 / 0.05);
   --shadow: 0 1px 2px rgb(17 18 20 / 0.06), 0 12px 32px -12px rgb(17 18 20 / 0.18);
 

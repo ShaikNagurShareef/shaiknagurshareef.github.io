@@ -14,8 +14,8 @@ const shown = keys.filter((k) => links[k]);
 <ul class:list={["flex flex-wrap gap-x-5 gap-y-2 text-sm", cls]} aria-label="Profiles">
   {shown.map((k) => (
     <li>
-      <a href={links[k]!} target="_blank" rel="noopener me" class="link-plain inline-flex items-center gap-1 font-medium text-ink-2 hover:text-ink">
-        {LABEL[k]}<Icon name="arrow-up-right" size={13} class="text-muted" />
+      <a href={links[k]!} target="_blank" rel="noopener me" class="link-quiet font-medium">
+        {LABEL[k]}
       </a>
     </li>
   ))}

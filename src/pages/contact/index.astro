@@ -85,7 +85,7 @@ const profiles: Array<[string, string]> = [
         <li>
           <a href={d.href} target="_blank" rel="noopener" class="row-link">
             <span class="inline-flex items-center gap-3"><Icon name="file-text" size={17} class="text-muted" />{d.label}</span>
-            <Icon name="arrow-up-right" size={16} class="text-muted" />
+            <span class="mono text-muted">PDF</span>
           </a>
         </li>
       ))}
@@ -97,7 +97,7 @@ const profiles: Array<[string, string]> = [
       {profiles.filter(([, k]) => me.links[k]).map(([label, k]) => (
         <li class="border-b border-border">
           <a href={me.links[k]!} target="_blank" rel="noopener me" class="row-link">
-            {label}<Icon name="arrow-up-right" size={16} class="text-muted" />
+            {label}
           </a>
         </li>
       ))}
