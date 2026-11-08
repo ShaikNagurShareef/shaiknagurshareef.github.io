@@ -9,7 +9,7 @@ const d = project.data;
 ---
 <article id={project.id} class="project card flex h-full flex-col p-5" data-project data-tags={d.tags.join(" ")}>
   <div class="flex items-baseline justify-between gap-3">
-    <h3 class="text-base font-semibold">{d.title}</h3>
+    <h3 class="text-[1.1875rem] font-semibold">{d.title}</h3>
     <span class="shrink-0 text-xs tabular text-muted">{ym(d.date)}</span>
   </div>
   <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-2">{d.description}</p>

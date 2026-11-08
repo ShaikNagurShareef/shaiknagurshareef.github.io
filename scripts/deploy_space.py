@@ -23,7 +23,7 @@ from huggingface_hub import HfApi
 SPACE = "nagur-shareef-shaik/portfolio-chat-api"
 ROOT = Path(__file__).resolve().parent.parent
 APP_DIR = ROOT / "portfolio-chat-api"
-FILES = ["app.py", "visits.py", "fetch_geo.py", "knowledge.md", "requirements.txt", "Dockerfile", "build_knowledge.py"]
+FILES = ["app.py", "visits.py", "inbox.py", "fetch_geo.py", "knowledge.md", "requirements.txt", "Dockerfile", "build_knowledge.py"]
 
 
 def read_key() -> str | None:

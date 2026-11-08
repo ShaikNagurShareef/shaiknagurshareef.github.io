@@ -36,14 +36,14 @@ const stages = diss.stages.map((s) => ({
     lead="Multimodal medical AI that reasons the way clinicians read a study: locate the evidence, characterize it, weigh it against context, compare it with prior exams, and commit to a claim that can be checked against the image." />
 
   <Section id="diss-h" title="Ph.D. dissertation" description="Georgia State University, Department of Computer Science.">
-    <h3 class="font-display text-[1.5rem] leading-snug sm:text-[1.75rem]">{diss.title}</h3>
-    <dl class="mt-6 grid gap-x-8 gap-y-3 border-t border-border pt-5 text-[0.9375rem] sm:grid-cols-[8rem_1fr]">
+    <h3 class="font-display text-[1.625rem] leading-snug sm:text-[2rem]">{diss.title}</h3>
+    <dl class="mt-6 grid gap-x-8 gap-y-3 border-t border-border pt-5 text-[1.0625rem] sm:grid-cols-[8rem_1fr]">
       <dt class="text-muted">Status</dt><dd class="text-ink">{diss.status}</dd>
       <dt class="text-muted">Advisor</dt><dd class="text-ink">Dr. {diss.advisor}</dd>
       <dt class="text-muted">Scope</dt>
       <dd class="text-ink tabular">{diss.scale.domains} clinical domains · {diss.scale.benchmarks} benchmarks · {diss.scale.architectures} architectures</dd>
     </dl>
-    <p class="mt-6 max-w-[66ch] text-[0.9375rem] leading-relaxed text-ink-2">{diss.summary}</p>
+    <p class="mt-6 max-w-[66ch] text-[1.0625rem] leading-relaxed text-ink-2">{diss.summary}</p>
     <div class="mt-6 flex flex-wrap gap-2">
       <a href={me.documents.research_statement} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="file-text" size={15} />Research statement</a>
       <a href="#committee-h" class="btn">Committee</a>
@@ -56,7 +56,7 @@ const stages = diss.stages.map((s) => ({
         <li class="grid gap-4 border-b border-border py-6 md:grid-cols-[13rem_1fr] md:gap-8" id={`stage-${s.id}`}>
           <div>
             <span class="font-mono text-xs tabular text-accent-ink" aria-hidden="true">{String(s.n).padStart(2, "0")}</span>
-            <h3 class="mt-1 text-base font-semibold"><span class="sr-only">Stage {s.n}: </span>{s.name}</h3>
+            <h3 class="mt-1 text-[1.1875rem] font-semibold"><span class="sr-only">Stage {s.n}: </span>{s.name}</h3>
             <p class="mt-1 text-sm leading-snug text-muted">{s.question}</p>
           </div>
           <ul class="grid gap-4">
@@ -67,7 +67,7 @@ const stages = diss.stages.map((s) => ({
                   <ul class="mt-1 grid gap-1.5">
                     {m.papers.map((p) => (
                       <li class="text-sm leading-relaxed text-ink-2">
-                        {p.data.url ? <a href={p.data.url} target="_blank" rel="noopener">{p.data.title}</a> : <span>{p.data.title}</span>}
+                        {p.data.url ? <a href={p.data.url} target="_blank" rel="noopener" class="link-quiet">{p.data.title}</a> : <span class="text-ink">{p.data.title}</span>}
                         <span class="text-muted"> · {p.data.status === "published" ? shortVenue(p.data.venue) : STATUS_LABEL[p.data.status]}</span>
                       </li>
                     ))}
@@ -87,7 +87,7 @@ const stages = diss.stages.map((s) => ({
     <div class="grid gap-8 md:grid-cols-3 md:gap-6">
       {themes.map((t) => (
         <article class="border-t-2 border-ink pt-4">
-          <h3 class="text-[0.9375rem] font-semibold">{t.title}</h3>
+          <h3 class="text-[1.0625rem] font-semibold">{t.title}</h3>
           <p class="mt-2 text-sm leading-relaxed text-ink-2">{t.text}</p>
         </article>
       ))}
@@ -101,8 +101,8 @@ const stages = diss.stages.map((s) => ({
   </Section>
 
   <Section id="thesis-h" title={`M.S. thesis, ${thesis.year}`} description={`Advisor: Dr. ${thesis.advisor}. Georgia State University.`}>
-    <h3 class="font-display text-[1.375rem] leading-snug">{thesis.title}</h3>
-    <p class="mt-4 max-w-[66ch] text-[0.9375rem] leading-relaxed text-ink-2">{thesis.summary}</p>
+    <h3 class="font-display text-[1.5rem] leading-snug sm:text-[1.75rem]">{thesis.title}</h3>
+    <p class="mt-4 max-w-[66ch] text-[1.0625rem] leading-relaxed text-ink-2">{thesis.summary}</p>
     <div class="mt-6 flex flex-wrap gap-2">
       {thesis.links.map((l, i) => (
         <a href={l.url} target="_blank" rel="noopener" class:list={["btn", i === 0 && "btn-primary"]}>

@@ -33,6 +33,16 @@
   --shadow-card: var(--shadow);
 }
 
+/* Type scale: stronger than Tailwind's defaults (small text 15px, body 17px). */
+@theme {
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.55;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.6;
+}
+
 @layer base {
   html {
     background: var(--bg);
@@ -92,22 +102,22 @@
   @media (min-width: 768px) { .section { padding-block: 4.5rem; } }
   .section-grid { display: grid; gap: 1.5rem; }
   @media (min-width: 1024px) {
-    .section-grid { grid-template-columns: 14rem minmax(0, 1fr); gap: 4rem; }
+    .section-grid { grid-template-columns: 16rem minmax(0, 1fr); gap: 4rem; }
     .section-grid > .section-head { position: sticky; top: calc(var(--header-h) + 2rem); align-self: start; }
     .section-grid.is-stacked { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
     .section-grid.is-stacked > .section-head { position: static; display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
   }
-  .section-title { font-size: 1.25rem; font-weight: 600; }
-  .section-desc { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.55; color: var(--muted); max-width: 40ch; }
-  .subhead { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .section-title { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+  .section-desc { margin-top: 0.6rem; font-size: 0.9375rem; line-height: 1.55; color: var(--muted); max-width: 40ch; }
+  .subhead { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
 
-  .meta { font-size: 0.875rem; color: var(--muted); }
+  .meta { font-size: 0.9375rem; color: var(--muted); }
 
   /* Badges: rectangular, quiet; used only where a status carries meaning. */
   .badge {
     display: inline-flex; align-items: center; gap: 0.3rem;
-    height: 1.375rem; padding-inline: 0.45rem; border-radius: var(--radius-sm);
-    font-size: 0.75rem; font-weight: 500; line-height: 1; white-space: nowrap;
+    height: 1.5rem; padding-inline: 0.5rem; border-radius: var(--radius-sm);
+    font-size: 0.8125rem; font-weight: 600; line-height: 1; white-space: nowrap;
     color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--border);
   }
   .badge-accent { color: var(--accent-ink); background: var(--accent-soft); border-color: transparent; }
@@ -119,8 +129,8 @@
   /* Buttons */
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
-    height: 2.375rem; padding-inline: 0.9rem; border-radius: var(--radius);
-    font-size: 0.875rem; font-weight: 500; line-height: 1; text-decoration: none; white-space: nowrap;
+    height: 2.75rem; padding-inline: 1.1rem; border-radius: var(--radius);
+    font-size: 0.9375rem; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap;
     border: 1px solid var(--border-strong); color: var(--ink); background: var(--surface);
     transition: background-color 120ms, border-color 120ms, color 120ms;
   }
@@ -129,13 +139,16 @@
   .btn-primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: var(--on-accent); }
   .btn-ghost { border-color: transparent; background: transparent; color: var(--ink-2); }
   .btn-ghost:hover { background: var(--surface-2); color: var(--ink); }
-  .btn-sm { height: 1.875rem; padding-inline: 0.6rem; font-size: 0.8125rem; gap: 0.35rem; }
+  .btn-sm { height: 2.125rem; padding-inline: 0.7rem; font-size: 0.875rem; gap: 0.35rem; }
 
   /* A text link with a trailing arrow, for "View all" style navigation. */
-  .link-more { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.875rem; font-weight: 600; color: var(--accent-ink); text-decoration: none; }
+  .link-more { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.9375rem; font-weight: 600; color: var(--accent-ink); text-decoration: none; }
   .link-more:hover { color: var(--accent); }
   .link-more svg { transition: transform 120ms; }
   .link-more:hover svg { transform: translateX(2px); }
+  /* Content links (paper titles, organizations): ink text, accent only on hover. */
+  .link-quiet { color: var(--ink); text-decoration-color: var(--border-strong); }
+  .link-quiet:hover { color: var(--accent-ink); text-decoration-color: currentColor; }
   .link-plain { text-decoration: none; }
   .link-plain:hover { text-decoration: underline; text-decoration-color: var(--accent); }
 
@@ -143,9 +156,9 @@
   .rows > * + * { border-top: 1px solid var(--border); }
 
   /* Data tables */
-  .table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
   .table th {
-    text-align: left; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    text-align: left; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
     color: var(--muted); padding: 0 0.75rem 0.6rem 0; border-bottom: 1px solid var(--border-strong);
   }
   .table td { padding: 0.7rem 0.75rem 0.7rem 0; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -154,11 +167,29 @@
 
   /* Form controls */
   .field {
-    height: 2.375rem; width: 100%; padding-inline: 0.75rem; border-radius: var(--radius);
-    border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink); font-size: 0.875rem;
+    height: 2.75rem; width: 100%; padding-inline: 0.85rem; border-radius: var(--radius);
+    border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink); font-size: 1rem;
   }
   .field::placeholder { color: var(--muted); }
   .field:focus { outline: 2px solid var(--focus); outline-offset: 0; border-color: transparent; }
+
+  /* Forms */
+  .form-grid { display: grid; gap: 1.25rem; max-width: 44rem; }
+  @media (min-width: 640px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+  .field-group { display: grid; gap: 0.45rem; }
+  .field-label { font-size: 0.9375rem; font-weight: 600; color: var(--ink); }
+  .field.textarea { height: auto; min-height: 9rem; padding-block: 0.7rem; line-height: 1.55; resize: vertical; }
+  .field:user-invalid { border-color: var(--warn); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .form-error { padding: 0.7rem 0.9rem; border-radius: var(--radius); background: var(--warn-soft); color: var(--warn); font-size: 0.9375rem; }
+  .form-done {
+    display: flex; gap: 1rem; align-items: flex-start; max-width: 44rem; padding: 1.5rem;
+    border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface);
+  }
+  .form-done-icon {
+    display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem;
+    border-radius: 999px; background: var(--ok-soft); color: var(--ok);
+  }
 
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
 

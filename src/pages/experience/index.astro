@@ -28,12 +28,12 @@ const skills = (await getCollection("skills")).sort(byOrder);
             {!j.data.end && <span class="badge badge-ok ml-2 md:ml-0 md:mt-2 md:flex md:w-fit">Current</span>}
           </p>
           <div>
-            <h3 class="text-base font-semibold">{j.data.role}</h3>
-            <p class="mt-0.5 text-[0.9375rem] text-ink-2">
-              {j.data.orgUrl ? <a href={j.data.orgUrl} target="_blank" rel="noopener">{j.data.org}</a> : j.data.org}
+            <h3 class="text-[1.1875rem] font-semibold">{j.data.role}</h3>
+            <p class="mt-0.5 text-[1.0625rem] text-ink-2">
+              {j.data.orgUrl ? <a href={j.data.orgUrl} target="_blank" rel="noopener" class="link-quiet">{j.data.org}</a> : j.data.org}
               <span class="text-muted"> · {j.data.location}</span>
             </p>
-            <ul class="mt-3 grid list-disc gap-1.5 pl-4 text-[0.9375rem] leading-relaxed text-ink-2 marker:text-border-strong prose-measure">
+            <ul class="mt-3 grid list-disc gap-1.5 pl-4 text-[1.0625rem] leading-relaxed text-ink-2 marker:text-border-strong prose-measure">
               {j.data.highlights.map((h) => <li>{h}</li>)}
             </ul>
           </div>
@@ -48,12 +48,12 @@ const skills = (await getCollection("skills")).sort(byOrder);
         <li class="grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8">
           <p class="text-sm tabular text-muted md:pt-0.5">{range(s.data.start, s.data.end, s.data.expected)}</p>
           <div>
-            <h3 class="text-base font-semibold">{s.data.degree}</h3>
-            <p class="mt-0.5 text-[0.9375rem] text-ink-2">
-              {s.data.schoolUrl ? <a href={s.data.schoolUrl} target="_blank" rel="noopener">{s.data.school}</a> : s.data.school}
+            <h3 class="text-[1.1875rem] font-semibold">{s.data.degree}</h3>
+            <p class="mt-0.5 text-[1.0625rem] text-ink-2">
+              {s.data.schoolUrl ? <a href={s.data.schoolUrl} target="_blank" rel="noopener" class="link-quiet">{s.data.school}</a> : s.data.school}
               <span class="text-muted"> · {s.data.location} · GPA {s.data.gpa}</span>
             </p>
-            {s.data.note && <p class="mt-2 text-[0.9375rem] text-ink-2 prose-measure">{s.data.note}</p>}
+            {s.data.note && <p class="mt-2 text-[1.0625rem] text-ink-2 prose-measure">{s.data.note}</p>}
             <p class="mt-3 text-sm leading-relaxed text-muted prose-measure"><span class="font-medium text-ink-2">Coursework:</span> {s.data.coursework.join(", ")}</p>
           </div>
         </li>

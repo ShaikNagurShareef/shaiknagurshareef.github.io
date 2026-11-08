@@ -26,6 +26,7 @@ from google.genai import errors as genai_errors
 from google.genai import types
 from pydantic import BaseModel, Field
 
+import inbox
 import visits
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -101,6 +102,7 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization"],
 )
 app.include_router(visits.router)
+app.include_router(inbox.router)
 
 
 # ---------------------------------------------------------------- schemas

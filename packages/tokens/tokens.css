@@ -52,7 +52,7 @@
   /* layout */
   --measure: 66ch;
   --page-max: 1200px;
-  --header-h: 4rem;
+  --header-h: 4.25rem;
 }
 
 :root[data-theme="dark"] {

@@ -7,16 +7,16 @@ import Base from "../../layouts/Base.astro";
 import Icon from "../../components/Icon.astro";
 import { SPACE_API } from "../../lib/api";
 ---
-<Base title="Visitor log" noindex track={false} chat={false} description="Private visitor log.">
+<Base title="Audit" noindex track={false} chat={false} description="Private visitor log.">
   <div class="container-page pb-6 pt-10 md:pt-14" data-audit data-api={SPACE_API}>
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 class="text-[2rem] sm:text-[2.25rem]">Visitor log</h1>
-        <p class="mt-2 text-sm text-muted">Private audit view. Times are shown in your local time zone.</p>
+        <h1 class="text-[2rem] sm:text-[2.5rem]">Audit</h1>
+        <p class="mt-2 text-sm text-muted">Private. Visitors, messages and feedback. Times are in your local time zone.</p>
       </div>
       <div data-signed-in hidden class="flex flex-wrap items-center gap-2">
         <label class="sr-only" for="range">Date range</label>
-        <select id="range" data-range class="field w-auto pr-8">
+        <select id="range" data-range data-visitors-only class="field w-auto pr-8">
           <option value="1">Today</option>
           <option value="7">Last 7 days</option>
           <option value="30" selected>Last 30 days</option>
@@ -24,7 +24,7 @@ import { SPACE_API } from "../../lib/api";
           <option value="365">Last 12 months</option>
         </select>
         <button type="button" class="btn" data-refresh><Icon name="rotate-ccw" size={14} />Refresh</button>
-        <button type="button" class="btn" data-export><Icon name="download" size={14} />CSV</button>
+        <button type="button" class="btn" data-export data-visitors-only><Icon name="download" size={14} />CSV</button>
         <button type="button" class="btn btn-ghost" data-signout>Sign out</button>
       </div>
     </div>
@@ -42,6 +42,13 @@ import { SPACE_API } from "../../lib/api";
     </form>
 
     <div data-signed-in hidden>
+      <div role="tablist" aria-label="Audit views" class="audit-tabs mt-8">
+        <button type="button" role="tab" id="tab-visitors" aria-controls="panel-visitors" aria-selected="true" data-tab="visitors">Visitors</button>
+        <button type="button" role="tab" id="tab-messages" aria-controls="panel-messages" aria-selected="false" data-tab="messages" tabindex="-1">Messages <span data-count-messages></span></button>
+        <button type="button" role="tab" id="tab-feedback" aria-controls="panel-feedback" aria-selected="false" data-tab="feedback" tabindex="-1">Feedback <span data-count-feedback></span></button>
+      </div>
+
+      <div id="panel-visitors" role="tabpanel" aria-labelledby="tab-visitors" data-panel="visitors">
       <p data-status class="mt-6 text-sm text-muted" aria-live="polite"></p>
 
       <!-- Filters -->
@@ -111,11 +118,29 @@ import { SPACE_API } from "../../lib/api";
         Location and network from <a href="https://db-ip.com" target="_blank" rel="noopener">IP Geolocation by DB-IP</a> (CC BY 4.0); city-level accuracy varies.
         IP addresses are stored with the last block removed. Data: private Hugging Face dataset.
       </p>
+      </div>
+
+      <div id="panel-messages" role="tabpanel" aria-labelledby="tab-messages" data-panel="messages" hidden>
+        <p data-inbox-status class="mt-6 text-sm text-muted" aria-live="polite"></p>
+        <div data-messages class="mt-4 grid gap-4"></div>
+      </div>
+
+      <div id="panel-feedback" role="tabpanel" aria-labelledby="tab-feedback" data-panel="feedback" hidden>
+        <p class="mt-6 text-sm text-muted">Only feedback whose author allowed it to be shown and that you approve appears on the public Feedback page.</p>
+        <div data-feedback-admin class="mt-4 grid gap-4"></div>
+      </div>
     </div>
   </div>
 </Base>
 
 <style is:global>
+  .audit-tabs { display: flex; gap: 1.5rem; border-bottom: 1px solid var(--border); }
+  .audit-tabs button { position: relative; height: 2.75rem; font-size: 1rem; font-weight: 600; color: var(--ink-2); }
+  .audit-tabs button span { margin-left: 0.25rem; font-size: 0.8125rem; color: var(--muted); }
+  .audit-tabs button[aria-selected="true"] { color: var(--accent-ink); }
+  .audit-tabs button[aria-selected="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--accent); }
+  .inbox-item { padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); }
+  .inbox-item .body { margin-top: 0.75rem; white-space: pre-wrap; font-size: 1rem; line-height: 1.6; color: var(--ink); overflow-wrap: anywhere; }
   .bar-chart { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 0.5rem; }
   .bar-y { position: relative; height: 10rem; font-size: 0.6875rem; color: var(--muted); font-variant-numeric: tabular-nums; }
   .bar-y span { position: absolute; right: 0; transform: translateY(50%); }
@@ -401,6 +426,102 @@ import { SPACE_API } from "../../lib/api";
     $<HTMLButtonElement>("[data-next]").disabled = page >= pages - 1;
   }
 
+  // ---------------------------------------------------------------- inbox (messages + feedback)
+  type Msg = { id: string; ts: string; name: string; email: string; subject?: string; message: string; org?: string; city?: string; country?: string; delivered?: boolean };
+  type Fb = Msg & { relation?: string; public?: boolean; status: string };
+  let inbox: { messages: Msg[]; feedback: Fb[]; storage: string } = { messages: [], feedback: [], storage: "" };
+
+  async function loadInbox() {
+    const st = $("[data-inbox-status]");
+    try {
+      const r = await fetch(`${API}/v1/admin/inbox`, { headers: { Authorization: `Bearer ${token}` } });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      inbox = await r.json();
+      st.textContent = inbox.storage === "ok" ? "" : `Storage: ${inbox.storage}.`;
+    } catch (e) {
+      st.textContent = `Could not load messages (${(e as Error).message}).`;
+    }
+    renderInbox();
+  }
+
+  function meta(m: Msg) {
+    return [fmt(m.ts), m.org, [m.city, m.country].filter(Boolean).join(", ")].filter(Boolean).join(" · ");
+  }
+
+  function renderInbox() {
+    $("[data-count-messages]").textContent = String(inbox.messages.length);
+    const pending = inbox.feedback.filter((f) => f.status === "pending").length;
+    $("[data-count-feedback]").textContent = pending ? `${pending} pending` : String(inbox.feedback.length);
+
+    const ml = $("[data-messages]");
+    ml.replaceChildren(...inbox.messages.map((m) => {
+      const card = el("article", null, "inbox-item");
+      const head = el("div", null, "flex flex-wrap items-baseline justify-between gap-2");
+      const who = el("p", null, "text-[1.0625rem] font-semibold text-ink");
+      who.append(document.createTextNode(m.name + " "));
+      const mail = el("a", m.email, "link-quiet text-sm font-normal") as HTMLAnchorElement;
+      mail.href = `mailto:${m.email}?subject=${encodeURIComponent("Re: " + (m.subject || "your message"))}`;
+      who.append(mail);
+      head.append(who, el("span", meta(m), "text-sm text-muted"));
+      card.append(head);
+      if (m.subject) card.append(el("p", m.subject, "mt-1 font-medium text-ink-2"));
+      card.append(el("p", m.message, "body"));
+      const foot = el("div", null, "mt-3 flex items-center gap-3");
+      foot.append(el("span", m.delivered ? "Emailed" : "Not emailed (saved here)", m.delivered ? "badge badge-ok" : "badge badge-warn"));
+      card.append(foot);
+      return card;
+    }));
+    if (!inbox.messages.length) ml.replaceChildren(el("p", "No messages yet.", "text-muted"));
+
+    const fl = $("[data-feedback-admin]");
+    fl.replaceChildren(...inbox.feedback.map((f) => {
+      const card = el("article", null, "inbox-item");
+      const head = el("div", null, "flex flex-wrap items-baseline justify-between gap-2");
+      const who = el("p", null, "text-[1.0625rem] font-semibold text-ink");
+      who.textContent = f.name + (f.relation ? ` · ${f.relation}` : "");
+      head.append(who, el("span", meta(f), "text-sm text-muted"));
+      card.append(head);
+      if (f.email) { const a = el("a", f.email, "link-quiet text-sm") as HTMLAnchorElement; a.href = `mailto:${f.email}`; card.append(a); }
+      card.append(el("p", f.message, "body"));
+      const foot = el("div", null, "mt-4 flex flex-wrap items-center gap-2");
+      const badge = f.status === "approved" ? "badge badge-ok" : f.status === "hidden" ? "badge" : "badge badge-info";
+      foot.append(el("span", f.status === "approved" ? (f.public ? "Shown on site" : "Approved (author kept it private)") : f.status === "hidden" ? "Hidden" : "Pending review", badge));
+      if (!f.public) foot.append(el("span", "Author did not allow public display", "text-sm text-muted"));
+      for (const [status, label] of [["approved", "Approve"], ["hidden", "Hide"]] as const) {
+        if (f.status === status) continue;
+        const b = el("button", label, status === "approved" ? "btn btn-sm btn-primary" : "btn btn-sm") as HTMLButtonElement;
+        b.type = "button";
+        b.addEventListener("click", async () => {
+          b.disabled = true;
+          const r = await fetch(`${API}/v1/admin/feedback/${f.id}`, {
+            method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ status }),
+          });
+          if (r.ok) { f.status = status; renderInbox(); } else { b.disabled = false; b.textContent = "Failed, retry"; }
+        });
+        foot.append(b);
+      }
+      card.append(foot);
+      return card;
+    }));
+    if (!inbox.feedback.length) fl.replaceChildren(el("p", "No feedback yet.", "text-muted"));
+  }
+
+  // Tabs (arrow keys move between them, per the ARIA tabs pattern).
+  const tabs = [...root.querySelectorAll<HTMLButtonElement>("[data-tab]")];
+  const selectTab = (name: string) => {
+    tabs.forEach((t) => { const on = t.dataset.tab === name; t.setAttribute("aria-selected", String(on)); t.tabIndex = on ? 0 : -1; });
+    root.querySelectorAll<HTMLElement>("[data-panel]").forEach((p) => (p.hidden = p.dataset.panel !== name));
+    root.querySelectorAll<HTMLElement>("[data-visitors-only]").forEach((c) => (c.hidden = name !== "visitors"));
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => selectTab(t.dataset.tab!));
+    t.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      const next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+      next.focus(); selectTab(next.dataset.tab!);
+    });
+  });
+
   function exportCsv() {
     const rows = filtered();
     const cols: (keyof Visit)[] = ["ts", "path", "title", "vid", "sid", "new", "bot", "org", "asn", "city", "region", "country", "ip", "ref", "browser", "os", "device", "screen", "lang", "tz", "ms", "ua"];
@@ -446,6 +567,7 @@ import { SPACE_API } from "../../lib/api";
     login.reset();
     showApp(true);
     render();
+    loadInbox();
   }
 
   login.addEventListener("submit", (e) => {
@@ -456,7 +578,7 @@ import { SPACE_API } from "../../lib/api";
     signIn(f.get("remember") === "on");
   });
   $("[data-signout]").addEventListener("click", () => signOut());
-  $("[data-refresh]").addEventListener("click", load);
+  $("[data-refresh]").addEventListener("click", () => { load(); loadInbox(); });
   $("[data-range]").addEventListener("change", load);
   $("[data-export]").addEventListener("click", exportCsv);
   $("[data-q]").addEventListener("input", () => { page = 0; render(); });

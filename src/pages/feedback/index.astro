@@ -1,0 +1,118 @@
+---
+/**
+ * Feedback about Shareef. Submissions are private until he approves them on /audit/; only entries the
+ * author allowed to be shown, and that he approved, are listed here (fetched from the Space).
+ */
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
+import Icon from "../../components/Icon.astro";
+---
+<Base title="Feedback" description="Feedback from colleagues, collaborators and readers, and a form to leave your own.">
+  <PageHeader title="Feedback"
+    lead="Worked with me, reviewed or read a paper, or used one of my projects? I'd value your perspective. Feedback you allow me to share appears on this page after I review it." />
+
+  <Section id="said-h" title="What people say" description="Shared with the author's permission.">
+    <div data-fb-list aria-live="polite">
+      <p class="text-[1.0625rem] text-muted" data-fb-loading>Loading feedback…</p>
+    </div>
+  </Section>
+
+  <Section id="leave-h" title="Leave feedback" description="Private by default. Your email is never shown.">
+    <div data-sent hidden class="form-done" role="status" tabindex="-1">
+      <span class="form-done-icon"><Icon name="check" size={22} /></span>
+      <div>
+        <p class="font-display text-[1.5rem] font-semibold text-ink">Thank you</p>
+        <p class="mt-1 text-[1.0625rem] text-ink-2" data-sent-text></p>
+      </div>
+    </div>
+
+    <form data-feedback class="form-grid" novalidate>
+      <label class="field-group">
+        <span class="field-label">Name</span>
+        <input name="name" required maxlength="100" autocomplete="name" class="field" />
+      </label>
+      <label class="field-group">
+        <span class="field-label">How do you know me? <span class="font-normal text-muted">(optional)</span></span>
+        <input name="relation" maxlength="120" class="field" placeholder="Colleague at UST, co-author, read my paper…" />
+      </label>
+      <label class="field-group sm:col-span-2">
+        <span class="field-label">Email <span class="font-normal text-muted">(optional, private, only if you'd like a reply)</span></span>
+        <input name="email" type="email" maxlength="200" autocomplete="email" class="field" />
+      </label>
+      <label class="field-group sm:col-span-2">
+        <span class="field-label flex justify-between">Feedback <span class="font-normal text-muted tabular" data-count-for="message"></span></span>
+        <textarea name="message" required minlength="10" maxlength="2000" rows="6" data-counter class="field textarea"></textarea>
+      </label>
+      <label class="flex items-start gap-3 text-[0.9375rem] text-ink-2 sm:col-span-2">
+        <input type="checkbox" name="public" class="mt-1 h-4 w-4 accent-[var(--accent)]" />
+        <span>You may show this feedback on this page with my name and how I know you. (It is published only after review.)</span>
+      </label>
+      <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+      <p data-form-status class="form-error sm:col-span-2" role="alert" hidden></p>
+      <div class="sm:col-span-2"><button type="submit" class="btn btn-primary"><Icon name="send" size={16} />Submit feedback</button></div>
+    </form>
+  </Section>
+</Base>
+
+<style is:global>
+  .fb-list { display: grid; gap: 1rem; }
+  @media (min-width: 768px) { .fb-list { grid-template-columns: 1fr 1fr; } }
+  .fb-item { padding: 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); }
+  .fb-item blockquote { font-family: var(--font-serif); font-size: 1.1875rem; line-height: 1.55; color: var(--ink); white-space: pre-line; }
+  .fb-item figcaption { margin-top: 1rem; font-size: 0.9375rem; color: var(--muted); }
+  .fb-item figcaption strong { color: var(--ink); font-weight: 600; }
+</style>
+
+<script>
+  import { wireForm, apiBase } from "../../lib/forms";
+
+  // Approved feedback (rendered with textContent only).
+  const list = document.querySelector<HTMLElement>("[data-fb-list]")!;
+  (async () => {
+    try {
+      const r = await fetch(apiBase() + "/v1/feedback");
+      if (!r.ok) throw new Error();
+      const items: { name: string; relation: string; message: string; date: string }[] = (await r.json()).feedback;
+      if (!items.length) {
+        list.innerHTML = "";
+        const p = document.createElement("p");
+        p.className = "text-[1.0625rem] text-muted";
+        p.textContent = "No public feedback yet. Yours could be the first.";
+        list.append(p);
+        return;
+      }
+      const wrap = document.createElement("div");
+      wrap.className = "fb-list";
+      const fmt = new Intl.DateTimeFormat(undefined, { month: "long", year: "numeric" });
+      for (const it of items) {
+        const fig = document.createElement("figure");
+        fig.className = "fb-item";
+        const q = document.createElement("blockquote");
+        q.textContent = it.message;
+        const cap = document.createElement("figcaption");
+        const who = document.createElement("strong");
+        who.textContent = it.name;
+        cap.append(who, document.createTextNode([it.relation, fmt.format(new Date(it.date))].filter(Boolean).map((x) => ` · ${x}`).join("")));
+        fig.append(q, cap);
+        wrap.append(fig);
+      }
+      list.replaceChildren(wrap);
+    } catch {
+      list.querySelector("[data-fb-loading]")!.textContent = "Feedback couldn't be loaded right now. Please check back shortly.";
+    }
+  })();
+
+  const form = document.querySelector<HTMLFormElement>("[data-feedback]")!;
+  const done = document.querySelector<HTMLElement>("[data-sent]")!;
+  wireForm(form, "/v1/feedback",
+    (d) => ({ name: d.get("name"), relation: d.get("relation"), email: d.get("email"), message: d.get("message"), public: d.get("public") === "on" }),
+    (d) => {
+      done.querySelector("[data-sent-text]")!.textContent = d.get("public") === "on"
+        ? `Thanks, ${d.get("name")}. Your feedback will appear here once I've reviewed it.`
+        : `Thanks, ${d.get("name")}. Your feedback reached me privately.`;
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    });
+</script>

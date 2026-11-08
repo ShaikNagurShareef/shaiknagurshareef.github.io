@@ -19,12 +19,12 @@ const search = `${d.title} ${d.authors} ${d.venue} ${d.year ?? ""}`.toLowerCase(
 ---
 <article class="pub py-5" id={pub.id} data-pub data-year={d.year ?? ""} data-kind={d.kind} data-status={d.status}
          data-presentation={d.presentation ?? ""} data-search={search}>
-  <H class="text-base font-semibold leading-snug">
+  <H class="text-[1.125rem] font-semibold leading-snug">
     {d.url ? <a href={d.url} target="_blank" rel="noopener" class="link-plain text-ink">{d.title}</a> : d.title}
   </H>
   <p class="mt-1.5 text-sm leading-relaxed text-muted" set:html={authors} />
   <p class="mt-0.5 text-sm leading-relaxed text-ink-2">{d.venue}{d.year && published ? `, ${d.year}` : ""}</p>
-  <div class="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.8125rem]">
+  <div class="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.875rem]">
     {statusBadge && <span class={statusBadge}>{STATUS_LABEL[d.status]}</span>}
     {d.presentation === "oral" && <span class="badge badge-accent">Oral</span>}
     <span class="text-muted">{KIND_LABEL[d.kind]}{d.presentation === "poster" ? " · Poster" : ""}</span>

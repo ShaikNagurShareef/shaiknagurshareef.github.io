@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY fetch_geo.py /code/
 RUN python /code/fetch_geo.py /code/geo
 
-COPY app.py visits.py knowledge.md /code/
+COPY app.py visits.py inbox.py knowledge.md /code/
 
 # Hugging Face Spaces run containers as uid 1000
 RUN useradd -m -u 1000 user

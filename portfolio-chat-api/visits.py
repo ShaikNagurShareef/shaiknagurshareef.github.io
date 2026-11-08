@@ -333,8 +333,8 @@ def _password_ok(given: str) -> bool:
 _fails: dict[str, list[float]] = {}  # per-IP failed sign-ins (so guessing cannot lock the owner out)
 
 
-@router.get("/v1/visits")
-async def visits(request: Request, days: int = 30):
+async def require_admin(request: Request) -> None:
+    """Raise unless the request carries the audit password (Authorization: Bearer ...)."""
     if not (ADMIN_HASH or ADMIN_TOKEN):
         raise HTTPException(503, "Audit access is not configured on the server.")
     given = request.headers.get("authorization", "").removeprefix("Bearer ").strip()
@@ -350,6 +350,10 @@ async def visits(request: Request, days: int = 30):
         raise HTTPException(401, "Incorrect password.")
     _fails.pop(ip, None)
 
+
+@router.get("/v1/visits")
+async def visits(request: Request, days: int = 30):
+    await require_admin(request)
     days = max(1, min(days, MAX_DAYS))
     today = datetime.now(timezone.utc).date()
     out: list[dict] = []
