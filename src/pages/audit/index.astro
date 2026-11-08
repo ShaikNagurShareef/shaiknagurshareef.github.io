@@ -32,11 +32,11 @@ import { SPACE_API } from "../../lib/api";
     <!-- Sign in -->
     <form data-login class="card mt-8 max-w-md p-6">
       <h2 class="text-base font-semibold">Sign in</h2>
-      <p class="mt-1 text-sm text-muted">Enter the admin token (<code class="font-mono text-xs">VISITS_ADMIN_TOKEN</code> in the repo's local <code class="font-mono text-xs">.env</code>).</p>
-      <label class="mt-4 block text-sm font-medium" for="token">Admin token</label>
+      <p class="mt-1 text-sm text-muted">This page is private. Enter the audit password.</p>
+      <label class="mt-4 block text-sm font-medium" for="token">Password</label>
       <input id="token" name="token" type="password" autocomplete="current-password" required class="field mt-1.5" />
       <label class="mt-3 flex items-center gap-2 text-sm text-ink-2"><input type="checkbox" name="remember" class="accent-[var(--ink)]" />Remember on this device</label>
-      <p data-login-error class="mt-3 text-sm text-warn" role="alert" hidden></p>
+      <p data-login-error class="mt-3 rounded-[var(--radius)] bg-warn-soft px-3 py-2 text-sm text-warn" role="alert" hidden></p>
       <button type="submit" class="btn btn-primary mt-5 w-full">Sign in</button>
       <p class="mt-4 text-xs text-muted">Signing in also stops this browser from being counted as a visitor.</p>
     </form>
@@ -194,13 +194,16 @@ import { SPACE_API } from "../../lib/api";
   };
 
   // ---------------------------------------------------------------- data
-  async function load() {
+  /** Fetch the log with the current password. Returns an error message, or "" on success. */
+  async function fetchLog(): Promise<string> {
     const days = Number($<HTMLSelectElement>("[data-range]").value);
-    status.textContent = "Loading…";
+    let r: Response;
     try {
-      const r = await fetch(`${API}/v1/visits?days=${days}`, { headers: { Authorization: `Bearer ${token}` } });
-      if (r.status === 401) { signOut("That token was not accepted."); return; }
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      r = await fetch(`${API}/v1/visits?days=${days}`, { headers: { Authorization: `Bearer ${token}` } });
+    } catch {
+      return "Could not reach the server. It may be waking up after being idle; try again in a minute.";
+    }
+    if (r.ok) {
       const data = await r.json();
       all = data.visits as Visit[];
       const notes = [];
@@ -208,10 +211,21 @@ import { SPACE_API } from "../../lib/api";
       if (!data.geo) notes.push("Location lookup unavailable.");
       status.textContent = `Updated ${new Date().toLocaleTimeString()}. ${notes.join(" ")}`;
       page = 0;
-      render();
-    } catch (e) {
-      status.textContent = `Could not load the log (${(e as Error).message}). The API may be waking up; try Refresh in a minute.`;
+      return "";
     }
+    const detail = await r.json().then((d) => d.detail as string).catch(() => "");
+    if (r.status === 401) return "Incorrect password.";
+    if (r.status === 429) return detail || "Too many failed attempts. Try again later.";
+    if (r.status === 503) return detail || "Audit access is not configured on the server yet.";
+    return `The server returned an error (HTTP ${r.status}). Try again in a minute.`;
+  }
+
+  async function load() {
+    status.textContent = "Loading…";
+    const err = await fetchLog();
+    if (err === "Incorrect password.") { signOut("Your session expired. Sign in again."); return; }
+    if (err) { status.textContent = err; return; }
+    render();
   }
 
   function filtered() {
@@ -410,16 +424,36 @@ import { SPACE_API } from "../../lib/api";
     err.hidden = !msg; err.textContent = msg ?? "";
   }
 
-  login.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const f = new FormData(login);
-    token = String(f.get("token") || "").trim();
-    if (!token) return;
-    store.set(token, f.get("remember") === "on");
+  const submitBtn = login.querySelector<HTMLButtonElement>("button[type=submit]")!;
+  const loginErr = $("[data-login-error]");
+  async function signIn(remember: boolean | null) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Checking…";
+    loginErr.hidden = true;
+    const err = await fetchLog();
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Sign in";
+    if (err) {
+      if (remember === null) store.clear();  // a stored password that no longer works
+      showApp(false);
+      loginErr.textContent = err;
+      loginErr.hidden = false;
+      login.querySelector<HTMLInputElement>("#token")!.select();
+      return;
+    }
+    if (remember !== null) store.set(token, remember);
     try { localStorage.setItem("notrack", "1"); } catch { /* ignore */ }
     login.reset();
     showApp(true);
-    load();
+    render();
+  }
+
+  login.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = new FormData(login);
+    token = String(f.get("token") || "");
+    if (!token) return;
+    signIn(f.get("remember") === "on");
   });
   $("[data-signout]").addEventListener("click", () => signOut());
   $("[data-refresh]").addEventListener("click", load);
@@ -433,5 +467,6 @@ import { SPACE_API } from "../../lib/api";
   $("[data-next]").addEventListener("click", () => { page++; render(); });
 
   token = store.get();
-  if (token) { showApp(true); load(); } else showApp(false);
+  showApp(false);
+  if (token) signIn(null);
 </script>

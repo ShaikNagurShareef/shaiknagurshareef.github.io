@@ -33,6 +33,9 @@ log = logging.getLogger("portfolio-visits")
 
 DATASET = os.getenv("VISITS_DATASET", "nagur-shareef-shaik/portfolio-visits")
 HF_TOKEN = os.getenv("HF_TOKEN")
+# Audit password, stored only as "pbkdf2_sha256:<iterations>:<salt hex>:<hash hex>" (VISITS_ADMIN_HASH).
+# VISITS_ADMIN_TOKEN (plain) is still accepted as a fallback.
+ADMIN_HASH = os.getenv("VISITS_ADMIN_HASH", "")
 ADMIN_TOKEN = os.getenv("VISITS_ADMIN_TOKEN", "")
 SALT = os.getenv("VISITS_SALT", "")
 FLUSH_SECONDS = int(os.getenv("VISITS_FLUSH_SECONDS", "300"))
@@ -313,20 +316,39 @@ async def visit(request: Request):
     return Response(status_code=204)
 
 
-_fails: list[float] = []
+def _password_ok(given: str) -> bool:
+    if ADMIN_HASH:
+        try:
+            algo, iters, salt, digest = ADMIN_HASH.split(":")
+            if algo != "pbkdf2_sha256":
+                return False
+            calc = hashlib.pbkdf2_hmac("sha256", given.encode(), bytes.fromhex(salt), int(iters)).hex()
+            return secrets.compare_digest(calc, digest)
+        except ValueError:
+            log.error("VISITS_ADMIN_HASH is malformed")
+            return False
+    return bool(ADMIN_TOKEN) and secrets.compare_digest(given, ADMIN_TOKEN)
+
+
+_fails: dict[str, list[float]] = {}  # per-IP failed sign-ins (so guessing cannot lock the owner out)
 
 
 @router.get("/v1/visits")
 async def visits(request: Request, days: int = 30):
-    token = request.headers.get("authorization", "").removeprefix("Bearer ").strip()
-    now = time.time()
-    _fails[:] = [t for t in _fails if now - t < 600]
-    if len(_fails) > 20:
-        raise HTTPException(429, "Too many failed attempts. Try again in a few minutes.")
-    if not ADMIN_TOKEN or not secrets.compare_digest(token, ADMIN_TOKEN):
-        _fails.append(now)
+    if not (ADMIN_HASH or ADMIN_TOKEN):
+        raise HTTPException(503, "Audit access is not configured on the server.")
+    given = request.headers.get("authorization", "").removeprefix("Bearer ").strip()
+    ip, now = _client_ip(request), time.time()
+    recent = [t for t in _fails.get(ip, []) if now - t < 900]
+    if len(recent) >= 8:
+        raise HTTPException(429, "Too many failed attempts. Try again in 15 minutes.")
+    if not given or not _password_ok(given):
+        _fails[ip] = recent + [now]
+        if len(_fails) > 5000:
+            _fails.clear()
         await asyncio.sleep(1)
-        raise HTTPException(401, "Invalid token.")
+        raise HTTPException(401, "Incorrect password.")
+    _fails.pop(ip, None)
 
     days = max(1, min(days, MAX_DAYS))
     today = datetime.now(timezone.utc).date()

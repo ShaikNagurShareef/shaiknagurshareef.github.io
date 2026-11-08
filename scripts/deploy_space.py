@@ -7,9 +7,10 @@ Usage (after `hf auth login` with a write token):
 Secrets are read from the local, gitignored .env and sent straight to the Space's secret store; they
 are never printed or written anywhere else:
   GOOGLE_API_KEY (or GEMINI_API_KEY)   Gemini key for the chat assistant
-  VISITS_ADMIN_TOKEN, VISITS_SALT      visit log: audit-page token and the IP-hash salt
-  HF_TOKEN                             visit log: write access to the private dataset
-                                       (falls back to the local `hf auth login` token)
+  VISITS_ADMIN_HASH, VISITS_SALT       visit log: PBKDF2 hash of the audit password, IP-hash salt
+  HF_TOKEN                             visit log: write access to the private dataset. Use a
+                                       fine-grained token scoped to that dataset; the local login
+                                       token is deliberately never copied to the Space.
 """
 from __future__ import annotations
 
@@ -68,12 +69,10 @@ def main() -> int:
         else:
             api.add_space_secret(SPACE, "GOOGLE_API_KEY", key, description="Gemini API key (portfolio chat)")
             print("Space secret GOOGLE_API_KEY set.")
-        from huggingface_hub import get_token
-
         visit_secrets = {
-            "VISITS_ADMIN_TOKEN": (read_env("VISITS_ADMIN_TOKEN"), "Visit log: audit page token"),
+            "VISITS_ADMIN_HASH": (read_env("VISITS_ADMIN_HASH"), "Visit log: audit password (PBKDF2 hash)"),
             "VISITS_SALT": (read_env("VISITS_SALT"), "Visit log: salt for IP hashes"),
-            "HF_TOKEN": (read_env("HF_TOKEN") or get_token(), "Visit log: write access to the private dataset"),
+            "HF_TOKEN": (read_env("HF_TOKEN"), "Visit log: write access to the private dataset"),
         }
         for name, (value, desc) in visit_secrets.items():
             if value:
