@@ -6,7 +6,7 @@ const path = Astro.url.pathname;
 <header data-site-header class="sticky top-0 z-40 border-b border-border bg-bg/90 backdrop-blur-md supports-[backdrop-filter]:bg-bg/80">
   <div class="container-page flex h-[var(--header-h)] items-center gap-6">
     <a href="/" class="flex shrink-0 items-center gap-2.5 no-underline" aria-label="Nagur Shareef Shaik, home">
-      <span aria-hidden="true" class="inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius)] bg-ink font-serif text-[0.9375rem] font-semibold text-bg">NS</span>
+      <span aria-hidden="true" class="inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius)] bg-accent font-serif text-[0.9375rem] font-semibold text-on-accent">NS</span>
       <span class="font-display text-[1.0625rem] font-semibold text-ink">Nagur Shareef Shaik</span>
     </a>
 
@@ -59,7 +59,7 @@ const path = Astro.url.pathname;
     font-size: 0.875rem; font-weight: 500; color: var(--ink-2); text-decoration: none;
   }
   .nav-link:hover { color: var(--ink); }
-  .nav-link[aria-current="page"] { color: var(--ink); }
+  .nav-link[aria-current="page"] { color: var(--accent-ink); }
   .nav-link[aria-current="page"]::after {
     content: ""; position: absolute; left: 0.7rem; right: 0.7rem; bottom: -1px; height: 2px;
     background: var(--accent); border-radius: 2px 2px 0 0;

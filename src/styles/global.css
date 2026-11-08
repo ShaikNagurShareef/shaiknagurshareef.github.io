@@ -62,14 +62,14 @@
   h2, h3, h4 { color: var(--ink); letter-spacing: -0.01em; line-height: 1.3; text-wrap: pretty; }
   p { text-wrap: pretty; }
   a {
-    color: inherit;
+    color: var(--accent-ink);
     text-decoration-line: underline;
-    text-decoration-color: var(--border-strong);
+    text-decoration-color: color-mix(in srgb, var(--accent-ink) 35%, transparent);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
     transition: text-decoration-color 120ms, color 120ms;
   }
-  a:hover { text-decoration-color: var(--accent); }
+  a:hover { text-decoration-color: currentColor; }
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
   ::selection { background: var(--accent-soft); color: var(--ink); }
   kbd { font-family: var(--font-sans); }
@@ -125,15 +125,15 @@
     transition: background-color 120ms, border-color 120ms, color 120ms;
   }
   .btn:hover { background: var(--surface-2); border-color: var(--border-strong); }
-  .btn-primary { background: var(--ink); border-color: var(--ink); color: var(--bg); }
-  .btn-primary:hover { background: var(--ink-2); border-color: var(--ink-2); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: var(--on-accent); }
   .btn-ghost { border-color: transparent; background: transparent; color: var(--ink-2); }
   .btn-ghost:hover { background: var(--surface-2); color: var(--ink); }
   .btn-sm { height: 1.875rem; padding-inline: 0.6rem; font-size: 0.8125rem; gap: 0.35rem; }
 
   /* A text link with a trailing arrow, for "View all" style navigation. */
-  .link-more { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.875rem; font-weight: 500; color: var(--ink); text-decoration: none; }
-  .link-more:hover { color: var(--accent-ink); }
+  .link-more { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.875rem; font-weight: 600; color: var(--accent-ink); text-decoration: none; }
+  .link-more:hover { color: var(--accent); }
   .link-more svg { transition: transform 120ms; }
   .link-more:hover svg { transform: translateX(2px); }
   .link-plain { text-decoration: none; }

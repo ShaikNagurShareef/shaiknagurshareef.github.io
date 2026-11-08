@@ -1,38 +1,38 @@
 /*
  * Design tokens shared by the portfolio (Astro) and the Research Copilot (Next.js).
- * Direction: institutional and document-grade. Neutral surfaces, hairline rules, one accent
- * (terracotta) used sparingly for emphasis, focus and the active state. Contrast targets
+ * Direction: editorial research. Warm paper neutrals, ink text, a terracotta accent for primary
+ * actions, links, emphasis and the active state; hairline rules instead of heavy cards. Contrast targets
  * WCAG 2.2 AA; checked by scripts/contrast.mjs.
  */
 :root {
   color-scheme: light;
 
   /* surfaces */
-  --bg: #ffffff;
+  --bg: #fbfaf7;
   --surface: #ffffff;
-  --surface-2: #f6f6f4;
-  --surface-3: #eeeeeb;
-  --border: #e6e6e2;
-  --border-strong: #d0d0ca;
+  --surface-2: #f4f1ea;
+  --surface-3: #ece7dc;
+  --border: #e6e1d6;
+  --border-strong: #cfc7b8;
 
   /* text */
-  --ink: #111214;
-  --ink-2: #393c41;
-  --muted: #62666d;
+  --ink: #1b1d21;
+  --ink-2: #3d424a;
+  --muted: #5f6670;
 
   /* accent (terracotta) */
-  --accent: #a6462a;
-  --accent-ink: #933c22;
-  --accent-soft: #f8ece6;
+  --accent: #b0532f;
+  --accent-ink: #9a4423;
+  --accent-soft: #f6e6dd;
   --on-accent: #ffffff;
 
   /* status */
-  --ok: #24663f;
-  --ok-soft: #e6f2ea;
-  --warn: #7f5200;
-  --warn-soft: #fbf0d9;
-  --info: #24548f;
-  --info-soft: #e7eef8;
+  --ok: #2b7149;
+  --ok-soft: #e3f1e8;
+  --warn: #8a5a00;
+  --warn-soft: #fbefd5;
+  --info: #2a5d9f;
+  --info-soft: #e3ecf8;
 
   /* focus */
   --focus: #b8661c;
@@ -43,9 +43,9 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* shape and depth (depth is reserved for overlays) */
-  --radius-sm: 4px;
-  --radius: 6px;
-  --radius-lg: 10px;
+  --radius-sm: 5px;
+  --radius: 8px;
+  --radius-lg: 12px;
   --shadow-sm: 0 1px 2px rgb(17 18 20 / 0.05);
   --shadow: 0 1px 2px rgb(17 18 20 / 0.06), 0 12px 32px -12px rgb(17 18 20 / 0.18);
 
@@ -57,25 +57,25 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0f1012;
-  --surface: #141518;
-  --surface-2: #1a1c20;
-  --surface-3: #22252a;
-  --border: #26292e;
-  --border-strong: #383c43;
-  --ink: #ededeb;
-  --ink-2: #c3c5c8;
-  --muted: #959aa2;
+  --bg: #121315;
+  --surface: #181a1d;
+  --surface-2: #1f2226;
+  --surface-3: #272a2f;
+  --border: #2c3036;
+  --border-strong: #3c424a;
+  --ink: #eceae6;
+  --ink-2: #c9c6c0;
+  --muted: #9da3ab;
   --accent: #e07a52;
-  --accent-ink: #ee9a78;
-  --accent-soft: #2e1d16;
-  --on-accent: #111214;
+  --accent-ink: #f0a07f;
+  --accent-soft: #3a2219;
+  --on-accent: #1b1d21;
   --ok: #7cc79b;
-  --ok-soft: #16261c;
+  --ok-soft: #1c2f24;
   --warn: #e7b85a;
-  --warn-soft: #2b230e;
+  --warn-soft: #33290f;
   --info: #8fb6ec;
-  --info-soft: #172131;
+  --info-soft: #1b2738;
   --focus: #f0a35b;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
   --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px -12px rgb(0 0 0 / 0.7);
