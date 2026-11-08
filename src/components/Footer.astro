@@ -4,30 +4,25 @@ import SocialLinks from "./SocialLinks.astro";
 import { NAV } from "../lib/nav";
 const me = (await getEntry("profile", "me"))!.data;
 const year = new Date().getFullYear();
+const updated = new Date(`${me.updated}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 ---
-<footer data-site-footer class="mt-24 border-t border-border bg-surface-2/60">
-  <div class="container-page grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
-    <div class="space-y-3">
-      <p class="font-serif text-lg font-semibold text-ink">{me.name}</p>
-      <p class="max-w-sm text-sm text-muted">{me.headline}</p>
-      <SocialLinks links={me.links} size="sm" />
+<footer data-site-footer class="mt-16 border-t border-border">
+  <div class="container-page grid gap-8 py-10 md:grid-cols-[1fr_auto] md:items-start">
+    <div>
+      <p class="font-display text-base font-semibold text-ink">{me.name}</p>
+      <p class="mt-1 text-sm text-muted">{me.title}, UST · {me.role}</p>
+      <p class="mt-3 text-sm"><a href={`mailto:${me.email}`} class="text-ink-2">{me.email}</a><span class="text-muted"> · {me.location}</span></p>
     </div>
     <nav aria-label="Footer">
-      <p class="eyebrow mb-3">Explore</p>
-      <ul class="grid gap-1.5 text-sm">
-        {NAV.map((i) => <li><a href={i.href} class="text-ink-2 no-underline hover:text-accent-ink">{i.label}</a></li>)}
+      <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm md:justify-end">
+        {NAV.map((i) => <li><a href={i.href} class="link-plain text-ink-2 hover:text-ink">{i.label}</a></li>)}
       </ul>
     </nav>
-    <div class="text-sm">
-      <p class="eyebrow mb-3">Contact</p>
-      <p><a href={`mailto:${me.email}`}>{me.email}</a></p>
-      <p class="text-muted">{me.location}</p>
-    </div>
   </div>
   <div class="border-t border-border">
-    <div class="container-page flex flex-col gap-1 py-4 text-xs text-muted sm:flex-row sm:justify-between">
-      <p>© {year} {me.name}</p>
-      <p>Data refreshed {me.updated}</p>
+    <div class="container-page flex flex-col gap-3 py-5 text-xs text-muted md:flex-row md:items-center md:justify-between">
+      <SocialLinks links={me.links} class="!text-xs" />
+      <p>© {year} {me.name} · Updated {updated} · <a href="/privacy/" class="text-muted">Privacy</a></p>
     </div>
   </div>
 </footer>

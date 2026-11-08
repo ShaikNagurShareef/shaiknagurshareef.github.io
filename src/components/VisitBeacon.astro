@@ -1,0 +1,51 @@
+---
+/**
+ * Records one page view per load in the private visit log (see portfolio-chat-api/visits.py and
+ * /privacy/). Sends a beacon to the Space; no cookies. Skipped when the browser sends Global
+ * Privacy Control, for this site's owner (?notrack=1 or signing in to /audit/), and off production
+ * unless ?visit_api=<url> is given for local testing.
+ */
+import { SPACE_API } from "../lib/api";
+---
+<script is:inline define:vars={{ SPACE_API }}>
+  (function () {
+    try {
+      var qs = new URLSearchParams(location.search);
+      if (qs.get("notrack") === "1") localStorage.setItem("notrack", "1");
+      if (qs.get("notrack") === "0") localStorage.removeItem("notrack");
+      var api = location.hostname === "shaiknagurshareef.github.io" ? SPACE_API : qs.get("visit_api");
+      if (!api || localStorage.getItem("notrack") === "1" || navigator.globalPrivacyControl) return;
+      if (!navigator.sendBeacon) return;
+
+      var rid = function () { return crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now(); };
+      var vid = localStorage.getItem("vid"), isNew = !vid;
+      if (!vid) { vid = rid(); localStorage.setItem("vid", vid); }
+      var sid = sessionStorage.getItem("sid");
+      if (!sid) { sid = rid(); sessionStorage.setItem("sid", sid); }
+      var pv = rid();
+      var ref = "";
+      if (document.referrer) {
+        var r = new URL(document.referrer);
+        ref = r.origin === location.origin ? r.pathname : r.origin + r.pathname;
+      }
+      var send = function (o) { navigator.sendBeacon(api + "/v1/visit", JSON.stringify(o)); };
+      send({
+        t: "view", pv: pv, vid: vid, sid: sid, new: isNew,
+        path: location.pathname + location.search, title: document.title, ref: ref,
+        lang: navigator.language, tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        screen: screen.width + "x" + screen.height, wd: navigator.webdriver === true,
+      });
+
+      // Time on page counts only while the tab is visible; the latest total is sent when it hides.
+      var shown = document.visibilityState === "visible" ? Date.now() : 0, total = 0;
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "hidden") {
+          if (shown) { total += Date.now() - shown; shown = 0; }
+          send({ t: "leave", pv: pv, ms: total });
+        } else {
+          shown = Date.now();
+        }
+      });
+    } catch (e) { /* storage or beacon unavailable: skip */ }
+  })();
+</script>

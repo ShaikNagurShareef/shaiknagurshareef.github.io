@@ -32,7 +32,7 @@ const { email } = (await getEntry("profile", "me"))!.data;
     border-radius: var(--radius-lg);
     background: var(--surface);
     color: var(--ink);
-    box-shadow: 0 24px 64px -16px rgb(0 0 0 / 0.35);
+    box-shadow: var(--shadow);
   }
   .cmdk::backdrop { background: rgb(18 19 21 / 0.45); backdrop-filter: blur(2px); }
   .cmdk kbd { font-family: var(--font-sans); }
@@ -40,7 +40,7 @@ const { email } = (await getEntry("profile", "me"))!.data;
     display: flex; align-items: center; gap: 0.75rem;
     padding: 0.55rem 0.75rem; border-radius: var(--radius); cursor: pointer;
   }
-  .cmdk :global([role="option"][aria-selected="true"]) { background: var(--accent-soft); }
+  .cmdk :global([role="option"][aria-selected="true"]) { background: var(--surface-2); box-shadow: inset 2px 0 0 var(--accent); }
   .cmdk :global(.cmdk-group) {
     padding: 0.6rem 0.75rem 0.25rem; font-size: 0.7rem; font-weight: 700;
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);

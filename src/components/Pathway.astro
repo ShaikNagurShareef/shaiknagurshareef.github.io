@@ -1,24 +1,32 @@
 ---
+/** The five-stage interpretation pathway as a horizontal stepper (vertical on small screens). */
 interface Stage { id: string; n: number; name: string; question: string; methods: string[] }
-interface Props { stages: Stage[]; compact?: boolean }
-const { stages, compact = false } = Astro.props;
+interface Props { stages: Stage[] }
+const { stages } = Astro.props;
 ---
-<ol class="grid gap-3 sm:grid-cols-2 lg:grid-cols-5" aria-label="The five-stage interpretation pathway">
-  {stages.map((s, i) => (
-    <li class="card relative flex flex-col p-4">
-      <div class="flex items-center gap-2">
-        <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-on-accent" aria-hidden="true">{s.n}</span>
-        <h3 class="text-base font-semibold"><span class="sr-only">Stage {s.n}: </span>{s.name}</h3>
-      </div>
-      <p class="mt-2 text-sm text-ink-2">{s.question}</p>
-      {!compact && (
-        <ul class="mt-3 flex flex-wrap gap-1.5" aria-label={`Methods for ${s.name}`}>
-          {s.methods.map((m) => <li class="chip">{m}</li>)}
-        </ul>
-      )}
-      {i < stages.length - 1 && (
-        <span aria-hidden="true" class="pointer-events-none absolute -right-2.5 top-1/2 hidden h-px w-2 bg-border-strong lg:block"></span>
-      )}
+<ol class="pathway" aria-label="The five-stage interpretation pathway">
+  {stages.map((s) => (
+    <li>
+      <a href={`/research/#stage-${s.id}`} class="block h-full no-underline">
+        <span class="font-mono text-xs tabular text-accent-ink" aria-hidden="true">{String(s.n).padStart(2, "0")}</span>
+        <h3 class="mt-1 text-[0.9375rem] font-semibold text-ink"><span class="sr-only">Stage {s.n}: </span>{s.name}</h3>
+        <p class="mt-1 text-sm leading-snug text-ink-2">{s.question}</p>
+        <p class="mt-3 text-xs leading-relaxed text-muted"><span class="sr-only">Methods: </span>{s.methods.join(" · ")}</p>
+      </a>
     </li>
   ))}
 </ol>
+
+<style>
+  .pathway { display: grid; border-top: 1px solid var(--border-strong); }
+  .pathway > li { border-bottom: 1px solid var(--border); }
+  .pathway a { padding: 1rem 0; }
+  .pathway a:hover h3 { color: var(--accent-ink); }
+  @media (min-width: 900px) {
+    .pathway { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .pathway > li { border-bottom: 0; }
+    .pathway > li + li { border-left: 1px solid var(--border); }
+    .pathway a { padding: 1rem 1rem 0.25rem; }
+    .pathway > li:first-child a { padding-left: 0; }
+  }
+</style>

@@ -5,19 +5,19 @@
  * knowledge lives server-side. Replaced by the Research Copilot API in Phase 4.
  */
 import Icon from "./Icon.astro";
-const API = "https://nagur-shareef-shaik-portfolio-chat-api.hf.space";
+import { SPACE_API as API } from "../lib/api";
 ---
 <div data-no-print>
   <button type="button" id="chat-btn" class="chat-fab" aria-label="Ask my AI assistant" aria-expanded="false" aria-controls="chat-win">
-    <span data-open><Icon name="message-circle" size={24} /></span>
-    <span data-close hidden><Icon name="x" size={24} /></span>
+    <span data-open class="inline-flex items-center gap-2"><Icon name="sparkles" size={17} /><span class="fab-label">Ask AI</span></span>
+    <span data-close hidden class="inline-flex items-center gap-2"><Icon name="x" size={17} /><span class="fab-label">Close</span></span>
   </button>
 
   <section id="chat-win" class="chat-win" role="dialog" aria-label="Chat with Shareef's AI assistant" data-api={API} hidden>
     <header class="chat-head">
       <span class="flex-1">
-        <span class="block font-semibold">Ask about Shareef</span>
-        <span class="block text-xs opacity-85">AI assistant · answers from his public profile</span>
+        <span class="block text-[0.9375rem] font-semibold">Ask about Shareef's work</span>
+        <span class="block text-xs text-muted">AI assistant · answers only from his public profile and papers</span>
       </span>
       <button type="button" data-chat-clear aria-label="Clear conversation" title="Clear conversation"><Icon name="rotate-ccw" size={18} /></button>
       <button type="button" data-chat-close aria-label="Close chat"><Icon name="x" size={18} /></button>
@@ -26,7 +26,7 @@ const API = "https://nagur-shareef-shaik-portfolio-chat-api.hf.space";
     <div data-chat-chips class="chat-chips" aria-label="Suggested questions"></div>
     <form data-chat-form class="chat-form" autocomplete="off">
       <input data-chat-input type="text" maxlength="1000" placeholder="Ask about research, projects, experience…" aria-label="Your question" />
-      <button type="submit" data-chat-send class="btn btn-primary min-h-0 px-3" aria-label="Send"><Icon name="send" size={18} /></button>
+      <button type="submit" data-chat-send class="btn btn-primary w-[2.375rem] px-0" aria-label="Send"><Icon name="arrow-up" size={17} /></button>
     </form>
   </section>
 </div>
@@ -35,44 +35,55 @@ const API = "https://nagur-shareef-shaik-portfolio-chat-api.hf.space";
   .chat-fab {
     position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 50;
     display: inline-flex; align-items: center; justify-content: center;
-    width: 3.5rem; height: 3.5rem; border-radius: 999px;
-    background: var(--accent); color: var(--on-accent); box-shadow: var(--shadow);
+    height: 2.75rem; padding-inline: 1rem; border-radius: 999px;
+    background: var(--ink); color: var(--bg); font-size: 0.875rem; font-weight: 600;
+    box-shadow: var(--shadow); transition: background-color 120ms, transform 120ms;
   }
-  .chat-fab:hover { background: var(--accent-ink); }
+  .chat-fab:hover { background: var(--ink-2); }
+  .chat-fab:active { transform: translateY(1px); }
   .chat-win {
-    position: fixed; right: 1.25rem; bottom: 5.5rem; z-index: 50;
-    width: min(24rem, calc(100vw - 1.5rem)); height: min(36rem, calc(100dvh - 7.5rem));
+    position: fixed; right: 1.25rem; bottom: 4.75rem; z-index: 50;
+    width: min(25rem, calc(100vw - 1.5rem)); height: min(38rem, calc(100dvh - 7rem));
     display: flex; flex-direction: column; overflow: hidden;
     background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
-    box-shadow: 0 24px 64px -16px rgb(0 0 0 / 0.35);
+    box-shadow: var(--shadow);
   }
   .chat-win[hidden] { display: none; }
-  @media (max-width: 480px) { .chat-win { right: 0.75rem; } .chat-fab { right: 0.75rem; bottom: 0.75rem; } .chat-win { bottom: 4.75rem; } }
-  .chat-head { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 0.9rem; background: var(--accent); color: var(--on-accent); }
-  .chat-head button { padding: 0.35rem; border-radius: 6px; color: inherit; }
-  .chat-head button:hover { background: rgb(255 255 255 / 0.18); }
-  .chat-log { flex: 1; overflow-y: auto; padding: 0.9rem; display: flex; flex-direction: column; gap: 0.6rem; background: var(--bg); font-size: 0.9rem; }
-  .chat-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.5rem 0.9rem 0; background: var(--bg); }
+  @media (max-width: 639px) {
+    .chat-fab { right: 0.75rem; bottom: 0.75rem; width: 2.75rem; padding: 0; }
+    .chat-fab .fab-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .chat-win { right: 0.75rem; bottom: 4.25rem; height: min(38rem, calc(100dvh - 5.5rem)); }
+  }
+  .chat-head { display: flex; align-items: center; gap: 0.5rem; padding: 0.8rem 0.9rem; border-bottom: 1px solid var(--border); }
+  .chat-head button { display: inline-flex; padding: 0.4rem; border-radius: var(--radius); color: var(--ink-2); }
+  .chat-head button:hover { background: var(--surface-2); color: var(--ink); }
+  .chat-log { flex: 1; overflow-y: auto; padding: 1rem 0.9rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem; }
+  .chat-chips { display: flex; flex-wrap: wrap; gap: 0.375rem; padding: 0 0.9rem 0.75rem; }
   .chat-chips[hidden] { display: none; }
   .chat-chips :global(button) {
-    border: 1px solid var(--accent); color: var(--accent-ink); background: var(--surface);
-    border-radius: 999px; padding: 0.2rem 0.7rem; font-size: 0.8rem; font-weight: 600;
+    border: 1px solid var(--border-strong); color: var(--ink-2); background: var(--surface);
+    border-radius: var(--radius); padding: 0.3rem 0.6rem; font-size: 0.8125rem; text-align: left;
   }
-  .chat-chips :global(button:hover) { background: var(--accent); color: var(--on-accent); }
-  .chat-form { display: flex; gap: 0.5rem; padding: 0.65rem; border-top: 1px solid var(--border); background: var(--surface); }
+  .chat-chips :global(button:hover) { background: var(--surface-2); color: var(--ink); }
+  .chat-form { display: flex; gap: 0.5rem; padding: 0.75rem; border-top: 1px solid var(--border); background: var(--surface); }
   .chat-form input {
-    flex: 1; min-width: 0; height: 2.5rem; padding: 0 0.75rem; border-radius: var(--radius);
-    border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink);
+    flex: 1; min-width: 0; height: 2.375rem; padding: 0 0.75rem; border-radius: var(--radius);
+    border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink); font-size: 0.875rem;
   }
-  .chat-log :global(.msg) { max-width: 88%; padding: 0.55rem 0.75rem; border-radius: 12px; line-height: 1.5; overflow-wrap: anywhere; }
-  .chat-log :global(.msg.user) { align-self: flex-end; background: var(--accent); color: var(--on-accent); white-space: pre-wrap; }
-  .chat-log :global(.msg.ai) { align-self: flex-start; background: var(--surface-2); color: var(--ink); }
-  .chat-log :global(.msg.error) { align-self: flex-start; background: var(--warn-soft); color: var(--warn); }
-  .chat-log :global(.msg p) { margin: 0 0 0.45rem; }
+  .chat-form input:focus { outline: 2px solid var(--focus); outline-offset: 0; border-color: transparent; }
+  .chat-log :global(.msg) { max-width: 90%; line-height: 1.55; overflow-wrap: anywhere; }
+  .chat-log :global(.msg.user) {
+    align-self: flex-end; padding: 0.5rem 0.75rem; border-radius: var(--radius-lg) var(--radius-lg) var(--radius-sm) var(--radius-lg);
+    background: var(--surface-3); color: var(--ink); white-space: pre-wrap;
+  }
+  .chat-log :global(.msg.ai) { align-self: flex-start; color: var(--ink); }
+  .chat-log :global(.msg.error) { align-self: flex-start; padding: 0.5rem 0.75rem; border-radius: var(--radius); background: var(--warn-soft); color: var(--warn); }
+  .chat-log :global(.msg p) { margin: 0 0 0.5rem; }
   .chat-log :global(.msg > :last-child) { margin-bottom: 0; }
-  .chat-log :global(.msg ul), .chat-log :global(.msg ol) { margin: 0 0 0.45rem; padding-left: 1.2rem; }
+  .chat-log :global(.msg ul), .chat-log :global(.msg ol) { margin: 0 0 0.5rem; padding-left: 1.2rem; }
   .chat-log :global(.msg ul) { list-style: disc; }
   .chat-log :global(.msg ol) { list-style: decimal; }
+  .chat-log :global(.msg strong) { font-weight: 600; }
   .chat-log :global(.msg a) { color: var(--accent-ink); text-decoration: underline; }
   .chat-log :global(.msg.typing::after) {
     content: ""; display: inline-block; width: 1.4em; height: 0.5em; vertical-align: middle; margin-left: 4px;

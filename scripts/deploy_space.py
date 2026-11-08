@@ -4,8 +4,12 @@ Usage (after `hf auth login` with a write token):
     python3 scripts/deploy_space.py            # upload code + set the Gemini key secret
     python3 scripts/deploy_space.py --code-only
 
-The Gemini key is read from the local, gitignored .env (GOOGLE_API_KEY or GEMINI_API_KEY) and sent
-straight to the Space's secret store. It is never printed or written anywhere else.
+Secrets are read from the local, gitignored .env and sent straight to the Space's secret store; they
+are never printed or written anywhere else:
+  GOOGLE_API_KEY (or GEMINI_API_KEY)   Gemini key for the chat assistant
+  VISITS_ADMIN_TOKEN, VISITS_SALT      visit log: audit-page token and the IP-hash salt
+  HF_TOKEN                             visit log: write access to the private dataset
+                                       (falls back to the local `hf auth login` token)
 """
 from __future__ import annotations
 
@@ -18,7 +22,7 @@ from huggingface_hub import HfApi
 SPACE = "nagur-shareef-shaik/portfolio-chat-api"
 ROOT = Path(__file__).resolve().parent.parent
 APP_DIR = ROOT / "portfolio-chat-api"
-FILES = ["app.py", "knowledge.md", "requirements.txt", "Dockerfile", "build_knowledge.py"]
+FILES = ["app.py", "visits.py", "fetch_geo.py", "knowledge.md", "requirements.txt", "Dockerfile", "build_knowledge.py"]
 
 
 def read_key() -> str | None:
@@ -28,6 +32,17 @@ def read_key() -> str | None:
     for line in env.read_text().splitlines():
         name, _, value = line.partition("=")
         if name.strip() in ("GOOGLE_API_KEY", "GEMINI_API_KEY") and value.strip():
+            return value.strip().strip('"').strip("'")
+    return None
+
+
+def read_env(*names: str) -> str | None:
+    env = ROOT / ".env"
+    if not env.exists():
+        return None
+    for line in env.read_text().splitlines():
+        name, _, value = line.partition("=")
+        if name.strip() in names and value.strip():
             return value.strip().strip('"').strip("'")
     return None
 
@@ -53,13 +68,26 @@ def main() -> int:
         else:
             api.add_space_secret(SPACE, "GOOGLE_API_KEY", key, description="Gemini API key (portfolio chat)")
             print("Space secret GOOGLE_API_KEY set.")
+        from huggingface_hub import get_token
+
+        visit_secrets = {
+            "VISITS_ADMIN_TOKEN": (read_env("VISITS_ADMIN_TOKEN"), "Visit log: audit page token"),
+            "VISITS_SALT": (read_env("VISITS_SALT"), "Visit log: salt for IP hashes"),
+            "HF_TOKEN": (read_env("HF_TOKEN") or get_token(), "Visit log: write access to the private dataset"),
+        }
+        for name, (value, desc) in visit_secrets.items():
+            if value:
+                api.add_space_secret(SPACE, name, value, description=desc)
+                print(f"Space secret {name} set.")
+            else:
+                print(f"No {name} available; the visit log will run without it.", file=sys.stderr)
 
     commit = api.upload_folder(
         repo_id=SPACE,
         repo_type="space",
         folder_path=str(APP_DIR),
         allow_patterns=FILES,
-        commit_message="Deploy rebuilt portfolio chat API (server-side knowledge, streaming, rate limits)",
+        commit_message="Deploy portfolio API (chat + private visit log)",
     )
     print(f"Uploaded: {commit.commit_url}")
     print("The Space rebuilds now; check https://nagur-shareef-shaik-portfolio-chat-api.hf.space/health in a few minutes.")

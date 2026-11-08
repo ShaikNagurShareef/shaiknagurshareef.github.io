@@ -1,31 +1,21 @@
 ---
+/** Profile links as labelled text links (no unlabeled icon circles). `keys` picks and orders them. */
 import Icon from "./Icon.astro";
-interface Props { links: Record<string, string | null>; size?: "sm" | "md" }
-const { links, size = "md" } = Astro.props;
+interface Props { links: Record<string, string | null>; keys?: string[]; class?: string }
 
-// Order and presentation. `brand` = simple-icons glyph; `mono` = text monogram (no brand glyph available).
-const ITEMS: Array<{ key: string; label: string; brand?: string; mono?: string }> = [
-  { key: "linkedin", label: "LinkedIn", mono: "in" },
-  { key: "github", label: "GitHub", brand: "github" },
-  { key: "scholar", label: "Google Scholar", brand: "googlescholar" },
-  { key: "orcid", label: "ORCID", brand: "orcid" },
-  { key: "openreview", label: "OpenReview", mono: "OR" },
-  { key: "huggingface", label: "Hugging Face", brand: "huggingface" },
-  { key: "researchgate", label: "ResearchGate", brand: "researchgate" },
-  { key: "kaggle", label: "Kaggle", brand: "kaggle" },
-  { key: "medium", label: "Medium", brand: "medium" },
-];
-const shown = ITEMS.filter((i) => links[i.key]);
-const box = size === "sm" ? "h-9 w-9" : "h-10 w-10";
+const LABEL: Record<string, string> = {
+  scholar: "Google Scholar", orcid: "ORCID", openreview: "OpenReview", github: "GitHub",
+  linkedin: "LinkedIn", huggingface: "Hugging Face", researchgate: "ResearchGate",
+  webofscience: "Web of Science", kaggle: "Kaggle", medium: "Medium",
+};
+const { links, keys = ["scholar", "orcid", "openreview", "github", "linkedin", "huggingface"], class: cls } = Astro.props;
+const shown = keys.filter((k) => links[k]);
 ---
-<ul class="flex flex-wrap gap-2" aria-label="Profiles">
-  {shown.map((i) => (
+<ul class:list={["flex flex-wrap gap-x-5 gap-y-2 text-sm", cls]} aria-label="Profiles">
+  {shown.map((k) => (
     <li>
-      <a href={links[i.key]!} target="_blank" rel="noopener me"
-         class={`${box} inline-flex items-center justify-center rounded-full border border-border bg-surface text-ink-2 hover:text-accent-ink hover:border-accent transition-colors no-underline`}
-         aria-label={i.label} title={i.label}>
-        {i.brand ? <Icon brand={i.brand} size={size === "sm" ? 16 : 18} /> :
-          <span aria-hidden="true" class="text-[0.8rem] font-bold tracking-tight">{i.mono}</span>}
+      <a href={links[k]!} target="_blank" rel="noopener me" class="link-plain inline-flex items-center gap-1 font-medium text-ink-2 hover:text-ink">
+        {LABEL[k]}<Icon name="arrow-up-right" size={13} class="text-muted" />
       </a>
     </li>
   ))}

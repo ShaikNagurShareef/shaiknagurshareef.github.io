@@ -1,78 +1,82 @@
 /*
  * Design tokens shared by the portfolio (Astro) and the Research Copilot (Next.js).
- * Editorial-research direction: warm paper neutrals, ink text, a terracotta accent.
- * Contrast (WCAG 2.2 AA), measured: ink/bg 16.2:1, muted/bg 5.6:1, accent-ink/bg 6.2:1,
- * white/accent 5.1:1, badges >= 5:1; dark theme pairs all >= 5.7:1.
+ * Direction: institutional and document-grade. Neutral surfaces, hairline rules, one accent
+ * (terracotta) used sparingly for emphasis, focus and the active state. Contrast targets
+ * WCAG 2.2 AA; checked by scripts/contrast.mjs.
  */
 :root {
   color-scheme: light;
 
   /* surfaces */
-  --bg: #fbfaf7;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #f4f1ea;
-  --border: #e6e1d6;
-  --border-strong: #cfc7b8;
+  --surface-2: #f6f6f4;
+  --surface-3: #eeeeeb;
+  --border: #e6e6e2;
+  --border-strong: #d0d0ca;
 
   /* text */
-  --ink: #1b1d21;
-  --ink-2: #3d424a;
-  --muted: #5f6670;
+  --ink: #111214;
+  --ink-2: #393c41;
+  --muted: #62666d;
 
   /* accent (terracotta) */
-  --accent: #b0532f;          /* fills/buttons: white text on it = 5.1:1 */
-  --accent-ink: #9a4423;      /* accent used as text: 6.2:1 on --bg */
-  --accent-soft: #f6e6dd;
+  --accent: #a6462a;
+  --accent-ink: #933c22;
+  --accent-soft: #f8ece6;
   --on-accent: #ffffff;
 
   /* status */
-  --ok: #2b7149;
-  --ok-soft: #e3f1e8;
-  --warn: #8a5a00;
-  --warn-soft: #fbefd5;
-  --info: #2a5d9f;
-  --info-soft: #e3ecf8;
+  --ok: #24663f;
+  --ok-soft: #e6f2ea;
+  --warn: #7f5200;
+  --warn-soft: #fbf0d9;
+  --info: #24548f;
+  --info-soft: #e7eef8;
 
   /* focus */
-  --focus: #ffb000;
+  --focus: #b8661c;
 
   /* type */
   --font-serif: "Source Serif 4 Variable", "Source Serif 4", Georgia, "Times New Roman", serif;
   --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  /* shape and depth */
-  --radius-sm: 6px;
-  --radius: 10px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 2px rgb(27 29 33 / 0.06);
-  --shadow: 0 1px 2px rgb(27 29 33 / 0.05), 0 6px 20px -8px rgb(27 29 33 / 0.12);
+  /* shape and depth (depth is reserved for overlays) */
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --shadow-sm: 0 1px 2px rgb(17 18 20 / 0.05);
+  --shadow: 0 1px 2px rgb(17 18 20 / 0.06), 0 12px 32px -12px rgb(17 18 20 / 0.18);
 
   /* layout */
-  --measure: 68ch;
-  --page-max: 1120px;
+  --measure: 66ch;
+  --page-max: 1200px;
+  --header-h: 4rem;
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #121315;
-  --surface: #181a1d;
-  --surface-2: #1f2226;
-  --border: #2c3036;
-  --border-strong: #3c424a;
-  --ink: #eceae6;
-  --ink-2: #c9c6c0;
-  --muted: #9da3ab;
+  --bg: #0f1012;
+  --surface: #141518;
+  --surface-2: #1a1c20;
+  --surface-3: #22252a;
+  --border: #26292e;
+  --border-strong: #383c43;
+  --ink: #ededeb;
+  --ink-2: #c3c5c8;
+  --muted: #959aa2;
   --accent: #e07a52;
-  --accent-ink: #f0a07f;
-  --accent-soft: #3a2219;
-  --on-accent: #1b1d21;
+  --accent-ink: #ee9a78;
+  --accent-soft: #2e1d16;
+  --on-accent: #111214;
   --ok: #7cc79b;
-  --ok-soft: #1c2f24;
+  --ok-soft: #16261c;
   --warn: #e7b85a;
-  --warn-soft: #33290f;
+  --warn-soft: #2b230e;
   --info: #8fb6ec;
-  --info-soft: #1b2738;
+  --info-soft: #172131;
+  --focus: #f0a35b;
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -10px rgb(0 0 0 / 0.6);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px -12px rgb(0 0 0 / 0.7);
 }

@@ -22,17 +22,17 @@ const mark = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").repla
 <Base title="CV" description={`Curriculum vitae of ${me.name}: education, experience, publications, honors and service.`}>
   <div class="container-page py-10 md:py-14">
     <div data-no-print class="mb-8 flex flex-wrap items-center justify-between gap-3">
-      <p class="eyebrow">Curriculum vitae</p>
+      <p class="subhead">Curriculum vitae</p>
       <div class="flex flex-wrap gap-2">
-        <button type="button" data-print class="btn"><Icon name="printer" />Print or save as PDF</button>
-        <a href={me.documents.research_resume} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="download" />Research CV (PDF)</a>
-        <a href={me.documents.resume} target="_blank" rel="noopener" class="btn"><Icon name="download" />Industry resume (PDF)</a>
+        <button type="button" data-print class="btn"><Icon name="printer" size={15} />Print or save as PDF</button>
+        <a href={me.documents.research_resume} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="download" size={15} />Research CV (PDF)</a>
+        <a href={me.documents.resume} target="_blank" rel="noopener" class="btn"><Icon name="download" size={15} />Industry resume (PDF)</a>
       </div>
     </div>
 
     <article class="cv mx-auto max-w-[52rem]">
       <header class="border-b border-border-strong pb-5">
-        <h1 class="text-4xl font-semibold">{me.name}</h1>
+        <h1 class="text-[2.25rem]">{me.name}</h1>
         <p class="mt-1 text-lg text-ink-2">{me.title}, {me.titleOrg}</p>
         <p class="text-ink-2">{me.role}</p>
         <p class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-ink-2">
@@ -132,8 +132,8 @@ const mark = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").repla
   .cv section { margin-top: 1.75rem; }
   .cv h2 {
     font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--accent-ink);
-    border-bottom: 1px solid var(--border); padding-bottom: 0.35rem; margin-bottom: 0.75rem;
+    text-transform: uppercase; color: var(--ink);
+    border-bottom: 1px solid var(--border-strong); padding-bottom: 0.35rem; margin-bottom: 0.75rem;
   }
   .cv-row { display: grid; grid-template-columns: 1fr auto; gap: 0.25rem 1.5rem; margin-bottom: 0.75rem; }
   .cv-entry { margin-bottom: 0.9rem; display: flow-root; }

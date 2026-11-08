@@ -1,0 +1,437 @@
+---
+/**
+ * Private visitor log (owner only). Static page; the data comes from the Space's GET /v1/visits,
+ * which requires the admin token. Not linked from the site, not in the sitemap, not indexed.
+ */
+import Base from "../../layouts/Base.astro";
+import Icon from "../../components/Icon.astro";
+import { SPACE_API } from "../../lib/api";
+---
+<Base title="Visitor log" noindex track={false} chat={false} description="Private visitor log.">
+  <div class="container-page pb-6 pt-10 md:pt-14" data-audit data-api={SPACE_API}>
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <h1 class="text-[2rem] sm:text-[2.25rem]">Visitor log</h1>
+        <p class="mt-2 text-sm text-muted">Private audit view. Times are shown in your local time zone.</p>
+      </div>
+      <div data-signed-in hidden class="flex flex-wrap items-center gap-2">
+        <label class="sr-only" for="range">Date range</label>
+        <select id="range" data-range class="field w-auto pr-8">
+          <option value="1">Today</option>
+          <option value="7">Last 7 days</option>
+          <option value="30" selected>Last 30 days</option>
+          <option value="90">Last 90 days</option>
+          <option value="365">Last 12 months</option>
+        </select>
+        <button type="button" class="btn" data-refresh><Icon name="rotate-ccw" size={14} />Refresh</button>
+        <button type="button" class="btn" data-export><Icon name="download" size={14} />CSV</button>
+        <button type="button" class="btn btn-ghost" data-signout>Sign out</button>
+      </div>
+    </div>
+
+    <!-- Sign in -->
+    <form data-login class="card mt-8 max-w-md p-6">
+      <h2 class="text-base font-semibold">Sign in</h2>
+      <p class="mt-1 text-sm text-muted">Enter the admin token (<code class="font-mono text-xs">VISITS_ADMIN_TOKEN</code> in the repo's local <code class="font-mono text-xs">.env</code>).</p>
+      <label class="mt-4 block text-sm font-medium" for="token">Admin token</label>
+      <input id="token" name="token" type="password" autocomplete="current-password" required class="field mt-1.5" />
+      <label class="mt-3 flex items-center gap-2 text-sm text-ink-2"><input type="checkbox" name="remember" class="accent-[var(--ink)]" />Remember on this device</label>
+      <p data-login-error class="mt-3 text-sm text-warn" role="alert" hidden></p>
+      <button type="submit" class="btn btn-primary mt-5 w-full">Sign in</button>
+      <p class="mt-4 text-xs text-muted">Signing in also stops this browser from being counted as a visitor.</p>
+    </form>
+
+    <div data-signed-in hidden>
+      <p data-status class="mt-6 text-sm text-muted" aria-live="polite"></p>
+
+      <!-- Filters -->
+      <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3 border-y border-border py-3 text-sm">
+        <label class="relative min-w-[16rem] flex-1">
+          <span class="sr-only">Filter visits</span>
+          <Icon name="search" size={15} class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+          <input type="search" data-q placeholder="Filter by page, network, city, referrer, browser…" class="field pl-9" />
+        </label>
+        <label class="flex items-center gap-2 text-ink-2"><input type="checkbox" data-bots class="accent-[var(--ink)]" />Include bots</label>
+        <label class="flex items-center gap-2 text-ink-2"><input type="checkbox" data-me checked class="accent-[var(--ink)]" />Exclude this browser</label>
+        <button type="button" data-clear-visitor hidden class="badge badge-accent cursor-pointer">Visitor <span data-visitor-label></span> ✕</button>
+      </div>
+
+      <!-- KPIs -->
+      <dl data-kpis class="mt-6 grid grid-cols-2 gap-y-6 md:grid-cols-5"></dl>
+
+      <!-- Daily views -->
+      <section class="mt-10" aria-labelledby="daily-h">
+        <h2 id="daily-h" class="text-sm font-semibold">Page views per day</h2>
+        <div data-chart class="relative mt-3"></div>
+      </section>
+
+      <!-- Breakdowns -->
+      <div class="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-4" data-breakdowns></div>
+
+      <!-- Visitors -->
+      <section class="mt-12" aria-labelledby="visitors-h">
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id="visitors-h" class="text-base font-semibold">Visitors</h2>
+          <p class="text-xs text-muted">Select a visitor to see only their page views.</p>
+        </div>
+        <div class="mt-3 overflow-x-auto">
+          <table class="table min-w-[56rem]">
+            <thead><tr>
+              <th scope="col">Visitor</th><th scope="col">Network</th><th scope="col">Location</th><th scope="col">Device</th>
+              <th scope="col">First seen</th><th scope="col">Last seen</th><th scope="col" class="num">Views</th><th scope="col" class="num">Time</th>
+            </tr></thead>
+            <tbody data-visitors></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Raw log -->
+      <section class="mt-12" aria-labelledby="log-h">
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id="log-h" class="text-base font-semibold">Page views</h2>
+          <p data-log-count class="text-xs text-muted tabular"></p>
+        </div>
+        <div class="mt-3 overflow-x-auto">
+          <table class="table min-w-[64rem]">
+            <thead><tr>
+              <th scope="col">Time</th><th scope="col">Page</th><th scope="col">Visitor</th><th scope="col">Network</th>
+              <th scope="col">Location</th><th scope="col">Referrer</th><th scope="col">Device</th><th scope="col" class="num">Time on page</th>
+            </tr></thead>
+            <tbody data-log></tbody>
+          </table>
+        </div>
+        <div class="mt-4 flex items-center justify-between gap-4 text-sm">
+          <button type="button" class="btn btn-sm" data-prev>Previous</button>
+          <span data-page class="text-muted tabular"></span>
+          <button type="button" class="btn btn-sm" data-next>Next</button>
+        </div>
+      </section>
+
+      <p class="mt-12 text-xs text-muted">
+        Location and network from <a href="https://db-ip.com" target="_blank" rel="noopener">IP Geolocation by DB-IP</a> (CC BY 4.0); city-level accuracy varies.
+        IP addresses are stored with the last block removed. Data: private Hugging Face dataset.
+      </p>
+    </div>
+  </div>
+</Base>
+
+<style is:global>
+  .bar-chart { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 0.5rem; }
+  .bar-y { position: relative; height: 10rem; font-size: 0.6875rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .bar-y span { position: absolute; right: 0; transform: translateY(50%); }
+  .bar-plot { position: relative; height: 10rem; display: flex; align-items: flex-end; gap: 2px; border-bottom: 1px solid var(--border-strong); }
+  .bar-grid { position: absolute; left: 0; right: 0; border-top: 1px dashed var(--border); pointer-events: none; }
+  .bar { position: relative; flex: 1; height: 100%; display: flex; align-items: flex-end; cursor: default; }
+  .bar > i { display: block; width: 100%; background: var(--accent); border-radius: 4px 4px 0 0; min-height: 0; }
+  .bar:hover > i, .bar:focus-visible > i { background: var(--accent-ink); }
+  .bar-x { display: flex; justify-content: space-between; margin-left: 3rem; margin-top: 0.4rem; font-size: 0.6875rem; color: var(--muted); }
+  .tip {
+    position: absolute; z-index: 5; pointer-events: none; white-space: nowrap; transform: translate(-50%, calc(-100% - 8px));
+    padding: 0.35rem 0.55rem; border-radius: var(--radius); background: var(--ink); color: var(--bg); font-size: 0.75rem;
+  }
+  [data-visitors] tr { cursor: pointer; }
+  [data-visitors] tr:hover td { background: var(--surface-2); }
+  [data-visitors] tr[aria-selected="true"] td { background: var(--accent-soft); }
+  .truncate-cell { max-width: 16rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+</style>
+
+<script>
+  type Visit = {
+    ts: string; pv?: string; vid?: string; sid?: string; path?: string; title?: string; ref?: string;
+    lang?: string; tz?: string; screen?: string; new?: boolean; ip?: string; ip_hash?: string; ua?: string; bot?: boolean;
+    browser?: string; os?: string; device?: string; city?: string; region?: string; country?: string; cc?: string;
+    asn?: number; org?: string; ms?: number;
+  };
+
+  const root = document.querySelector<HTMLElement>("[data-audit]")!;
+  const API = new URLSearchParams(location.search).get("visit_api") || root.dataset.api!;
+  const $ = <T extends HTMLElement = HTMLElement>(s: string) => root.querySelector<T>(s)!;
+  const login = $<HTMLFormElement>("[data-login]");
+  const signedIn = [...root.querySelectorAll<HTMLElement>("[data-signed-in]")];
+  const status = $("[data-status]");
+  const PAGE = 50;
+
+  let token = "";
+  let all: Visit[] = [];
+  let visitor: string | null = null;
+  let page = 0;
+
+  const store = {
+    get: () => { try { return sessionStorage.getItem("audit-token") || localStorage.getItem("audit-token") || ""; } catch { return ""; } },
+    set: (t: string, remember: boolean) => { try { (remember ? localStorage : sessionStorage).setItem("audit-token", t); } catch { /* ignore */ } },
+    clear: () => { try { sessionStorage.removeItem("audit-token"); localStorage.removeItem("audit-token"); } catch { /* ignore */ } },
+  };
+  const myVid = (() => { try { return localStorage.getItem("vid"); } catch { return null; } })();
+
+  // ---------------------------------------------------------------- helpers
+  const el = (tag: string, text?: string | number | null, cls?: string) => {
+    const e = document.createElement(tag);
+    if (text !== undefined && text !== null) e.textContent = String(text);
+    if (cls) e.className = cls;
+    return e;
+  };
+  const who = (v: Visit) => v.vid || v.ip_hash || v.ip || "unknown";
+  const short = (id: string) => id.replace(/-/g, "").slice(0, 8);
+  const place = (v: Visit) => [v.city?.replace(/\s*\(.*\)$/, ""), v.region, v.cc].filter(Boolean).join(", ") || "Unknown";
+  const device = (v: Visit) => [v.browser, v.os, v.device].filter(Boolean).join(" · ") || "Unknown";
+  const refHost = (r?: string) => {
+    if (!r) return "Direct";
+    if (r.startsWith("/")) return "Internal";
+    try { return new URL(r).hostname.replace(/^www\./, ""); } catch { return r; }
+  };
+  const dur = (ms?: number) => {
+    if (ms === undefined) return "–";
+    const s = Math.round(ms / 1000);
+    return s < 60 ? `${s}s` : `${Math.floor(s / 60)}m ${String(s % 60).padStart(2, "0")}s`;
+  };
+  const dt = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  const fmt = (ts: string) => dt.format(new Date(ts));
+  const dayKey = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  const countBy = <T,>(xs: T[], key: (x: T) => string) => {
+    const m = new Map<string, number>();
+    for (const x of xs) m.set(key(x), (m.get(key(x)) ?? 0) + 1);
+    return [...m].sort((a, b) => b[1] - a[1]);
+  };
+
+  // ---------------------------------------------------------------- data
+  async function load() {
+    const days = Number($<HTMLSelectElement>("[data-range]").value);
+    status.textContent = "Loading…";
+    try {
+      const r = await fetch(`${API}/v1/visits?days=${days}`, { headers: { Authorization: `Bearer ${token}` } });
+      if (r.status === 401) { signOut("That token was not accepted."); return; }
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const data = await r.json();
+      all = data.visits as Visit[];
+      const notes = [];
+      if (data.storage !== "ok") notes.push(`Storage: ${data.storage}.`);
+      if (!data.geo) notes.push("Location lookup unavailable.");
+      status.textContent = `Updated ${new Date().toLocaleTimeString()}. ${notes.join(" ")}`;
+      page = 0;
+      render();
+    } catch (e) {
+      status.textContent = `Could not load the log (${(e as Error).message}). The API may be waking up; try Refresh in a minute.`;
+    }
+  }
+
+  function filtered() {
+    const q = $<HTMLInputElement>("[data-q]").value.trim().toLowerCase();
+    const bots = $<HTMLInputElement>("[data-bots]").checked;
+    const me = $<HTMLInputElement>("[data-me]").checked;
+    return all.filter((v) =>
+      (bots || !v.bot) &&
+      (!me || !myVid || v.vid !== myVid) &&
+      (!visitor || who(v) === visitor) &&
+      (!q || [v.path, v.title, v.org, v.city, v.region, v.country, v.ref, v.browser, v.os, v.device, v.ip].join(" ").toLowerCase().includes(q)),
+    );
+  }
+
+  // ---------------------------------------------------------------- render
+  function render() {
+    const rows = filtered();
+    renderKpis(rows);
+    renderChart(rows);
+    renderBreakdowns(rows);
+    renderVisitors(rows);
+    renderLog(rows);
+    const chip = $("[data-clear-visitor]");
+    chip.hidden = !visitor;
+    $("[data-visitor-label]").textContent = visitor ? short(visitor) : "";
+  }
+
+  function renderKpis(rows: Visit[]) {
+    const timed = rows.filter((v) => v.ms !== undefined);
+    const avg = timed.length ? timed.reduce((n, v) => n + v.ms!, 0) / timed.length : undefined;
+    const kpis: [string, string][] = [
+      ["Page views", rows.length.toLocaleString()],
+      ["Unique visitors", new Set(rows.map(who)).size.toLocaleString()],
+      ["Sessions", new Set(rows.map((v) => v.sid || who(v))).size.toLocaleString()],
+      ["Avg. time on page", dur(avg)],
+      ["Networks", new Set(rows.map((v) => v.org).filter(Boolean)).size.toLocaleString()],
+    ];
+    const dl = $("[data-kpis]");
+    dl.replaceChildren(...kpis.map(([l, v], i) => {
+      const d = el("div", null, `flex flex-col-reverse justify-end gap-1 ${i ? "md:border-l md:border-border md:pl-6" : ""} ${i % 2 ? "border-l border-border pl-5 md:pl-6" : ""}`);
+      d.append(el("dt", l, "text-sm text-muted"), el("dd", v, "text-[1.625rem] font-semibold leading-none tracking-tight tabular text-ink"));
+      return d;
+    }));
+  }
+
+  function renderChart(rows: Visit[]) {
+    const host = $("[data-chart]");
+    const days = Number($<HTMLSelectElement>("[data-range]").value);
+    const n = Math.max(days, 1);
+    const counts = new Map<string, number>();
+    for (const v of rows) { const k = dayKey(new Date(v.ts)); counts.set(k, (counts.get(k) ?? 0) + 1); }
+    const series: { key: string; date: Date; n: number }[] = [];
+    for (let i = n - 1; i >= 0; i--) {
+      const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - i);
+      series.push({ key: dayKey(d), date: d, n: counts.get(dayKey(d)) ?? 0 });
+    }
+    const max = Math.max(1, ...series.map((s) => s.n));
+    const step = Math.max(1, Math.ceil(max / 4));
+    const top = step * Math.ceil(max / step);
+
+    const wrap = el("div", null, "bar-chart");
+    const y = el("div", null, "bar-y");
+    const plot = el("div", null, "bar-plot");
+    plot.setAttribute("role", "img");
+    plot.setAttribute("aria-label", `Page views per day, ${series[0].key} to ${series[series.length - 1].key}. Peak ${max}.`);
+    for (let t = 0; t <= top; t += step) {
+      const s = el("span", t); s.style.bottom = `${(t / top) * 100}%`; y.append(s);
+      if (t > 0) { const g = el("div", null, "bar-grid"); g.style.bottom = `${(t / top) * 100}%`; plot.append(g); }
+    }
+    const tip = el("div", null, "tip"); tip.hidden = true;
+    const label = new Intl.DateTimeFormat(undefined, { weekday: "short", month: "short", day: "numeric" });
+    for (const s of series) {
+      const b = el("div", null, "bar");
+      b.tabIndex = series.length <= 31 ? 0 : -1;
+      const fill = el("i"); fill.style.height = `${(s.n / top) * 100}%`;
+      b.append(fill);
+      const show = () => {
+        tip.textContent = `${label.format(s.date)}: ${s.n} view${s.n === 1 ? "" : "s"}`;
+        tip.hidden = false;
+        const pr = plot.getBoundingClientRect(), br = b.getBoundingClientRect();
+        tip.style.left = `${br.left - pr.left + br.width / 2 + 48}px`;
+        tip.style.top = `${br.top - pr.top + br.height * (1 - s.n / top)}px`;
+      };
+      b.addEventListener("mouseenter", show);
+      b.addEventListener("focus", show);
+      b.addEventListener("mouseleave", () => (tip.hidden = true));
+      b.addEventListener("blur", () => (tip.hidden = true));
+      plot.append(b);
+    }
+    wrap.append(y, plot);
+    const x = el("div", null, "bar-x");
+    const xl = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
+    x.append(el("span", xl.format(series[0].date)), el("span", n > 1 ? xl.format(series[series.length - 1].date) : "Today"));
+    host.replaceChildren(wrap, x, tip);
+  }
+
+  function renderBreakdowns(rows: Visit[]) {
+    const groups: [string, [string, number][]][] = [
+      ["Top pages", countBy(rows, (v) => (v.path || "/").split("?")[0])],
+      ["Networks", countBy(rows, (v) => v.org || "Unknown")],
+      ["Locations", countBy(rows, (v) => [v.city?.replace(/\s*\(.*\)$/, ""), v.country].filter(Boolean).join(", ") || "Unknown")],
+      ["Referrers", countBy(rows, (v) => refHost(v.ref))],
+    ];
+    $("[data-breakdowns]").replaceChildren(...groups.map(([title, items]) => {
+      const s = el("section");
+      s.append(el("h2", title, "subhead"));
+      const t = el("table", null, "table mt-2");
+      const tb = el("tbody");
+      if (!items.length) { const tr = el("tr"); tr.append(el("td", "No data", "text-muted")); tb.append(tr); }
+      for (const [k, n] of items.slice(0, 8)) {
+        const tr = el("tr");
+        tr.append(el("td", k, "truncate-cell text-ink"), el("td", n, "num text-ink-2"));
+        tb.append(tr);
+      }
+      t.append(tb); s.append(t);
+      return s;
+    }));
+  }
+
+  function renderVisitors(rows: Visit[]) {
+    const by = new Map<string, Visit[]>();
+    for (const v of rows) { const k = who(v); by.set(k, [...(by.get(k) ?? []), v]); }
+    const list = [...by].sort((a, b) => b[1][0].ts.localeCompare(a[1][0].ts)).slice(0, 200);
+    const tb = $("[data-visitors]");
+    tb.replaceChildren(...list.map(([id, vs]) => {
+      const latest = vs[0], first = vs[vs.length - 1];
+      const total = vs.reduce((n, v) => n + (v.ms ?? 0), 0);
+      const tr = el("tr");
+      tr.tabIndex = 0;
+      tr.setAttribute("aria-selected", String(visitor === id));
+      const idCell = el("td", null, "whitespace-nowrap font-mono text-xs");
+      idCell.append(el("span", short(id), "text-ink"));
+      if (latest.bot) idCell.append(el("span", "bot", "badge ml-2"));
+      tr.append(
+        idCell, el("td", latest.org || "Unknown", "truncate-cell text-ink"), el("td", place(latest), "text-ink-2"),
+        el("td", device(latest), "text-ink-2"), el("td", fmt(first.ts), "tabular text-muted"), el("td", fmt(latest.ts), "tabular text-muted"),
+        el("td", vs.length, "num text-ink"), el("td", total ? dur(total) : "–", "num text-ink-2"),
+      );
+      const pick = () => { visitor = visitor === id ? null : id; page = 0; render(); };
+      tr.addEventListener("click", pick);
+      tr.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
+      return tr;
+    }));
+    if (!list.length) { const tr = el("tr"); const td = el("td", "No visits in this range.", "text-muted"); td.setAttribute("colspan", "8"); tr.append(td); tb.append(tr); }
+  }
+
+  function renderLog(rows: Visit[]) {
+    const pages = Math.max(1, Math.ceil(rows.length / PAGE));
+    page = Math.min(page, pages - 1);
+    const slice = rows.slice(page * PAGE, page * PAGE + PAGE);
+    const tb = $("[data-log]");
+    tb.replaceChildren(...slice.map((v) => {
+      const tr = el("tr");
+      const pageCell = el("td", null, "truncate-cell");
+      pageCell.append(el("span", v.path || "/", "text-ink"));
+      pageCell.title = v.title || "";
+      const visCell = el("td", short(who(v)), "whitespace-nowrap font-mono text-xs text-ink-2");
+      if (v.new) visCell.append(el("span", "new", "badge badge-info ml-2"));
+      if (v.bot) visCell.append(el("span", "bot", "badge ml-2"));
+      const ref = el("td", refHost(v.ref), "truncate-cell text-ink-2");
+      ref.title = v.ref || "";
+      tr.append(
+        el("td", fmt(v.ts), "tabular whitespace-nowrap text-muted"), pageCell, visCell,
+        el("td", v.org || "Unknown", "truncate-cell text-ink-2"), el("td", place(v), "text-ink-2"), ref,
+        el("td", device(v), "text-ink-2"), el("td", dur(v.ms), "num text-ink-2"),
+      );
+      return tr;
+    }));
+    if (!slice.length) { const tr = el("tr"); const td = el("td", "No page views match.", "text-muted"); td.setAttribute("colspan", "8"); tr.append(td); tb.append(tr); }
+    $("[data-log-count]").textContent = `${rows.length.toLocaleString()} page views`;
+    $("[data-page]").textContent = `Page ${page + 1} of ${pages}`;
+    $<HTMLButtonElement>("[data-prev]").disabled = page === 0;
+    $<HTMLButtonElement>("[data-next]").disabled = page >= pages - 1;
+  }
+
+  function exportCsv() {
+    const rows = filtered();
+    const cols: (keyof Visit)[] = ["ts", "path", "title", "vid", "sid", "new", "bot", "org", "asn", "city", "region", "country", "ip", "ref", "browser", "os", "device", "screen", "lang", "tz", "ms", "ua"];
+    const esc = (x: unknown) => { const s = x === undefined || x === null ? "" : String(x); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+    const csv = [cols.join(","), ...rows.map((r) => cols.map((c) => esc(r[c])).join(","))].join("\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = `portfolio-visits-${dayKey(new Date())}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+
+  // ---------------------------------------------------------------- session
+  function showApp(on: boolean) {
+    login.hidden = on;
+    signedIn.forEach((e) => (e.hidden = !on));
+  }
+  function signOut(msg?: string) {
+    token = ""; all = []; store.clear(); showApp(false);
+    const err = $("[data-login-error]");
+    err.hidden = !msg; err.textContent = msg ?? "";
+  }
+
+  login.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = new FormData(login);
+    token = String(f.get("token") || "").trim();
+    if (!token) return;
+    store.set(token, f.get("remember") === "on");
+    try { localStorage.setItem("notrack", "1"); } catch { /* ignore */ }
+    login.reset();
+    showApp(true);
+    load();
+  });
+  $("[data-signout]").addEventListener("click", () => signOut());
+  $("[data-refresh]").addEventListener("click", load);
+  $("[data-range]").addEventListener("change", load);
+  $("[data-export]").addEventListener("click", exportCsv);
+  $("[data-q]").addEventListener("input", () => { page = 0; render(); });
+  $("[data-bots]").addEventListener("change", () => { page = 0; render(); });
+  $("[data-me]").addEventListener("change", () => { page = 0; render(); });
+  $("[data-clear-visitor]").addEventListener("click", () => { visitor = null; page = 0; render(); });
+  $("[data-prev]").addEventListener("click", () => { page--; render(); });
+  $("[data-next]").addEventListener("click", () => { page++; render(); });
+
+  token = store.get();
+  if (token) { showApp(true); load(); } else showApp(false);
+</script>

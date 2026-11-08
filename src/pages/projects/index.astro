@@ -19,39 +19,41 @@ for (const p of projects) for (const t of p.data.tags) counts.set(t, (counts.get
 const tags = [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 ---
 <Base title="Projects" description="Agentic systems, medical AI tools and data products, from hackathon builds to production prototypes.">
-  <PageHeader eyebrow="Projects" title="Things I have built"
+  <PageHeader title="Projects"
     lead="Agentic systems, medical AI tools and data products, from hackathon builds to production prototypes. Most are open source.">
-    <div class="mt-6 flex flex-wrap gap-3">
-      <a href={me.links.github!} target="_blank" rel="noopener" class="btn"><Icon brand="github" />GitHub</a>
-      <a href={me.links.huggingface!} target="_blank" rel="noopener" class="btn"><Icon brand="huggingface" />Hugging Face</a>
-    </div>
+    <a href={me.links.github!} target="_blank" rel="noopener" class="btn"><Icon brand="github" size={15} />GitHub</a>
+    <a href={me.links.huggingface!} target="_blank" rel="noopener" class="btn"><Icon brand="huggingface" size={15} />Hugging Face</a>
   </PageHeader>
 
-  <div class="container-page py-8">
-    <div data-tag-filter hidden role="group" aria-label="Filter projects by topic" class="flex flex-wrap gap-2">
-      <button type="button" data-tag="" aria-pressed="true" class="tag-btn">All <span class="text-muted">{projects.length}</span></button>
-      {tags.map(([t, n]) => (
-        <button type="button" data-tag={t} aria-pressed="false" class="tag-btn">{TAG_LABEL[t] ?? t} <span class="text-muted">{n}</span></button>
-      ))}
-    </div>
-    <p class="sr-only" aria-live="polite" data-project-count></p>
+  <div class="border-t border-border">
+    <div class="container-page pb-6 pt-8 lg:pt-10">
+      <div data-tag-filter hidden role="group" aria-label="Filter projects by topic" class="tabs">
+        <button type="button" data-tag="" aria-pressed="true">All <span>{projects.length}</span></button>
+        {tags.map(([t, n]) => (
+          <button type="button" data-tag={t} aria-pressed="false">{TAG_LABEL[t] ?? t} <span>{n}</span></button>
+        ))}
+      </div>
+      <p class="sr-only" aria-live="polite" data-project-count></p>
 
-    <div class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {projects.map((p) => <ProjectCard project={p} />)}
+      <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
     </div>
   </div>
 </Base>
 
 <style>
-  .tag-btn {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    min-height: 2.25rem; padding: 0.25rem 0.85rem; border-radius: 999px;
-    border: 1px solid var(--border-strong); background: var(--surface);
-    font-size: 0.875rem; font-weight: 600; color: var(--ink-2);
+  .tabs { display: flex; gap: 0.25rem 1.25rem; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
+  .tabs button {
+    position: relative; display: inline-flex; align-items: center; gap: 0.35rem;
+    height: 2.5rem; font-size: 0.875rem; font-weight: 500; color: var(--ink-2);
   }
-  .tag-btn:hover { background: var(--surface-2); }
-  .tag-btn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
-  .tag-btn[aria-pressed="true"] span { color: inherit; opacity: 0.75; }
+  .tabs button span { font-size: 0.75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button[aria-pressed="true"] { color: var(--ink); }
+  .tabs button[aria-pressed="true"]::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent);
+  }
 </style>
 
 <script>

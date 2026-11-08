@@ -1,0 +1,21 @@
+---
+/**
+ * Page section: heading rail on the left on desktop (sticky), content on the right.
+ * `stacked` puts the heading above full-width content instead (for wide grids).
+ * Extra heading-side content (e.g. a "View all" link) goes in the `head` slot.
+ */
+interface Props { id: string; title: string; description?: string; stacked?: boolean; class?: string }
+const { id, title, description, stacked = false, class: cls } = Astro.props;
+---
+<section aria-labelledby={id} class:list={["section", cls]}>
+  <div class:list={["container-page section-grid", stacked && "is-stacked"]}>
+    <div class="section-head">
+      <div>
+        <h2 id={id} class="section-title">{title}</h2>
+        {description && <p class="section-desc">{description}</p>}
+      </div>
+      <slot name="head" />
+    </div>
+    <div class="min-w-0"><slot /></div>
+  </div>
+</section>

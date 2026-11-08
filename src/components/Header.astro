@@ -3,42 +3,38 @@ import Icon from "./Icon.astro";
 import { NAV, isActive } from "../lib/nav";
 const path = Astro.url.pathname;
 ---
-<header data-site-header class="sticky top-0 z-40 border-b border-border bg-bg/85 backdrop-blur supports-[backdrop-filter]:bg-bg/70">
-  <div class="container-page flex h-16 items-center justify-between gap-4">
-    <a href="/" class="group flex items-baseline gap-2 no-underline" aria-label="Nagur Shareef Shaik, home">
-      <span class="font-serif text-lg font-semibold text-ink group-hover:text-accent-ink">Nagur Shareef Shaik</span>
+<header data-site-header class="sticky top-0 z-40 border-b border-border bg-bg/90 backdrop-blur-md supports-[backdrop-filter]:bg-bg/80">
+  <div class="container-page flex h-[var(--header-h)] items-center gap-6">
+    <a href="/" class="flex shrink-0 items-center gap-2.5 no-underline" aria-label="Nagur Shareef Shaik, home">
+      <span aria-hidden="true" class="inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius)] bg-ink font-serif text-[0.9375rem] font-semibold text-bg">NS</span>
+      <span class="font-display text-[1.0625rem] font-semibold text-ink">Nagur Shareef Shaik</span>
     </a>
 
-    <nav aria-label="Primary" class="hidden lg:block">
-      <ul class="flex items-center gap-1">
+    <nav aria-label="Primary" class="hidden flex-1 lg:block">
+      <ul class="flex h-[var(--header-h)] items-stretch gap-1">
         {NAV.map((item) => {
           const active = isActive(path, item.href);
           return (
-            <li>
-              <a href={item.href} aria-current={active ? "page" : undefined}
-                 class:list={["rounded-md px-3 py-2 text-[0.9375rem] font-medium no-underline transition-colors",
-                   active ? "text-accent-ink bg-accent-soft" : "text-ink-2 hover:text-ink hover:bg-surface-2"]}>
-                {item.label}
-              </a>
+            <li class="flex">
+              <a href={item.href} aria-current={active ? "page" : undefined} class="nav-link">{item.label}</a>
             </li>
           );
         })}
       </ul>
     </nav>
 
-    <div class="flex items-center gap-1">
-      <button type="button" data-cmdk-open aria-label="Search (Ctrl or Command + K)"
-              class="inline-flex h-10 items-center gap-2 rounded-md px-2.5 text-ink-2 hover:bg-surface-2 hover:text-ink xl:border xl:border-border xl:bg-surface xl:pr-2">
-        <Icon name="search" />
-        <span class="hidden text-sm text-muted xl:inline">Search</span>
-        <kbd class="hidden rounded border border-border px-1.5 text-xs font-sans text-muted xl:inline" data-cmdk-hint>Ctrl K</kbd>
+    <div class="ml-auto flex items-center gap-1">
+      <button type="button" data-cmdk-open aria-label="Search the site (Ctrl or Command + K)"
+              class="search-trigger">
+        <Icon name="search" size={16} />
+        <span class="hidden xl:inline">Search</span>
+        <kbd data-cmdk-hint class="hidden xl:inline-flex">Ctrl K</kbd>
       </button>
-      <button type="button" data-theme-toggle class="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink-2 hover:bg-surface-2 hover:text-ink"
-              aria-label="Toggle dark mode" aria-pressed="false">
-        <span data-icon-light><Icon name="moon" /></span>
-        <span data-icon-dark hidden><Icon name="sun" /></span>
+      <button type="button" data-theme-toggle class="icon-btn" aria-label="Toggle dark mode" aria-pressed="false">
+        <span data-icon-light><Icon name="moon" size={17} /></span>
+        <span data-icon-dark hidden><Icon name="sun" size={17} /></span>
       </button>
-      <button type="button" data-menu-button class="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink-2 hover:bg-surface-2 lg:hidden"
+      <button type="button" data-menu-button class="icon-btn lg:hidden"
               aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <span data-open-icon><Icon name="menu" size={20} /></span>
         <span data-close-icon hidden><Icon name="x" size={20} /></span>
@@ -47,18 +43,54 @@ const path = Astro.url.pathname;
   </div>
 
   <nav id="mobile-menu" aria-label="Primary" hidden class="border-t border-border bg-bg lg:hidden">
-    <ul class="container-page grid gap-1 py-3">
+    <ul class="container-page grid py-2">
       {NAV.map((item) => (
         <li>
-          <a href={item.href} aria-current={isActive(path, item.href) ? "page" : undefined}
-             class="block rounded-md px-3 py-2.5 font-medium text-ink-2 no-underline hover:bg-surface-2 aria-[current=page]:text-accent-ink aria-[current=page]:bg-accent-soft">
-            {item.label}
-          </a>
+          <a href={item.href} aria-current={isActive(path, item.href) ? "page" : undefined} class="mobile-link">{item.label}</a>
         </li>
       ))}
     </ul>
   </nav>
 </header>
+
+<style>
+  .nav-link {
+    position: relative; display: inline-flex; align-items: center; padding-inline: 0.7rem;
+    font-size: 0.875rem; font-weight: 500; color: var(--ink-2); text-decoration: none;
+  }
+  .nav-link:hover { color: var(--ink); }
+  .nav-link[aria-current="page"] { color: var(--ink); }
+  .nav-link[aria-current="page"]::after {
+    content: ""; position: absolute; left: 0.7rem; right: 0.7rem; bottom: -1px; height: 2px;
+    background: var(--accent); border-radius: 2px 2px 0 0;
+  }
+  .icon-btn {
+    display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem;
+    border-radius: var(--radius); color: var(--ink-2);
+  }
+  .icon-btn:hover { background: var(--surface-2); color: var(--ink); }
+  @media (min-width: 1024px) { [data-menu-button] { display: none; } }
+  .search-trigger {
+    display: inline-flex; align-items: center; gap: 0.5rem; height: 2.25rem; padding-inline: 0.6rem;
+    border-radius: var(--radius); color: var(--ink-2); font-size: 0.875rem;
+  }
+  .search-trigger:hover { background: var(--surface-2); color: var(--ink); }
+  @media (min-width: 1280px) {
+    .search-trigger { width: 13rem; padding-inline: 0.7rem 0.4rem; border: 1px solid var(--border); background: var(--surface-2); color: var(--muted); }
+    .search-trigger:hover { border-color: var(--border-strong); background: var(--surface-2); color: var(--ink-2); }
+    .search-trigger kbd { margin-left: auto; }
+  }
+  .search-trigger kbd {
+    align-items: center; height: 1.375rem; padding-inline: 0.35rem; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); background: var(--surface); font-size: 0.6875rem; color: var(--muted);
+  }
+  .mobile-link {
+    display: block; padding: 0.7rem 0; font-weight: 500; color: var(--ink-2); text-decoration: none;
+    border-bottom: 1px solid var(--border);
+  }
+  li:last-child > .mobile-link { border-bottom: 0; }
+  .mobile-link[aria-current="page"] { color: var(--ink); box-shadow: inset 2px 0 0 var(--accent); padding-left: 0.75rem; }
+</style>
 
 <script>
   const root = document.documentElement;
@@ -84,7 +116,7 @@ const path = Astro.url.pathname;
     if (hint) hint.textContent = "⌘K";
   }
 
-  const menuBtn =document.querySelector<HTMLButtonElement>("[data-menu-button]");
+  const menuBtn = document.querySelector<HTMLButtonElement>("[data-menu-button]");
   const menu = document.getElementById("mobile-menu");
   const setMenu = (open: boolean) => {
     if (!menuBtn || !menu) return;

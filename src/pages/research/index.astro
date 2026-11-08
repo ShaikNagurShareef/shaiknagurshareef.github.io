@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import PersonCard from "../../components/PersonCard.astro";
+import Section from "../../components/Section.astro";
 import Icon from "../../components/Icon.astro";
 import { getCollection, getEntry } from "astro:content";
 import { getPublications } from "../../lib/pubs";
@@ -24,69 +25,50 @@ const ALIASES: Record<string, string[]> = {
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9²]+/g, "");
 const papersFor = (method: string) =>
   pubs.filter((p) => [method, ...(ALIASES[method] ?? [])].some((m) => norm(p.data.title).includes(norm(m))));
+const shortVenue = (v: string) => v.replace(/^Proceedings of (the )?/i, "");
 const stages = diss.stages.map((s) => ({
   ...s,
   methods: s.methods.map((m) => ({ name: m, papers: papersFor(m) })),
 }));
 ---
 <Base title="Research" description={diss.summary}>
-  <PageHeader eyebrow="Research" title="From perception to clinical reasoning" lead={diss.summary} />
+  <PageHeader title="Research"
+    lead="Multimodal medical AI that reasons the way clinicians read a study: locate the evidence, characterize it, weigh it against context, compare it with prior exams, and commit to a claim that can be checked against the image." />
 
-  <!-- Dissertation -->
-  <section aria-labelledby="diss-h" class="container-page py-12">
-    <div class="card grid gap-8 p-6 md:grid-cols-[1.6fr_1fr] md:p-8">
-      <div>
-        <p class="eyebrow">Ph.D. dissertation</p>
-        <h2 id="diss-h" class="mt-2 text-2xl font-semibold sm:text-[1.75rem]">{diss.title}</h2>
-        <dl class="mt-5 grid gap-2 text-[0.9375rem] sm:grid-cols-[7rem_1fr]">
-          <dt class="text-muted">Status</dt><dd class="text-ink-2">{diss.status}</dd>
-          <dt class="text-muted">Advisor</dt><dd class="text-ink-2">Dr. {diss.advisor}</dd>
-          <dt class="text-muted">Institution</dt><dd class="text-ink-2">Georgia State University, Department of Computer Science</dd>
-        </dl>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a href={me.documents.research_statement} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="file-text" />Research statement</a>
-          <a href="/publications/" class="btn">Publications</a>
-        </div>
-      </div>
-      <dl class="grid grid-cols-3 gap-3 self-start md:grid-cols-1">
-        {[
-          { v: diss.scale.domains, l: "clinical domains" },
-          { v: diss.scale.benchmarks, l: "benchmarks" },
-          { v: diss.scale.architectures, l: "architectures" },
-        ].map((s) => (
-          <div class="rounded-[var(--radius)] bg-surface-2 p-4">
-            <dt class="text-sm text-muted">{s.l}</dt>
-            <dd class="font-serif text-3xl font-semibold text-ink">{s.v}</dd>
-          </div>
-        ))}
-      </dl>
+  <Section id="diss-h" title="Ph.D. dissertation" description="Georgia State University, Department of Computer Science.">
+    <h3 class="font-display text-[1.5rem] leading-snug sm:text-[1.75rem]">{diss.title}</h3>
+    <dl class="mt-6 grid gap-x-8 gap-y-3 border-t border-border pt-5 text-[0.9375rem] sm:grid-cols-[8rem_1fr]">
+      <dt class="text-muted">Status</dt><dd class="text-ink">{diss.status}</dd>
+      <dt class="text-muted">Advisor</dt><dd class="text-ink">Dr. {diss.advisor}</dd>
+      <dt class="text-muted">Scope</dt>
+      <dd class="text-ink tabular">{diss.scale.domains} clinical domains · {diss.scale.benchmarks} benchmarks · {diss.scale.architectures} architectures</dd>
+    </dl>
+    <p class="mt-6 max-w-[66ch] text-[0.9375rem] leading-relaxed text-ink-2">{diss.summary}</p>
+    <div class="mt-6 flex flex-wrap gap-2">
+      <a href={me.documents.research_statement} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="file-text" size={15} />Research statement</a>
+      <a href="#committee-h" class="btn">Committee</a>
     </div>
-  </section>
+  </Section>
 
-  <!-- Pathway, with papers per method -->
-  <section aria-labelledby="path-h" class="container-page py-8">
-    <p class="eyebrow">The five-stage interpretation pathway</p>
-    <h2 id="path-h" class="mt-2 text-3xl font-semibold">One question per stage</h2>
-    <ol class="mt-8 grid gap-4">
+  <Section id="path-h" title="Interpretation pathway" description="Five stages, one question each. Every method below maps to a dissertation chapter and its papers.">
+    <ol class="border-t border-border-strong">
       {stages.map((s) => (
-        <li class="card grid gap-4 p-5 md:grid-cols-[14rem_1fr] md:p-6" id={`stage-${s.id}`}>
-          <div class="flex items-start gap-3">
-            <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent font-bold text-on-accent" aria-hidden="true">{s.n}</span>
-            <div>
-              <h3 class="text-xl font-semibold"><span class="sr-only">Stage {s.n}: </span>{s.name}</h3>
-              <p class="mt-1 text-sm text-ink-2">{s.question}</p>
-            </div>
+        <li class="grid gap-4 border-b border-border py-6 md:grid-cols-[13rem_1fr] md:gap-8" id={`stage-${s.id}`}>
+          <div>
+            <span class="font-mono text-xs tabular text-accent-ink" aria-hidden="true">{String(s.n).padStart(2, "0")}</span>
+            <h3 class="mt-1 text-base font-semibold"><span class="sr-only">Stage {s.n}: </span>{s.name}</h3>
+            <p class="mt-1 text-sm leading-snug text-muted">{s.question}</p>
           </div>
-          <ul class="grid gap-3">
+          <ul class="grid gap-4">
             {s.methods.map((m) => (
               <li>
-                <p class="font-semibold text-ink">{m.name}</p>
+                <p class="text-sm font-semibold text-ink">{m.name}</p>
                 {m.papers.length > 0 ? (
-                  <ul class="mt-1 grid gap-1">
+                  <ul class="mt-1 grid gap-1.5">
                     {m.papers.map((p) => (
-                      <li class="text-sm text-ink-2">
+                      <li class="text-sm leading-relaxed text-ink-2">
                         {p.data.url ? <a href={p.data.url} target="_blank" rel="noopener">{p.data.title}</a> : <span>{p.data.title}</span>}
-                        <span class="text-muted"> · {p.data.status === "published" ? p.data.venue.replace(/^Proceedings of (the )?/i, "") : STATUS_LABEL[p.data.status]}</span>
+                        <span class="text-muted"> · {p.data.status === "published" ? shortVenue(p.data.venue) : STATUS_LABEL[p.data.status]}</span>
                       </li>
                     ))}
                   </ul>
@@ -99,54 +81,40 @@ const stages = diss.stages.map((s) => ({
         </li>
       ))}
     </ol>
-  </section>
+  </Section>
 
-  <!-- Themes -->
-  <section aria-labelledby="themes-h" class="container-page py-12">
-    <p class="eyebrow">Threads that run through the work</p>
-    <h2 id="themes-h" class="mt-2 text-3xl font-semibold">Research themes</h2>
-    <div class="mt-6 grid gap-4 md:grid-cols-3">
+  <Section id="themes-h" title="Research themes" description="Threads that run through the work.">
+    <div class="grid gap-8 md:grid-cols-3 md:gap-6">
       {themes.map((t) => (
-        <article class="card p-5">
-          <h3 class="text-lg font-semibold">{t.title}</h3>
-          <p class="mt-2 text-[0.9375rem] text-ink-2">{t.text}</p>
+        <article class="border-t-2 border-ink pt-4">
+          <h3 class="text-[0.9375rem] font-semibold">{t.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-2">{t.text}</p>
         </article>
       ))}
     </div>
-  </section>
+  </Section>
 
-  <!-- Committee -->
-  <section aria-labelledby="committee-h" class="container-page py-8">
-    <p class="eyebrow">Dissertation committee</p>
-    <h2 id="committee-h" class="mt-2 text-3xl font-semibold">Committee</h2>
-    <div class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+  <Section id="committee-h" title="Dissertation committee">
+    <div class="grid gap-x-8 gap-y-8 sm:grid-cols-2 xl:grid-cols-3">
       {committee.map((p) => <PersonCard person={p} />)}
     </div>
-  </section>
+  </Section>
 
-  <!-- M.S. thesis -->
-  <section aria-labelledby="thesis-h" class="container-page py-12">
-    <div class="card p-6 md:p-8">
-      <p class="eyebrow">M.S. thesis · {thesis.year}</p>
-      <h2 id="thesis-h" class="mt-2 text-2xl font-semibold">{thesis.title}</h2>
-      <p class="mt-1 text-sm text-muted">Advisor: Dr. {thesis.advisor} · Georgia State University</p>
-      <p class="mt-4 text-ink-2 prose-measure">{thesis.summary}</p>
-      <div class="mt-5 flex flex-wrap gap-3">
-        {thesis.links.map((l, i) => (
-          <a href={l.url} target="_blank" rel="noopener" class:list={["btn", i === 0 && "btn-primary"]}>
-            <Icon name={i === 0 ? "file-text" : "arrow-up-right"} />{l.label}
-          </a>
-        ))}
-      </div>
+  <Section id="thesis-h" title={`M.S. thesis, ${thesis.year}`} description={`Advisor: Dr. ${thesis.advisor}. Georgia State University.`}>
+    <h3 class="font-display text-[1.375rem] leading-snug">{thesis.title}</h3>
+    <p class="mt-4 max-w-[66ch] text-[0.9375rem] leading-relaxed text-ink-2">{thesis.summary}</p>
+    <div class="mt-6 flex flex-wrap gap-2">
+      {thesis.links.map((l, i) => (
+        <a href={l.url} target="_blank" rel="noopener" class:list={["btn", i === 0 && "btn-primary"]}>
+          <Icon name={i === 0 ? "file-text" : "arrow-up-right"} size={15} />{l.label}
+        </a>
+      ))}
     </div>
-  </section>
+  </Section>
 
-  <!-- Collaborators -->
-  <section aria-labelledby="collab-h" class="container-page py-8">
-    <p class="eyebrow">People I work with</p>
-    <h2 id="collab-h" class="mt-2 text-3xl font-semibold">Research collaborators</h2>
-    <div class="mt-6 grid gap-4 md:grid-cols-2">
+  <Section id="collab-h" title="Collaborators">
+    <div class="grid gap-x-8 gap-y-8 sm:grid-cols-2">
       {collaborators.map((p) => <PersonCard person={p} />)}
     </div>
-  </section>
+  </Section>
 </Base>

@@ -14,8 +14,28 @@ const published = pubs.filter((p) => p.data.status === "published");
 const years = [...new Set(published.map((p) => p.data.year ?? 0))].sort((a, b) => b - a);
 const allYears = [...new Set(pubs.map((p) => p.data.year).filter(Boolean))].sort((a, b) => b! - a!);
 const kinds = [...new Set(pubs.map((p) => p.data.kind))];
-const statuses = [...new Set(pubs.map((p) => p.data.status))];
+const STATUS_ORDER = ["published", "under-review", "submitted", "in-preparation"];
+const statuses = [...new Set(pubs.map((p) => p.data.status))].sort((a, b) => STATUS_ORDER.indexOf(a) - STATUS_ORDER.indexOf(b));
 const orals = published.filter((p) => p.data.presentation === "oral").length;
+const count = (f: (p: (typeof pubs)[number]) => boolean) => pubs.filter(f).length;
+const facets = [
+  {
+    name: "status", label: "Status",
+    options: [
+      ...statuses.map((s) => ({ value: s, label: STATUS_LABEL[s], n: count((p) => p.data.status === s) })),
+      { value: "oral", label: "Oral presentation", n: orals },
+    ],
+  },
+  { name: "kind", label: "Type", options: kinds.map((k) => ({ value: k, label: KIND_LABEL[k], n: count((p) => p.data.kind === k) })) },
+  { name: "year", label: "Year", options: allYears.map((y) => ({ value: String(y), label: String(y), n: count((p) => p.data.year === y) })) },
+];
+const figures = [
+  { value: published.length, label: "Peer-reviewed (listed)" },
+  { value: orals, label: "Oral presentations" },
+  { value: inReview.length, label: "In review" },
+  { value: me.stats.citations, label: `Citations (${me.stats.source})` },
+  { value: me.stats.h_index, label: "h-index" },
+];
 
 const site = Astro.site!.toString().replace(/\/$/, "");
 const jsonLd = published.map((p) => ({
@@ -33,81 +53,119 @@ const jsonLd = published.map((p) => ({
 }));
 ---
 <Base title="Publications" description={`${published.length} peer-reviewed papers and ${inReview.length} manuscripts in review on multimodal medical AI, report generation and vision-language models.`} jsonLd={jsonLd}>
-  <PageHeader eyebrow="Publications" title="Papers and manuscripts"
-    lead={`${published.length} peer-reviewed papers listed here (${orals} oral presentations) and ${inReview.length} manuscripts in review. Google Scholar counts ${me.stats.papers} papers, ${me.stats.citations} citations and an h-index of ${me.stats.h_index}.`}>
-    <div class="mt-6 flex flex-wrap gap-3">
-      <a href={me.links.scholar!} target="_blank" rel="noopener" class="btn"><Icon brand="googlescholar" />Google Scholar</a>
-      <a href="/publications.bib" class="btn" download><Icon name="download" />All BibTeX (.bib)</a>
-    </div>
+  <PageHeader title="Publications"
+    lead={`Peer-reviewed papers and manuscripts in review on multimodal medical AI, radiology report generation and vision-language models.`}>
+    <a href={me.links.scholar!} target="_blank" rel="noopener" class="btn"><Icon name="arrow-up-right" size={15} />Google Scholar</a>
+    <a href="/publications.bib" class="btn" download><Icon name="download" size={15} />BibTeX (.bib)</a>
+    <Fragment slot="meta">
+      <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
+        {figures.map((f) => (
+          <div class="flex flex-col-reverse justify-end">
+            <dt class="text-xs text-muted">{f.label}</dt>
+            <dd class="text-xl font-semibold tabular text-ink">{f.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </Fragment>
   </PageHeader>
 
-  <div class="container-page py-8">
-    <!-- Filters (progressive enhancement: without JS everything is listed) -->
-    <form data-pub-filters role="search" aria-label="Filter publications" class="card z-10 grid grid-cols-3 gap-3 p-3 sm:sticky sm:top-[4.5rem] sm:grid-cols-[1fr_auto_auto_auto] sm:items-end" hidden>
-      <label class="col-span-3 grid gap-1 text-sm sm:col-span-1">
-        <span class="font-semibold text-ink-2">Search</span>
-        <span class="relative">
-          <Icon name="search" size={16} class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
-          <input name="q" type="search" placeholder="Title, co-author, venue…" autocomplete="off"
-                 class="h-10 w-full rounded-[var(--radius)] border border-border-strong bg-surface pl-9 pr-3 text-[0.9375rem] text-ink placeholder:text-muted" />
-        </span>
-      </label>
-      <label class="grid min-w-0 gap-1 text-sm">
-        <span class="font-semibold text-ink-2">Year</span>
-        <select name="year" class="h-10 w-full min-w-0 rounded-[var(--radius)] border border-border-strong bg-surface px-2 text-ink">
-          <option value="">All years</option>
-          {allYears.map((y) => <option value={y}>{y}</option>)}
-        </select>
-      </label>
-      <label class="grid min-w-0 gap-1 text-sm">
-        <span class="font-semibold text-ink-2">Type</span>
-        <select name="kind" class="h-10 w-full min-w-0 rounded-[var(--radius)] border border-border-strong bg-surface px-2 text-ink">
-          <option value="">All types</option>
-          {kinds.map((k) => <option value={k}>{KIND_LABEL[k]}</option>)}
-        </select>
-      </label>
-      <label class="grid min-w-0 gap-1 text-sm">
-        <span class="font-semibold text-ink-2">Status</span>
-        <select name="status" class="h-10 w-full min-w-0 rounded-[var(--radius)] border border-border-strong bg-surface px-2 text-ink">
-          <option value="">Any status</option>
-          {statuses.map((s) => <option value={s}>{STATUS_LABEL[s]}</option>)}
-          <option value="oral">Oral presentations</option>
-        </select>
-      </label>
-      <div class="col-span-3 flex items-center justify-between gap-3 sm:col-span-4">
-        <p class="text-sm text-muted" data-pub-count aria-live="polite"></p>
-        <button type="reset" class="text-sm font-semibold text-accent-ink hover:underline">Clear filters</button>
-      </div>
-    </form>
+  <div class="border-t border-border">
+    <div class="container-page grid gap-8 py-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16 lg:py-14">
+      <!-- Filters (progressive enhancement: without JS everything is listed) -->
+      <form data-pub-filters role="search" aria-label="Filter publications" hidden
+            class="lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:self-start">
+        <label class="relative block">
+          <span class="sr-only">Search publications</span>
+          <Icon name="search" size={15} class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+          <input name="q" type="search" placeholder="Search publications" autocomplete="off" class="field pl-9" />
+        </label>
+        <div class="mt-3 lg:hidden">
+          <button type="button" class="btn btn-sm" data-filters-toggle aria-expanded="false" aria-controls="pub-facets">
+            <Icon name="sliders-horizontal" size={14} />Filters<span data-active-count class="text-muted"></span>
+          </button>
+        </div>
+        <div id="pub-facets" data-facets class="facets">
+          {facets.map((f) => (
+            <fieldset>
+              <legend class="subhead">{f.label}</legend>
+              <div class="facet-options">
+                <label><input type="radio" name={f.name} value="" checked /><span>All</span><span class="n">{pubs.length}</span></label>
+                {f.options.map((o) => (
+                  <label><input type="radio" name={f.name} value={o.value} /><span>{o.label}</span><span class="n">{o.n}</span></label>
+                ))}
+              </div>
+            </fieldset>
+          ))}
+          <button type="reset" class="mt-5 text-sm font-medium text-ink-2 hover:text-accent-ink">Clear filters</button>
+        </div>
+      </form>
 
-    <section data-pub-group aria-labelledby="review-h" class="mt-10">
-      <h2 id="review-h" class="flex items-baseline gap-3 border-b border-border pb-2 text-2xl font-semibold">
-        In review <span class="font-sans text-sm font-medium text-muted" data-group-count>{inReview.length}</span>
-      </h2>
-      <div class="divide-y divide-border">
-        {inReview.map((p) => <PubItem pub={p} bibtex={p.bibtex} />)}
-      </div>
-    </section>
+      <div class="min-w-0">
+        <p class="text-sm text-muted tabular" data-pub-count aria-live="polite"></p>
 
-    {years.map((y) => {
-      const items = published.filter((p) => (p.data.year ?? 0) === y);
-      return (
-        <section data-pub-group aria-labelledby={`y-${y}`} class="mt-10">
-          <h2 id={`y-${y}`} class="flex items-baseline gap-3 border-b border-border pb-2 text-2xl font-semibold">
-            {y || "Undated"} <span class="font-sans text-sm font-medium text-muted" data-group-count>{items.length}</span>
-          </h2>
-          <div class="divide-y divide-border">
-            {items.map((p) => <PubItem pub={p} bibtex={p.bibtex} />)}
+        <section data-pub-group aria-labelledby="review-h" class="mt-4 first:mt-0">
+          <h2 id="review-h" class="pub-group-h">In review <span data-group-count>{inReview.length}</span></h2>
+          <div class="rows">
+            {inReview.map((p) => <PubItem pub={p} bibtex={p.bibtex} />)}
           </div>
         </section>
-      );
-    })}
 
-    <p data-pub-empty hidden class="mt-10 rounded-[var(--radius)] border border-dashed border-border-strong p-8 text-center text-muted">
-      No publications match these filters.
-    </p>
+        {years.map((y) => {
+          const items = published.filter((p) => (p.data.year ?? 0) === y);
+          return (
+            <section data-pub-group aria-labelledby={`y-${y}`} class="mt-10">
+              <h2 id={`y-${y}`} class="pub-group-h">{y || "Undated"} <span data-group-count>{items.length}</span></h2>
+              <div class="rows">
+                {items.map((p) => <PubItem pub={p} bibtex={p.bibtex} />)}
+              </div>
+            </section>
+          );
+        })}
+
+        <div data-pub-empty hidden class="mt-6 rounded-[var(--radius-lg)] border border-dashed border-border-strong p-10 text-center">
+          <p class="font-medium text-ink">No publications match these filters.</p>
+          <button type="button" data-clear class="mt-2 text-sm font-medium text-accent-ink hover:underline">Clear filters</button>
+        </div>
+      </div>
+    </div>
   </div>
 </Base>
+
+<style>
+  .pub-group-h {
+    position: sticky; top: var(--header-h); z-index: 5; display: flex; align-items: baseline; gap: 0.6rem;
+    padding: 0.6rem 0; background: var(--bg); border-bottom: 1px solid var(--border-strong);
+    font-size: 1rem; font-weight: 600;
+  }
+  .pub-group-h span { font-size: 0.8125rem; font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .facets fieldset { margin-top: 1.5rem; }
+  .facets legend { margin-bottom: 0.5rem; }
+  .facet-options { display: flex; flex-wrap: wrap; gap: 0.375rem; }
+  .facet-options label {
+    display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;
+    height: 2rem; padding-inline: 0.65rem; border: 1px solid var(--border-strong); border-radius: var(--radius);
+    font-size: 0.8125rem; color: var(--ink-2);
+  }
+  .facet-options input { position: absolute; opacity: 0; pointer-events: none; }
+  .facet-options .n { color: var(--muted); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+  .facet-options label:has(input:checked) { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .facet-options label:has(input:checked) .n { color: inherit; opacity: 0.7; }
+  .facet-options label:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+  @media (max-width: 1023px) {
+    .facets:not([data-open]) { display: none; }
+    .facets { padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  }
+  @media (min-width: 1024px) {
+    .facet-options { display: grid; gap: 0; }
+    .facet-options label {
+      height: 2rem; padding-inline: 0.6rem; border: 0; border-radius: var(--radius); justify-content: space-between;
+      display: grid; grid-template-columns: 1fr auto; font-size: 0.875rem;
+    }
+    .facet-options label:hover { background: var(--surface-2); color: var(--ink); }
+    .facet-options label:has(input:checked) { background: var(--surface-3); color: var(--ink); font-weight: 600; box-shadow: inset 2px 0 0 var(--accent); }
+    .facet-options label:has(input:checked) .n { opacity: 1; color: var(--muted); }
+  }
+</style>
 
 <script>
   const form = document.querySelector<HTMLFormElement>("[data-pub-filters]");
@@ -119,7 +177,17 @@ const jsonLd = published.map((p) => ({
   if (form) {
     form.hidden = false;
     const fields = ["q", "year", "kind", "status"] as const;
-    const get = (n: string) => (form.elements.namedItem(n) as HTMLInputElement | HTMLSelectElement).value.trim();
+    // `q` is a text input; the facets are radio groups (RadioNodeList has the same .value API).
+    const get = (n: string) => ((form.elements.namedItem(n) as HTMLInputElement | RadioNodeList | null)?.value ?? "").trim();
+    const activeEl = document.querySelector<HTMLElement>("[data-active-count]");
+    const facetsEl = document.querySelector<HTMLElement>("[data-facets]");
+    const toggle = document.querySelector<HTMLButtonElement>("[data-filters-toggle]");
+    toggle?.addEventListener("click", () => {
+      const open = !facetsEl?.hasAttribute("data-open");
+      facetsEl?.toggleAttribute("data-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    document.querySelector("[data-clear]")?.addEventListener("click", () => form.reset());
 
     // Restore filters from the URL so filtered views are shareable.
     const params = new URLSearchParams(location.search);
@@ -147,7 +215,10 @@ const jsonLd = published.map((p) => ({
         const c = g.querySelector<HTMLElement>("[data-group-count]");
         if (c) c.textContent = String(n);
       }
-      if (countEl) countEl.textContent = `Showing ${shown} of ${items.length}`;
+      const label = shown === items.length ? `${items.length} publications` : `Showing ${shown} of ${items.length}`;
+      if (countEl) countEl.textContent = label;
+      const active = ["year", "kind", "status"].filter((f) => get(f)).length;
+      if (activeEl) activeEl.textContent = active ? ` (${active})` : "";
       if (empty) empty.hidden = shown !== 0;
 
       const next = new URLSearchParams();

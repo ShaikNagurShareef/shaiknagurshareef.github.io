@@ -5,6 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CommandPalette from "../components/CommandPalette.astro";
 import ChatWidget from "../components/ChatWidget.astro";
+import VisitBeacon from "../components/VisitBeacon.astro";
 
 interface Props {
   title?: string;
@@ -12,10 +13,14 @@ interface Props {
   /** Extra JSON-LD objects for this page (e.g. ScholarlyArticle list). */
   jsonLd?: object[];
   noindex?: boolean;
+  /** Record this page in the visit log (off for the private audit page). */
+  track?: boolean;
+  /** Show the AI assistant button. */
+  chat?: boolean;
 }
 
 const me = (await getEntry("profile", "me"))!.data;
-const { title, description = me.summary, jsonLd = [], noindex = false } = Astro.props;
+const { title, description = me.summary, jsonLd = [], noindex = false, track = true, chat = true } = Astro.props;
 const fullTitle = title ? `${title} · ${me.name}` : `${me.name} · ${me.headline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL("/img/Shareef.png", Astro.site).toString();
@@ -89,8 +94,19 @@ const person = {
     </main>
     <Footer />
     <CommandPalette />
-    <ChatWidget />
+    {chat && <ChatWidget />}
+    {track && <VisitBeacon />}
     <script>
+      // Shared disclosure for "Cite" buttons (BibTeX panel below each publication).
+      document.addEventListener("click", (e) => {
+        const t = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-cite-toggle]");
+        if (!t) return;
+        const panel = document.getElementById(t.getAttribute("aria-controls") ?? "");
+        if (!panel) return;
+        const open = t.getAttribute("aria-expanded") !== "true";
+        t.setAttribute("aria-expanded", String(open));
+        panel.hidden = !open;
+      });
       // Shared copy-to-clipboard for any [data-copy] button (BibTeX, email, ...).
       document.addEventListener("click", async (e) => {
         const btn = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-copy]");

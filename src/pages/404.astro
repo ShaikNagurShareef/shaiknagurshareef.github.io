@@ -2,14 +2,15 @@
 import Base from "../layouts/Base.astro";
 ---
 <Base title="Page not found" noindex>
-  <section class="container-page py-24 text-center">
-    <p class="eyebrow">404</p>
-    <h1 class="mt-3 text-4xl font-semibold">This page doesn't exist</h1>
-    <p class="mx-auto mt-4 max-w-md text-ink-2">The site was reorganized into separate pages. Try the home page or one of the sections below.</p>
-    <div class="mt-8 flex flex-wrap justify-center gap-3">
+  <section class="container-page py-24 md:py-32">
+    <p class="font-mono text-sm text-accent-ink">404</p>
+    <h1 class="mt-3 text-[2.25rem] sm:text-[2.75rem]">Page not found</h1>
+    <p class="mt-4 max-w-[52ch] text-[1.0625rem] text-ink-2">The site was reorganized into separate pages, so older links may point here. Use search (Ctrl K or ⌘K) or start from one of these:</p>
+    <div class="mt-8 flex flex-wrap gap-2">
       <a class="btn btn-primary" href="/">Home</a>
       <a class="btn" href="/research/">Research</a>
       <a class="btn" href="/publications/">Publications</a>
+      <button type="button" class="btn" data-cmdk-open>Search</button>
     </div>
   </section>
 </Base>
