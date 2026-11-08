@@ -1,6 +1,30 @@
 {
-  "summary": "Reviewer for 25+ journals and major conferences (AAAI, MICCAI, NeurIPS, EACL, ISBI), with 60+ papers reviewed across AI/ML, biomedical imaging and computer vision.",
+  "summary": "Reviewer for 25+ journals and major conferences (AAAI, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 60+ papers reviewed across AI/ML, biomedical imaging and computer vision.",
   "conferences": [
+    {
+      "name": "AAAI 2027",
+      "count": null,
+      "url": null,
+      "active": true
+    },
+    {
+      "name": "ICLR 2027",
+      "count": null,
+      "url": null,
+      "active": true
+    },
+    {
+      "name": "EACL 2027",
+      "count": null,
+      "url": null,
+      "active": true
+    },
+    {
+      "name": "NeurIPS 2026 GenAI4Health Workshop",
+      "count": null,
+      "url": null,
+      "active": true
+    },
     {
       "name": "IEEE ISBI 2026",
       "count": 9,

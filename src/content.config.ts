@@ -200,7 +200,10 @@ const service = defineCollection({
   loader: () => [{ id: "service", ...(readJson("content/service.json") as object) }],
   schema: z.object({
     summary: z.string(),
-    conferences: z.array(z.object({ name: z.string(), count: z.number().int(), url: z.string().nullable() })),
+    /** count is null while a reviewing cycle is still active (assignments not final). */
+    conferences: z.array(z.object({
+      name: z.string(), count: z.number().int().nullable(), url: z.string().nullable(), active: z.boolean().optional(),
+    })),
     journals: z.array(z.object({ name: z.string(), count: z.number().int(), url: z.string().nullable() })),
   }),
 });

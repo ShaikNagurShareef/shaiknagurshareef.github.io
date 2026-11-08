@@ -6,6 +6,7 @@ Sources (all relative to the repo root):
   - data/NagurShareefShaik_ResearchStatement.pdf
   - data/{conferences,journals,workshops,under-review}.json
   - content/awards.json (honors, with years)
+  - content/service.json (peer review, including active reviewing roles)
   - selected <section> blocks of index.html
 
 Run from anywhere:  python3 portfolio-chat-api/build_knowledge.py
@@ -35,7 +36,7 @@ PUB_FILES = [
 ]
 SECTIONS = [
     "about", "education", "experience", "skills", "projects", "certifications",
-    "interests", "participations", "services", "team",
+    "interests", "participations", "team",
 ]
 
 
@@ -136,6 +137,20 @@ def awards() -> str:
     return "\n".join(lines)
 
 
+def service() -> str:
+    """Peer review from content/service.json, the same source the website renders."""
+    d = json.loads((ROOT / "content/service.json").read_text())
+    active = [c["name"] for c in d["conferences"] if c.get("active")]
+    done = [f"{c['name']} ({c['count']} papers)" for c in d["conferences"] if c.get("count") is not None]
+    journals = [f"{j['name']} ({j['count']})" for j in d["journals"]]
+    lines = [d["summary"]]
+    if active:
+        lines.append("Currently an active reviewer for: " + ", ".join(active) + ".")
+    lines.append("Completed conference reviewing: " + "; ".join(done) + ".")
+    lines.append("Journal reviewing (papers reviewed): " + "; ".join(journals) + ".")
+    return "\n".join(lines)
+
+
 def main() -> int:
     blocks = ["# Knowledge base: Nagur Shareef Shaik", ""]
     for label, path in PDFS:
@@ -146,6 +161,7 @@ def main() -> int:
 
     blocks += ["## PUBLICATIONS", publications(), ""]
     blocks += ["## HONORS AND AWARDS", awards(), ""]
+    blocks += ["## PEER REVIEW AND SERVICE", service(), ""]
 
     html = (ROOT / "index.html").read_text()
     # Ignore commented-out markup so stale content never leaks into the knowledge base.

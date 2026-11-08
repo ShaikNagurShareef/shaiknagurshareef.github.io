@@ -335,6 +335,12 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 - Best Outgoing Student of CSE, VFSTR University (2020)
 - Academic Excellence Awards (all four years), VFSTR University (2016–2020). Top-5 rank holder in CSE each year.
 
+## PEER REVIEW AND SERVICE
+Reviewer for 25+ journals and major conferences (AAAI, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 60+ papers reviewed across AI/ML, biomedical imaging and computer vision.
+Currently an active reviewer for: AAAI 2027, ICLR 2027, EACL 2027, NeurIPS 2026 GenAI4Health Workshop.
+Completed conference reviewing: IEEE ISBI 2026 (9 papers); AAAI 2026 (4 papers); IEEE ISBI 2025 (9 papers); MICCAI 2025 (3 papers).
+Journal reviewing (papers reviewed): Applied Sciences (MDPI) (2); Artificial Intelligence Review (Springer) (5); BMC Medical Imaging (Springer) (1); BMC Cancer (Springer) (1); Computers in Biology and Medicine (Elsevier) (1); Computer Methods in Biomechanics and Biomedical Engineering: Imaging & Visualization (1); Cognitive Computation (Springer) (1); Diagnostics (MDPI) (3); Evolutionary Intelligence (Springer) (2); IEEE Access (1); IEEE Transactions on Medical Imaging (1); IEEE Transactions on Circuits and Systems for Video Technology (1); International Journal of Data Science and Analytics (Springer) (2); International Journal of Information Management Data Insights (Elsevier) (2); International Journal of Machine Learning and Cybernetics (Springer) (1); Journal of Big Data (Springer) (1); Journal of Ambient Intelligence and Humanized Computing (Springer) (2); Knowledge and Information Systems (Springer) (1); Machine Vision and Applications (Springer) (2); Neural Processing Letters (Springer) (3); Pattern Analysis and Applications (Springer) (1); Scientific Reports (Springer Nature) (6); Sensors (MDPI) (1); Signal, Image and Video Processing (Springer) (5).
+
 ## WEBSITE SECTIONS
 ### ABOUT
 Nagur Shareef
@@ -499,39 +505,6 @@ Participations 🤝
 Participant at the CSAIL Agentic AI Hackathon (https://www.csail.mit.edu/event/agentic-ai-hackathon) hosted by MIT CSAIL, Cambridge, MA - building autonomous agents that plan, use tools, and recover from failure, alongside 35 teams. April 25-26, 2026.
 Participant at the 2026 CSAIL Alliances Annual Meeting (https://cap.csail.mit.edu/members/events/2026-csail-alliances-annual-meeting-0) hosted by MIT CSAIL Alliances at the Stata Center & Schwarzman College of Computing, Cambridge, MA - research updates, student poster sessions, and startup pitches. April 27-29, 2026.
 Participant at the 2nd Agentic AI Summit 2026 (https://rdi.berkeley.edu/events/agentic-ai-summit-2026) hosted by Berkeley RDI, UC Berkeley, CA - 5,000+ attendees, 200+ speakers across 4 stages, and 200+ poster presentations spanning agent frameworks, evaluation, and deployment. August 1-2, 2026.
-
-### SERVICES
-Research Services
-Conference Reviewer
-IEEE International Symposium on Biomedical Imaging (ISBI), 2026 (https://shaiknagurshareef.github.io/data/reviewer/RC_ISBI2026.pdf): 9
-The Fortieth AAAI Conference on Artificial Intelligence, 2026 (https://shaiknagurshareef.github.io/data/reviewer/RC_AAAI2026.png): 4
-IEEE International Symposium on Biomedical Imaging (ISBI), 2025 (https://shaiknagurshareef.github.io/data/reviewer/RC_ISBI2025.pdf): 9
-Medical Image Computing and Computer Assisted Intervention (MICCAI), 2025 (https://shaiknagurshareef.github.io/data/reviewer/RC_MICCAI2025.png): 3
-Journal Reviewer
-Applied Sciences (https://shaiknagurshareef.github.io/data/reviewer/RC_MDPI.pdf), MDPI: 2
-Artificial Intelligence Review (https://shaiknagurshareef.github.io/data/reviewer/RC_AIR.pdf), Springer: 5
-BMC Medical Imaging (https://shaiknagurshareef.github.io/data/reviewer/RC_BMCMI.pdf), Springer: 1
-BMC Cancer (https://shaiknagurshareef.github.io/data/reviewer/RC_BMCC.pdf), Springer: 1
-Computers in Biology and Medicine (https://shaiknagurshareef.github.io/data/reviewer/RC_CBM.pdf), Elsevier: 1
-Computer Methods in Biomechanics and Biomedical Engineering: Imaging & Visualization: 1
-Cognitive Computation (https://shaiknagurshareef.github.io/data/reviewer/RC_CC.pdf), Springer: 1
-Diagnostics (https://shaiknagurshareef.github.io/data/reviewer/RC_MDPI.pdf), MDPI: 3
-Evolutionary Intelligence (https://shaiknagurshareef.github.io/data/reviewer/RC_EI.pdf), Springer: 2
-IEEE Access: 1
-IEEE Transactions on Medical Imaging: 1
-IEEE Transactions on Circuits and Systems for Video Technology: 1
-International Journal of Data Science and Analytics (https://shaiknagurshareef.github.io/data/reviewer/RC_IJDSA.pdf), Springer: 2
-International Journal of Information Management Data Insights (https://shaiknagurshareef.github.io/data/reviewer/RC_JJIMEI.pdf), Elsevier: 2
-International Journal of Machine Learning and Cybernetics (https://shaiknagurshareef.github.io/data/reviewer/RC_IJMLC.pdf), Springer: 1
-Journal of Big Data (https://shaiknagurshareef.github.io/data/reviewer/RC_JBD.pdf), Springer: 1
-Journal of Ambient Intelligence and Humanized Computing, Springer: 2
-Knowledge and Information Systems (https://shaiknagurshareef.github.io/data/reviewer/RC_KIS.pdf), Springer: 1
-Machine Vision and Applications, Springer: 2
-Neural Processing Letters (https://shaiknagurshareef.github.io/data/reviewer/RC_NPL.pdf), Springer: 3
-Pattern Analysis and Applications (https://shaiknagurshareef.github.io/data/reviewer/RC_PAA.pdf), Springer: 1
-Scientific Reports (https://shaiknagurshareef.github.io/data/reviewer/RC_SR.pdf), Springer Nature: 6
-Sensors (https://shaiknagurshareef.github.io/data/reviewer/RC_MDPI.pdf), MDPI: 1
-Signal, Image and Video Processing (https://shaiknagurshareef.github.io/data/reviewer/RC_SIVP.pdf), Springer: 5
 
 ### TEAM
 Research Collaborators

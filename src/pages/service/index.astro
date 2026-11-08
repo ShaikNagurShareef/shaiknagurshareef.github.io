@@ -9,7 +9,9 @@ const service = (await getEntry("service", "service"))!.data;
 const awards = (await getCollection("awards")).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0) || byOrder(a, b));
 const certs = (await getCollection("certifications")).sort(byOrder);
 const events = (await getCollection("participations")).sort((a, b) => b.data.date.localeCompare(a.data.date));
-const total = [...service.conferences, ...service.journals].reduce((n, v) => n + v.count, 0);
+const counted = [...service.conferences, ...service.journals].filter((v) => v.count !== null);
+const total = counted.reduce((n, v) => n + (v.count ?? 0), 0);
+const activeCount = service.conferences.filter((v) => v.active).length;
 const CATEGORY: Record<string, string> = { research: "Research", industry: "Industry", academic: "Academic" };
 ---
 <Base title="Service & honors" description={service.summary}>
@@ -21,7 +23,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
         <p class="eyebrow">Peer review</p>
         <h2 id="review-h" class="mt-2 text-3xl font-semibold">Reviewing</h2>
       </div>
-      <p class="text-sm text-muted">{total} reviews with recorded counts across {service.conferences.length + service.journals.length} venues</p>
+      <p class="text-sm text-muted">{total} completed reviews across {counted.length} venues · {activeCount} active reviewing roles</p>
     </div>
 
     <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_1.6fr]">
@@ -32,7 +34,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
             <li class="card flex items-center justify-between gap-3 px-4 py-3">
               <span class="font-semibold text-ink">{v.name}</span>
               <span class="flex items-center gap-3 text-sm">
-                <span class="text-muted">{v.count} paper{v.count === 1 ? "" : "s"}</span>
+                {v.active ? <span class="chip chip-ok">Active reviewer</span> : <span class="text-muted">{v.count} paper{v.count === 1 ? "" : "s"}</span>}
                 {v.url && <a href={v.url} target="_blank" rel="noopener" class="inline-flex items-center gap-1 font-semibold no-underline hover:underline">Record<Icon name="arrow-up-right" size={13} /><span class="sr-only"> for {v.name}</span></a>}
               </span>
             </li>
