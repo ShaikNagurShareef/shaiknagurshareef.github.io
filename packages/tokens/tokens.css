@@ -44,11 +44,11 @@
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* shape and depth (depth is reserved for overlays) */
-  --radius-sm: 2px;
-  --radius: 2px;
-  --radius-lg: 4px;
-  --shadow-sm: 0 1px 2px rgb(17 18 20 / 0.05);
-  --shadow: 0 1px 2px rgb(17 18 20 / 0.06), 0 12px 32px -12px rgb(17 18 20 / 0.18);
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgb(27 29 33 / 0.06);
+  --shadow: 0 1px 2px rgb(27 29 33 / 0.05), 0 6px 20px -8px rgb(27 29 33 / 0.12);
 
   /* layout */
   --measure: 66ch;

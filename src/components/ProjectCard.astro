@@ -17,7 +17,7 @@ const d = project.data;
   {d.links.length > 0 && (
     <div class="mt-4 flex flex-wrap gap-4 border-t border-border pt-3 text-sm">
       {d.links.map((l) => (
-        <a href={l.url} target="_blank" rel="noopener" class="link-more">
+        <a href={l.url} target="_blank" rel="noopener" class="link-quiet font-semibold">
           {l.label}<span class="sr-only"> for {d.title}</span>
         </a>
       ))}
@@ -26,6 +26,7 @@ const d = project.data;
 </article>
 
 <style>
-  .project { transition: border-color 120ms; }
-  .project:hover { border-color: var(--border-strong); }
+  .project { transition: border-color 120ms, box-shadow 160ms, transform 160ms; }
+  .project:hover { border-color: var(--border-strong); box-shadow: var(--shadow); transform: translateY(-1px); }
+  @media (prefers-reduced-motion: reduce) { .project:hover { transform: none; } }
 </style>

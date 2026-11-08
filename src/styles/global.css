@@ -131,18 +131,19 @@
 
   /* Buttons */
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem;
-    height: 2.75rem; padding-inline: 1.1rem; border-radius: var(--radius);
-    font-size: 0.9375rem; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap;
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 2.5rem; padding: 0.5rem 1rem; border-radius: var(--radius);
+    font-size: 0.9375rem; font-weight: 600; line-height: 1.2; text-decoration: none; white-space: nowrap;
     border: 1px solid var(--border-strong); color: var(--ink); background: var(--surface);
-    transition: background-color 120ms, border-color 120ms, color 120ms;
+    box-shadow: var(--shadow-sm);
+    transition: background-color 120ms, border-color 120ms, color 120ms, box-shadow 120ms;
   }
-  .btn:hover { background: var(--surface-2); border-color: var(--border-strong); }
+  .btn:hover { background: var(--surface-2); text-decoration: none; }
   .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
   .btn-primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: var(--on-accent); }
-  .btn-ghost { border-color: transparent; background: transparent; color: var(--ink-2); }
+  .btn-ghost { border-color: transparent; background: transparent; color: var(--ink-2); box-shadow: none; }
   .btn-ghost:hover { background: var(--surface-2); color: var(--ink); }
-  .btn-sm { height: 2.125rem; padding-inline: 0.7rem; font-size: 0.875rem; gap: 0.35rem; }
+  .btn-sm { min-height: 2rem; padding: 0.3rem 0.7rem; font-size: 0.875rem; gap: 0.35rem; }
 
   /* A text link with a trailing arrow, for "View all" style navigation. */
   .link-more { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.9375rem; font-weight: 600; color: var(--accent-ink); text-decoration: none; }
@@ -170,7 +171,7 @@
 
   /* Form controls */
   .field {
-    height: 2.75rem; width: 100%; padding-inline: 0.85rem; border-radius: var(--radius);
+    height: 2.5rem; width: 100%; padding-inline: 0.85rem; border-radius: var(--radius);
     border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink); font-size: 1rem;
   }
   .field::placeholder { color: var(--muted); }
@@ -194,7 +195,12 @@
     border-radius: 999px; background: var(--ok-soft); color: var(--ok);
   }
 
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
 
   .skip-link {
     position: absolute; left: 0.75rem; top: -3rem; z-index: 100;
