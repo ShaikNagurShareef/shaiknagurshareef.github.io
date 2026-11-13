@@ -2,7 +2,11 @@
 import { STATUS_LABEL, KIND_LABEL } from "../lib/format";
 import Icon from "./Icon.astro";
 interface Props {
-  pub: { id: string; data: { title: string; authors: string; venue: string; year: number | null; kind: string; status: string; presentation: string | null; url: string | null } };
+  pub: { id: string; data: {
+    title: string; authors: string; venue: string; year: number | null; kind: string; status: string;
+    presentation: string | null; url: string | null;
+    links?: { doi: string | null; official: string | null; arxiv: string | null; openreview: string | null };
+  } };
   headingLevel?: "h3" | "h4";
   /** When given, renders a "Cite" disclosure with copyable BibTeX. */
   bibtex?: string;
@@ -16,6 +20,17 @@ const authors = escapeHtml(d.authors).replace(/(Shaik, Nagur Shareef)/, "<span c
 const published = d.status === "published";
 const statusBadge = published ? null : d.status === "in-preparation" ? "badge" : "badge badge-info";
 const search = `${d.title} ${d.authors} ${d.venue} ${d.year ?? ""}`.toLowerCase();
+// Version of record, preprint and open review, in that order; fall back to the single legacy url.
+const L = d.links;
+type PubLink = { href: string; label: string; hint: string; icon?: string; brand?: string };
+const links: PubLink[] = [];
+if (L) {
+  if (L.official) links.push({ href: L.official, label: "Paper", hint: L.doi ? `Published version, DOI ${L.doi}` : "Published version", icon: "file-text" });
+  if (L.arxiv) links.push({ href: L.arxiv, label: "arXiv", hint: `arXiv preprint ${L.arxiv.split("/abs/")[1]}`, brand: "arxiv" });
+  if (L.openreview) links.push({ href: L.openreview, label: "OpenReview", hint: "OpenReview page", icon: "message-square-text" });
+} else if (d.url) {
+  links.push({ href: d.url, label: "Paper", hint: "Paper", icon: "file-text" });
+}
 ---
 <article class="pub py-5" id={pub.id} data-pub data-year={d.year ?? ""} data-kind={d.kind} data-status={d.status}
          data-presentation={d.presentation ?? ""} data-search={search}>
@@ -28,11 +43,11 @@ const search = `${d.title} ${d.authors} ${d.venue} ${d.year ?? ""}`.toLowerCase(
     {statusBadge && <span class={statusBadge}>{STATUS_LABEL[d.status]}</span>}
     {d.presentation === "oral" && <span class="badge badge-accent">Oral</span>}
     <span class="text-muted">{KIND_LABEL[d.kind]}{d.presentation === "poster" ? " · Poster" : ""}</span>
-    {d.url && (
-      <a href={d.url} target="_blank" rel="noopener" class="pub-action">
-        <Icon name="file-text" size={15} />Paper<span class="sr-only">: {d.title}</span>
+    {links.map((l) => (
+      <a href={l.href} target="_blank" rel="noopener" class="pub-action" title={l.hint}>
+        {l.brand ? <Icon brand={l.brand} size={14} /> : <Icon name={l.icon!} size={15} />}{l.label}<span class="sr-only"> ({l.hint}): {d.title}</span>
       </a>
-    )}
+    ))}
     {bibtex && (
       <button type="button" class="pub-action" data-cite-toggle aria-expanded="false" aria-controls={`cite-${pub.id}`}>
         <Icon name="quote" size={15} />Cite<span class="sr-only"> {d.title}</span>

@@ -7,7 +7,7 @@
 interface Props { id: string; title: string; description?: string; stacked?: boolean; class?: string }
 const { id, title, description, stacked = false, class: cls } = Astro.props;
 ---
-<section aria-labelledby={id} class:list={["section", cls]}>
+<section aria-labelledby={id} class:list={["section", cls]} data-reveal>
   <div class:list={["container-page section-grid", stacked && "is-stacked"]}>
     <div class="section-head">
       <div>

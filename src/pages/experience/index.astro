@@ -20,9 +20,10 @@ const skills = (await getCollection("skills")).sort(byOrder);
   </PageHeader>
 
   <Section id="work-h" title="Work">
-    <ol class="rows -mt-6">
-      {jobs.map((j) => (
-        <li class="grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8">
+    <ol class="timeline -mt-6">
+      {jobs.map((j, i) => (
+        <li class:list={["grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8", !j.data.end && "is-current"]} style={`--i:${i}`}>
+          <span class="tl-dot" aria-hidden="true"></span>
           <p class="mono text-muted md:pt-1">
             {range(j.data.start, j.data.end)}
             {!j.data.end && <span class="badge badge-ok ml-2 md:ml-0 md:mt-2 md:flex md:w-fit">Current</span>}
@@ -43,9 +44,10 @@ const skills = (await getCollection("skills")).sort(byOrder);
   </Section>
 
   <Section id="edu-h" title="Education">
-    <ol class="rows -mt-6">
-      {schools.map((s) => (
-        <li class="grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8">
+    <ol class="timeline -mt-6">
+      {schools.map((s, i) => (
+        <li class:list={["grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8", s.data.expected && "is-current"]} style={`--i:${i}`}>
+          <span class="tl-dot" aria-hidden="true"></span>
           <p class="mono text-muted md:pt-1">{range(s.data.start, s.data.end, s.data.expected)}</p>
           <div>
             <h3 class="text-[1.1875rem] font-semibold">{s.data.degree}</h3>
@@ -72,3 +74,28 @@ const skills = (await getCollection("skills")).sort(byOrder);
     </dl>
   </Section>
 </Base>
+
+<style>
+  /* Timeline rail: a line between the date column and the details, one marker per entry. */
+  .timeline { position: relative; }
+  .timeline > li { position: relative; padding-left: 1.75rem; }
+  .timeline > li + li { border-top: 1px solid var(--border); }
+  .timeline > li::before { content: ""; position: absolute; left: 5px; top: 0; bottom: 0; width: 1px; background: var(--border-strong); }
+  .timeline > li:first-child::before { top: 2rem; }
+  .timeline > li:last-child::before { bottom: auto; height: 2rem; }
+  .tl-dot {
+    position: absolute; left: 0; top: 1.85rem; width: 11px; height: 11px; border-radius: 999px;
+    background: var(--bg); border: 2px solid var(--ink-2); box-shadow: 0 0 0 4px var(--bg);
+  }
+  .is-current > .tl-dot { background: var(--ink); border-color: var(--ink); }
+  @media (min-width: 768px) {
+    .timeline > li { padding-left: 0; }
+    .timeline > li::before { left: calc(10rem + 1rem); }
+    .tl-dot { left: calc(10rem + 1rem - 5px); }
+    .timeline > li > :global(div) { padding-left: 1rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .tl-dot { transform: scale(0.4); opacity: 0; transition: transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 400ms; transition-delay: calc(var(--i) * 120ms + 200ms); }
+    :global(.js .is-visible) .tl-dot { transform: none; opacity: 1; }
+  }
+</style>

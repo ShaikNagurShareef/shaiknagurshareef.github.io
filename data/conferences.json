@@ -1,19 +1,21 @@
 [
   {
-      "url": "https://arxiv.org/pdf/2604.17209",
-      "title": "DREAM: Dynamic Retinal Enhancement with Adaptive Multi-modal Fusion for Expert Precision Medical Report Generation",
-      "medium": "Proceedings of the 48th International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC) - <span style='color: blue;'>Oral</span>",
-      "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
-      "year": "2026",
-      "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    "url": "https://arxiv.org/pdf/2604.17209",
+    "title": "DREAM: Dynamic Retinal Enhancement with Adaptive Multi-modal Fusion for Expert Precision Medical Report Generation",
+    "medium": "Proceedings of the 48th International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC) - <span style='color: blue;'>Oral</span>",
+    "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
+    "year": "2026",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
+    "arxiv": "2604.17209"
   },
   {
-      "url": "https://arxiv.org/pdf/2604.17222",
-      "title": "Region-Affinity Attention for Whole-Slide Breast Cancer Classification in Deep Ultraviolet Imaging",
-      "medium": "Proceedings of the 48th International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC) - Poster",
-      "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
-      "year": "2026",
-      "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    "url": "https://arxiv.org/pdf/2604.17222",
+    "title": "Region-Affinity Attention for Whole-Slide Breast Cancer Classification in Deep Ultraviolet Imaging",
+    "medium": "Proceedings of the 48th International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC) - Poster",
+    "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
+    "year": "2026",
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
+    "arxiv": "2604.17222"
   },
   {
     "url": "https://arxiv.org/pdf/2511.05968",
@@ -21,7 +23,9 @@
     "medium": "Proceedings of the 40th Annual Conference on Association for the Advancement of Artificial Intelligence (AAAI 2026) - <span style='color: blue;'>Oral</span>",
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Masood, Adnan; Ye, Dong Hye",
     "year": "2026",
-    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
+    "doi": "10.1609/aaai.v40i11.37835",
+    "arxiv": "2511.05968"
   },
   {
     "url": "https://arxiv.org/pdf/2504.20306",
@@ -29,7 +33,9 @@
     "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Yellu, Sribhuvan Reddy; Chung, Jun-Won; Ye, Dong Hye",
     "medium": "47th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC) - <span style='color: blue;'>Oral</span>",
     "year": "2025",
-    "new": ""
+    "new": "",
+    "doi": "10.1109/embc58623.2025.11254199",
+    "arxiv": "2504.20306"
   },
   {
     "url": "https://arxiv.org/pdf/2407.19385",
@@ -37,7 +43,9 @@
     "medium": "Proceedings of the 22nd IEEE International Symposium on Biomedical Imaging (ISBI) - Poster",
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
     "year": "2025",
-    "new": ""
+    "new": "",
+    "doi": "10.1109/isbi60581.2025.10980651",
+    "arxiv": "2407.19385"
   },
   {
     "url": "https://ieeexplore.ieee.org/document/10890310",
@@ -45,15 +53,19 @@
     "medium": "Proceedings of the 50th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP) - Poster",
     "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Bodapati, Jyostna Devi; Ye, Dong Hye",
     "year": "2025",
-    "new": ""
-  },  
+    "new": "",
+    "doi": "10.1109/icassp49660.2025.10890310",
+    "arxiv": "2412.17251"
+  },
   {
     "url": "https://ieeexplore.ieee.org/document/10647584",
     "title": "M3T: Multi-Modal Medical Transformer to Bridge Clinical Context with Visual Insights for Retinal Image Medical Description Generation",
     "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP) - <span style='color: blue;'>Oral</span>",
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
     "year": "2024",
-    "new": ""
+    "new": "",
+    "doi": "10.1109/icip51287.2024.10647584",
+    "arxiv": "2406.13129"
   },
   {
     "url": "https://ieeexplore.ieee.org/document/10647604",
@@ -61,14 +73,18 @@
     "medium": "Proceedings of the IEEE International Conference on Image Processing (ICIP) - Poster",
     "authors": "Cherukuri, Teja Krishna; <strong>Shaik, Nagur Shareef</strong>; Ye, Dong Hye",
     "year": "2024",
-    "new": ""
+    "new": "",
+    "doi": "10.1109/icip51287.2024.10647604",
+    "arxiv": "2406.13126"
   },
   {
-      "url": "https://ieeexplore.ieee.org/document/10635528",
-      "title": "Spatial Sequence Attention Network for Schizophrenia Classification from Structural Brain MR Images",
-      "medium": "Proceedings of the 21st IEEE International Symposium on Biomedical Imaging (ISBI) - <span style='color: blue;'>Oral</span>",
-      "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
-      "year": "2024",
-      "new": ""
+    "url": "https://ieeexplore.ieee.org/document/10635528",
+    "title": "Spatial Sequence Attention Network for Schizophrenia Classification from Structural Brain MR Images",
+    "medium": "Proceedings of the 21st IEEE International Symposium on Biomedical Imaging (ISBI) - <span style='color: blue;'>Oral</span>",
+    "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Calhoun, Vince D; Ye, Dong Hye",
+    "year": "2024",
+    "new": "",
+    "doi": "10.1109/isbi56570.2024.10635528",
+    "arxiv": "2406.12683"
   }
 ]

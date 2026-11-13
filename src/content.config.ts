@@ -34,7 +34,28 @@ const PUB_SOURCES = [
   { file: "data/under-review.json", kind: "manuscript" },
 ] as const;
 
-type RawPub = { url?: string; title: string; medium?: string; authors?: string; year?: string | number; new?: string };
+type RawPub = {
+  url?: string; title: string; medium?: string; authors?: string; year?: string | number; new?: string;
+  /** Verified links (checked against arXiv, Crossref and OpenReview): DOI, arXiv id, OpenReview forum id, official page. */
+  doi?: string; arxiv?: string; openreview?: string; official?: string;
+};
+
+const ARXIV_RE = /arxiv\.org\/(?:abs|pdf)\/([0-9]{4}\.[0-9]{4,5})/i;
+const OPENREVIEW_RE = /openreview\.net\/(?:forum|pdf)\?id=([A-Za-z0-9_-]+)/i;
+
+/** Split a paper's known locations into official / arXiv / OpenReview links. */
+function pubLinks(raw: RawPub) {
+  const legacy = raw.url && !raw.url.startsWith("#") ? raw.url : null;
+  const arxivId = raw.arxiv ?? legacy?.match(ARXIV_RE)?.[1] ?? null;
+  const orId = raw.openreview ?? legacy?.match(OPENREVIEW_RE)?.[1] ?? null;
+  const legacyOfficial = legacy && !ARXIV_RE.test(legacy) && !OPENREVIEW_RE.test(legacy) ? legacy : null;
+  return {
+    doi: raw.doi ?? null,
+    official: raw.official ?? (raw.doi ? `https://doi.org/${raw.doi}` : legacyOfficial),
+    arxiv: arxivId ? `https://arxiv.org/abs/${arxivId}` : null,
+    openreview: orId ? `https://openreview.net/forum?id=${orId}` : null,
+  };
+}
 
 function normalizePub(raw: RawPub, kind: (typeof PUB_SOURCES)[number]["kind"]) {
   const medium = stripHtml(raw.medium);
@@ -46,7 +67,9 @@ function normalizePub(raw: RawPub, kind: (typeof PUB_SOURCES)[number]["kind"]) {
     : "under-review";
   const presentation = /\boral\b/i.test(medium) ? "oral" : /\bposter\b/i.test(medium) ? "poster" : null;
   const venue = medium.replace(/\s*-\s*(Oral|Poster)\b.*$/i, "").trim();
-  const url = raw.url && !raw.url.startsWith("#") ? raw.url : null;
+  const links = pubLinks(raw);
+  // The title links to the version of record, falling back to the preprint.
+  const url = links.official ?? links.arxiv ?? links.openreview;
   return {
     id: slug(stripHtml(raw.title)),
     title: stripHtml(raw.title),
@@ -57,6 +80,7 @@ function normalizePub(raw: RawPub, kind: (typeof PUB_SOURCES)[number]["kind"]) {
     status,
     presentation,
     url,
+    links,
     isNew: Boolean(raw.new && raw.new.trim()),
   };
 }
@@ -73,6 +97,12 @@ const publications = defineCollection({
     status: z.enum(["published", "under-review", "submitted", "in-preparation"]),
     presentation: z.enum(["oral", "poster"]).nullable(),
     url: z.string().nullable(),
+    links: z.object({
+      doi: z.string().nullable(),
+      official: z.url().nullable(),
+      arxiv: z.url().nullable(),
+      openreview: z.url().nullable(),
+    }),
     isNew: z.boolean(),
   }),
 });

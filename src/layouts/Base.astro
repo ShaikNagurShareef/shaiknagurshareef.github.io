@@ -50,6 +50,7 @@ const person = {
     <script is:inline>
       // Apply saved or OS theme before first paint (no flash).
       (function () {
+        if ("IntersectionObserver" in window) document.documentElement.classList.add("js");
         try {
           var t = localStorage.getItem("theme");
           if (!t && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
@@ -97,6 +98,32 @@ const person = {
     {chat && <ChatWidget />}
     {track && <VisitBeacon />}
     <script>
+      // Scroll reveal for [data-reveal] blocks and count-up for [data-count] numbers (first view only).
+      const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const countUp = (el: HTMLElement) => {
+        const m = (el.dataset.count || el.textContent || "").trim().match(/^([\d.]+)(.*)$/);
+        if (!m || reduceMotion) return;
+        const target = parseFloat(m[1]), suffix = m[2], decimals = (m[1].split(".")[1] || "").length;
+        const start = performance.now(), dur = 1100;
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - start) / dur), eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = (target * eased).toFixed(decimals) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            e.target.classList.add("is-visible");
+            e.target.querySelectorAll<HTMLElement>("[data-count]").forEach(countUp);
+            io.unobserve(e.target);
+          }
+        }, { rootMargin: "0px 0px -6% 0px", threshold: 0.04 });
+        document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+      }
+
       // Shared disclosure for "Cite" buttons (BibTeX panel below each publication).
       document.addEventListener("click", (e) => {
         const t = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-cite-toggle]");

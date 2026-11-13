@@ -1,14 +1,19 @@
 ---
-/** The five-stage interpretation pathway as a horizontal stepper (vertical on small screens). */
+/**
+ * The five-stage interpretation pathway as a connected track: a line runs through one marker per
+ * stage. When the section scrolls into view the line draws and the markers fill in order (the
+ * enclosing Section adds .is-visible). Static and fully drawn without JS or with reduced motion.
+ */
 interface Stage { id: string; n: number; name: string; question: string; methods: string[] }
 interface Props { stages: Stage[] }
 const { stages } = Astro.props;
 ---
 <ol class="pathway" aria-label="The five-stage interpretation pathway">
-  {stages.map((s) => (
-    <li>
+  {stages.map((s, i) => (
+    <li style={`--i:${i}`}>
+      <span class="node" aria-hidden="true"></span>
       <a href={`/research/#stage-${s.id}`} class="block h-full no-underline">
-        <span class="font-mono text-xs tabular text-accent-ink" aria-hidden="true">{String(s.n).padStart(2, "0")}</span>
+        <span class="mono text-muted" aria-hidden="true">{String(s.n).padStart(2, "0")}</span>
         <h3 class="mt-1 text-[1.125rem] font-semibold text-ink"><span class="sr-only">Stage {s.n}: </span>{s.name}</h3>
         <p class="mt-1 text-sm leading-snug text-ink-2">{s.question}</p>
         <p class="mt-3 text-xs leading-relaxed text-muted"><span class="sr-only">Methods: </span>{s.methods.join(" · ")}</p>
@@ -18,15 +23,46 @@ const { stages } = Astro.props;
 </ol>
 
 <style>
-  .pathway { display: grid; border-top: 1px solid var(--border-strong); }
-  .pathway > li { border-bottom: 1px solid var(--border); }
-  .pathway a { padding: 1rem 0; }
-  .pathway a:hover h3 { color: var(--accent-ink); }
+  /* Vertical track (small screens) */
+  .pathway { position: relative; display: grid; padding-left: 2rem; }
+  .pathway::before, .pathway::after {
+    content: ""; position: absolute; left: 6px; top: 0.6rem; bottom: 0.6rem; width: 2px; border-radius: 2px;
+  }
+  .pathway::before { background: var(--border); }
+  .pathway::after { background: var(--ink); transform-origin: top; }
+  .pathway > li { position: relative; }
+  .pathway .node {
+    position: absolute; left: calc(-2rem + 1px); top: 1.25rem; width: 12px; height: 12px; border-radius: 999px;
+    background: var(--ink); box-shadow: 0 0 0 4px var(--bg); z-index: 1;
+  }
+  .pathway a { padding: 0.9rem 0; }
+  .pathway a:hover h3 { text-decoration: underline; text-underline-offset: 0.2em; }
+
+  /* Horizontal track (wide screens) */
   @media (min-width: 900px) {
-    .pathway { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-    .pathway > li { border-bottom: 0; }
+    .pathway { grid-template-columns: repeat(5, minmax(0, 1fr)); padding-left: 0; padding-top: 2rem; }
+    .pathway::before, .pathway::after { left: 0; right: 0; top: 5px; bottom: auto; width: auto; height: 2px; }
+    .pathway::after { transform-origin: left; }
+    .pathway .node { left: 0; top: -2rem; }
+    .pathway > li + li .node { left: 1rem; }
     .pathway > li + li { border-left: 1px solid var(--border); }
-    .pathway a { padding: 1rem 1rem 0.25rem; }
+    .pathway a { padding: 0 1rem 0.25rem; }
     .pathway > li:first-child a { padding-left: 0; }
+  }
+
+  /* Draw-in when the section becomes visible */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .pathway::after { transform: scaleY(0); transition: transform 1300ms cubic-bezier(0.4, 0, 0.2, 1) 150ms; }
+    :global(.js) .pathway .node {
+      background: var(--bg); outline: 2px solid var(--border-strong); outline-offset: -2px;
+      transition: background-color 300ms ease, outline-color 300ms ease;
+      transition-delay: calc(var(--i) * 240ms + 250ms);
+    }
+    :global(.js .is-visible) .pathway::after { transform: none; }
+    :global(.js .is-visible) .pathway .node { background: var(--ink); outline-color: var(--ink); }
+    @media (min-width: 900px) {
+      :global(.js) .pathway::after { transform: scaleX(0); }
+      :global(.js .is-visible) .pathway::after { transform: none; }
+    }
   }
 </style>

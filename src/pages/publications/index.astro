@@ -29,6 +29,12 @@ const facets = [
   { name: "kind", label: "Type", options: kinds.map((k) => ({ value: k, label: KIND_LABEL[k], n: count((p) => p.data.kind === k) })) },
   { name: "year", label: "Year", options: allYears.map((y) => ({ value: String(y), label: String(y), n: count((p) => p.data.year === y) })) },
 ];
+// Peer-reviewed papers per year, oldest to newest, for the bar chart.
+// Every year in the range is shown, including years with no papers, so the time axis is honest.
+const yearNums = years.filter(Boolean);
+const perYear = Array.from({ length: Math.max(...yearNums) - Math.min(...yearNums) + 1 }, (_, k) => Math.min(...yearNums) + k)
+  .map((y) => ({ year: y, n: published.filter((p) => p.data.year === y).length }));
+const maxPerYear = Math.max(...perYear.map((d) => d.n));
 const figures = [
   { value: published.length, label: "Peer-reviewed (listed)" },
   { value: orals, label: "Oral presentations" },
@@ -66,6 +72,19 @@ const jsonLd = published.map((p) => ({
           </div>
         ))}
       </dl>
+      <figure class="year-chart mt-8 max-w-[44rem]" data-reveal aria-labelledby="yc-h">
+        <figcaption id="yc-h" class="text-sm font-semibold text-ink">Peer-reviewed papers per year <span class="font-normal text-muted">· select a year to filter</span></figcaption>
+        <div class="yc-plot mt-4" role="group" aria-label="Filter by year">
+          {perYear.map((d, i) => (
+            <button type="button" class="yc-bar" data-year={d.year} disabled={d.n === 0} style={`--h:${(d.n / maxPerYear).toFixed(3)};--i:${i}`}
+                    aria-pressed="false" aria-label={`${d.year}: ${d.n} paper${d.n === 1 ? "" : "s"}. Show only ${d.year}.`}>
+              <span class="yc-n mono" aria-hidden="true">{d.n}</span>
+              <span class="yc-fill" aria-hidden="true"></span>
+              <span class="yc-year mono" aria-hidden="true">{d.year}</span>
+            </button>
+          ))}
+        </div>
+      </figure>
     </Fragment>
   </PageHeader>
 
@@ -132,6 +151,24 @@ const jsonLd = published.map((p) => ({
 </Base>
 
 <style>
+  .yc-plot { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0.5rem; height: 9rem; align-items: end; border-bottom: 1px solid var(--border-strong); }
+  .yc-bar { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; cursor: pointer; }
+  .yc-fill {
+    display: block; width: 100%; max-width: 3rem; height: calc(var(--h) * (100% - 1.6rem)); min-height: 3px;
+    background: var(--ink); border-radius: 4px 4px 0 0; transform-origin: bottom; transition: background-color 150ms, opacity 150ms;
+  }
+  .yc-n { margin-bottom: 0.3rem; font-size: 0.75rem; color: var(--ink-2); }
+  .yc-year { position: absolute; top: calc(100% + 0.4rem); font-size: 0.75rem; color: var(--muted); }
+  .year-chart { padding-bottom: 1.5rem; }
+  .yc-bar:hover .yc-fill { background: var(--ink-2); }
+  .yc-bar:disabled { cursor: default; }
+  .yc-bar:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+  .yc-plot.has-selection .yc-bar:not([aria-pressed="true"]) .yc-fill { opacity: 0.25; }
+  .yc-bar[aria-pressed="true"] .yc-year { color: var(--ink); font-weight: 500; }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .yc-fill { transform: scaleY(0); transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1), background-color 150ms, opacity 150ms; transition-delay: calc(var(--i) * 60ms + 150ms), 0ms, 0ms; }
+    :global(.js) .is-visible .yc-fill { transform: none; }
+  }
   .pub-group-h {
     position: sticky; top: var(--header-h); z-index: 5; display: flex; align-items: baseline; gap: 0.6rem;
     padding: 0.6rem 0; background: var(--bg); border-bottom: 1px solid var(--border-strong);
@@ -226,6 +263,27 @@ const jsonLd = published.map((p) => ({
       const qs = next.toString();
       history.replaceState(null, "", (qs ? `?${qs}` : location.pathname) + location.hash);
     };
+
+    // Year chart: a bar selects that year in the Year facet (click again to clear).
+    const plot = document.querySelector<HTMLElement>(".yc-plot");
+    const bars = [...document.querySelectorAll<HTMLButtonElement>(".yc-bar")];
+    const syncBars = () => {
+      const y = get("year");
+      bars.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.year === y)));
+      plot?.classList.toggle("has-selection", Boolean(y));
+    };
+    bars.forEach((b) => b.addEventListener("click", () => {
+      const next = get("year") === b.dataset.year ? "" : b.dataset.year!;
+      // Check the matching radio directly: browsers ignore RadioNodeList.value = "" (the "All" option).
+      const radio = [...(form.elements.namedItem("year") as RadioNodeList)].find((r) => (r as HTMLInputElement).value === next) as HTMLInputElement | undefined;
+      if (radio) radio.checked = true;
+      apply();
+      syncBars();
+      document.querySelector("[data-pub-count]")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    }));
+    form.addEventListener("input", syncBars);
+    form.addEventListener("reset", () => setTimeout(syncBars));
+    syncBars();
 
     form.addEventListener("input", apply);
     form.addEventListener("submit", (e) => e.preventDefault());

@@ -8,6 +8,7 @@ export interface PubData {
   kind: string;
   status: string;
   url: string | null;
+  links?: { doi: string | null; arxiv: string | null };
 }
 
 const STOP = new Set(["a", "an", "the", "on", "of", "for", "and", "in", "to", "with", "via", "towards", "toward"]);
@@ -42,6 +43,9 @@ export function toBibtex(p: PubData, key: string): string {
     ["author", esc(authors)],
     [venueField, esc(p.venue)],
     ["year", p.year ? String(p.year) : null],
+    ["doi", p.links?.doi ?? null],
+    ["eprint", p.links?.arxiv?.split("/abs/")[1] ?? null],
+    ["archivePrefix", p.links?.arxiv ? "arXiv" : null],
     ["url", p.url && /^https?:/.test(p.url) ? p.url : null],
   ];
   const body = fields

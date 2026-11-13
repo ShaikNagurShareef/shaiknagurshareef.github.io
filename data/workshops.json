@@ -5,7 +5,8 @@
     "authors": "Gogineni, Akash; <strong>Shaik, Nagur Shareef</strong>; Mandava, Aasrith; Masood, Adnan; Ye, Dong Hye",
     "medium": "Proceedings of the 36th IEEE International Workshop on Machine Learning for Signal Processing (MLSP 2026) - <span style='color: blue;'>Oral</span>",
     "year": "2026",
-    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
+    "arxiv": "2608.09774"
   },
   {
     "url": "https://arxiv.org/pdf/2608.09752",
@@ -13,7 +14,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Park, Jeongwoo; Kim, Yeong-Jin; Jung, Jaeuk; Oh, Hyunjung; Ye, Dong Hye",
     "medium": "Proceedings of the 36th IEEE International Workshop on Machine Learning for Signal Processing (MLSP 2026) - <span style='color: blue;'>Oral</span>",
     "year": "2026",
-    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>"
+    "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
+    "arxiv": "2608.09752"
   },
   {
     "url": "https://openreview.net/pdf?id=hatzHLfYtF",
@@ -21,6 +23,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna, Masood, Adnan; Adeli, Ehsan, Ye, Dong Hye;",
     "medium": "39th Conference on Neural Information Processing Systems (NeurIPS 2025) Workshop: The Second Workshop on GenAI for Health: Potential, Trust, and Policy Compliance - <span>Poster</span>",
     "year": "2025",
-    "new": ""
+    "new": "",
+    "arxiv": "2509.26146",
+    "openreview": "hatzHLfYtF"
   }
 ]
