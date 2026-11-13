@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import CommandPalette from "../components/CommandPalette.astro";
 import ChatWidget from "../components/ChatWidget.astro";
 import VisitBeacon from "../components/VisitBeacon.astro";
+import DefenseBanner from "../components/DefenseBanner.astro";
 
 interface Props {
   title?: string;
@@ -89,6 +90,7 @@ const person = {
   </head>
   <body class="flex min-h-dvh flex-col">
     <a class="skip-link" href="#main">Skip to content</a>
+    <DefenseBanner />
     <Header />
     <main id="main" class="flex-1" tabindex="-1">
       <slot />

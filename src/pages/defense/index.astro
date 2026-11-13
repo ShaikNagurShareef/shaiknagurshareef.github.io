@@ -1,0 +1,130 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
+import PersonCard from "../../components/PersonCard.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection } from "astro:content";
+import { getDefense } from "../../lib/defense";
+import { byOrder } from "../../lib/format";
+
+const d = (await getDefense())!;
+const committee = (await getCollection("people")).filter((p) => p.data.group === "committee").sort(byOrder);
+const month = d.start.toLocaleDateString("en-US", { month: "short", timeZone: "America/New_York" }).toUpperCase();
+const day = d.start.toLocaleDateString("en-US", { day: "numeric", timeZone: "America/New_York" });
+const weekday = d.start.toLocaleDateString("en-US", { weekday: "long", timeZone: "America/New_York" });
+const event = {
+  "@context": "https://schema.org", "@type": "Event", name: d.title,
+  startDate: d.start.toISOString(), endDate: d.end.toISOString(),
+  eventAttendanceMode: "https://schema.org/MixedEventAttendanceMode", eventStatus: "https://schema.org/EventScheduled",
+  location: [
+    { "@type": "Place", name: d.venue, address: d.address },
+    { "@type": "VirtualLocation", url: d.teamsUrl },
+  ],
+  organizer: { "@type": "CollegeOrUniversity", name: "Georgia State University" },
+  description: `Public defense of the dissertation "${d.dissertation.title}".`,
+};
+---
+<Base title="Ph.D. defense" description={`${d.dateLabel}, ${d.timeLabel}. ${d.venue}, ${d.address}, and online on Microsoft Teams.`} jsonLd={[event]}>
+  <PageHeader title="Ph.D. dissertation defense"
+    lead="I would be delighted to have friends, family and well-wishers join me for this occasion, in person or virtually, whichever suits you. Your presence and good wishes would mean a lot to me as I take on this academic milestone.">
+    <Fragment slot="meta">
+      <div class="mt-8 flex flex-wrap items-stretch gap-6 border-t border-border pt-6">
+        <div class="date-tile" aria-hidden="true">
+          <span class="date-tile-m">{month}</span>
+          <span class="date-tile-d">{day}</span>
+          <span class="date-tile-w">{weekday}</span>
+        </div>
+        <dl class="grid content-center gap-x-8 gap-y-2 text-[1.0625rem] sm:grid-cols-[7rem_1fr]">
+          <dt class="text-muted">Date</dt><dd class="font-semibold text-ink">{d.dateLabel}</dd>
+          <dt class="text-muted">Time</dt>
+          <dd class="text-ink">{d.timeLabel}<span class="block text-sm text-muted" data-local-time hidden></span></dd>
+          <dt class="text-muted">Status</dt><dd class="text-ink" data-countdown aria-live="polite">Scheduled</dd>
+        </dl>
+      </div>
+    </Fragment>
+    <a href="#join-h" class="btn btn-primary" data-live-only><Icon name="video" size={16} />How to join</a>
+    <a href="/defense.ics" download="phd-defense.ics" class="btn" data-live-only><Icon name="calendar-plus" size={16} />Add to calendar (.ics)</a>
+    <a href={d.google} target="_blank" rel="noopener" class="btn" data-live-only>Google Calendar</a>
+    <a href={d.outlook} target="_blank" rel="noopener" class="btn" data-live-only>Outlook</a>
+  </PageHeader>
+
+  <Section id="join-h" title="Join in person or online">
+    <p data-ended hidden class="form-error mb-6">This defense took place on {d.dateLabel}. Thank you to everyone who joined.</p>
+    <div class="grid gap-4 md:grid-cols-2">
+      <article class="card p-6">
+        <p class="subhead">In person</p>
+        <p class="mt-3 text-[1.125rem] font-semibold text-ink">{d.venue}</p>
+        <p class="mt-1 text-ink-2">{d.address}</p>
+        <a href={d.mapUrl} target="_blank" rel="noopener" class="btn mt-5"><Icon name="map-pin" size={16} />Open in Google Maps</a>
+      </article>
+      <article class="card p-6" data-live-only>
+        <p class="subhead">Online</p>
+        <p class="mt-3 text-[1.125rem] font-semibold text-ink">Microsoft Teams</p>
+        <dl class="mt-2 grid grid-cols-[6rem_1fr] gap-y-2 text-[1rem]">
+          <dt class="text-muted">Meeting ID</dt>
+          <dd class="flex flex-wrap items-center gap-2"><span class="mono whitespace-nowrap text-[0.9375rem] text-ink">{d.meetingId}</span>
+            <button type="button" class="btn btn-sm" data-copy={d.meetingId.replace(/\s/g, "")}><Icon name="copy" size={13} /><span data-copy-label>Copy</span></button></dd>
+          <dt class="text-muted">Passcode</dt>
+          <dd class="flex flex-wrap items-center gap-2"><span class="mono whitespace-nowrap text-[0.9375rem] text-ink">{d.passcode}</span>
+            <button type="button" class="btn btn-sm" data-copy={d.passcode}><Icon name="copy" size={13} /><span data-copy-label>Copy</span></button></dd>
+        </dl>
+        <a href={d.teamsUrl} target="_blank" rel="noopener" class="btn btn-primary mt-5"><Icon name="video" size={16} />Join on Microsoft Teams</a>
+      </article>
+    </div>
+  </Section>
+
+  <Section id="diss-h" title="Dissertation" description={`Advisor: Dr. ${d.dissertation.advisor}. Department of Computer Science, Georgia State University.`}>
+    <h3 class="text-[1.375rem] font-semibold leading-snug">{d.dissertation.title}</h3>
+    <p class="mt-4 max-w-[66ch] text-[1.0625rem] leading-relaxed text-ink-2">{d.dissertation.summary}</p>
+    <div class="mt-5 flex flex-wrap items-center gap-4">
+      {d.dissertation.document?.released
+        ? <a href={d.dissertation.document.path} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="download" size={16} />Read the dissertation (PDF)</a>
+        : <p class="text-sm text-muted">The full dissertation will be available here after the defense.</p>}
+      <a href="/research/" class="link-more">Read about the research<Icon name="arrow-right" size={14} /></a>
+    </div>
+  </Section>
+
+  <Section id="committee-h" title="Committee">
+    <div class="grid gap-x-8 gap-y-8 sm:grid-cols-2 xl:grid-cols-3">
+      {committee.map((p) => <PersonCard person={p} />)}
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .date-tile {
+    display: grid; justify-items: center; align-content: center; width: 7.5rem; padding: 0.9rem 0.5rem 1rem;
+    border: 1px solid var(--border-strong); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-sm);
+  }
+  .date-tile-m { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.12em; color: var(--muted); }
+  .date-tile-d { font-size: 3.25rem; font-weight: 600; line-height: 1; color: var(--ink); letter-spacing: -0.03em; }
+  .date-tile-w { margin-top: 0.35rem; font-size: 0.8125rem; color: var(--ink-2); }
+</style>
+
+<script define:vars={{ start: d.start.toISOString(), end: d.end.toISOString() }}>
+  // Visitor's local time, a live countdown, and an "ended" state once the defense is over.
+  const s = new Date(start), e = new Date(end);
+  const local = document.querySelector("[data-local-time]");
+  const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  if (local && zone !== "America/New_York") {
+    const f = (x) => x.toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+    local.textContent = `Your time: ${f(s)} – ${e.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit", timeZoneName: "short" })}`;
+    local.hidden = false;
+  }
+  const out = document.querySelector("[data-countdown]");
+  const tick = () => {
+    const now = Date.now();
+    if (now >= e.getTime()) {
+      out.textContent = "Completed";
+      document.querySelectorAll("[data-live-only]").forEach((el) => (el.hidden = true));
+      document.querySelector("[data-ended]").hidden = false;
+      return;
+    }
+    if (now >= s.getTime()) { out.textContent = "Happening now. Join on Microsoft Teams below."; return setTimeout(tick, 30000); }
+    const m = Math.round((s.getTime() - now) / 60000), dd = Math.floor(m / 1440), hh = Math.floor((m % 1440) / 60), mm = m % 60;
+    out.textContent = "Starts in " + [dd && `${dd} day${dd === 1 ? "" : "s"}`, hh && `${hh} hour${hh === 1 ? "" : "s"}`, !dd && `${mm} minute${mm === 1 ? "" : "s"}`].filter(Boolean).join(", ");
+    setTimeout(tick, 30000);
+  };
+  tick();
+</script>

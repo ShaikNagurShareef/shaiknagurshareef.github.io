@@ -134,6 +134,17 @@ def current_profile() -> str:
         "Professional identity: Applied Scientist (how he describes himself; it is not his UST job title).",
         f"Also: {me['role']}.", "", me["summary"], "",
     ]
+    diss = json.loads((ROOT / "content/research.json").read_text())["dissertation"]
+    lines += [f"Ph.D. dissertation: \"{diss['title']}\". Status: {diss['status']}."]
+    if diss.get("defense"):
+        d = diss["defense"]
+        lines += [
+            "Ph.D. defense: Monday, November 16, 2026, 2:30 PM to 4:00 PM EST (open to friends, family and well-wishers).",
+            f"In person: {d['venue']}, {d['address']}. Online: Microsoft Teams {d['teamsUrl']} (Meeting ID {d['meetingId']}, passcode {d['passcode']}).",
+            "Full details, calendar file and joining instructions: https://shaiknagurshareef.github.io/defense/",
+        ]
+    doc = diss.get("document") or {}
+    lines += ["The full dissertation PDF: " + ("https://shaiknagurshareef.github.io" + doc["path"] if doc.get("released") else "not public yet; it will be released on the site after the defense."), ""]
     for j in json.loads((ROOT / "content/experience.json").read_text()):
         end = j["end"] or "present"
         lines.append(f"- {j['role']}, {j['org']} ({j['start']} to {end}): " + " ".join(j["highlights"]))

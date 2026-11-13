@@ -23,3 +23,6 @@ coverage/
 # build-time copies of data/ and img/ (source of truth stays at repo root until cutover)
 public/data/
 public/img/
+
+# unreleased documents (e.g. the dissertation before its public release); never commit
+private/

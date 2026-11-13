@@ -219,6 +219,14 @@ const research = defineCollection({
   schema: z.object({
     dissertation: z.object({
       title: z.string(), advisor: z.string(), status: z.string(), summary: z.string(),
+      /** Full text: the PDF stays out of git (private/) until released by scripts/release_dissertation.py. */
+      document: z.object({ path: z.string(), released: z.boolean(), releasedOn: z.string().nullable() }).optional(),
+      /** Public defense (announced on the site until it ends). Times include the UTC offset. */
+      defense: z.object({
+        start: z.iso.datetime({ offset: true }), end: z.iso.datetime({ offset: true }),
+        venue: z.string(), address: z.string(), mapUrl: z.url(),
+        teamsUrl: z.url(), meetingId: z.string(), passcode: z.string(),
+      }).optional(),
       scale: z.object({ domains: z.number(), benchmarks: z.number(), architectures: z.number() }),
       stages: z.array(z.object({
         id: z.string(), n: z.number().int(), name: z.string(), question: z.string(), methods: z.array(z.string()),

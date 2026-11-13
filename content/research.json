@@ -2,8 +2,23 @@
   "dissertation": {
     "title": "From Perception to Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting",
     "advisor": "Dong Hye Ye",
-    "status": "Proposal defended April 2026 · expected December 2026",
+    "status": "Proposal defended April 2026 · defense November 16, 2026 · degree expected December 2026",
     "summary": "Reading a medical image involves five judgments: locating a finding, grading it, weighing it against clinical context, comparing it with earlier studies, and committing to a claim. This dissertation builds methods for each stage on two ideas: every stage carries a distribution rather than a point estimate, and evidence from different sources is represented separately so that losing one source does not corrupt the others. It is evaluated across endoscopy, whole-slide histology, retinal photography, brain MRI with genomics, and chest radiography.",
+    "document": {
+      "path": "/data/dissertation/NagurShareefShaik_PhD_Dissertation.pdf",
+      "released": false,
+      "releasedOn": null
+    },
+    "defense": {
+      "start": "2026-11-16T14:30:00-05:00",
+      "end": "2026-11-16T16:00:00-05:00",
+      "venue": "Room 1803, TReNDS Center, 18th Floor",
+      "address": "55 Park Place, Georgia State University, Atlanta, GA",
+      "mapUrl": "https://www.google.com/maps/search/?api=1&query=55+Park+Place+NE,+Atlanta,+GA+30303",
+      "teamsUrl": "https://teams.microsoft.com/meet/2696747059966048?p=sIwQWACWDgtkrgw1vb",
+      "meetingId": "269 674 705 996 604 8",
+      "passcode": "SY7yF3Pn"
+    },
     "scale": {
       "domains": 7,
       "benchmarks": 13,

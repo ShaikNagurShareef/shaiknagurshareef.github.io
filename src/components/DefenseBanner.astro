@@ -1,0 +1,46 @@
+---
+/**
+ * Slim announcement bar for the Ph.D. defense on every page (except the defense page itself).
+ * Not rendered once the build is past the end time; in the browser it also hides itself after the
+ * end time and stays dismissed per visitor (localStorage).
+ */
+import { getDefense } from "../lib/defense";
+const d = await getDefense();
+const show = d && Date.now() < d.end.getTime() && !Astro.url.pathname.startsWith("/defense");
+---
+{show && (
+  <div data-defense-banner data-end={d!.end.toISOString()} class="defense-bar" role="region" aria-label="Announcement" data-no-print>
+    <div class="container-page flex items-center gap-3 py-2">
+      <p class="flex-1 text-sm">
+        <span class="font-semibold">Ph.D. defense</span>
+        <span class="text-bar-muted"> · {d!.dateLabel.replace(/, \d{4}$/, "")}, {d!.timeLabel} · GSU and online</span>
+        <a href="/defense/" class="ml-2 font-semibold underline underline-offset-2">Details and how to join</a>
+      </p>
+      <button type="button" data-dismiss class="dismiss" aria-label="Dismiss announcement">✕</button>
+    </div>
+  </div>
+)}
+
+<style>
+  .defense-bar { background: var(--ink); color: var(--bg); }
+  .defense-bar a { color: inherit; }
+  .text-bar-muted { opacity: 0.75; }
+  .dismiss { display: inline-flex; width: 1.75rem; height: 1.75rem; align-items: center; justify-content: center; border-radius: var(--radius); opacity: 0.8; }
+  .dismiss:hover { opacity: 1; background: color-mix(in srgb, var(--bg) 15%, transparent); }
+</style>
+
+<script is:inline>
+  (function () {
+    var bar = document.querySelector("[data-defense-banner]");
+    if (!bar) return;
+    var key = "defense-banner-dismissed";
+    var over = Date.now() > new Date(bar.getAttribute("data-end")).getTime();
+    var dismissed = false;
+    try { dismissed = localStorage.getItem(key) === "1"; } catch (e) {}
+    if (over || dismissed) { bar.remove(); return; }
+    bar.querySelector("[data-dismiss]").addEventListener("click", function () {
+      try { localStorage.setItem(key, "1"); } catch (e) {}
+      bar.remove();
+    });
+  })();
+</script>

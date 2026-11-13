@@ -3,6 +3,7 @@ import { getCollection, getEntry } from "astro:content";
 import { getPublications } from "../lib/pubs";
 import { FOOTER_NAV } from "../lib/nav";
 import { STATUS_LABEL } from "../lib/format";
+import { getDefense } from "../lib/defense";
 
 /**
  * Index for the Ctrl/Cmd+K command palette. Built at build time and fetched lazily on first open,
@@ -33,6 +34,7 @@ export const GET: APIRoute = async () => {
     "/contact/": "email phone reach message form",
     "/feedback/": "testimonials reviews feedback recommend",
   };
+  if (await getDefense()) items.push({ type: "Page", title: "Ph.D. defense", subtitle: "November 16, 2026 · 2:30–4:00 PM EST · GSU and Teams", url: "/defense/", keywords: "defense dissertation phd thesis teams join calendar" });
   for (const n of FOOTER_NAV) items.push({ type: "Page", title: n.label, url: n.href, keywords: PAGE_HINTS[n.href] });
 
   for (const s of research.dissertation.stages) {
