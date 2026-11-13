@@ -46,19 +46,45 @@
   {
     "id": "venkateswara",
     "name": "Dr. Hemanth D. Venkateswara",
-    "role": "Committee Member",
+    "role": "Committee Member · Assistant Professor of Computer Science, GSU",
     "group": "committee",
     "photo": "/img/venkateswara.jpg",
-    "links": [],
+    "links": [
+      {
+        "label": "Scholar",
+        "url": "https://scholar.google.com/citations?user=0wmiTYoAAAAJ&hl=en"
+      },
+      {
+        "label": "Website",
+        "url": "https://www.hemanthdv.org/"
+      },
+      {
+        "label": "GSU profile",
+        "url": "https://cas.gsu.edu/profile/hemanth-venkateswara/"
+      }
+    ],
     "note": null
   },
   {
     "id": "kubek",
     "name": "Dr. Mario Michael Kubek",
-    "role": "Committee Member",
+    "role": "Committee Member · Assistant Professor of Computer Science, GSU",
     "group": "committee",
     "photo": "/img/kubek.jpg",
-    "links": [],
+    "links": [
+      {
+        "label": "Scholar",
+        "url": "https://scholar.google.com/citations?user=c0O25NIAAAAJ&hl=en"
+      },
+      {
+        "label": "GSU profile",
+        "url": "https://cas.gsu.edu/profile/mario-kubek/"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/mario-kubek/"
+      }
+    ],
     "note": null
   },
   {
@@ -113,7 +139,15 @@
     "photo": "/img/hashimoto.jpg",
     "links": [
       {
-        "label": "Profile",
+        "label": "Scholar",
+        "url": "https://scholar.google.com/citations?user=5ygiTwsAAAAJ&hl=en"
+      },
+      {
+        "label": "Website",
+        "url": "https://thashim.github.io/"
+      },
+      {
+        "label": "Stanford profile",
         "url": "https://profiles.stanford.edu/tatsunori-hashimoto"
       }
     ],
@@ -133,6 +167,10 @@
       {
         "label": "LinkedIn",
         "url": "https://www.linkedin.com/in/dr-jyostna-devi-bodapati-8b332796/"
+      },
+      {
+        "label": "ORCID",
+        "url": "https://orcid.org/0000-0002-5185-882X"
       }
     ],
     "note": null
