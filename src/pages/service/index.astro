@@ -34,7 +34,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
     </Fragment>
   </PageHeader>
 
-  <Section id="review-h" title="Peer review" description="Conference program committees and journal reviewing. Records link to the reviewer certificate or platform entry.">
+  <Section id="review-h" title="Peer review">
     <h3 class="subhead">Conferences</h3>
     <table class="table mt-3">
       <thead><tr><th scope="col">Venue</th><th scope="col">Status</th><th scope="col" class="num">Reviews</th><th scope="col" class="num"><span class="sr-only">Record</span></th></tr></thead>
@@ -96,7 +96,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
     </ol>
   </Section>
 
-  <Section id="certs-h" title="Certifications" description="Certificate PDFs are hosted here; where the issuer offers it, Verify opens the issuer's own record.">
+  <Section id="certs-h" title="Certifications">
     <ul class="rows -mt-3">
       {certs.map((c) => (
         <li class="flex flex-col gap-2 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">

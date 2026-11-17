@@ -26,3 +26,6 @@ public/img/
 
 # unreleased documents (e.g. the dissertation before its public release); never commit
 private/
+
+# unreviewed evidence drop folder: review and redact before anything is published
+data/misc/

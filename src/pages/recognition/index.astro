@@ -26,7 +26,7 @@ const certCount = (await getCollection("certifications")).length;
 ---
 <Base title="Recognition" description="Media coverage, awards and honors, with the public evidence behind each one.">
   <PageHeader title="Recognition"
-    lead="Independent coverage of my work and the awards behind it. Each item links to its source: the publisher's article, the organizer's announcement, or the award document itself.">
+    lead="Media coverage, awards and achievements.">
     <Fragment slot="meta">
       <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
         {[
@@ -44,7 +44,7 @@ const certCount = (await getCollection("certifications")).length;
     </Fragment>
   </PageHeader>
 
-  <Section id="news-h" title="In the news" description="Coverage by universities, news outlets and organizers. Links open the original publication.">
+  <Section id="news-h" title="In the news">
     {groups.map((g, gi) => (
       <div class:list={[gi > 0 && "mt-10"]}>
         <h3 class="subhead mb-3">{g.title} <span class="font-normal normal-case tracking-normal text-muted">· {g.items.length}</span></h3>
@@ -71,7 +71,7 @@ const certCount = (await getCollection("certifications")).length;
     )}
   </Section>
 
-  <Section id="awards-h" title="Awards and achievements" description="Each item with its supporting evidence: the organizer's record, the code, or the award document. Images open full size.">
+  <Section id="awards-h" title="Awards and achievements">
     <div class="grid gap-10">
       {rec.awards.map((a) => (
         <article id={a.id} class="award">
@@ -103,23 +103,18 @@ const certCount = (await getCollection("certifications")).length;
         </article>
       ))}
     </div>
-    <p class="mt-8 text-sm text-muted">The complete list of honors, including earlier academic and industry awards, is on the <a href="/service/#awards-h" class="link-quiet">Service and honors</a> page.</p>
   </Section>
 
-  <Section id="more-h" title="More evidence">
-    <ul class="rows -mt-3">
+  <Section id="more-h" title="See also">
+    <ul class="flex flex-wrap gap-2">
       {[
-        { href: "/service/#review-h", label: "Peer review", text: `${reviews} completed reviews and active reviewer roles, with reviewer records` },
-        { href: "/service/#certs-h", label: "Certifications", text: `${certCount} certificates, with issuer verification links where available` },
-        { href: "/publications/", label: "Publications", text: "Peer-reviewed papers with DOI, arXiv and OpenReview links" },
-        { href: "/research/", label: "Dissertation and thesis", text: "Ph.D. dissertation and M.S. thesis, with committee and full text" },
+        { href: "/service/#awards-h", label: "All honors" },
+        { href: "/service/#review-h", label: "Peer review" },
+        { href: "/service/#certs-h", label: "Certifications" },
+        { href: "/publications/", label: "Publications" },
+        { href: "/research/", label: "Dissertation and thesis" },
       ].map((r) => (
-        <li>
-          <a href={r.href} class="row-link">
-            <span><span class="block font-semibold text-ink">{r.label}</span><span class="block text-sm text-muted">{r.text}</span></span>
-            <Icon name="arrow-right" size={16} class="text-muted" />
-          </a>
-        </li>
+        <li><a href={r.href} class="cert-link">{r.label}<Icon name="arrow-right" size={14} /></a></li>
       ))}
     </ul>
   </Section>
