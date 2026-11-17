@@ -354,10 +354,24 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 - Best Outgoing Student of CSE, VFSTR University (2021). Conferred at the 8th Convocation, August 2021.
 - Academic Excellence Awards (all four years), VFSTR University (2016–2020). Top-5 rank holder in CSE each year.
 
+## CITATIONS
+OpenAlex snapshot of 2026-11-17: 1292 citations from 973 citing papers (1194 excluding self-citations), h-index 14, i10-index 17. Google Scholar reports slightly higher counts (see CURRENT PROFILE). Full list of citing papers: https://shaiknagurshareef.github.io/publications/citations/
+Most-cited papers:
+- Composite deep neural network with gated-attention mechanism for diabetic retinopathy severity classification (Journal of Ambient Intelligence and Humanized Computing, 2021): 200 citations
+- Blended Multi-Modal Deep ConvNet Features for Diabetic Retinopathy Severity Prediction (Electronics, 2020): 197 citations
+- Multi-level attention network: application to brain tumor classification (Signal Image and Video Processing, 2021): 167 citations
+- Joint training of two-channel deep neural network for brain tumor classification (Signal Image and Video Processing, 2020): 120 citations
+- Deep convolution feature aggregation: an application to diabetic retinopathy severity level prediction (Signal Image and Video Processing, 2021): 96 citations
+- Transfer learning based novel ensemble classifier for COVID-19 detection from chest CT-scans (Computers in Biology and Medicine, 2021): 96 citations
+- Hinge attention network: A joint model for diabetic retinopathy severity grading (Applied Intelligence, 2022): 81 citations
+- Deep Convolution Features in Non-linear Embedding Space for Fundus Image Classification (Revue d intelligence artificielle, 2020): 70 citations
+- Sentiment Analysis from Movie Reviews Using LSTMs (Ingénierie des systèmes d information, 2019): 69 citations
+- MSENet: Multi-Modal Squeeze-and-Excitation Network for Brain Tumor Severity Prediction (International Journal of Pattern Recognition and Artificial Intelligence, 2021): 43 citations
+
 ## PEER REVIEW AND SERVICE
-Reviewer for 25 journals and major conferences (AAAI, CVPR, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 80+ papers reviewed across AI/ML, biomedical imaging and computer vision.
+Reviewer for 25 journals and major conferences (AAAI, CVPR, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 90+ papers reviewed across AI/ML, biomedical imaging and computer vision.
 Currently an active reviewer for: AAAI 2027, ICLR 2027, EACL 2027, NeurIPS 2026 GenAI4Health Workshop, IEEE ISBI 2027, CVPR 2027.
-Completed conference reviewing: NeurIPS 2026 (4 papers); IEEE ISBI 2026 (9 papers); AAAI 2026 (4 papers); IEEE ISBI 2025 (9 papers); MICCAI 2025 (3 papers).
+Completed conference reviewing: AAAI 2027 (6 papers); ICLR 2027 (3 papers); NeurIPS 2026 (4 papers); IEEE ISBI 2026 (9 papers); AAAI 2026 (4 papers); IEEE ISBI 2025 (9 papers); MICCAI 2025 (3 papers).
 Journal reviewing (papers reviewed): Applied Sciences (MDPI) (2); Artificial Intelligence Review (Springer) (5); BMC Cancer (Springer) (1); BMC Medical Imaging (Springer) (1); Cognitive Computation (Springer) (1); Computer Methods in Biomechanics and Biomedical Engineering: Imaging & Visualization (1); Computers in Biology and Medicine (Elsevier) (1); Diagnostics (MDPI) (3); Evolutionary Intelligence (Springer) (2); IEEE Access (1); IEEE Transactions on Circuits and Systems for Video Technology (1); IEEE Transactions on Medical Imaging (3); International Journal of Data Science and Analytics (Springer) (2); International Journal of Information Management Data Insights (Elsevier) (2); International Journal of Machine Learning and Cybernetics (Springer) (1); Journal of Ambient Intelligence and Humanized Computing (Springer) (2); Journal of Big Data (Springer) (1); Knowledge and Information Systems (Springer) (1); Machine Vision and Applications (Springer) (2); Neural Processing Letters (Springer) (3); Pattern Analysis and Applications (Springer) (1); Plant Methods (BMC) (1); Scientific Reports (Springer Nature) (11); Sensors (MDPI) (2); Signal, Image and Video Processing (Springer) (6).
 Reviewer invitations received since 2021: 292, from 58 journals (log: /service/review-log/).
 
@@ -381,7 +395,7 @@ Achievements with public evidence:
 - Go Above Award: Impact, Elevance Health (Carelon Global Solutions) (2023). Recognized for analyzing the commission process in detail to fix a critical issue; nominated for Lead with Purpose and Heart.
 - NeurIPS 2025 GenAI4Health Workshop Travel Grant, GenAI4Health Workshop, NeurIPS 2025 (2025-11). Selected by the GenAI4Health organizing committee for a USD 100 travel grant to attend the workshop at NeurIPS 2025, recognizing the quality of the submitted work. Evidence: Grant notification (PDF): /data/awards/NeurIPS-2025-GenAI4Health-Travel-Grant.pdf
 - IEEE Signal Processing Society Travel Grant, IEEE Signal Processing Society (2024-07). Awarded USD 500 by the SPS Grant Selection Committee to present at the 2024 IEEE International Conference on Image Processing (ICIP 2024), Abu Dhabi. Evidence: Grant notification (PDF): /data/awards/IEEE-SPS-Travel-Grant-ICIP-2024.pdf
-- Chairman's Gold Medal and Best Outgoing Student, VFSTR (Vignan's Foundation for Science, Technology and Research) (2021-08). Received the Chairman's Gold Medal for overall excellence in the B.Tech in Computer Science and Engineering and the Best Outgoing Student award at the university's 8th Convocation on August 27, 2021. Evidence: Convocation video, 2:38:49: https://www.youtube.com/watch?v=iVxfVBQ_WXc&t=9529s; Convocation post (Instagram): https://www.instagram.com/p/CTbbNZNhzAO/
+- Chairman's Gold Medal and Best Outgoing Student, VFSTR (Vignan's Foundation for Science, Technology and Research) (2021-08). Received the Chairman's Gold Medal (CGPA 9.78) for overall excellence in the B.Tech in Computer Science and Engineering and the Best Outgoing Student award at the university's convocation on August 27, 2021, and addressed the graduates as the gold medalist. Evidence: Convocation post (Instagram): https://www.instagram.com/p/CTbbNZNhzAO/
 
 ## EVENTS AND HACKATHONS
 - 2nd Agentic AI Summit, Berkeley RDI, Berkeley, CA (August 1–2, 2026). 5,000+ attendees, 200+ speakers across 4 stages, and 200+ posters on agent frameworks, evaluation and deployment.

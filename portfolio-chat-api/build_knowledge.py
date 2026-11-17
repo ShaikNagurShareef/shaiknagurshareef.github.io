@@ -6,6 +6,7 @@ Sources (all relative to the repo root):
   - data/NagurShareefShaik_ResearchStatement.pdf
   - data/{conferences,journals,workshops,under-review}.json
   - data/profile.json + content/experience.json (CURRENT PROFILE; newer than the PDFs)
+  - data/citations.json (OpenAlex citation metrics)
   - content/awards.json (honors, with years)
   - content/service.json (peer review, including active reviewing roles)
   - content/recognition.json, content/participations.json, content/research.json (media, evidence, events, dissertation)
@@ -211,6 +212,24 @@ def dissertation() -> str:
     return line + "\n" + r["summary"]
 
 
+def citations() -> str:
+    """Citation metrics and most-cited papers from data/citations.json (OpenAlex; the /publications/citations/ page)."""
+    path = ROOT / "data/citations.json"
+    if not path.exists():
+        return "No citation snapshot."
+    d = json.loads(path.read_text())
+    t = d["totals"]
+    lines = [
+        f"OpenAlex snapshot of {d['as_of']}: {t['citations']} citations from {t['citing_works']} citing papers "
+        f"({t['citations'] - t['self_citations']} excluding self-citations), h-index {t['h_index']}, i10-index {t['i10_index']}. "
+        "Google Scholar reports slightly higher counts (see CURRENT PROFILE). Full list of citing papers: "
+        "https://shaiknagurshareef.github.io/publications/citations/",
+        "Most-cited papers:",
+    ]
+    lines += [f"- {w['title']} ({w.get('venue') or 'n/a'}, {w.get('year')}): {w['cited_by']} citations" for w in d["works"][:10]]
+    return "\n".join(lines)
+
+
 def main() -> int:
     blocks = ["# Knowledge base: Nagur Shareef Shaik", ""]
     blocks += ["## CURRENT PROFILE", current_profile(), ""]
@@ -222,6 +241,7 @@ def main() -> int:
 
     blocks += ["## PUBLICATIONS", publications(), ""]
     blocks += ["## HONORS AND AWARDS", awards(), ""]
+    blocks += ["## CITATIONS", citations(), ""]
     blocks += ["## PEER REVIEW AND SERVICE", service(), ""]
     blocks += ["## RECOGNITION AND MEDIA", recognition(), ""]
     blocks += ["## EVENTS AND HACKATHONS", events(), ""]

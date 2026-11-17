@@ -1,0 +1,242 @@
+---
+/**
+ * Who cites my work: every citing paper from OpenAlex (data/citations.json, refreshed by
+ * scripts/fetch-citations.mjs before each deploy), and the h-index worked out paper by paper.
+ * Without JS the full list is shown; with JS it can be filtered by cited paper, year and text.
+ */
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
+import Icon from "../../components/Icon.astro";
+import { getEntry } from "astro:content";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+type Work = { id: string; title: string; year: number | null; venue: string | null; doi: string | null; url: string; cited_by: number };
+type Citing = { id: string; title: string; year: number | null; venue: string | null; url: string; authors: string[]; more: number; self: boolean; cites: string[] };
+type Data = { source: string; source_url: string; as_of: string; totals: { citations: number; citing_works: number; h_index: number; i10_index: number; works: number; self_citations: number }; works: Work[]; citing: Citing[] };
+
+const me = (await getEntry("profile", "me"))!.data;
+const data = JSON.parse(readFileSync(join(process.cwd(), "data/citations.json"), "utf8")) as Data;
+const { totals } = data;
+const cited = data.works.filter((w) => w.cited_by > 0);
+const uncited = data.works.length - cited.length;
+const maxCites = Math.max(...cited.map((w) => w.cited_by));
+const nf = new Intl.NumberFormat("en-US");
+const asOf = new Date(`${data.as_of}T12:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+
+/** A short name for a paper: the acronym before a colon when there is one, else the opening words. */
+const short = (t: string) => {
+  const head = t.split(/:\s/)[0];
+  if (head !== t && head.length <= 34) return head;
+  return t.length > 56 ? t.slice(0, 54).replace(/\s+\S*$/, "") + "…" : t;
+};
+const shortById = new Map(data.works.map((w) => [w.id, short(w.title)]));
+const years = [...new Set(data.citing.map((c) => c.year).filter((y): y is number => !!y && y >= 2019))].sort((a, b) => b - a);
+const perYear = [...years].reverse().map((y) => ({ y, n: data.citing.filter((c) => c.year === y).reduce((n, c) => n + c.cites.length, 0) }));
+const maxYear = Math.max(...perYear.map((d) => d.n));
+const PAGE = 40;
+---
+<Base title="Citations" description={`${nf.format(totals.citations)} citations from ${nf.format(totals.citing_works)} papers, with the h-index worked out paper by paper.`}>
+  <PageHeader title="Citations"
+    lead={`Papers that cite my work, listed from OpenAlex, an open scholarly index (snapshot of ${asOf}). Google Scholar's counts run slightly higher because it also indexes theses, preprint servers and other sources.`}>
+    <a href="/publications/" class="btn">Back to Publications</a>
+    <a href={me.links.scholar!} target="_blank" rel="noopener" class="btn">Google Scholar<Icon name="arrow-up-right" size={14} /></a>
+    <a href={data.source_url} target="_blank" rel="noopener" class="btn">OpenAlex profile<Icon name="arrow-up-right" size={14} /></a>
+    <Fragment slot="meta">
+      <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
+        {[
+          { v: nf.format(totals.citations), l: "Citations", href: "#citing-h", self: "" },
+          { v: nf.format(totals.citations - totals.self_citations), l: "Excluding self-citations", href: "#citing-h", self: "hide" },
+          { v: nf.format(totals.citing_works), l: "Citing papers", href: "#citing-h", self: "" },
+          { v: totals.h_index, l: "h-index", href: "#h-index-h", self: null },
+          { v: totals.i10_index, l: "i10-index", href: "#h-index-h", self: null },
+        ].map((f) => (
+          <div class="figure-link flex flex-col-reverse justify-end">
+            <dt class="flex items-center gap-1 text-xs text-muted">{f.l}<Icon name="arrow-right" size={11} class="figure-arrow" /></dt>
+            <dd class="font-display text-[1.75rem] font-semibold tabular text-ink"><a href={f.href} class="figure-a" data-set-self={f.self ?? undefined}>{f.v}<span class="sr-only"> {f.l}</span></a></dd>
+          </div>
+        ))}
+      </dl>
+    </Fragment>
+  </PageHeader>
+
+  <Section id="h-index-h" title="h-index, paper by paper" icon="trending-up">
+    <p class="-mt-2 mb-5 max-w-[68ch] text-[1.0625rem] leading-relaxed text-ink-2">
+      An h-index of <strong class="text-ink">{totals.h_index}</strong> means {totals.h_index} papers have each been cited at least {totals.h_index} times.
+      The i10-index of {totals.i10_index} counts papers with ten or more citations. Select a count to see the papers behind it.
+    </p>
+    <ol class="hx" style={`--max:${maxCites}`}>
+      {cited.map((w, i) => (
+        <li class:list={["hx-row", i < totals.h_index && "in-h", i === totals.h_index - 1 && "h-edge"]}>
+          <span class="hx-rank mono" aria-hidden="true">{i + 1}</span>
+          <span class="min-w-0">
+            <a href={w.url} target="_blank" rel="noopener" class="hx-title">{w.title}</a>
+            <span class="block text-xs text-muted">{[w.venue, w.year].filter(Boolean).join(" · ")}</span>
+          </span>
+          <a href={`?paper=${w.id}#citing-h`} class="hx-count" data-set-paper={w.id} style={`--n:${w.cited_by}`}
+             aria-label={`${w.cited_by} citations: show the papers citing ${short(w.title)}`}>
+            <span class="hx-track" aria-hidden="true"><span class="hx-bar"></span></span><span class="mono tabular text-right">{w.cited_by}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    <p class="mt-3 text-xs text-muted">
+      The line marks the h-index. {uncited > 0 && `${uncited} more ${uncited === 1 ? "paper has" : "papers have"} no citations yet, mostly recent preprints. `}
+      Counts come from the citing papers listed below.
+    </p>
+  </Section>
+
+  <Section id="cy-h" title="Citations per year" icon="calendar-days">
+    <div class="cy-plot" role="img" aria-label={perYear.map((d) => `${d.y}: ${d.n} citations`).join("; ")}>
+      {perYear.map((d, i) => (
+        <div class="cy-bar" style={`--h:${(d.n / maxYear).toFixed(3)};--i:${i}`}>
+          <span class="mono text-xs text-ink-2">{d.n}</span>
+          <span class="cy-fill" aria-hidden="true"></span>
+          <span class="mono text-xs text-muted">{d.y}</span>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section id="citing-h" title="Citing papers" icon="quote">
+    <form data-cite-filters hidden role="search" aria-label="Filter citing papers" class="cite-filters mb-5 grid gap-3 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_8rem] sm:items-end">
+      <label class="relative block">
+        <span class="sr-only">Search citing papers</span>
+        <Icon name="search" size={15} class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+        <input name="q" type="search" placeholder="Search titles, authors, venues" autocomplete="off" class="field pl-9" />
+      </label>
+      <label class="block">
+        <span class="sr-only">Cited paper</span>
+        <select name="paper" class="field">
+          <option value="">All my papers</option>
+          {cited.map((w) => <option value={w.id}>{short(w.title)} ({w.cited_by})</option>)}
+        </select>
+      </label>
+      <label class="block">
+        <span class="sr-only">Year</span>
+        <select name="year" class="field">
+          <option value="">All years</option>
+          {years.map((y) => <option value={y}>{y}</option>)}
+        </select>
+      </label>
+      <label class="flex items-center gap-2 text-sm text-ink-2 sm:col-span-3">
+        <input type="checkbox" name="noself" /> Hide self-citations (papers I co-authored)
+      </label>
+    </form>
+    <p class="mb-3 text-sm text-muted tabular" data-cite-count aria-live="polite">{nf.format(data.citing.length)} papers</p>
+
+    <ol class="rows" data-cite-list>
+      {data.citing.map((c) => (
+        <li class="cite-row" data-year={c.year ?? ""} data-cites={c.cites.join(" ")} data-self={c.self ? "1" : undefined}
+>
+          <a href={c.url} target="_blank" rel="noopener" class="cite-title">{c.title}</a>
+          <p class="mt-0.5 text-sm text-ink-2">{c.authors.join(", ")}{c.more > 0 && ` + ${c.more} more`}</p>
+          <p class="mt-0.5 text-xs text-muted">
+            {[c.venue, c.year].filter(Boolean).join(" · ")}
+            {c.self && <span class="badge ml-2">Self-citation</span>}
+          </p>
+          <p class="mt-1.5 flex flex-wrap items-center gap-1.5 text-xs text-muted">
+            <span>Cites</span>
+            {c.cites.map((id) => <span class="cite-chip">{shortById.get(id) ?? id}</span>)}
+          </p>
+        </li>
+      ))}
+    </ol>
+    <div class="mt-5 flex items-center gap-3" data-cite-more hidden>
+      <button type="button" class="btn btn-sm">Show more</button>
+    </div>
+    <p class="mt-6 text-xs text-muted">
+      Source: <a href={data.source_url} target="_blank" rel="noopener" class="link-quiet">OpenAlex</a> (CC0 open data), snapshot of {asOf}.
+      Indexes differ, and some citing papers may be missing or attributed imperfectly. The data is also available as <a href="/data/citations.json" class="link-quiet">JSON</a>.
+    </p>
+  </Section>
+</Base>
+
+<style is:global>
+  /* Global (class names unique to this page) so rows carry no scoped-style attributes. */
+  .hx { display: grid; max-width: 56rem; }
+  .hx-row {
+    display: grid; grid-template-columns: 1.5rem minmax(0, 1fr) 4.75rem; gap: 0.6rem; align-items: center;
+    padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+  }
+  @media (min-width: 640px) { .hx-row { grid-template-columns: 2rem minmax(0, 1fr) 12rem; gap: 0.9rem; } }
+  .hx-row.h-edge { border-bottom: 2px solid var(--ink); }
+  .hx-rank { font-size: 0.8125rem; color: var(--muted); text-align: right; }
+  .in-h .hx-rank { color: var(--ink); font-weight: 600; }
+  .hx-title { display: block; font-size: 0.9375rem; line-height: 1.4; color: var(--ink); text-decoration: none; }
+  .hx-title:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .hx-count { display: grid; grid-template-columns: minmax(0, 1fr) 2.25rem; align-items: center; gap: 0.5rem; min-height: 2rem; font-size: 0.875rem; color: var(--ink); text-decoration: none; border-radius: 4px; }
+  .hx-count:hover .hx-bar { background: var(--ink); }
+  .hx-count:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .hx-track { display: block; height: 0.6rem; }
+  .hx-bar { display: block; height: 100%; width: calc(var(--n) / var(--max) * 100%); min-width: 3px; border-radius: 2px; background: var(--border-strong); transition: background-color 150ms; }
+  .in-h .hx-bar { background: var(--ink-2); }
+
+  .cy-plot { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0.75rem; height: 11rem; align-items: end; border-bottom: 1px solid var(--border-strong); max-width: 40rem; }
+  .cy-bar { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 0.3rem; height: 100%; }
+  .cy-fill { display: block; width: 100%; max-width: 3.25rem; height: calc(var(--h) * (100% - 2.6rem)); min-height: 3px; background: var(--ink-2); border-radius: 4px 4px 0 0; transform-origin: bottom; }
+  @media (prefers-reduced-motion: no-preference) {
+    .js .cy-fill { transform: scaleY(0); transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--i) * 80ms + 150ms); }
+    .js .is-visible .cy-fill { transform: none; }
+  }
+
+  .cite-row { padding: 0.9rem 0; }
+  .cite-title { font-weight: 600; line-height: 1.4; color: var(--ink); text-decoration: none; }
+  .cite-title:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cite-chip { display: inline-block; max-width: 100%; padding: 0.05rem 0.45rem; border: 1px solid var(--border); border-radius: 4px; color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cite-filters select.field { appearance: auto; }
+</style>
+
+<script define:vars={{ PAGE }}>
+  const form = document.querySelector("[data-cite-filters]");
+  const rows = [...document.querySelectorAll(".cite-row")];
+  const countEl = document.querySelector("[data-cite-count]");
+  const moreWrap = document.querySelector("[data-cite-more]");
+  if (form && rows.length) {
+    form.hidden = false;
+    let limit = PAGE;
+    const nf = new Intl.NumberFormat("en-US");
+    const apply = (resetLimit = true) => {
+      if (resetLimit) limit = PAGE;
+      const q = form.q.value.trim().toLowerCase();
+      const paper = form.paper.value, year = form.year.value, noself = form.noself.checked;
+      let shown = 0, total = 0, cites = 0;
+      for (const r of rows) {
+        r.dataset.text ??= r.textContent.replace(/\s+/g, " ").toLowerCase();
+        const ok = (!paper || r.dataset.cites.split(" ").includes(paper)) && (!year || r.dataset.year === year)
+          && (!noself || !r.dataset.self) && (!q || r.dataset.text.includes(q));
+        if (ok) { total++; cites += paper ? 1 : r.dataset.cites.split(" ").length; }
+        r.hidden = !ok || shown >= limit;
+        if (ok && shown < limit) shown++;
+      }
+      countEl.textContent = `${nf.format(total)} paper${total === 1 ? "" : "s"}${!paper && cites !== total ? ` · ${nf.format(cites)} citations` : ""}${shown < total ? ` · showing ${nf.format(shown)}` : ""}`;
+      moreWrap.hidden = shown >= total;
+      const url = new URL(location.href);
+      for (const [k, v] of [["paper", paper], ["year", year], ["q", q], ["noself", noself ? "1" : ""]]) v ? url.searchParams.set(k, v) : url.searchParams.delete(k);
+      history.replaceState(null, "", url);
+    };
+    form.addEventListener("input", () => apply());
+    form.addEventListener("submit", (e) => e.preventDefault());
+    moreWrap.querySelector("button").addEventListener("click", () => { limit += PAGE * 2; apply(false); });
+
+    // Links on the page (h-index rows, header figures) set a filter and jump to the list.
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[data-set-paper], a[data-set-self]");
+      if (!a) return;
+      e.preventDefault();
+      form.reset();
+      if (a.dataset.setPaper) form.paper.value = a.dataset.setPaper;
+      if (a.dataset.setSelf === "hide") form.noself.checked = true;
+      apply();
+      document.getElementById("citing-h")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+
+    const p = new URLSearchParams(location.search);
+    if (p.get("paper")) form.paper.value = p.get("paper");
+    if (p.get("year")) form.year.value = p.get("year");
+    if (p.get("q")) form.q.value = p.get("q");
+    if (p.get("noself")) form.noself.checked = true;
+    apply();
+  }
+</script>

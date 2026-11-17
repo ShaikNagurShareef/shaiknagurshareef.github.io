@@ -7,6 +7,8 @@ name: Deploy site to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "17 6 * * 1" # weekly rebuild so the citations page (OpenAlex) stays current
   workflow_dispatch:
     inputs:
       ref:
@@ -36,6 +38,8 @@ jobs:
           cache: npm
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - run: npm ci
+      # Refresh who-cites-my-work from OpenAlex; keep the committed snapshot if it is unreachable.
+      - run: node scripts/fetch-citations.mjs || echo "::warning::Citations refresh failed; using the committed snapshot"
       - run: npm run build
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:

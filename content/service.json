@@ -1,15 +1,15 @@
 {
-  "summary": "Reviewer for 25 journals and major conferences (AAAI, CVPR, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 80+ papers reviewed across AI/ML, biomedical imaging and computer vision.",
+  "summary": "Reviewer for 25 journals and major conferences (AAAI, CVPR, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 90+ papers reviewed across AI/ML, biomedical imaging and computer vision.",
   "conferences": [
     {
       "name": "AAAI 2027",
-      "count": null,
+      "count": 6,
       "url": "/data/reviewer/RC_AAAI2027.webp",
       "active": true
     },
     {
       "name": "ICLR 2027",
-      "count": null,
+      "count": 3,
       "url": "/data/reviewer/RC_ICLR2027.webp",
       "active": true
     },

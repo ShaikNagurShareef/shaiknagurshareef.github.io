@@ -14,6 +14,8 @@ import { join } from "node:path";
 type Entry = { date: string; venue: string; type: string };
 const log = JSON.parse(readFileSync(join(process.cwd(), "content/review-log.json"), "utf8")) as { entries: Entry[] };
 const entries = log.entries;
+type Venue = { name: string; count: number | null; url: string | null; active?: boolean };
+const service = JSON.parse(readFileSync(join(process.cwd(), "content/service.json"), "utf8")) as { conferences: Venue[] };
 const TYPES = ["Invitation", "Review accepted", "Review completed", "Conference review"];
 const count = (f: (e: Entry) => boolean) => entries.filter(f).length;
 const years = [...new Set(entries.map((e) => e.date.slice(0, 4)))].sort();
@@ -61,6 +63,27 @@ const fmt = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US"
       <span class="inline-flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm bg-ink"></span>Invitations</span>
       <span class="inline-flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm bg-border-strong"></span>Reviews and assignments</span>
     </p>
+  </Section>
+
+  <Section id="consoles-h" title="Conference assignments" icon="badge-check">
+    <p class="-mt-2 mb-4 max-w-[68ch] text-sm leading-relaxed text-muted">Program-committee and reviewer roles recorded in conference consoles (OpenReview, CMT). Each record is a console capture with submission details blacked out.</p>
+    <div class="overflow-x-auto">
+      <table class="table">
+        <thead><tr><th scope="col">Conference</th><th scope="col">Status</th><th scope="col" class="num">Assigned papers</th><th scope="col">Record</th></tr></thead>
+        <tbody>
+          {service.conferences.map((c) => (
+            <tr>
+              <td class="text-ink">{c.name}</td>
+              <td>{c.active ? <span class="badge badge-ok"><span class="dot"></span>Active</span> : <span class="text-muted">Completed</span>}</td>
+              <td class="num">{c.count ?? "–"}</td>
+              <td>{c.url
+                ? <a href={c.url} {...(/\.(webp|png|jpe?g)$/.test(c.url) ? { "data-lightbox": true, "data-caption": `${c.name}: reviewer console` } : { target: "_blank", rel: "noopener" })} class="link-quiet inline-flex items-center gap-1"><Icon name="file-text" size={13} />View</a>
+                : <span class="text-muted">–</span>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </Section>
 
   <Section id="venue-h" title="By venue" icon="library">

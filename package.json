@@ -10,6 +10,7 @@
   },
   "scripts": {
     "sync:public": "node scripts/sync-public.mjs",
+    "citations": "node scripts/fetch-citations.mjs",
     "dev": "npm run sync:public && astro dev",
     "check": "astro check",
     "build": "npm run sync:public && astro check && astro build",
