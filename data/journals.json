@@ -6,7 +6,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Naralasetti, Veeranjaneyulu; Bodapati, Jyostna Devi",
     "year": "2025",
     "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
-    "doi": "10.1007/s00138-025-01665-0"
+    "doi": "10.1007/s00138-025-01665-0",
+    "figure": "/img/papers/afanet.webp"
   },
   {
     "url": "https://link.springer.com/article/10.1007/s00138-024-01542-2",
@@ -15,7 +16,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Naralasetti, Veeranjaneyulu; Bodapati, Jyostna Devi",
     "year": "2024",
     "new": "",
-    "doi": "10.1007/s00138-024-01542-2"
+    "doi": "10.1007/s00138-024-01542-2",
+    "figure": "/img/papers/medtransnet.webp"
   },
   {
     "url": "https://www.sciencedirect.com/science/article/abs/pii/S0262885624000490",
@@ -24,7 +26,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong> and Cherukuri, Teja Krishna",
     "year": "2024",
     "new": "",
-    "doi": "10.1016/j.imavis.2024.104946"
+    "doi": "10.1016/j.imavis.2024.104946",
+    "figure": "/img/papers/gated-contextual-transformer.webp"
   },
   {
     "url": "https://link.springer.com/article/10.1007/s12652-022-03843-8",
@@ -33,7 +36,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong> and Cherukuri, Teja Krishna",
     "year": "2022",
     "new": "",
-    "doi": "10.1007/s12652-022-03843-8"
+    "doi": "10.1007/s12652-022-03843-8",
+    "figure": "/img/papers/visual-attention-facial-expression.webp"
   },
   {
     "url": "https://link.springer.com/article/10.1007/s10489-021-03043-5",
@@ -42,7 +46,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong> and Cherukuri, Teja Krishna",
     "year": "2022",
     "new": "",
-    "doi": "10.1007/s10489-021-03043-5"
+    "doi": "10.1007/s10489-021-03043-5",
+    "figure": "/img/papers/hinge-attention-network.webp"
   },
   {
     "url": "https://www.sciencedirect.com/science/article/pii/S0010482521009215",
@@ -51,7 +56,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong> and Cherukuri, Teja Krishna",
     "year": "2021",
     "new": "",
-    "doi": "10.1016/j.compbiomed.2021.105127"
+    "doi": "10.1016/j.compbiomed.2021.105127",
+    "figure": "/img/papers/covid-ensemble-classifier.webp"
   },
   {
     "url": "https://link.springer.com/article/10.1007/s00138-021-01253-y",
@@ -60,7 +66,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong> and Cherukuri, Teja Krishna",
     "year": "2021",
     "new": "",
-    "doi": "10.1007/s00138-021-01253-y"
+    "doi": "10.1007/s00138-021-01253-y",
+    "figure": "/img/papers/lesion-aware-attention.webp"
   },
   {
     "url": "https://link.springer.com/article/10.1007/s11760-021-02022-0",
@@ -69,7 +76,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong> and Cherukuri, Teja Krishna",
     "year": "2021",
     "new": "",
-    "doi": "10.1007/s11760-021-02022-0"
+    "doi": "10.1007/s11760-021-02022-0",
+    "figure": "/img/papers/multi-level-attention.webp"
   },
   {
     "url": "https://www.worldscientific.com/doi/10.1142/S0218001421570056",
@@ -78,7 +86,8 @@
     "authors": "Bodapati, Jyostna Devi; <strong>Shaik, Nagur Shareef</strong>; Naralasetti, Veeranjaneyulu; Mundukur, Nirupama Bhat",
     "year": "2021",
     "new": "",
-    "doi": "10.1142/s0218001421570056"
+    "doi": "10.1142/s0218001421570056",
+    "figure": "/img/papers/msenet.webp"
   },
   {
     "url": "https://link.springer.com/article/10.1007/s11760-020-01816-y",
@@ -87,7 +96,8 @@
     "authors": "Bodapati, Jyostna Devi; <strong>Shaik, Nagur Shareef</strong>; Naralasetti, Veeranjaneyulu",
     "year": "2021",
     "new": "",
-    "doi": "10.1007/s11760-020-01816-y"
+    "doi": "10.1007/s11760-020-01816-y",
+    "figure": "/img/papers/deep-feature-aggregation.webp"
   },
   {
     "url": "https://link.springer.com/article/10.1007/s12652-020-02727-z",
@@ -96,7 +106,8 @@
     "authors": "Bodapati, Jyostna Devi; <strong>Shaik, Nagur Shareef</strong>; Naralasetti, Veeranjaneyulu",
     "year": "2021",
     "new": "",
-    "doi": "10.1007/s12652-020-02727-z"
+    "doi": "10.1007/s12652-020-02727-z",
+    "figure": "/img/papers/composite-gated-attention.webp"
   },
   {
     "url": "https://link.springer.com/article/10.1007/s11760-020-01793-2",
@@ -105,7 +116,8 @@
     "authors": "Bodapati, Jyostna Devi; <strong>Shaik, Nagur Shareef</strong>; Naralasetti, Veeranjaneyulu; Mundukur, Nirupama Bhat",
     "year": "2021",
     "new": "",
-    "doi": "10.1007/s11760-020-01793-2"
+    "doi": "10.1007/s11760-020-01793-2",
+    "figure": "/img/papers/two-channel-brain-tumor.webp"
   },
   {
     "url": "https://www.iieta.org/journals/ria/paper/10.18280/ria.340308",
@@ -114,7 +126,8 @@
     "authors": "Dondeti, Venkatesulu; Bodapati, Jyostna Devi; <strong>Shaik, Nagur Shareef</strong>; Veeranjaneyulu, Naralasetti",
     "year": "2020",
     "new": "",
-    "doi": "10.18280/ria.340308"
+    "doi": "10.18280/ria.340308",
+    "figure": "/img/papers/fundus-nonlinear-embedding.webp"
   },
   {
     "url": "https://www.mdpi.com/2079-9292/9/6/914",
@@ -124,7 +137,8 @@
     "year": "2020",
     "new": "",
     "doi": "10.3390/electronics9060914",
-    "arxiv": "2006.00197"
+    "arxiv": "2006.00197",
+    "figure": "/img/papers/blended-deep-features.webp"
   },
   {
     "url": "https://www.iieta.org/journals/isi/paper/10.18280/isi.240119",
@@ -133,6 +147,7 @@
     "authors": "Bodapati, Jyostna Devi; Naralasetti, Veeranjaneyulu; <strong>Shaik, Nagur Shareef</strong>",
     "year": "2019",
     "new": "",
-    "doi": "10.18280/isi.240119"
+    "doi": "10.18280/isi.240119",
+    "figure": "/img/papers/lstm-sentiment.webp"
   }
 ]
