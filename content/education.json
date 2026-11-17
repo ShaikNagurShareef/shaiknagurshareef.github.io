@@ -21,7 +21,14 @@
       "Fundamentals of Data Science"
     ],
     "note": "Dissertation: From Perception to Clinical Reasoning (see Research).",
-    "logo": "/img/orgs/gsu.webp"
+    "logo": "/img/orgs/gsu.webp",
+    "credentials": [
+      {
+        "label": "Dissertation",
+        "url": "/data/dissertation/NagurShareefShaik_PhD_Dissertation.pdf",
+        "kind": "document"
+      }
+    ]
   },
   {
     "id": "ms",
@@ -43,7 +50,19 @@
       "Fundamentals of Data Science"
     ],
     "note": "Thesis: Attentive Multi-modal Learning (see Research).",
-    "logo": "/img/orgs/gsu.webp"
+    "logo": "/img/orgs/gsu.webp",
+    "credentials": [
+      {
+        "label": "Diploma (digitally signed)",
+        "url": "/data/degrees/GSU-MS-Computer-Science-Diploma.pdf",
+        "kind": "document"
+      },
+      {
+        "label": "Thesis",
+        "url": "/data/thesis/NagurShareefShaik_MS_Thesis.pdf",
+        "kind": "document"
+      }
+    ]
   },
   {
     "id": "btech",
@@ -65,6 +84,18 @@
       "Optimization Techniques"
     ],
     "note": "Chairman's Gold Medal; Best Outgoing Student of CSE.",
-    "logo": "/img/orgs/vfstr.webp"
+    "logo": "/img/orgs/vfstr.webp",
+    "credentials": [
+      {
+        "label": "Degree certificate",
+        "url": "/img/degrees/vfstr-btech-degree.webp",
+        "kind": "image"
+      },
+      {
+        "label": "Convocation video",
+        "url": "/recognition/#vfstr-convocation",
+        "kind": "video"
+      }
+    ]
   }
 ]

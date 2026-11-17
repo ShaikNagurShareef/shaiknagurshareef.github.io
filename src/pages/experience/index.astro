@@ -67,6 +67,15 @@ const skills = (await getCollection("skills")).sort(byOrder);
             </div>
             {s.data.note && <p class="mt-2 text-[1.0625rem] text-ink-2 prose-measure">{s.data.note}</p>}
             <p class="mt-3 text-sm leading-relaxed text-muted prose-measure"><span class="font-medium text-ink-2">Coursework:</span> {s.data.coursework.join(", ")}</p>
+            {s.data.credentials && (
+              <div class="mt-4 flex flex-wrap gap-2">
+                {s.data.credentials.map((c) => (
+                  c.kind === "image"
+                    ? <a href={c.url} data-lightbox data-caption={`${s.data.degree}, ${s.data.school}: ${c.label}`} class="cert-link"><Icon name="award" size={14} />{c.label}</a>
+                    : <a href={c.url} class="cert-link" {...(c.kind === "video" ? {} : { target: "_blank", rel: "noopener" })}><Icon name={c.kind === "video" ? "play" : c.kind === "verify" ? "badge-check" : "file-text"} size={14} />{c.label}</a>
+                ))}
+              </div>
+            )}
           </div>
         </li>
       ))}

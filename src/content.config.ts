@@ -176,6 +176,10 @@ const education = defineCollection({
     degree: z.string(), school: z.string(), schoolUrl: z.string().optional(), logo: z.string().optional(), location: z.string(),
     start: yearMonth, end: yearMonth, expected: z.boolean(), gpa: z.string(),
     coursework: z.array(z.string()), note: z.string().optional(),
+    /** Public credentials: diploma, thesis, verification page, ceremony video. */
+    credentials: z.array(z.object({
+      label: z.string(), url: z.string(), kind: z.enum(["document", "image", "verify", "video"]),
+    })).optional(),
   }),
 });
 

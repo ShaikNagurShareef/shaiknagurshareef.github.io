@@ -33,6 +33,9 @@ const watch = (s: number) => `https://www.youtube.com/watch?v=${id}&t=${s}s`;
           <span class="font-semibold">{c.label}</span>
           <span class="mono text-muted">{ts(c.start)}{c.end ? `–${ts(c.end)}` : ""}</span>
         </a>
+        <a href={watch(c.start)} target="_blank" rel="noopener" class="vclips-ext" title="Open on YouTube at this time">
+          <Icon name="arrow-up-right" size={14} /><span class="sr-only">Open {c.label} on YouTube at {ts(c.start)}</span>
+        </a>
       </li>
     ))}
   </ol>
@@ -61,7 +64,14 @@ const watch = (s: number) => `https://www.youtube.com/watch?v=${id}&t=${s}s`;
     border: 1px solid var(--border); border-radius: 999px; font-size: 0.875rem; color: var(--ink); text-decoration: none;
     background: var(--surface); transition: border-color 150ms, background-color 150ms, color 150ms;
   }
+  .vclips-list li { display: inline-flex; align-items: center; gap: 0.25rem; }
   .vclips-clip:hover { border-color: var(--ink); }
+  .vclips-ext {
+    display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem;
+    border: 1px solid var(--border); border-radius: 999px; color: var(--ink-2); background: var(--surface);
+    transition: border-color 150ms, color 150ms;
+  }
+  .vclips-ext:hover { border-color: var(--ink); color: var(--ink); }
   .vclips-clip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
   .vclips-clip[aria-pressed="true"] .text-muted { color: inherit; opacity: 0.75; }
   @media (prefers-reduced-motion: reduce) { .vclips-poster:hover img, .vclips-poster:hover .vclips-play { transform: none; } }

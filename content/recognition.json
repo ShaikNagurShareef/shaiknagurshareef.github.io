@@ -213,7 +213,7 @@
       "title": "Chairman's Gold Medal and Best Outgoing Student",
       "org": "VFSTR (Vignan's Foundation for Science, Technology and Research)",
       "date": "2021-08",
-      "summary": "Received the Chairman's Gold Medal for overall excellence in the B.Tech in Computer Science and Engineering and the Best Outgoing Student award at the university's 8th Convocation on August 27, 2021.",
+      "summary": "Received the Chairman's Gold Medal (CGPA 9.78) for overall excellence in the B.Tech in Computer Science and Engineering and the Best Outgoing Student award at the university's convocation on August 27, 2021, and addressed the graduates as the gold medalist.",
       "evidence": [
         {
           "label": "Convocation post (Instagram)",
@@ -232,8 +232,19 @@
         "poster": "/img/recognition/vfstr-convocation-video.webp",
         "clips": [
           {
-            "label": "On stage",
-            "start": 9529
+            "label": "Chairman's Gold Medal",
+            "start": 9478,
+            "end": 9565
+          },
+          {
+            "label": "Best Outgoing Student",
+            "start": 9738,
+            "end": 9754
+          },
+          {
+            "label": "Graduate address",
+            "start": 11622,
+            "end": 12014
           }
         ]
       }

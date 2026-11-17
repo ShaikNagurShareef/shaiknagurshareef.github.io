@@ -258,3 +258,11 @@
 .figure-link:hover .figure-a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
 .figure-arrow { opacity: 0; transform: translateX(-3px); transition: opacity 150ms, transform 150ms; }
 .figure-link:hover .figure-arrow, .figure-link:focus-within .figure-arrow { opacity: 1; transform: none; }
+
+/* Small outlined link to a document, record or verification page. */
+.cert-link {
+  display: inline-flex; align-items: center; gap: 0.35rem; height: 2rem; padding-inline: 0.7rem;
+  border: 1px solid var(--border); border-radius: 999px; font-size: 0.8125rem; font-weight: 600;
+  color: var(--ink); text-decoration: none; transition: border-color 150ms, background-color 150ms;
+}
+.cert-link:hover { border-color: var(--ink); background: var(--surface-2); }

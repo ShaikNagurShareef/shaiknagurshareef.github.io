@@ -141,12 +141,6 @@ const certCount = (await getCollection("certifications")).length;
   }
   .evidence-thumb img { display: block; width: 100%; height: auto; transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1); }
   .evidence-thumb:hover img { transform: scale(1.03); }
-  .cert-link {
-    display: inline-flex; align-items: center; gap: 0.35rem; height: 2rem; padding-inline: 0.7rem;
-    border: 1px solid var(--border); border-radius: 999px; font-size: 0.8125rem; font-weight: 600;
-    color: var(--ink); text-decoration: none; transition: border-color 150ms, background-color 150ms;
-  }
-  .cert-link:hover { border-color: var(--ink); background: var(--surface-2); }
   .row-link {
     display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 0;
     color: var(--ink); text-decoration: none;
