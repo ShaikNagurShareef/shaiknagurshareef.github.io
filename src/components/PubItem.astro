@@ -4,7 +4,7 @@ import Icon from "./Icon.astro";
 interface Props {
   pub: { id: string; data: {
     title: string; authors: string; venue: string; year: number | null; kind: string; status: string;
-    presentation: string | null; url: string | null;
+    presentation: string | null; url: string | null; figure?: string | null;
     links?: { doi: string | null; official: string | null; arxiv: string | null; openreview: string | null };
   } };
   headingLevel?: "h3" | "h4";
@@ -32,8 +32,15 @@ if (L) {
   links.push({ href: d.url, label: "Paper", hint: "Paper", icon: "file-text" });
 }
 ---
-<article class="pub py-5" id={pub.id} data-pub data-year={d.year ?? ""} data-kind={d.kind} data-status={d.status}
+<article class:list={["pub py-5", d.figure && "has-figure"]} id={pub.id} data-pub data-year={d.year ?? ""} data-kind={d.kind} data-status={d.status}
          data-presentation={d.presentation ?? ""} data-search={search}>
+  {d.figure && (
+    <a href={d.figure} class="pub-fig" data-lightbox data-caption={`${d.title} (main figure)`} aria-label={`Enlarge the main figure of ${d.title}`}>
+      <img src={d.figure.replace(/\.webp$/, "-thumb.webp")} alt="" loading="lazy" decoding="async" width="640" height="360" />
+      <span class="pub-fig-zoom" aria-hidden="true"><Icon name="maximize-2" size={14} /></span>
+    </a>
+  )}
+  <div class="min-w-0">
   <H class="text-[1.125rem] font-semibold leading-snug">
     {d.url ? <a href={d.url} target="_blank" rel="noopener" class="link-plain text-ink">{d.title}</a> : d.title}
   </H>
@@ -62,9 +69,24 @@ if (L) {
       </button>
     </div>
   )}
+</div>
 </article>
 
 <style>
+  .pub.has-figure { display: grid; gap: 0.75rem 1.5rem; }
+  @media (min-width: 640px) { .pub.has-figure { grid-template-columns: 12.5rem minmax(0, 1fr); align-items: start; } }
+  .pub-fig {
+    position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius);
+    border: 1px solid var(--border); background: #fff; cursor: zoom-in;
+  }
+  .pub-fig img { width: 100%; height: 100%; object-fit: contain; padding: 0.35rem; transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .pub-fig:hover img { transform: scale(1.06); }
+  .pub-fig-zoom {
+    position: absolute; right: 0.4rem; bottom: 0.4rem; display: inline-flex; padding: 0.3rem; border-radius: 999px;
+    background: var(--ink); color: var(--bg); opacity: 0; transform: translateY(4px); transition: opacity 150ms, transform 150ms;
+  }
+  .pub-fig:hover .pub-fig-zoom, .pub-fig:focus-visible .pub-fig-zoom { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .pub-fig:hover img { transform: none; } }
   .pub-action {
     display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 500; color: var(--ink);
     text-decoration: none;

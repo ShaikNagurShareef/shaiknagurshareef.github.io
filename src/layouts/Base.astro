@@ -7,6 +7,7 @@ import CommandPalette from "../components/CommandPalette.astro";
 import ChatWidget from "../components/ChatWidget.astro";
 import VisitBeacon from "../components/VisitBeacon.astro";
 import DefenseBanner from "../components/DefenseBanner.astro";
+import Lightbox from "../components/Lightbox.astro";
 
 interface Props {
   title?: string;
@@ -99,6 +100,7 @@ const person = {
     </main>
     <Footer />
     <CommandPalette />
+    <Lightbox />
     {chat && <ChatWidget />}
     {track && <VisitBeacon />}
     <script>

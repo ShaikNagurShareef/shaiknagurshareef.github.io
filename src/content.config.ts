@@ -38,6 +38,8 @@ type RawPub = {
   url?: string; title: string; medium?: string; authors?: string; year?: string | number; new?: string;
   /** Verified links (checked against arXiv, Crossref and OpenReview): DOI, arXiv id, OpenReview forum id, official page. */
   doi?: string; arxiv?: string; openreview?: string; official?: string;
+  /** Main/architecture figure (WebP under /img/papers/; a "-thumb" variant sits beside it). */
+  figure?: string;
 };
 
 const ARXIV_RE = /arxiv\.org\/(?:abs|pdf)\/([0-9]{4}\.[0-9]{4,5})/i;
@@ -81,6 +83,7 @@ function normalizePub(raw: RawPub, kind: (typeof PUB_SOURCES)[number]["kind"]) {
     presentation,
     url,
     links,
+    figure: raw.figure ?? null,
     isNew: Boolean(raw.new && raw.new.trim()),
   };
 }
@@ -103,6 +106,7 @@ const publications = defineCollection({
       arxiv: z.url().nullable(),
       openreview: z.url().nullable(),
     }),
+    figure: z.string().nullable(),
     isNew: z.boolean(),
   }),
 });

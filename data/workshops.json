@@ -6,7 +6,8 @@
     "medium": "Proceedings of the 36th IEEE International Workshop on Machine Learning for Signal Processing (MLSP 2026) - <span style='color: blue;'>Oral</span>",
     "year": "2026",
     "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
-    "arxiv": "2608.09774"
+    "arxiv": "2608.09774",
+    "figure": "/img/papers/c2a.webp"
   },
   {
     "url": "https://arxiv.org/pdf/2608.09752",
@@ -15,7 +16,8 @@
     "medium": "Proceedings of the 36th IEEE International Workshop on Machine Learning for Signal Processing (MLSP 2026) - <span style='color: blue;'>Oral</span>",
     "year": "2026",
     "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
-    "arxiv": "2608.09752"
+    "arxiv": "2608.09752",
+    "figure": "/img/papers/saliency-guided-moe.webp"
   },
   {
     "url": "https://openreview.net/pdf?id=hatzHLfYtF",
@@ -25,6 +27,7 @@
     "year": "2025",
     "new": "",
     "arxiv": "2509.26146",
-    "openreview": "hatzHLfYtF"
+    "openreview": "hatzHLfYtF",
+    "figure": "/img/papers/cap-wae.webp"
   }
 ]

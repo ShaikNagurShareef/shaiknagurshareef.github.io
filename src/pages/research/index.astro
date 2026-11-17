@@ -68,7 +68,7 @@ const stages = diss.stages.map((s) => ({
         <div class="defense-gallery mt-4">
           {diss.defensePhotos.map((p, i) => (
             <figure class:list={[i === 0 && "is-lead"]}>
-              <a href={p.src} target="_blank" rel="noopener" class="block overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface-2">
+              <a href={p.src} data-lightbox data-caption={p.caption} target="_blank" rel="noopener" class="block overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface-2">
                 <img src={p.src} alt={p.alt} loading="lazy" decoding="async" class:list={["h-full w-full object-cover", p.focus === "left" && "object-left", p.focus === "right" && "object-right"]} />
               </a>
               <figcaption class="mt-2 text-sm text-muted">{p.caption}</figcaption>

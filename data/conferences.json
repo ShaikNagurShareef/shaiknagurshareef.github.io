@@ -6,7 +6,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
     "year": "2026",
     "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
-    "arxiv": "2604.17209"
+    "arxiv": "2604.17209",
+    "figure": "/img/papers/dream.webp"
   },
   {
     "url": "https://arxiv.org/pdf/2604.17222",
@@ -15,7 +16,8 @@
     "authors": "<strong>Shaik, Nagur Shareef</strong>; Cherukuri, Teja Krishna; Ye, Dong Hye",
     "year": "2026",
     "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
-    "arxiv": "2604.17222"
+    "arxiv": "2604.17222",
+    "figure": "/img/papers/region-affinity-attention.webp"
   },
   {
     "url": "https://arxiv.org/pdf/2511.05968",
@@ -25,7 +27,8 @@
     "year": "2026",
     "new": "<span class='new-badge'><img src='img/new.png' alt='badge-icon' class='badge-icon' /></span>",
     "doi": "10.1609/aaai.v40i11.37835",
-    "arxiv": "2511.05968"
+    "arxiv": "2511.05968",
+    "figure": "/img/papers/dia-gnostic-vlvae.webp"
   },
   {
     "url": "https://arxiv.org/pdf/2504.20306",
@@ -35,7 +38,8 @@
     "year": "2025",
     "new": "",
     "doi": "10.1109/embc58623.2025.11254199",
-    "arxiv": "2504.20306"
+    "arxiv": "2504.20306",
+    "figure": "/img/papers/dcan.webp"
   },
   {
     "url": "https://arxiv.org/pdf/2407.19385",
@@ -45,7 +49,8 @@
     "year": "2025",
     "new": "",
     "doi": "10.1109/isbi60581.2025.10980651",
-    "arxiv": "2407.19385"
+    "arxiv": "2407.19385",
+    "figure": "/img/papers/migtrans.webp"
   },
   {
     "url": "https://ieeexplore.ieee.org/document/10890310",
@@ -55,7 +60,8 @@
     "year": "2025",
     "new": "",
     "doi": "10.1109/icassp49660.2025.10890310",
-    "arxiv": "2412.17251"
+    "arxiv": "2412.17251",
+    "figure": "/img/papers/gcs-m3vlt.webp"
   },
   {
     "url": "https://ieeexplore.ieee.org/document/10647584",
@@ -65,7 +71,8 @@
     "year": "2024",
     "new": "",
     "doi": "10.1109/icip51287.2024.10647584",
-    "arxiv": "2406.13129"
+    "arxiv": "2406.13129",
+    "figure": "/img/papers/m3t.webp"
   },
   {
     "url": "https://ieeexplore.ieee.org/document/10647604",
@@ -75,7 +82,8 @@
     "year": "2024",
     "new": "",
     "doi": "10.1109/icip51287.2024.10647604",
-    "arxiv": "2406.13126"
+    "arxiv": "2406.13126",
+    "figure": "/img/papers/guided-context-gating.webp"
   },
   {
     "url": "https://ieeexplore.ieee.org/document/10635528",
@@ -85,6 +93,7 @@
     "year": "2024",
     "new": "",
     "doi": "10.1109/isbi56570.2024.10635528",
-    "arxiv": "2406.12683"
+    "arxiv": "2406.12683",
+    "figure": "/img/papers/spatial-sequence-attention.webp"
   }
 ]
