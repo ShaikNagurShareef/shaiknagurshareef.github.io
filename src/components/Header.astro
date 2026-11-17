@@ -44,6 +44,7 @@ const path = Astro.url.pathname;
     </div>
   </div>
 
+  <div class="read-progress" data-read-progress aria-hidden="true"></div>
   <nav id="mobile-menu" aria-label="Primary" hidden class="border-t border-border bg-bg lg:hidden">
     <ul class="container-page grid py-2">
       {NAV.map((item) => (
@@ -57,6 +58,10 @@ const path = Astro.url.pathname;
 
 <style>
   .site-header { transition: box-shadow 160ms ease-out; }
+  .read-progress {
+    position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--ink);
+    transform-origin: left; transform: scaleX(var(--p, 0)); pointer-events: none;
+  }
   .site-header[data-scrolled] { box-shadow: 0 1px 0 var(--border); }
   .nav-link {
     position: relative; display: inline-flex; align-items: center; padding-inline: 0.75rem;
@@ -122,7 +127,12 @@ const path = Astro.url.pathname;
 
   // Soft shadow under the header once the page is scrolled.
   const header = document.querySelector<HTMLElement>("[data-site-header]");
-  const onScroll = () => header?.toggleAttribute("data-scrolled", scrollY > 4);
+  const bar = document.querySelector<HTMLElement>("[data-read-progress]");
+  const onScroll = () => {
+    header?.toggleAttribute("data-scrolled", scrollY > 4);
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar?.style.setProperty("--p", String(max > 0 ? Math.min(1, scrollY / max) : 0));
+  };
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 

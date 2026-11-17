@@ -128,6 +128,17 @@ const person = {
         document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
       }
 
+      // Cursor spotlight: feed pointer position to [data-spotlight] cards (fine pointers only).
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        document.addEventListener("pointermove", (e) => {
+          const card = (e.target as HTMLElement).closest<HTMLElement>("[data-spotlight]");
+          if (!card) return;
+          const r = card.getBoundingClientRect();
+          card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+          card.style.setProperty("--my", `${e.clientY - r.top}px`);
+        }, { passive: true });
+      }
+
       // Shared disclosure for "Cite" buttons (BibTeX panel below each publication).
       document.addEventListener("click", (e) => {
         const t = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-cite-toggle]");

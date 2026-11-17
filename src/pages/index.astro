@@ -32,6 +32,17 @@ const roles = [
   { title: me.role.split(", ")[0], org: me.role.split(", ").slice(1).join(", ") },
 ];
 const asOf = ym(me.stats.as_of);
+// Short venue names for the "Published at" strip, from the publication records (published only).
+const VENUE_SHORT: [RegExp, string][] = [
+  [/\(AAAI/, "AAAI"], [/NeurIPS/, "NeurIPS (GenAI4Health)"], [/ICASSP/, "IEEE ICASSP"], [/\(ICIP\)/, "IEEE ICIP"],
+  [/\(ISBI\)/, "IEEE ISBI"], [/\(EMBC/, "IEEE EMBC"], [/MLSP/, "IEEE MLSP"],
+  [/Machine Vision and Applications/, "Machine Vision and Applications"], [/Image and Vision Computing/, "Image and Vision Computing"],
+  [/Computers in Biology and Medicine/, "Computers in Biology and Medicine"], [/Applied Intelligence/, "Applied Intelligence"],
+  [/Signal Image and Video Processing/, "Signal, Image and Video Processing"], [/IJPRAI/, "IJPRAI"],
+  [/Ambient Intelligence/, "J. Ambient Intelligence & Humanized Computing"], [/Electronics/, "Electronics (MDPI)"],
+];
+const venues = [...new Set(pubs.filter((p) => p.data.status === "published")
+  .map((p) => VENUE_SHORT.find(([re]) => re.test(p.data.venue))?.[1]).filter((v): v is string => Boolean(v)))];
 ---
 <Base>
   <script is:inline>
@@ -50,7 +61,8 @@ const asOf = ym(me.stats.as_of);
     })();
   </script>
   <!-- Hero -->
-  <section class="container-page grid gap-10 pb-14 pt-12 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-16 md:pb-20 md:pt-20 lg:grid-cols-[minmax(0,1fr)_17rem]">
+  <div class="hero-wrap">
+  <section class="container-page relative grid gap-10 pb-14 pt-12 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-16 md:pb-20 md:pt-20 lg:grid-cols-[minmax(0,1fr)_17rem]">
     <div class="hero-in max-w-[46rem]">
       <h1 class="text-[2.75rem] sm:text-[3.75rem]">{me.name}{me.credentials && <span class="font-normal text-ink-2">, {me.credentials}</span>}</h1>
       <p class="mt-4 text-[1.25rem] font-medium text-ink-2 sm:text-[1.5rem]">{focus}</p>
@@ -71,11 +83,14 @@ const asOf = ym(me.stats.as_of);
       <SocialLinks links={me.links} class="mt-7" />
     </div>
     <div class="fade-in hidden md:block">
-      <img src="/img/Shareef-2026-hero.webp" alt={`Portrait of ${me.name}`} width="560" height="700"
-           class="aspect-[4/5] w-full rounded-[var(--radius-lg)] bg-surface-2 object-cover grayscale-[15%]" loading="eager" fetchpriority="high" />
-      <p class="mt-3 text-xs text-muted">{me.location} · <a href="/contact/" class="text-muted">Contact</a></p>
+      <div class="portrait">
+        <img src="/img/Shareef-2026-hero.webp" alt={`Portrait of ${me.name}`} width="560" height="700"
+             class="relative aspect-[4/5] w-full rounded-[var(--radius-lg)] bg-surface-2 object-cover" loading="eager" fetchpriority="high" />
+      </div>
+      <p class="mt-5 text-xs text-muted">{me.location} · <a href="/contact/" class="text-muted">Contact</a></p>
     </div>
   </section>
+  </div>
 
   <!-- Key figures -->
   <section aria-labelledby="stats-h" class="border-y border-border bg-surface-2" data-reveal>
@@ -90,6 +105,18 @@ const asOf = ym(me.stats.as_of);
         ))}
       </dl>
       <p class="mt-5 text-xs text-muted">Citation metrics: {me.stats.source}, {asOf}. Paper count includes workshops.</p>
+    </div>
+  </section>
+
+  <!-- Venues (scrolling strip; static and wrapped when motion is reduced) -->
+  <section aria-labelledby="venues-h" class="venues border-b border-border">
+    <div class="container-page flex items-center gap-6 py-5">
+      <h2 id="venues-h" class="subhead shrink-0">Published at</h2>
+      <div class="marquee" data-marquee>
+        <ul class="marquee-track">
+          {[...venues, ...venues].map((v, i) => <li aria-hidden={i >= venues.length ? "true" : undefined}>{v}</li>)}
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -127,3 +154,37 @@ const asOf = ym(me.stats.as_of);
     </ol>
   </Section>
 </Base>
+
+<style>
+  /* Hero: faint dot grid fading out toward the edges */
+  .hero-wrap { position: relative; overflow: hidden; }
+  .hero-wrap::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(color-mix(in srgb, var(--ink) 16%, transparent) 1px, transparent 1.2px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse 70% 80% at 78% 30%, #000 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 80% at 78% 30%, #000 0%, transparent 70%);
+  }
+  /* Portrait with an offset outline frame that shifts on hover */
+  .portrait { position: relative; }
+  .portrait::before {
+    content: ""; position: absolute; inset: 0; transform: translate(12px, 12px);
+    border: 1.5px solid var(--ink); border-radius: var(--radius-lg); transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .portrait:hover::before { transform: translate(6px, 6px); }
+  .portrait img { box-shadow: var(--shadow); }
+
+  /* Venue strip */
+  .marquee { position: relative; flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .marquee-track { display: flex; width: max-content; gap: 2.5rem; animation: marquee 48s linear infinite; }
+  .marquee-track li { font-size: 0.9375rem; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+  .marquee-track li + li::before { content: "·"; margin-right: 2.5rem; color: var(--border-strong); }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee { mask-image: none; -webkit-mask-image: none; }
+    .marquee-track { animation: none; width: auto; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+    .marquee-track li[aria-hidden] { display: none; }
+    .marquee-track li + li::before { margin-right: 1.25rem; }
+  }
+</style>

@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import Section from "../../components/Section.astro";
+import { PROFILE } from "../../lib/profiles";
 import Icon from "../../components/Icon.astro";
 import { getEntry } from "astro:content";
 
@@ -103,7 +104,10 @@ const profiles: Array<[string, string]> = [
       {profiles.filter(([, k]) => me.links[k]).map(([label, k]) => (
         <li class="border-b border-border">
           <a href={me.links[k]!} target="_blank" rel="noopener me" class="row-link">
-            {label}
+            <span class="inline-flex items-center gap-3">
+              {PROFILE[k]?.brand ? <Icon brand={PROFILE[k].brand} size={17} class="text-muted" /> : <Icon name={PROFILE[k]?.icon ?? "link"} size={18} class="text-muted" />}
+              {label}
+            </span>
           </a>
         </li>
       ))}

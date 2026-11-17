@@ -210,6 +210,15 @@
   .skip-link:focus { top: 0.75rem; }
 }
 
+/* Cursor spotlight on cards ([data-spotlight]); position comes from --mx/--my set in Base.astro. */
+[data-spotlight] { position: relative; isolation: isolate; }
+[data-spotlight]::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1; opacity: 0;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--ink) 7%, transparent), transparent 70%);
+  transition: opacity 200ms;
+}
+[data-spotlight]:hover::after { opacity: 1; }
+
 /* Motion: subtle, enabled only when JS runs (html.js) and the visitor has not asked for reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   .js [data-reveal] {
@@ -217,6 +226,11 @@
     transition: opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1), transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .js [data-reveal].is-visible { opacity: 1; transform: none; }
+  .js .section-title::after {
+    content: ""; display: block; width: 2.5rem; height: 3px; margin-top: 0.6rem; background: var(--ink); border-radius: 2px;
+    transform: scaleX(0); transform-origin: left; transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 250ms;
+  }
+  .js .is-visible .section-title::after { transform: none; }
   .hero-in > * { animation: rise-in 800ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
   .hero-in > :nth-child(2) { animation-delay: 70ms; }
   .hero-in > :nth-child(3) { animation-delay: 140ms; }
