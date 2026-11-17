@@ -265,7 +265,11 @@ const recognition = defineCollection({
     })),
     awards: z.array(z.object({
       id: z.string(), title: z.string(), org: z.string(), date: z.string(), summary: z.string(),
-      evidence: z.array(linkItem), images: z.array(z.object({ src: z.string(), caption: z.string() })),
+      evidence: z.array(linkItem),
+      /** Photos (lightbox); `source` credits and links the original post. */
+      images: z.array(z.object({ src: z.string(), caption: z.string(), source: linkItem.optional() })),
+      /** Short self-hosted videos (vertical reels), played in place; `source` links the original. */
+      reels: z.array(z.object({ src: z.string(), poster: z.string(), caption: z.string(), source: linkItem })).optional(),
       /** A YouTube recording with named clips (seconds); played in place, loaded only on demand. */
       video: z.object({
         id: z.string(), title: z.string(), poster: z.string(),

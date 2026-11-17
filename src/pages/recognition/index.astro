@@ -91,14 +91,29 @@ const certCount = (await getCollection("certifications")).length;
             </div>
           )}
           {a.video && <div class="mt-5"><VideoClips {...a.video} /></div>}
-          {a.images.length > 0 && (
-            <div class:list={["evidence-grid mt-5", a.images.length === 1 && "is-single"]}>
+          {(a.images.length > 0 || a.reels?.length) && (
+            <div class:list={["evidence-grid mt-5", a.images.length + (a.reels?.length ?? 0) === 1 && "is-single", a.reels?.length && "has-reel"]}>
+              {a.reels?.map((r) => (
+                <figure class="reel">
+                  <video class="reel-video" controls playsinline preload="none" poster={r.poster} aria-label={r.caption}>
+                    <source src={r.src} type="video/mp4" />
+                    <a href={r.source.url} target="_blank" rel="noopener">{r.caption} ({r.source.label})</a>
+                  </video>
+                  <figcaption class="mt-2 text-sm text-muted">
+                    {r.caption}
+                    <span class="block text-xs">Video: <a href={r.source.url} target="_blank" rel="noopener" class="link-quiet">{r.source.label}</a></span>
+                  </figcaption>
+                </figure>
+              ))}
               {a.images.map((img) => (
                 <figure>
-                  <a href={img.src} data-lightbox data-caption={`${a.title}: ${img.caption}`} class="evidence-thumb">
+                  <a href={img.src} data-lightbox data-caption={`${a.title}: ${img.caption}${img.source ? ` (photo: ${img.source.label})` : ""}`} class="evidence-thumb">
                     <img src={img.src.replace(/\.webp$/, "-thumb.webp")} alt={img.caption} loading="lazy" decoding="async" />
                   </a>
-                  <figcaption class="mt-2 text-sm text-muted">{img.caption}</figcaption>
+                  <figcaption class="mt-2 text-sm text-muted">
+                    {img.caption}
+                    {img.source && <span class="block text-xs">Photo: <a href={img.source.url} target="_blank" rel="noopener" class="link-quiet">{img.source.label}</a></span>}
+                  </figcaption>
                 </figure>
               ))}
             </div>
@@ -141,6 +156,11 @@ const certCount = (await getCollection("certifications")).length;
   }
   .evidence-thumb img { display: block; width: 100%; height: auto; transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1); }
   .evidence-thumb:hover img { transform: scale(1.03); }
+  .evidence-grid.has-reel { align-items: start; }
+  .reel-video {
+    display: block; width: 100%; aspect-ratio: 9 / 16; max-height: 32rem; object-fit: cover; background: #000;
+    border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+  }
   .row-link {
     display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 0;
     color: var(--ink); text-decoration: none;

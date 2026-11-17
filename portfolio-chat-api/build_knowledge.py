@@ -191,7 +191,9 @@ def recognition() -> str:
         lines.append(f"- {m['source']} ({m['kind']}{', ' + m['date'] if m.get('date') else ''}): \"{m['title']}\" {m['url']}")
     lines.append("Achievements with public evidence:")
     for a in d["awards"]:
-        links = "; ".join(f"{e['label']}: {e['url']}" for e in a["evidence"])
+        media = [{"label": f"{m['caption']} ({m['source']['label']})", "url": m["source"]["url"]}
+                 for m in a.get("reels", []) + a.get("images", []) if m.get("source")]
+        links = "; ".join(f"{e['label']}: {e['url']}" for e in a["evidence"] + media)
         lines.append(f"- {a['title']}, {a['org']} ({a['date']}). {a['summary']}" + (f" Evidence: {links}" if links else ""))
     return "\n".join(lines)
 

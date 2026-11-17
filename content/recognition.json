@@ -98,19 +98,39 @@
           "url": "https://news.gsu.edu/2025/10/28/georgia-state-ph-d-student-wins-global-tech-innovation-award/"
         },
         {
-          "label": "UST reel: award on the D3 stage",
-          "url": "https://www.instagram.com/ust.global/reel/DP3o5BygDFh/"
-        },
-        {
-          "label": "TReNDS Center post: US-region award",
-          "url": "https://www.linkedin.com/feed/update/urn:li:activity:7382196259450818560/"
-        },
-        {
           "label": "PRISM on GitHub",
           "url": "https://github.com/ShaikNagurShareef/PRISM/"
         }
       ],
-      "images": []
+      "images": [
+        {
+          "src": "/img/recognition/d3code-2025-us-award.webp",
+          "caption": "US regional award, presented at UST",
+          "source": {
+            "label": "TReNDS Center on LinkedIn",
+            "url": "https://www.linkedin.com/feed/update/urn:li:activity:7382196259450818560/"
+          }
+        },
+        {
+          "src": "/img/recognition/d3code-2025-prism-demo.webp",
+          "caption": "Presenting PRISM at UST",
+          "source": {
+            "label": "TReNDS Center on LinkedIn",
+            "url": "https://www.linkedin.com/feed/update/urn:li:activity:7382196259450818560/"
+          }
+        }
+      ],
+      "reels": [
+        {
+          "src": "/img/recognition/d3code-2025-ust-reel.mp4",
+          "poster": "/img/recognition/d3code-2025-ust-reel.webp",
+          "caption": "Receiving the D3CODE 2025 global award on the D3 stage",
+          "source": {
+            "label": "UST on Instagram",
+            "url": "https://www.instagram.com/ust.global/reel/DP3o5BygDFh/"
+          }
+        }
+      ]
     },
     {
       "id": "axissql-bird",
