@@ -165,14 +165,14 @@ const venues = [...new Set(pubs.filter((p) => p.data.status === "published")
     mask-image: radial-gradient(ellipse 70% 80% at 78% 30%, #000 0%, transparent 70%);
     -webkit-mask-image: radial-gradient(ellipse 70% 80% at 78% 30%, #000 0%, transparent 70%);
   }
-  /* Portrait with an offset outline frame that shifts on hover */
-  .portrait { position: relative; }
-  .portrait::before {
-    content: ""; position: absolute; inset: 0; transform: translate(12px, 12px);
-    border: 1.5px solid var(--ink); border-radius: var(--radius-lg); transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* Portrait: clean rounded frame; the photo zooms gently inside it on hover */
+  .portrait {
+    position: relative; overflow: hidden; border-radius: var(--radius-lg);
+    border: 1px solid var(--border); box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 18px 40px -18px rgb(0 0 0 / 0.35);
   }
-  .portrait:hover::before { transform: translate(6px, 6px); }
-  .portrait img { box-shadow: var(--shadow); }
+  .portrait img { display: block; border-radius: 0; transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .portrait:hover img { transform: scale(1.03); }
+  @media (prefers-reduced-motion: reduce) { .portrait:hover img { transform: none; } }
 
   /* Venue strip */
   .marquee { position: relative; flex: 1; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
