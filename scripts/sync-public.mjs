@@ -19,6 +19,8 @@ for (const dir of ["data", "img"]) {
   const dest = join(root, "public", dir);
   if (!existsSync(src)) continue;
   rmSync(dest, { recursive: true, force: true });
-  cpSync(src, dest, { recursive: true, filter: (p) => !p.endsWith(".DS_Store") });
+  // data/misc is the private evidence drop folder (gitignored): never copy it into the site.
+  const misc = join(root, "data", "misc");
+  cpSync(src, dest, { recursive: true, filter: (p) => !p.endsWith(".DS_Store") && p !== misc && !p.startsWith(misc + "/") });
 }
 console.log("synced data/ and img/ into public/");

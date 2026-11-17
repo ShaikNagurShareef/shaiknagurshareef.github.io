@@ -11,7 +11,7 @@ import Icon from "../../components/Icon.astro";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-type Entry = { date: string; venue: string; type: string };
+type Entry = { date: string; venue: string; type: string; file?: string };
 const log = JSON.parse(readFileSync(join(process.cwd(), "content/review-log.json"), "utf8")) as { entries: Entry[] };
 const entries = log.entries;
 type Venue = { name: string; count: number | null; url: string | null; active?: boolean };
@@ -29,7 +29,7 @@ const fmt = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US"
 ---
 <Base title="Peer-review log" description="Reviewer invitations, accepted and completed reviews, and conference review assignments, 2021–2026.">
   <PageHeader title="Peer-review log"
-    lead={`Every reviewer invitation and review recorded in my editorial correspondence since ${years[0]}. Manuscript titles, IDs and editors' details are confidential and omitted.`}>
+    lead={`Every reviewer invitation and review recorded in my editorial correspondence since ${years[0]}, each with its email record as a PDF. Manuscript titles, IDs, abstracts, review text and editors' details are confidential and blacked out.`}>
     <a href="/service/#review-h" class="btn">Back to Service</a>
     <Fragment slot="meta">
       <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
@@ -106,13 +106,16 @@ const fmt = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US"
     </div>
     <div class="overflow-x-auto">
       <table class="table">
-        <thead><tr><th scope="col">Date</th><th scope="col">Journal or conference</th><th scope="col">Type</th></tr></thead>
+        <thead><tr><th scope="col">Date</th><th scope="col">Journal or conference</th><th scope="col">Type</th><th scope="col">Record</th></tr></thead>
         <tbody>
           {entries.map((e) => (
             <tr data-row-type={e.type}>
               <td class="mono whitespace-nowrap text-muted">{fmt(e.date)}</td>
               <td class="text-ink">{e.venue}</td>
               <td><span class:list={["badge", e.type === "Review completed" && "badge-ok", e.type === "Invitation" && "badge-info"]}>{e.type}</span></td>
+              <td>{e.file
+                ? <a href={`/data/reviewer/log/${e.file}`} target="_blank" rel="noopener" class="link-quiet inline-flex items-center gap-1" aria-label={`Email record (PDF): ${e.type}, ${e.venue}, ${fmt(e.date)}`}><Icon name="file-text" size={13} />PDF</a>
+                : <span class="text-muted">–</span>}</td>
             </tr>
           ))}
         </tbody>
