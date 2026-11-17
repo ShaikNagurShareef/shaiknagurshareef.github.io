@@ -1,0 +1,147 @@
+---
+/**
+ * Recognition: independent media coverage and awards, each with the public evidence behind it.
+ * Data: content/recognition.json. Only publicly shareable material is listed here; documents with
+ * personal identifiers are redacted before they are added, and private records are never published.
+ */
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
+import Icon from "../../components/Icon.astro";
+import { getEntry, getCollection } from "astro:content";
+import { ym } from "../../lib/format";
+
+const rec = (await getEntry("recognition", "recognition"))!.data;
+const media = [...rec.media].sort((a, b) => b.date.localeCompare(a.date));
+const fmtDate = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+const service = (await getEntry("service", "service"))!.data;
+const reviews = [...service.conferences, ...service.journals].filter((v) => v.count !== null).reduce((n, v) => n + (v.count ?? 0), 0);
+const certCount = (await getCollection("certifications")).length;
+---
+<Base title="Recognition" description="Media coverage, awards and honors, with the public evidence behind each one.">
+  <PageHeader title="Recognition"
+    lead="Independent coverage of my work and the awards behind it. Each item links to its source: the publisher's article, the organizer's announcement, or the award document itself.">
+    <Fragment slot="meta">
+      <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
+        {[
+          { v: media.length, l: "Media articles" },
+          { v: rec.awards.length, l: "Awards with evidence" },
+          { v: certCount, l: "Certifications" },
+          { v: reviews, l: "Peer reviews completed" },
+        ].map((f) => (
+          <div class="flex flex-col-reverse justify-end">
+            <dt class="text-xs text-muted">{f.l}</dt>
+            <dd class="font-display text-[1.75rem] font-semibold tabular text-ink">{f.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </Fragment>
+  </PageHeader>
+
+  <Section id="news-h" title="In the news" description="Coverage by universities, news outlets and organizers. Links open the original publication.">
+    <ol class="grid gap-3">
+      {media.map((m) => (
+        <li>
+          <a href={m.url} target="_blank" rel="noopener" class="media-card" data-spotlight>
+            <span class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+              <span class="font-semibold text-ink">{m.source}</span>
+              <span class="badge">{m.kind}</span>
+              <span class="mono text-muted">{fmtDate(m.date)}</span>
+            </span>
+            <span class="mt-1.5 block text-[1.125rem] font-semibold leading-snug text-ink">{m.title}</span>
+            {m.quote && <span class="mt-2 block border-l-2 border-border-strong pl-3 text-[0.9375rem] italic text-ink-2">“{m.quote}”</span>}
+            <span class="media-cta" aria-hidden="true">Read article <Icon name="arrow-up-right" size={14} /></span>
+          </a>
+        </li>
+      ))}
+    </ol>
+    {rec.profiles.length > 0 && (
+      <p class="mt-5 text-sm text-muted">Also: {rec.profiles.map((p, i) => <>{i > 0 && " · "}<a href={p.url} target="_blank" rel="noopener" class="link-quiet">{p.label}</a></>)}</p>
+    )}
+  </Section>
+
+  <Section id="awards-h" title="Awards and honors" description="Each award with its supporting evidence. Images open full size.">
+    <div class="grid gap-10">
+      {rec.awards.map((a) => (
+        <article id={a.id} class="award">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <h3 class="text-[1.25rem] font-semibold">{a.title}</h3>
+            <span class="mono text-muted">{a.date.length > 4 ? ym(a.date) : a.date}</span>
+          </div>
+          <p class="mt-0.5 text-[0.9375rem] font-medium text-ink-2">{a.org}</p>
+          <p class="mt-3 max-w-[70ch] text-[1.0625rem] leading-relaxed text-ink-2">{a.summary}</p>
+          {a.evidence.length > 0 && (
+            <div class="mt-4 flex flex-wrap gap-2">
+              {a.evidence.map((e) => (
+                <a href={e.url} target="_blank" rel="noopener" class="cert-link"><Icon name="badge-check" size={14} />{e.label}</a>
+              ))}
+            </div>
+          )}
+          {a.images.length > 0 && (
+            <div class:list={["evidence-grid mt-5", a.images.length === 1 && "is-single"]}>
+              {a.images.map((img) => (
+                <figure>
+                  <a href={img.src} data-lightbox data-caption={`${a.title}: ${img.caption}`} class="evidence-thumb">
+                    <img src={img.src.replace(/\.webp$/, "-thumb.webp")} alt={img.caption} loading="lazy" decoding="async" />
+                  </a>
+                  <figcaption class="mt-2 text-sm text-muted">{img.caption}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+    <p class="mt-8 text-sm text-muted">The complete list of honors, including earlier academic and industry awards, is on the <a href="/service/#awards-h" class="link-quiet">Service and honors</a> page.</p>
+  </Section>
+
+  <Section id="more-h" title="More evidence">
+    <ul class="rows -mt-3">
+      {[
+        { href: "/service/#review-h", label: "Peer review", text: `${reviews} completed reviews and active reviewer roles, with reviewer records` },
+        { href: "/service/#certs-h", label: "Certifications", text: `${certCount} certificates, with issuer verification links where available` },
+        { href: "/publications/", label: "Publications", text: "Peer-reviewed papers with DOI, arXiv and OpenReview links" },
+        { href: "/research/", label: "Dissertation and thesis", text: "Ph.D. dissertation and M.S. thesis, with committee and full text" },
+      ].map((r) => (
+        <li>
+          <a href={r.href} class="row-link">
+            <span><span class="block font-semibold text-ink">{r.label}</span><span class="block text-sm text-muted">{r.text}</span></span>
+            <Icon name="arrow-right" size={16} class="text-muted" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+</Base>
+
+<style>
+  .media-card {
+    position: relative; display: block; padding: 1.1rem 1.25rem 1rem; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); background: var(--surface); text-decoration: none; box-shadow: var(--shadow-sm);
+    transition: border-color 150ms, box-shadow 150ms, transform 150ms;
+  }
+  .media-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow); transform: translateY(-1px); }
+  .media-cta { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 600; color: var(--ink); }
+  .award { padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+  .award:last-child { padding-bottom: 0; border-bottom: 0; }
+  .evidence-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
+  .evidence-grid.is-single { grid-template-columns: minmax(0, 26rem); }
+  .evidence-thumb {
+    display: block; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: #fff;
+    cursor: zoom-in; box-shadow: var(--shadow-sm);
+  }
+  .evidence-thumb img { display: block; width: 100%; height: auto; transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .evidence-thumb:hover img { transform: scale(1.03); }
+  .cert-link {
+    display: inline-flex; align-items: center; gap: 0.35rem; height: 2rem; padding-inline: 0.7rem;
+    border: 1px solid var(--border); border-radius: 999px; font-size: 0.8125rem; font-weight: 600;
+    color: var(--ink); text-decoration: none; transition: border-color 150ms, background-color 150ms;
+  }
+  .cert-link:hover { border-color: var(--ink); background: var(--surface-2); }
+  .row-link {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 0;
+    color: var(--ink); text-decoration: none;
+  }
+  .row-link:hover { color: var(--accent-ink); }
+  @media (prefers-reduced-motion: reduce) { .media-card:hover { transform: none; } .evidence-thumb:hover img { transform: none; } }
+</style>

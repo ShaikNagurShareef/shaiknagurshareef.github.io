@@ -248,6 +248,22 @@ const research = defineCollection({
   }),
 });
 
+/* Recognition: media coverage and awards with public evidence (content/recognition.json). */
+const linkItem = z.object({ label: z.string(), url: z.string() });
+const recognition = defineCollection({
+  loader: () => [{ id: "recognition", ...(readJson("content/recognition.json") as object) }],
+  schema: z.object({
+    media: z.array(z.object({
+      source: z.string(), kind: z.string(), date: z.string(), title: z.string(), url: z.url(), quote: z.string().optional(),
+    })),
+    awards: z.array(z.object({
+      id: z.string(), title: z.string(), org: z.string(), date: z.string(), summary: z.string(),
+      evidence: z.array(linkItem), images: z.array(z.object({ src: z.string(), caption: z.string() })),
+    })),
+    profiles: z.array(linkItem),
+  }),
+});
+
 const service = defineCollection({
   loader: () => [{ id: "service", ...(readJson("content/service.json") as object) }],
   schema: z.object({
@@ -260,7 +276,7 @@ const service = defineCollection({
   }),
 });
 
-export const collections = {
+export const collections = { recognition,
   publications, projects, profile, experience, education, people, awards,
   certifications, participations, news, skills, research, service,
 };

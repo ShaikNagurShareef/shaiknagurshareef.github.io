@@ -33,6 +33,7 @@ export const GET: APIRoute = async () => {
     "/cv/": "resume curriculum vitae print",
     "/contact/": "email phone reach message form",
     "/feedback/": "testimonials reviews feedback recommend",
+    "/recognition/": "news media press awards honors evidence d3code champion recognition",
   };
   if (await getDefense()) items.push({ type: "Page", title: "Ph.D. defense", subtitle: "November 16, 2026 · 2:30–4:00 PM EST · GSU and Teams", url: "/defense/", keywords: "defense dissertation phd thesis teams join calendar" });
   for (const n of FOOTER_NAV) items.push({ type: "Page", title: n.label, url: n.href, keywords: PAGE_HINTS[n.href] });

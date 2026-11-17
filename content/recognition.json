@@ -1,0 +1,83 @@
+{
+  "media": [
+    {
+      "source": "Georgia State University News",
+      "kind": "University news",
+      "date": "2025-10-28",
+      "title": "Georgia State Ph.D. Student Wins Global Tech Innovation Award",
+      "url": "https://news.gsu.edu/2025/10/28/georgia-state-ph-d-student-wins-global-tech-innovation-award/",
+      "quote": "PRISM brings the power of AI from research labs into real enterprise workflows."
+    },
+    {
+      "source": "EurekAlert! (AAAS)",
+      "kind": "Science news release",
+      "date": "2025-10-29",
+      "title": "Georgia State Ph.D. student wins Global Tech Innovation Award",
+      "url": "https://www.eurekalert.org/news-releases/1103853"
+    },
+    {
+      "source": "Rough Draft Atlanta",
+      "kind": "News",
+      "date": "2025-11-15",
+      "title": "Georgia State University student wins global AI innovation competition",
+      "url": "https://roughdraftatlanta.com/2025/11/15/gsu-student-wins-ai-competition/"
+    },
+    {
+      "source": "PR Newswire (UST)",
+      "kind": "Press release",
+      "date": "2025-10-15",
+      "title": "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference",
+      "url": "https://www.prnewswire.com/news-releases/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-302583559.html"
+    },
+    {
+      "source": "TechNode Global",
+      "kind": "News",
+      "date": "2025-10-15",
+      "title": "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference",
+      "url": "https://technode.global/?p=109875"
+    }
+  ],
+  "awards": [
+    {
+      "id": "d3code-2025",
+      "title": "Global Champion, D3CODE 2025",
+      "org": "UST",
+      "date": "2025-10",
+      "summary": "UST's international student innovation challenge on AI, quantum computing and data ecosystems drew more than 25,000 students from Malaysia, India, Mexico, the United Kingdom and the United States. The Grand Jury named team Neural Navigators (Nagur Shareef Shaik, Georgia State University; Vandna Rajpal, Stevens Institute of Technology) the global winner for PRISM, an AI platform for no-code data analysis, ETL and predictive modeling.",
+      "evidence": [
+        { "label": "UST press release", "url": "https://www.prnewswire.com/news-releases/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-302583559.html" },
+        { "label": "Georgia State News", "url": "https://news.gsu.edu/2025/10/28/georgia-state-ph-d-student-wins-global-tech-innovation-award/" },
+        { "label": "PRISM on GitHub", "url": "https://github.com/ShaikNagurShareef/PRISM/" }
+      ],
+      "images": []
+    },
+    {
+      "id": "gsu-graduate-research-award",
+      "title": "Graduate Research Award",
+      "org": "Department of Computer Science, Georgia State University",
+      "date": "2026",
+      "summary": "Selected by the Computer Science Honors and Awards Committee; the award was presented at the department's CS Demo Day awards ceremony.",
+      "evidence": [],
+      "images": [
+        { "src": "/img/recognition/gsu-graduate-research-award.webp", "caption": "Award notification from the Department of Computer Science (staff contact details redacted)" }
+      ]
+    },
+    {
+      "id": "ust-ustar",
+      "title": "USTAR Recognitions: STELLAR, NOVA STAR (two) and SUPER STAR",
+      "org": "UST",
+      "date": "2026",
+      "summary": "Company recognitions for advancing AI initiatives with clients (STELLAR), digital acumen and hackathon work (NOVA STAR), and the CardDemo COBOL modernization hackathon (SUPER STAR).",
+      "evidence": [],
+      "images": [
+        { "src": "/img/recognition/ust-stellar.webp", "caption": "STELLAR, Innovate (client account name redacted)" },
+        { "src": "/img/recognition/ust-super-star.webp", "caption": "SUPER STAR, Innovate: CardDemo COBOL hackathon" },
+        { "src": "/img/recognition/ust-nova-star-1.webp", "caption": "NOVA STAR, Digital Acumen" },
+        { "src": "/img/recognition/ust-nova-star-2.webp", "caption": "NOVA STAR, Digital Acumen: hackathon participation and work" }
+      ]
+    }
+  ],
+  "profiles": [
+    { "label": "TReNDS Center profile", "url": "https://trendscenter.org/nagur-shareef-shaik/" }
+  ]
+}
