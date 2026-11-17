@@ -181,6 +181,20 @@
       ]
     },
     {
+      "id": "neurips-genai4health-travel-grant",
+      "title": "NeurIPS 2025 GenAI4Health Workshop Travel Grant",
+      "org": "GenAI4Health Workshop, NeurIPS 2025",
+      "date": "2025-11",
+      "summary": "Selected by the GenAI4Health organizing committee for a USD 100 travel grant to attend the workshop at NeurIPS 2025, recognizing the quality of the submitted work.",
+      "evidence": [
+        {
+          "label": "Grant notification (PDF)",
+          "url": "/data/awards/NeurIPS-2025-GenAI4Health-Travel-Grant.pdf"
+        }
+      ],
+      "images": []
+    },
+    {
       "id": "ieee-sps-travel-grant",
       "title": "IEEE Signal Processing Society Travel Grant",
       "org": "IEEE Signal Processing Society",

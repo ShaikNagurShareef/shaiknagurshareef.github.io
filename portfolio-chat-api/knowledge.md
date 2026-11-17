@@ -344,7 +344,7 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 ## HONORS AND AWARDS
 - Graduate Research Award, Department of Computer Science, Georgia State University (2026)
 - Global Champion and US Regional Winner, D3CODE 2025, UST Global Inc. (2025). Team Neural Navigators, for PRISM; first among 25,000+ students from five countries. USD 15,000 in prizes (USD 10,000 global, USD 5,000 US region).
-- NeurIPS 2025 GenAI4Health Travel Grant, NeurIPS 2025 GenAI4Health Workshop (2025)
+- NeurIPS 2025 GenAI4Health Travel Grant, NeurIPS 2025 GenAI4Health Workshop (2025). USD 100 to attend the GenAI4Health Workshop at NeurIPS 2025.
 - IEEE SPS Travel Grant (ICIP 2024), IEEE Signal Processing Society (2024). USD 500 to present at ICIP 2024, Abu Dhabi.
 - STELLAR, NOVA Star and Super Star Awards, UST Global Inc. (2026)
 - 100% graduate scholarship, Georgia State University (2023–2026)
@@ -379,6 +379,7 @@ Achievements with public evidence:
 - Graduate Research Award, Department of Computer Science, Georgia State University (2026). Selected by the Computer Science Honors and Awards Committee; the award was presented at the department's CS Demo Day awards ceremony.
 - USTAR Recognitions: STELLAR, NOVA STAR (two) and SUPER STAR, UST (2026). Company recognitions for advancing AI initiatives with clients (STELLAR), digital acumen and hackathon work (NOVA STAR), and the CardDemo COBOL modernization hackathon (SUPER STAR).
 - Go Above Award: Impact, Elevance Health (Carelon Global Solutions) (2023). Recognized for analyzing the commission process in detail to fix a critical issue; nominated for Lead with Purpose and Heart.
+- NeurIPS 2025 GenAI4Health Workshop Travel Grant, GenAI4Health Workshop, NeurIPS 2025 (2025-11). Selected by the GenAI4Health organizing committee for a USD 100 travel grant to attend the workshop at NeurIPS 2025, recognizing the quality of the submitted work. Evidence: Grant notification (PDF): /data/awards/NeurIPS-2025-GenAI4Health-Travel-Grant.pdf
 - IEEE Signal Processing Society Travel Grant, IEEE Signal Processing Society (2024-07). Awarded USD 500 by the SPS Grant Selection Committee to present at the 2024 IEEE International Conference on Image Processing (ICIP 2024), Abu Dhabi. Evidence: Grant notification (PDF): /data/awards/IEEE-SPS-Travel-Grant-ICIP-2024.pdf
 - Chairman's Gold Medal and Best Outgoing Student, VFSTR (Vignan's Foundation for Science, Technology and Research) (2021-08). Received the Chairman's Gold Medal for overall excellence in the B.Tech in Computer Science and Engineering and the Best Outgoing Student award at the university's 8th Convocation on August 27, 2021. Evidence: Convocation video, 2:38:49: https://www.youtube.com/watch?v=iVxfVBQ_WXc&t=9529s; Convocation post (Instagram): https://www.instagram.com/p/CTbbNZNhzAO/
 
