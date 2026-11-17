@@ -60,6 +60,7 @@ const profiles: Array<[string, string]> = [
   </Section>
 
   <Section id="direct-h" title="Direct">
+    <div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_11rem] md:gap-12">
     <dl class="rows -mt-4">
       <div class="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:items-center sm:gap-8">
         <dt class="text-sm text-muted">Email</dt>
@@ -77,6 +78,11 @@ const profiles: Array<[string, string]> = [
         <dd class="font-medium text-ink">{me.location}</dd>
       </div>
     </dl>
+    <figure class="hidden md:block">
+      <img src="/img/Shareef-2023-portrait.webp" alt={`Portrait of ${me.name}`} width="176" height="220" loading="lazy"
+           class="aspect-[4/5] w-full rounded-[var(--radius-lg)] bg-surface-2 object-cover" />
+    </figure>
+    </div>
   </Section>
 
   <Section id="docs-h" title="Documents" description="PDFs open in a new tab.">
