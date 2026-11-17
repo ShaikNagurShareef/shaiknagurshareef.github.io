@@ -262,9 +262,13 @@ const recognition = defineCollection({
     media: z.array(z.object({
       group: z.enum(["press", "ust"]), source: z.string(), kind: z.string(), date: z.string().optional(),
       title: z.string(), url: z.url(), quote: z.string().optional(),
+      /** The same story republished by other outlets (shown on one card). */
+      also: z.array(linkItem).optional(),
     })),
     awards: z.array(z.object({
       id: z.string(), title: z.string(), org: z.string(), date: z.string(), summary: z.string(),
+      /** Section on the Recognition page. */
+      category: z.enum(["competition", "academic", "industry"]),
       evidence: z.array(linkItem),
       /** Photos (lightbox); `source` credits and links the original post. */
       images: z.array(z.object({ src: z.string(), caption: z.string(), source: linkItem.optional() })),

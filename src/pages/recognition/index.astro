@@ -25,6 +25,14 @@ const fmtDate = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en
 const service = (await getEntry("service", "service"))!.data;
 const reviews = [...service.conferences, ...service.journals].filter((v) => v.count !== null).reduce((n, v) => n + (v.count ?? 0), 0);
 const certCount = (await getCollection("certifications")).length;
+// Awards by kind, newest first within each (a year-only date sorts after that year's dated items).
+const AWARD_GROUPS = [
+  { id: "competition", title: "Competitions and research" },
+  { id: "academic", title: "Academic honors and grants" },
+  { id: "industry", title: "Industry recognition" },
+] as const;
+const awardGroups = AWARD_GROUPS.map((g) => ({ ...g, items: rec.awards.filter((a) => a.category === g.id).sort((a, b) => b.date.localeCompare(a.date)) }))
+  .filter((g) => g.items.length);
 ---
 <Base title="Recognition" description="Media coverage, awards and honors, with the public evidence behind each one.">
   <PageHeader title="Recognition"
@@ -32,7 +40,7 @@ const certCount = (await getCollection("certifications")).length;
     <Fragment slot="meta">
       <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
         {[
-          { v: media.length, l: "Media articles", href: "#news-h" },
+          { v: media.reduce((n, m) => n + 1 + (m.also?.length ?? 0), 0), l: "Media articles", href: "#news-h" },
           { v: rec.awards.length, l: "Awards and achievements", href: "#awards-h" },
           { v: certCount, l: "Certifications", href: "/service/#certs-h" },
           { v: reviews, l: "Peer reviews completed", href: "/service/#review-h" },
@@ -53,16 +61,19 @@ const certCount = (await getCollection("certifications")).length;
         <ol class="grid gap-3">
           {g.items.map((m) => (
             <li>
-              <a href={m.url} target="_blank" rel="noopener" class="media-card" data-spotlight>
+              <div class="media-card" data-spotlight>
                 <span class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
                   <span class="font-semibold text-ink">{m.source}</span>
                   <span class="badge"><Icon name={KIND_ICON[m.kind] ?? "newspaper"} size={12} />{m.kind}</span>
                   {m.date && <span class="mono text-muted">{fmtDate(m.date)}</span>}
                 </span>
-                <span class="mt-1.5 block text-[1.125rem] font-semibold leading-snug text-ink">{m.title}</span>
+                <a href={m.url} target="_blank" rel="noopener" class="media-link mt-1.5 block text-[1.125rem] font-semibold leading-snug text-ink">{m.title}</a>
                 {m.quote && <span class="mt-2 block border-l-2 border-border-strong pl-3 text-[0.9375rem] italic text-ink-2">{m.quote}</span>}
                 <span class="media-cta" aria-hidden="true">Read article <Icon name="arrow-up-right" size={14} /></span>
-              </a>
+                {m.also && m.also.length > 0 && (
+                  <p class="media-also mt-2 text-sm text-muted">Also published by {m.also.map((o, i) => <>{i > 0 && (i === m.also!.length - 1 ? " and " : ", ")}<a href={o.url} target="_blank" rel="noopener" class="link-quiet">{o.label}</a></>)}</p>
+                )}
+              </div>
             </li>
           ))}
         </ol>
@@ -74,53 +85,61 @@ const certCount = (await getCollection("certifications")).length;
   </Section>
 
   <Section id="awards-h" title="Awards and achievements">
-    <div class="grid gap-10">
-      {rec.awards.map((a) => (
-        <article id={a.id} class="award">
-          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h3 class="text-[1.25rem] font-semibold">{a.title}</h3>
-            <span class="mono text-muted">{a.date.length > 4 ? ym(a.date) : a.date}</span>
-          </div>
-          <p class="mt-0.5 text-[0.9375rem] font-medium text-ink-2">{a.org}</p>
-          <p class="mt-3 max-w-[70ch] text-[1.0625rem] leading-relaxed text-ink-2">{a.summary}</p>
-          {a.evidence.length > 0 && (
-            <div class="mt-4 flex flex-wrap gap-2">
-              {a.evidence.map((e) => (
-                <a href={e.url} target="_blank" rel="noopener" class="cert-link"><Icon name="badge-check" size={14} />{e.label}</a>
-              ))}
-            </div>
-          )}
-          {a.video && <div class="mt-5"><VideoClips {...a.video} /></div>}
-          {(a.images.length > 0 || a.reels?.length) && (
-            <div class:list={["evidence-grid mt-5", a.images.length + (a.reels?.length ?? 0) === 1 && "is-single", a.reels?.length && "has-reel"]}>
-              {a.reels?.map((r) => (
-                <figure class="reel">
-                  <video class="reel-video" controls playsinline preload="none" poster={r.poster} aria-label={r.caption}>
-                    <source src={r.src} type="video/mp4" />
-                    <a href={r.source.url} target="_blank" rel="noopener">{r.caption} ({r.source.label})</a>
-                  </video>
-                  <figcaption class="mt-2 text-sm text-muted">
-                    {r.caption}
-                    <span class="block text-xs">Video: <a href={r.source.url} target="_blank" rel="noopener" class="link-quiet">{r.source.label}</a></span>
-                  </figcaption>
-                </figure>
-              ))}
-              {a.images.map((img) => (
-                <figure>
-                  <a href={img.src} data-lightbox data-caption={`${a.title}: ${img.caption}${img.source ? ` (photo: ${img.source.label})` : ""}`} class="evidence-thumb">
-                    <img src={img.src.replace(/\.webp$/, "-thumb.webp")} alt={img.caption} loading="lazy" decoding="async" />
-                  </a>
-                  <figcaption class="mt-2 text-sm text-muted">
-                    {img.caption}
-                    {img.source && <span class="block text-xs">Photo: <a href={img.source.url} target="_blank" rel="noopener" class="link-quiet">{img.source.label}</a></span>}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          )}
-        </article>
-      ))}
-    </div>
+    <nav aria-label="Award groups" class="-mt-2 mb-8 flex flex-wrap gap-2">
+      {awardGroups.map((g) => <a href={`#awards-${g.id}`} class="cert-link">{g.title} <span class="text-muted">{g.items.length}</span></a>)}
+    </nav>
+    {awardGroups.map((g, gi) => (
+      <div id={`awards-${g.id}`} class:list={["award-group", gi > 0 && "mt-14"]}>
+        <h3 class="subhead mb-5">{g.title} <span class="font-normal normal-case tracking-normal text-muted">· {g.items.length}</span></h3>
+        <div class="grid gap-10">
+          {g.items.map((a) => (
+            <article id={a.id} class="award">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h4 class="text-[1.25rem] font-semibold">{a.title}</h4>
+                <span class="mono text-muted">{a.date.length > 4 ? ym(a.date) : a.date}</span>
+              </div>
+              <p class="mt-0.5 text-[0.9375rem] font-medium text-ink-2">{a.org}</p>
+              <p class="mt-3 max-w-[70ch] text-[1.0625rem] leading-relaxed text-ink-2">{a.summary}</p>
+              {a.evidence.length > 0 && (
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {a.evidence.map((e) => (
+                    <a href={e.url} target="_blank" rel="noopener" class="cert-link"><Icon name="badge-check" size={14} />{e.label}</a>
+                  ))}
+                </div>
+              )}
+              {a.video && <div class="mt-5"><VideoClips {...a.video} /></div>}
+              {(a.images.length > 0 || a.reels?.length) && (
+                <div class:list={["evidence-grid mt-5", a.images.length + (a.reels?.length ?? 0) === 1 && "is-single", a.reels?.length && "has-reel", !a.reels?.length && a.images.length === 4 && "is-four"]} style={a.reels?.length ? `--rows:${Math.max(1, a.images.length)}` : undefined}>
+                  {a.reels?.map((r) => (
+                    <figure class="reel">
+                      <video class="reel-video" controls playsinline preload="none" poster={r.poster} aria-label={r.caption}>
+                        <source src={r.src} type="video/mp4" />
+                        <a href={r.source.url} target="_blank" rel="noopener">{r.caption} ({r.source.label})</a>
+                      </video>
+                      <figcaption class="mt-2 text-sm text-muted">
+                        {r.caption}
+                        <span class="block text-xs">Video: <a href={r.source.url} target="_blank" rel="noopener" class="link-quiet">{r.source.label}</a></span>
+                      </figcaption>
+                    </figure>
+                  ))}
+                  {a.images.map((img) => (
+                    <figure>
+                      <a href={img.src} data-lightbox data-caption={`${a.title}: ${img.caption}${img.source ? ` (photo: ${img.source.label})` : ""}`} class="evidence-thumb">
+                        <img src={img.src.replace(/\.webp$/, "-thumb.webp")} alt={img.caption} loading="lazy" decoding="async" />
+                      </a>
+                      <figcaption class="mt-2 text-sm text-muted">
+                        {img.caption}
+                        {img.source && <span class="block text-xs">Photo: <a href={img.source.url} target="_blank" rel="noopener" class="link-quiet">{img.source.label}</a></span>}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    ))}
   </Section>
 
   <Section id="more-h" title="See also">
@@ -145,18 +164,32 @@ const certCount = (await getCollection("certifications")).length;
     transition: border-color 150ms, box-shadow 150ms, transform 150ms;
   }
   .media-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow); transform: translateY(-1px); }
+  /* The title link covers the whole card; "also published by" links sit above it. */
+  .media-link { text-decoration: none; }
+  .media-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+  .media-link:focus-visible { outline: none; }
+  .media-card:has(.media-link:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .media-also { position: relative; z-index: 1; }
+  .award-group { scroll-margin-top: calc(var(--header-h, 4rem) + 1.5rem); }
   .media-cta { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 600; color: var(--ink); }
   .award { padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
   .award:last-child { padding-bottom: 0; border-bottom: 0; }
   .evidence-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
   .evidence-grid.is-single { grid-template-columns: minmax(0, 26rem); }
+  .evidence-grid.is-four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 900px) { .evidence-grid.is-four { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .evidence-thumb {
     display: block; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: #fff;
     cursor: zoom-in; box-shadow: var(--shadow-sm);
   }
   .evidence-thumb img { display: block; width: 100%; height: auto; transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1); }
   .evidence-thumb:hover img { transform: scale(1.03); }
-  .evidence-grid.has-reel { align-items: start; }
+  /* A reel beside photos: the reel on the left, photos stacked on the right, cropped to match. */
+  @media (min-width: 640px) {
+    .evidence-grid.has-reel { grid-template-columns: minmax(0, 17rem) minmax(0, 1fr); max-width: 44rem; align-items: start; }
+    .has-reel .reel { grid-row: span var(--rows, 2); }
+    .has-reel .evidence-thumb img { aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 35%; }
+  }
   .reel-video {
     display: block; width: 100%; aspect-ratio: 9 / 16; max-height: 32rem; object-fit: cover; background: #000;
     border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm);

@@ -189,6 +189,8 @@ def recognition() -> str:
     lines = ["Media coverage (see the Recognition page, /recognition/):"]
     for m in d["media"]:
         lines.append(f"- {m['source']} ({m['kind']}{', ' + m['date'] if m.get('date') else ''}): \"{m['title']}\" {m['url']}")
+        for o in m.get("also", []):
+            lines.append(f"  Also published by {o['label']}: {o['url']}")
     lines.append("Achievements with public evidence:")
     for a in d["awards"]:
         media = [{"label": f"{m['caption']} ({m['source']['label']})", "url": m["source"]["url"]}

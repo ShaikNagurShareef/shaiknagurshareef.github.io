@@ -31,23 +31,17 @@
       "date": "2025-10-15",
       "title": "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference",
       "url": "https://www.prnewswire.com/news-releases/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-302583559.html",
-      "group": "press"
-    },
-    {
-      "source": "TechNode Global",
-      "kind": "News",
-      "date": "2025-10-15",
-      "title": "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference",
-      "url": "https://technode.global/?p=109875",
-      "group": "press"
-    },
-    {
       "group": "press",
-      "source": "The Tribune (India)",
-      "kind": "News",
-      "date": "2025-10-15",
-      "title": "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference",
-      "url": "https://www.tribuneindia.com/news/business/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-2"
+      "also": [
+        {
+          "label": "TechNode Global",
+          "url": "https://technode.global/?p=109875"
+        },
+        {
+          "label": "The Tribune (India)",
+          "url": "https://www.tribuneindia.com/news/business/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-2"
+        }
+      ]
     },
     {
       "group": "press",
@@ -130,7 +124,8 @@
             "url": "https://www.instagram.com/ust.global/reel/DP3o5BygDFh/"
           }
         }
-      ]
+      ],
+      "category": "competition"
     },
     {
       "id": "axissql-bird",
@@ -152,7 +147,8 @@
           "url": "https://www.ust.com/en/insights/text-to-sql-enterprise-natural-language-analytics"
         }
       ],
-      "images": []
+      "images": [],
+      "category": "competition"
     },
     {
       "id": "gsu-graduate-research-award",
@@ -166,7 +162,8 @@
           "src": "/img/recognition/gsu-graduate-research-award.webp",
           "caption": "Award notification, Department of Computer Science"
         }
-      ]
+      ],
+      "category": "academic"
     },
     {
       "id": "ust-ustar",
@@ -192,7 +189,8 @@
           "src": "/img/recognition/ust-nova-star-2.webp",
           "caption": "NOVA STAR, Digital Acumen: hackathon participation and work"
         }
-      ]
+      ],
+      "category": "industry"
     },
     {
       "id": "elevance-go-above",
@@ -206,7 +204,8 @@
           "src": "/img/recognition/elevance-go-above.webp",
           "caption": "Go Above certificate, Elevance Health"
         }
-      ]
+      ],
+      "category": "industry"
     },
     {
       "id": "neurips-genai4health-travel-grant",
@@ -220,7 +219,8 @@
           "url": "/data/awards/NeurIPS-2025-GenAI4Health-Travel-Grant.pdf"
         }
       ],
-      "images": []
+      "images": [],
+      "category": "academic"
     },
     {
       "id": "ieee-sps-travel-grant",
@@ -234,7 +234,8 @@
           "url": "/data/awards/IEEE-SPS-Travel-Grant-ICIP-2024.pdf"
         }
       ],
-      "images": []
+      "images": [],
+      "category": "academic"
     },
     {
       "id": "vfstr-convocation",
@@ -275,7 +276,8 @@
             "end": 12014
           }
         ]
-      }
+      },
+      "category": "academic"
     }
   ],
   "profiles": [
