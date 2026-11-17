@@ -4,13 +4,13 @@
     {
       "name": "AAAI 2027",
       "count": null,
-      "url": null,
+      "url": "/data/reviewer/RC_AAAI2027.webp",
       "active": true
     },
     {
       "name": "ICLR 2027",
       "count": null,
-      "url": null,
+      "url": "/data/reviewer/RC_ICLR2027.webp",
       "active": true
     },
     {
@@ -34,8 +34,13 @@
     {
       "name": "CVPR 2027",
       "count": null,
-      "url": null,
+      "url": "/data/reviewer/RC_CVPR2027.webp",
       "active": true
+    },
+    {
+      "name": "NeurIPS 2026",
+      "count": 4,
+      "url": "/data/reviewer/RC_NeurIPS2026.webp"
     },
     {
       "name": "IEEE ISBI 2026",

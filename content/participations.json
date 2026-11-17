@@ -28,5 +28,15 @@
     "dateLabel": "August 1–2, 2026",
     "url": "https://rdi.berkeley.edu/events/agentic-ai-summit-2026",
     "detail": "5,000+ attendees, 200+ speakers across 4 stages, and 200+ posters on agent frameworks, evaluation and deployment."
+  },
+  {
+    "id": "digitalist-papers-2025",
+    "title": "The Digitalist Papers, Volume 2: The Economics of Transformative AI (launch)",
+    "host": "Stanford Digital Economy Lab",
+    "location": "Stanford, CA",
+    "date": "2025-12-11",
+    "dateLabel": "December 11, 2025",
+    "url": "https://digitaleconomy.stanford.edu/event/the-digitalist-papers-volume-2-the-economics-of-transformative-ai-launch-event",
+    "detail": "Attended the in-person launch with UST; panels on the economics of transformative AI."
   }
 ]

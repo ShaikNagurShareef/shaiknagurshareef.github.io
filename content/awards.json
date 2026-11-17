@@ -29,7 +29,8 @@
     "org": "IEEE Signal Processing Society",
     "year": 2024,
     "category": "research",
-    "detail": null
+    "detail": "USD 500 to present at ICIP 2024, Abu Dhabi.",
+    "url": "/data/awards/IEEE-SPS-Travel-Grant-ICIP-2024.pdf"
   },
   {
     "id": "ust-awards",
@@ -58,7 +59,7 @@
   },
   {
     "id": "tcs-star",
-    "title": "Star Performer Award",
+    "title": "Star of the Month Award",
     "org": "Tata Consultancy Services",
     "year": 2022,
     "category": "industry",
@@ -68,17 +69,18 @@
     "id": "gold-medal",
     "title": "Chairman's Gold Medal",
     "org": "VFSTR University",
-    "year": 2020,
+    "year": 2021,
     "category": "academic",
-    "detail": "For overall excellence throughout the B.Tech."
+    "detail": "For overall excellence throughout the B.Tech; conferred at the 8th Convocation, August 2021.",
+    "url": "/recognition/#vfstr-convocation"
   },
   {
     "id": "best-outgoing",
     "title": "Best Outgoing Student of CSE",
     "org": "VFSTR University",
-    "year": 2020,
+    "year": 2021,
     "category": "academic",
-    "detail": null
+    "detail": "Conferred at the 8th Convocation, August 2021."
   },
   {
     "id": "academic-excellence",

@@ -16,7 +16,7 @@ The full dissertation PDF: https://shaiknagurshareef.github.io/data/dissertation
 - Machine Learning Engineer II, UST Global Inc., AI Center of Excellence (2024-07 to present): Lead a 21-person AI team in the AI-CoE building UST Alpha AI, UST's one-stop shop for AI workloads, and its platform-modernization tools. Led development of CodeCrafter; designed and built Orbit. Run delivery on an AI-DLC approach: agents migrate legacy .NET 4→8 and COBOL monoliths to React/Java Spring Boot, generating NX monorepos from specs that land 95% functional, with delivery 70% faster at 60% of the cost. Now reimagining a NextGen Reinsurance Platform with SpecKit; the MVP already works. Built PathForce, an AI-assisted anatomic-pathology LIS (rules-first eligibility checks, effort-weighted case distribution, HL7/FHIR/X12, Part 11-grade audit trail), plus RiskIQ for ICD-10 coding and risk adjustment, and PolicyIQ, which turns CMS/payer policy into SME-approved claim edits in minutes, not weeks. Modernized a payer's claims adjudication by re-engineering its extracts and reporting, improving payment accuracy and audit-readiness. Architected and led Call Analytics Agents that raise First-Call Resolution, reduce repeat contacts, and flag quality and compliance issues. Architected BSA DataMap (agentic profiling into BigQuery, saving 2 FTEs/$250K) and an ETL Test Agent validated with LLM-as-a-Judge. Delivered RegView, natural-language search over regulatory documents, and a RAG-powered RFI/RFP engine that cut proposal time by 60%. Collaborated with Dr. Tatsunori Hashimoto (Stanford AI Lab) on AxisSQL, an inference-time-scaling Text-to-SQL framework ranked #12 on the BIRD leaderboard at submission; submitted to EACL (Industry Track).
 - Graduate Research Assistant, TReNDS Center, Georgia State University (2023-09 to 2025-05): Customized multimodal LLMs in PyTorch to generate reports from medical images and text: 13.4% higher BLEU-4 than VisionGPT, with inference down to 1.6 s per image. Built TensorFlow/Keras image classifiers for retinopathy, schizophrenia, breast cancer and colon cancer, cutting false negatives by 5–7%. Multi-modal Imaging Genomics Transformer: fused genomics with sMRI and fMRI, improving schizophrenia diagnosis accuracy by 2.12%. Guided Context Gating and Spatial Sequence Attention: attention mechanisms for retinal images and structural brain MRI. Medical Vision Language Transformer: an Abstractor-Adaptor framework for resource-constrained medical image captioning.
 - Software Engineer III, Carelon Global Solutions (Elevance Health) (2022-09 to 2023-08): Built REST APIs for the COmpensation INcentive System, a microservices application that validates, computes and speeds up incentive payments, cutting processing time by 10%. Wrote Python/SQL clean-up scripts that stopped over $500K in overpayments. Fixed critical production issues in the commissions calculation flow (agent advance computation), saving $1.5 million in historical overpayments; earned the Go Above – Impact Award.
-- Systems Engineer, Analytics & Insights, Tata Consultancy Services (2020-08 to 2022-09): Designed a log-based Bug Root Cause Prediction System with an Attention LSTM in Azure ML Studio, cutting debugging effort and saving 3 full-time equivalents a year. Set up an Azure DevOps model-deployment pipeline that took deployment from 2 to 1.2 hours and raised system availability by 25%; named team Star Performer. Optimized order-orchestration data pipelines, reducing fallouts by 30%, and built operational dashboards for data-driven decisions.
+- Systems Engineer, Analytics & Insights, Tata Consultancy Services (2020-08 to 2022-09): Designed a log-based Bug Root Cause Prediction System with an Attention LSTM in Azure ML Studio, cutting debugging effort and saving 3 full-time equivalents a year. Set up an Azure DevOps model-deployment pipeline that took deployment from 2 to 1.2 hours and raised system availability by 25%; received the Star of the Month Award. Optimized order-orchestration data pipelines, reducing fallouts by 30%, and built operational dashboards for data-driven decisions.
 
 ## RESEARCH RESUME
 Nagur Shareef Shaik
@@ -75,7 +75,7 @@ Systems Engineer | Analytics & Insights Business Unit Hyderabad, TS
 • Designed a log-based Bug Root Cause Prediction System with a n Attention LSTM in Azure ML Studio , cutting
 debugging eﬀort and saving 3 full-time equivalents a year.
 • Set up an Azure DevOps model-deployment pipeline that took deployment from 2 to 1.2 hours and raised system
-availability by 25%; named team Star Performer .
+availability by 25%; received the Star of the Month Award.
 Doctoral Dissertation
 From Perception to Clinical Reasoning: Structured & Disent angled Latent
 Modeling for Robust Multi-Modal Medical AI |Advisor: Dong Hye Ye
@@ -160,7 +160,7 @@ Accomplishments
 • Graduate Research Award 2026 , Georgia State University; winner, D3CODE Hackathon 2025 (US Region &
 Global), UST Global Inc., ahead of teams from the UK, Mexico, Malaysia, and India.
 • STELLER, NOV A Star and Super Star Awards, UST Global Inc.; Go Above – Impact Award , Elevance Health
-(Carelon Global Solutions); Star Performer Award , Tata Consultancy Services.
+(Carelon Global Solutions); Star of the Month Award, Tata Consultancy Services.
 • NeurIPS 2025 GenAI4Health and IEEE SPS (ICIP 2024) Travel Grants; 100% graduate scholarship ,
 Georgia State University; Chairman’s Gold Medal , Best Outgoing Student of CSE , and 4-year Academic
 Excellence Awards , VFSTR University.
@@ -349,7 +349,7 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 - STELLAR, NOVA Star and Super Star Awards, UST Global Inc. (2026)
 - 100% graduate scholarship, Georgia State University (2023–2026)
 - Go Above – Impact Award, Elevance Health (Carelon Global Solutions) (2023). For fixing a critical production issue in the commissions calculation flow.
-- Star Performer Award, Tata Consultancy Services (2022)
+- Star of the Month Award, Tata Consultancy Services (January 2022)
 - Chairman's Gold Medal, VFSTR University (2020). For overall excellence throughout the B.Tech.
 - Best Outgoing Student of CSE, VFSTR University (2020)
 - Academic Excellence Awards (all four years), VFSTR University (2016–2020). Top-5 rank holder in CSE each year.

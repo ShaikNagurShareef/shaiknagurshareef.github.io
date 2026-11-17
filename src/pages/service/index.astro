@@ -78,6 +78,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
             <p class="font-semibold text-ink">{a.data.title}</p>
             <p class="text-sm text-ink-2">{a.data.org}</p>
             {a.data.detail && <p class="mt-1 text-sm text-muted">{a.data.detail}</p>}
+            {a.data.url && <a href={a.data.url} class="cert-link mt-2" {...(a.data.url.startsWith("/data/") ? { target: "_blank", rel: "noopener" } : {})}><Icon name="badge-check" size={14} />Evidence<span class="sr-only"> for {a.data.title}</span></a>}
             </div>
           </div>
           <span class="text-xs text-muted sm:pt-1 sm:text-right">{CATEGORY[a.data.category]}</span>

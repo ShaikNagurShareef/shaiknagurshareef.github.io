@@ -194,6 +194,8 @@ const awards = defineCollection({
     /** First year, for awards held over a range (shown as start–year). */
     startYear: z.number().int().optional(),
     category: z.enum(["research", "industry", "academic"]), detail: z.string().nullable(),
+    /** Public evidence: a redacted document under /data or a section of the Recognition page. */
+    url: z.string().optional(),
   }),
 });
 

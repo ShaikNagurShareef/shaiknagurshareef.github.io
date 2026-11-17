@@ -73,7 +73,7 @@
     "end": "2022-09",
     "highlights": [
       "Designed a log-based Bug Root Cause Prediction System with an Attention LSTM in Azure ML Studio, cutting debugging effort and saving 3 full-time equivalents a year.",
-      "Set up an Azure DevOps model-deployment pipeline that took deployment from 2 to 1.2 hours and raised system availability by 25%; named team Star Performer.",
+      "Set up an Azure DevOps model-deployment pipeline that took deployment from 2 to 1.2 hours and raised system availability by 25%; received the Star of the Month Award.",
       "Optimized order-orchestration data pipelines, reducing fallouts by 30%, and built operational dashboards for data-driven decisions."
     ],
     "logo": "/img/orgs/tcs.webp"
