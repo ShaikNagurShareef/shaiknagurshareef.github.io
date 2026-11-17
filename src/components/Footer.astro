@@ -24,7 +24,7 @@ const COLUMNS: { title: string; links: { label: string; href: string; external?:
 <footer data-site-footer class="mt-24 border-t border-border">
   <div class="container-page grid gap-10 py-12 md:grid-cols-[minmax(0,1.6fr)_repeat(3,minmax(0,1fr))]">
     <div>
-      <p class="text-[1.0625rem] font-semibold text-ink">{me.name}</p>
+      <p class="text-[1.0625rem] font-semibold text-ink">{me.name}{me.credentials && `, ${me.credentials}`}</p>
       <p class="mt-2 max-w-[34ch] text-sm leading-relaxed text-muted">{me.title}, UST. {me.role}.</p>
       <p class="mt-4 text-sm"><a href={`mailto:${me.email}`} class="link-quiet">{me.email}</a></p>
       <p class="mt-1 text-sm text-muted">{me.location}</p>

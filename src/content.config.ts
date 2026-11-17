@@ -128,6 +128,8 @@ const profile = defineCollection({
   loader: () => [{ id: "me", ...(readJson("data/profile.json") as object) }],
   schema: z.object({
     name: z.string(),
+    /** Post-nominal shown after the name, e.g. "Ph.D." */
+    credentials: z.string().optional(),
     headline: z.string(),
     role: z.string(),
     /** Current title, used in headlines and descriptions; the Experience entry keeps "Machine Learning Engineer II". */
@@ -221,6 +223,7 @@ const research = defineCollection({
       title: z.string(), advisor: z.string(), status: z.string(), summary: z.string(),
       /** Full text: the PDF stays out of git (private/) until released by scripts/release_dissertation.py. */
       document: z.object({ path: z.string(), released: z.boolean(), releasedOn: z.string().nullable() }).optional(),
+      defensePhotos: z.array(z.object({ src: z.string(), alt: z.string(), caption: z.string(), focus: z.enum(["left", "center", "right"]).optional() })).optional(),
       /** Public defense (announced on the site until it ends). Times include the UTC offset. */
       defense: z.object({
         start: z.iso.datetime({ offset: true }), end: z.iso.datetime({ offset: true }),

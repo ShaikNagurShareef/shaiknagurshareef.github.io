@@ -52,7 +52,7 @@ const asOf = ym(me.stats.as_of);
   <!-- Hero -->
   <section class="container-page grid gap-10 pb-14 pt-12 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-16 md:pb-20 md:pt-20 lg:grid-cols-[minmax(0,1fr)_17rem]">
     <div class="hero-in max-w-[46rem]">
-      <h1 class="text-[2.75rem] sm:text-[3.75rem]">{me.name}</h1>
+      <h1 class="text-[2.75rem] sm:text-[3.75rem]">{me.name}{me.credentials && <span class="font-normal text-ink-2">, {me.credentials}</span>}</h1>
       <p class="mt-4 text-[1.25rem] font-medium text-ink-2 sm:text-[1.5rem]">{focus}</p>
       <dl class="mt-8 grid gap-4 border-y border-border py-5 text-[1rem] sm:grid-cols-2 sm:gap-8">
         {roles.map((r) => (

@@ -36,20 +36,47 @@ const stages = diss.stages.map((s) => ({
     lead="Multimodal medical AI that reasons the way clinicians read a study: locate the evidence, characterize it, weigh it against context, compare it with prior exams, and commit to a claim that can be checked against the image." />
 
   <Section id="diss-h" title="Ph.D. dissertation" description="Georgia State University, Department of Computer Science.">
+    <div class:list={["grid gap-8", diss.document?.released && "md:grid-cols-[minmax(0,1fr)_11rem]"]}>
+    <div class="min-w-0">
     <h3 class="font-display text-[1.625rem] leading-snug sm:text-[2rem]">{diss.title}</h3>
     <dl class="mt-6 grid gap-x-8 gap-y-3 border-t border-border pt-5 text-[1.0625rem] sm:grid-cols-[8rem_1fr]">
       <dt class="text-muted">Status</dt><dd class="text-ink">{diss.status}</dd>
+      <dt class="text-muted">Degree</dt><dd class="text-ink">Ph.D. in Computer Science, Georgia State University</dd>
       <dt class="text-muted">Advisor</dt><dd class="text-ink">Dr. {diss.advisor}</dd>
       <dt class="text-muted">Scope</dt>
       <dd class="text-ink tabular">{diss.scale.domains} clinical domains · {diss.scale.benchmarks} benchmarks · {diss.scale.architectures} architectures</dd>
     </dl>
     <p class="mt-6 max-w-[66ch] text-[1.0625rem] leading-relaxed text-ink-2">{diss.summary}</p>
     <div class="mt-6 flex flex-wrap gap-2">
-      <a href={me.documents.research_statement} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="file-text" size={15} />Research statement</a>
-      {diss.document?.released && <a href={diss.document.path} target="_blank" rel="noopener" class="btn"><Icon name="download" size={15} />Dissertation (PDF)</a>}
+      {diss.document?.released && <a href={diss.document.path} target="_blank" rel="noopener" class="btn btn-primary"><Icon name="file-text" size={15} />Dissertation (PDF)</a>}
+      <a href={me.documents.research_statement} target="_blank" rel="noopener" class:list={["btn", !diss.document?.released && "btn-primary"]}><Icon name="file-text" size={15} />Research statement</a>
       {diss.defense && <a href="/defense/" class="btn">Defense</a>}
       <a href="#committee-h" class="btn">Committee</a>
     </div>
+    {!diss.document?.released && <p class="mt-3 text-sm text-muted">The full dissertation will be posted here after final submission to Georgia State University.</p>}
+    </div>
+    {diss.document?.released && (
+      <a href={diss.document.path} target="_blank" rel="noopener" class="diss-cover order-first md:order-none" aria-label="Open the dissertation (PDF)">
+        <img src="/img/dissertation-cover.webp" alt="Dissertation cover page" width="176" height="228" loading="lazy" class="w-[11rem] rounded-[var(--radius)] border border-border shadow-card" />
+        <span class="mt-2 block text-center text-xs text-muted">PDF · 283 pages</span>
+      </a>
+    )}
+    </div>
+    {diss.defensePhotos && (
+      <div class="mt-10" id="defense">
+        <h4 class="subhead">Dissertation defense · November 16, 2026</h4>
+        <div class="defense-gallery mt-4">
+          {diss.defensePhotos.map((p, i) => (
+            <figure class:list={[i === 0 && "is-lead"]}>
+              <a href={p.src} target="_blank" rel="noopener" class="block overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface-2">
+                <img src={p.src} alt={p.alt} loading="lazy" decoding="async" class:list={["h-full w-full object-cover", p.focus === "left" && "object-left", p.focus === "right" && "object-right"]} />
+              </a>
+              <figcaption class="mt-2 text-sm text-muted">{p.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    )}
   </Section>
 
   <Section id="path-h" title="Interpretation pathway" description="Five stages, one question each. Every method below maps to a dissertation chapter and its papers.">
@@ -120,3 +147,18 @@ const stages = diss.stages.map((s) => ({
     </div>
   </Section>
 </Base>
+
+<style>
+  .diss-cover { display: block; width: 11rem; text-decoration: none; }
+  .diss-cover img { transition: transform 200ms ease, box-shadow 200ms ease; }
+  .diss-cover:hover img { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .defense-gallery { display: grid; gap: 1rem; }
+  .defense-gallery img { aspect-ratio: 4 / 3; transition: transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .defense-gallery a:hover img { transform: scale(1.02); }
+  @media (min-width: 768px) {
+    .defense-gallery { grid-template-columns: 1.5fr 1fr; grid-template-rows: auto auto; }
+    .defense-gallery .is-lead { grid-row: span 2; }
+    .defense-gallery .is-lead img { aspect-ratio: auto; height: calc(100% - 1.75rem); }
+  }
+  @media (prefers-reduced-motion: reduce) { .defense-gallery a:hover img { transform: none; } }
+</style>

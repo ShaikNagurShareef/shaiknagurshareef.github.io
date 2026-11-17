@@ -1,5 +1,7 @@
 ---
 import Icon from "./Icon.astro";
+import { getEntry } from "astro:content";
+const me = (await getEntry("profile", "me"))!.data;
 import { NAV, isActive } from "../lib/nav";
 const path = Astro.url.pathname;
 ---
@@ -7,7 +9,7 @@ const path = Astro.url.pathname;
   <div class="container-page flex h-[var(--header-h)] items-center gap-6">
     <a href="/" class="flex shrink-0 items-center gap-2.5 no-underline" aria-label="Nagur Shareef Shaik, home">
       <img src="/img/avatar-96.webp" alt="" width="40" height="40" class="h-10 w-10 rounded-full bg-surface-2 object-cover ring-2 ring-accent/25" />
-      <span class="font-display text-[1.1875rem] font-semibold text-ink">Nagur Shareef Shaik</span>
+      <span class="font-display text-[1.1875rem] font-semibold text-ink">{me.name}{me.credentials && <span class="hidden font-normal text-ink-2 sm:inline">, {me.credentials}</span>}</span>
     </a>
 
     <nav aria-label="Primary" class="hidden flex-1 lg:block">
