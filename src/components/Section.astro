@@ -3,14 +3,33 @@
  * Page section: heading rail on the left on desktop (sticky), content on the right.
  * `stacked` puts the heading above full-width content instead (for wide grids).
  * Extra heading-side content (e.g. a "View all" link) goes in the `head` slot.
+ * Each heading carries a small icon tile; it comes from `icon`, else from the section id below.
  */
-interface Props { id: string; title: string; description?: string; stacked?: boolean; class?: string }
-const { id, title, description, stacked = false, class: cls } = Astro.props;
+import Icon from "./Icon.astro";
+
+interface Props { id: string; title: string; description?: string; stacked?: boolean; class?: string; icon?: string | false }
+
+// One place for the site's section icons (lucide names), keyed by section id.
+const SECTION_ICONS: Record<string, string> = {
+  "pathway-h": "workflow", "pubs-h": "book-open", "proj-h": "folder-git-2", "news-h": "newspaper",
+  "message-h": "send", "direct-h": "at-sign", "docs-h": "file-text", "profiles-h": "globe",
+  "work-h": "briefcase", "edu-h": "graduation-cap", "skills-h": "cpu",
+  "said-h": "message-square-quote", "leave-h": "message-square-text",
+  "diss-h": "graduation-cap", "path-h": "route", "themes-h": "layers", "committee-h": "users",
+  "thesis-h": "library", "collab-h": "handshake",
+  "log-h": "shield", "store-h": "shield", "forms-h": "shield", "optout-h": "shield",
+  "review-h": "scale", "awards-h": "award", "events-h": "calendar-days", "certs-h": "badge-check",
+  "more-h": "compass",
+};
+
+const { id, title, description, stacked = false, class: cls, icon } = Astro.props;
+const iconName = icon === false ? null : (icon ?? SECTION_ICONS[id] ?? null);
 ---
 <section aria-labelledby={id} class:list={["section", cls]} data-reveal>
   <div class:list={["container-page section-grid", stacked && "is-stacked"]}>
     <div class="section-head">
       <div>
+        {iconName && <span class="section-icon" aria-hidden="true"><Icon name={iconName} size={18} /></span>}
         <h2 id={id} class="section-title">{title}</h2>
         {description && <p class="section-desc">{description}</p>}
       </div>
@@ -19,3 +38,15 @@ const { id, title, description, stacked = false, class: cls } = Astro.props;
     <div class="min-w-0"><slot /></div>
   </div>
 </section>
+
+<style>
+  .section-icon {
+    display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; margin-bottom: 0.75rem;
+    border-radius: var(--radius); background: var(--surface); color: var(--ink);
+    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .section-icon { opacity: 0; transform: translateY(6px) scale(0.9); transition: opacity 500ms ease 120ms, transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms; }
+    :global(.js .is-visible) .section-icon { opacity: 1; transform: none; }
+  }
+</style>

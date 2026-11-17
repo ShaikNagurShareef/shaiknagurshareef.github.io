@@ -71,10 +71,13 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
       {awards.map((a) => (
         <li class="grid gap-1 py-4 sm:grid-cols-[6.5rem_1fr_auto] sm:gap-6">
           <span class="mono pt-0.5 text-muted">{yearSpan(a.data)}</span>
-          <div>
+          <div class="flex gap-3">
+            <span class="award-icon" aria-hidden="true"><Icon name={a.data.category === "research" ? "award" : a.data.category === "industry" ? "trophy" : "graduation-cap"} size={16} /></span>
+            <div>
             <p class="font-semibold text-ink">{a.data.title}</p>
             <p class="text-sm text-ink-2">{a.data.org}</p>
             {a.data.detail && <p class="mt-1 text-sm text-muted">{a.data.detail}</p>}
+            </div>
           </div>
           <span class="text-xs text-muted sm:pt-1 sm:text-right">{CATEGORY[a.data.category]}</span>
         </li>
@@ -116,6 +119,12 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
 </Base>
 
 <style>
+  .award-icon {
+    display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: 2rem; height: 2rem; margin-top: 0.1rem;
+    border-radius: 999px; background: var(--surface-2); color: var(--ink); border: 1px solid var(--border);
+  }
+  li:hover > div > .award-icon { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .award-icon { transition: background-color 200ms, color 200ms, border-color 200ms; }
   .cert-link {
     display: inline-flex; align-items: center; gap: 0.35rem; height: 2rem; padding-inline: 0.7rem;
     border: 1px solid var(--border); border-radius: 999px; font-size: 0.8125rem; font-weight: 600;

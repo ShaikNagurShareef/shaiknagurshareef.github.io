@@ -15,6 +15,7 @@ const rec = (await getEntry("recognition", "recognition"))!.data;
 // Dated items newest first; undated ones (sites that do not expose a date) after them.
 const byDate = (a: { date?: string }, b: { date?: string }) => (b.date ?? "").localeCompare(a.date ?? "");
 const media = [...rec.media].sort(byDate);
+const KIND_ICON: Record<string, string> = { "University news": "landmark", "Science news release": "newspaper", "News": "newspaper", "Press release": "megaphone", "Company article": "building-2" };
 const groups = [
   { id: "press", title: "Press coverage", items: media.filter((m) => m.group === "press") },
   { id: "ust", title: "Featured by UST", items: media.filter((m) => m.group === "ust") },
@@ -54,7 +55,7 @@ const certCount = (await getCollection("certifications")).length;
               <a href={m.url} target="_blank" rel="noopener" class="media-card" data-spotlight>
                 <span class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
                   <span class="font-semibold text-ink">{m.source}</span>
-                  <span class="badge">{m.kind}</span>
+                  <span class="badge"><Icon name={KIND_ICON[m.kind] ?? "newspaper"} size={12} />{m.kind}</span>
                   {m.date && <span class="mono text-muted">{fmtDate(m.date)}</span>}
                 </span>
                 <span class="mt-1.5 block text-[1.125rem] font-semibold leading-snug text-ink">{m.title}</span>

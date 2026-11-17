@@ -20,10 +20,10 @@ const news = (await getCollection("news")).sort((a, b) => sortKey(b.data.date).l
 const underReview = pubs.filter((p) => p.data.status !== "published").length;
 
 const stats = [
-  { value: String(me.stats.papers), label: "Peer-reviewed papers" },
-  { value: me.stats.citations, label: "Citations" },
-  { value: String(me.stats.h_index), label: "h-index" },
-  { value: String(underReview), label: "Manuscripts in review" },
+  { value: String(me.stats.papers), label: "Peer-reviewed papers", icon: "file-text" },
+  { value: me.stats.citations, label: "Citations", icon: "quote" },
+  { value: String(me.stats.h_index), label: "h-index", icon: "trending-up" },
+  { value: String(underReview), label: "Manuscripts in review", icon: "hourglass" },
 ];
 // Headline under the name: identity · focus ("Applied Scientist · Multimodal Medical AI & Agentic Systems").
 const focus = me.headline;
@@ -100,7 +100,7 @@ const venues = [...new Set(pubs.filter((p) => p.data.status === "published")
       <dl class="grid grid-cols-2 gap-y-6 md:grid-cols-4">
         {stats.map((s, i) => (
           <div class:list={["flex flex-col-reverse justify-end gap-1 pr-4", i % 2 === 1 && "border-l border-border pl-5 md:pl-6", i >= 2 && "md:border-l md:border-border md:pl-6"]}>
-            <dt class="text-sm text-muted">{s.label}</dt>
+            <dt class="flex items-center gap-1.5 text-sm text-muted"><Icon name={s.icon} size={14} />{s.label}</dt>
             <dd class="font-display text-[2.5rem] font-semibold leading-none text-ink tabular" data-count={s.value}>{s.value}</dd>
           </div>
         ))}
@@ -192,7 +192,8 @@ const venues = [...new Set(pubs.filter((p) => p.data.status === "published")
     .marquee { mask-image: none; -webkit-mask-image: none; }
     .marquee-track { animation: none; width: auto; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
     .marquee-track li[aria-hidden] { display: none; }
-    .marquee-track li + li::before { margin-right: 1.25rem; }
+    .marquee-track { gap: 0.5rem 1.75rem; }
+    .marquee-track li + li::before { content: none; }
   }
 </style>
 
