@@ -404,7 +404,7 @@ Achievements with public evidence:
 - The Digitalist Papers, Volume 2: The Economics of Transformative AI (launch), Stanford Digital Economy Lab, Stanford, CA (December 11, 2025). Attended the in-person launch with UST; panels on the economics of transformative AI.
 
 ## DISSERTATION
-Ph.D. dissertation: "From Perception to Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting". Advisor: Dong Hye Ye. Status: Defended November 16, 2026 · Ph.D. conferral December 2026. Full text: https://shaiknagurshareef.github.io/data/dissertation/NagurShareefShaik_PhD_Dissertation.pdf
+Ph.D. dissertation: "From Perception to Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting". Advisor: Dong Hye Ye. Status: Defended November 16, 2026 · Ph.D. conferral December 2026. Full text: https://shaiknagurshareef.github.io/data/dissertation/NagurShareefShaik_PhD_Dissertation.pdf GSU ScholarWorks: https://hdl.handle.net/20.500.14694/16775
 Reading a medical image involves five judgments: locating a finding, grading it, weighing it against clinical context, comparing it with earlier studies, and committing to a claim. This dissertation builds methods for each stage on two ideas: every stage carries a distribution rather than a point estimate, and evidence from different sources is represented separately so that losing one source does not corrupt the others. It is evaluated across endoscopy, whole-slide histology, retinal photography, brain MRI with genomics, and chest radiography.
 
 ## WEBSITE SECTIONS

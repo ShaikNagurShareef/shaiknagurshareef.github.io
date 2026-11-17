@@ -237,6 +237,8 @@ const research = defineCollection({
       title: z.string(), advisor: z.string(), status: z.string(), summary: z.string(),
       /** Full text: the PDF stays out of git (private/) until released by scripts/release_dissertation.py. */
       document: z.object({ path: z.string(), released: z.boolean(), releasedOn: z.string().nullable() }).optional(),
+      /** Public records of the dissertation (GSU ScholarWorks handle, DOI once minted). */
+      links: z.array(link).optional(),
       defensePhotos: z.array(z.object({ src: z.string(), alt: z.string(), caption: z.string(), focus: z.enum(["left", "center", "right"]).optional() })).optional(),
       /** Public defense (announced on the site until it ends). Times include the UTC offset. */
       defense: z.object({

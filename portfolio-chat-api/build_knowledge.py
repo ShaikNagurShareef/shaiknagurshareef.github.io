@@ -213,6 +213,8 @@ def dissertation() -> str:
     doc = r.get("document") or {}
     if doc.get("released") and doc.get("path"):
         line += f" Full text: https://shaiknagurshareef.github.io{doc['path']}"
+    for l in r.get("links") or []:
+        line += f" {l['label']}: {l['url']}"
     return line + "\n" + r["summary"]
 
 

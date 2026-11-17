@@ -55,7 +55,7 @@ const mark = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").repla
             <div>
               <p class="font-semibold text-ink">{s.data.degree}</p>
               <p>{s.data.school}, {s.data.location} · GPA {s.data.gpa}</p>
-              {s.id === "phd" && <p class="text-ink-2">Dissertation: <em>{dissertation.title}</em>. {dissertation.status}.</p>}
+              {s.id === "phd" && <p class="text-ink-2">Dissertation: <em>{dissertation.title}</em>. {dissertation.status}.{dissertation.links?.[0] && <> <a href={dissertation.links[0].url}>{dissertation.links[0].url.replace(/^https?:\/\//, "")}</a></>}</p>}
               {s.id === "ms" && <p class="text-ink-2">Thesis: <em>{thesis.title}</em>. Committee: {thesis.advisor} (chair){(thesis.committee ?? []).map((id) => `, ${nameOf(id)}`).join("")}.</p>}
               {s.id === "btech" && s.data.note && <p class="text-ink-2">{s.data.note}</p>}
             </div>

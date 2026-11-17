@@ -27,6 +27,11 @@
         "label": "Dissertation",
         "url": "/data/dissertation/NagurShareefShaik_PhD_Dissertation.pdf",
         "kind": "document"
+      },
+      {
+        "label": "GSU ScholarWorks",
+        "url": "https://hdl.handle.net/20.500.14694/16775",
+        "kind": "verify"
       }
     ]
   },

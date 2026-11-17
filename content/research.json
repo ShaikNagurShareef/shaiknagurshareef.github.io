@@ -9,6 +9,12 @@
       "released": true,
       "releasedOn": "2026-11-16"
     },
+    "links": [
+      {
+        "label": "GSU ScholarWorks",
+        "url": "https://hdl.handle.net/20.500.14694/16775"
+      }
+    ],
     "scale": {
       "domains": 7,
       "benchmarks": 13,
