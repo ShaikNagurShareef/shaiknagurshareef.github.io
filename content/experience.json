@@ -11,7 +11,8 @@
       "Lead my doctoral research on multimodal medical AI that holds up when data is incomplete: modality-aware perception, latent disentanglement under missing modalities, and longitudinal clinical reasoning that keeps track of uncertainty.",
       "Developed a probabilistic multimodal framework (HSIC-constrained latent factorization plus a Self-Critiquing Mixture-of-Experts) that set state of the art across 7 systemic and ocular conditions.",
       "Developed uncertainty-aware longitudinal reasoning that treats disease progression as distributional change on statistical manifolds (Fisher-Rao), so diagnostic ambiguity survives and claims stay tied to image evidence; state of the art with +7.4% CE-F1 on Longitudinal MIMIC-CXR (Dist-RRG, STRIDE, DELTA)."
-    ]
+    ],
+    "logo": "/img/orgs/trends.webp"
   },
   {
     "id": "ust",
@@ -28,7 +29,8 @@
       "Modernized a payer's claims adjudication by re-engineering its extracts and reporting, improving payment accuracy and audit-readiness. Architected and led Call Analytics Agents that raise First-Call Resolution, reduce repeat contacts, and flag quality and compliance issues.",
       "Architected BSA DataMap (agentic profiling into BigQuery, saving 2 FTEs/$250K) and an ETL Test Agent validated with LLM-as-a-Judge. Delivered RegView, natural-language search over regulatory documents, and a RAG-powered RFI/RFP engine that cut proposal time by 60%.",
       "Collaborated with Dr. Tatsunori Hashimoto (Stanford AI Lab) on AxisSQL, an inference-time-scaling Text-to-SQL framework ranked #12 on the BIRD leaderboard at submission; submitted to EACL (Industry Track)."
-    ]
+    ],
+    "logo": "/img/orgs/ust.webp"
   },
   {
     "id": "gsu-gra-2023",
@@ -44,7 +46,8 @@
       "Multi-modal Imaging Genomics Transformer: fused genomics with sMRI and fMRI, improving schizophrenia diagnosis accuracy by 2.12%.",
       "Guided Context Gating and Spatial Sequence Attention: attention mechanisms for retinal images and structural brain MRI.",
       "Medical Vision Language Transformer: an Abstractor-Adaptor framework for resource-constrained medical image captioning."
-    ]
+    ],
+    "logo": "/img/orgs/trends.webp"
   },
   {
     "id": "carelon",
@@ -57,7 +60,8 @@
     "highlights": [
       "Built REST APIs for the COmpensation INcentive System, a microservices application that validates, computes and speeds up incentive payments, cutting processing time by 10%. Wrote Python/SQL clean-up scripts that stopped over $500K in overpayments.",
       "Fixed critical production issues in the commissions calculation flow (agent advance computation), saving $1.5 million in historical overpayments; earned the Go Above – Impact Award."
-    ]
+    ],
+    "logo": "/img/orgs/carelon.webp"
   },
   {
     "id": "tcs",
@@ -71,6 +75,7 @@
       "Designed a log-based Bug Root Cause Prediction System with an Attention LSTM in Azure ML Studio, cutting debugging effort and saving 3 full-time equivalents a year.",
       "Set up an Azure DevOps model-deployment pipeline that took deployment from 2 to 1.2 hours and raised system availability by 25%; named team Star Performer.",
       "Optimized order-orchestration data pipelines, reducing fallouts by 30%, and built operational dashboards for data-driven decisions."
-    ]
+    ],
+    "logo": "/img/orgs/tcs.webp"
   }
 ]

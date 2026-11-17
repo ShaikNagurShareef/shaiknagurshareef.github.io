@@ -165,7 +165,7 @@ const order = z.number().int().nonnegative();
 const experience = defineCollection({
   loader: fromArray("content/experience.json"),
   schema: z.object({ order,
-    role: z.string(), org: z.string(), orgUrl: z.string().optional(), location: z.string(),
+    role: z.string(), org: z.string(), orgUrl: z.string().optional(), logo: z.string().optional(), location: z.string(),
     start: yearMonth, end: yearMonth.nullable(), highlights: z.array(z.string()).min(1),
   }),
 });
@@ -173,7 +173,7 @@ const experience = defineCollection({
 const education = defineCollection({
   loader: fromArray("content/education.json"),
   schema: z.object({ order,
-    degree: z.string(), school: z.string(), schoolUrl: z.string().optional(), location: z.string(),
+    degree: z.string(), school: z.string(), schoolUrl: z.string().optional(), logo: z.string().optional(), location: z.string(),
     start: yearMonth, end: yearMonth, expected: z.boolean(), gpa: z.string(),
     coursework: z.array(z.string()), note: z.string().optional(),
   }),

@@ -355,8 +355,8 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 - Academic Excellence Awards (all four years), VFSTR University (2016–2020). Top-5 rank holder in CSE each year.
 
 ## PEER REVIEW AND SERVICE
-Reviewer for 25+ journals and major conferences (AAAI, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 60+ papers reviewed across AI/ML, biomedical imaging and computer vision.
-Currently an active reviewer for: AAAI 2027, ICLR 2027, EACL 2027, NeurIPS 2026 GenAI4Health Workshop.
+Reviewer for 25+ journals and major conferences (AAAI, CVPR, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 60+ papers reviewed across AI/ML, biomedical imaging and computer vision.
+Currently an active reviewer for: AAAI 2027, ICLR 2027, EACL 2027, NeurIPS 2026 GenAI4Health Workshop, IEEE ISBI 2027, CVPR 2027.
 Completed conference reviewing: IEEE ISBI 2026 (9 papers); AAAI 2026 (4 papers); IEEE ISBI 2025 (9 papers); MICCAI 2025 (3 papers).
 Journal reviewing (papers reviewed): Applied Sciences (MDPI) (2); Artificial Intelligence Review (Springer) (5); BMC Medical Imaging (Springer) (1); BMC Cancer (Springer) (1); Computers in Biology and Medicine (Elsevier) (1); Computer Methods in Biomechanics and Biomedical Engineering: Imaging & Visualization (1); Cognitive Computation (Springer) (1); Diagnostics (MDPI) (3); Evolutionary Intelligence (Springer) (2); IEEE Access (1); IEEE Transactions on Medical Imaging (1); IEEE Transactions on Circuits and Systems for Video Technology (1); International Journal of Data Science and Analytics (Springer) (2); International Journal of Information Management Data Insights (Elsevier) (2); International Journal of Machine Learning and Cybernetics (Springer) (1); Journal of Big Data (Springer) (1); Journal of Ambient Intelligence and Humanized Computing (Springer) (2); Knowledge and Information Systems (Springer) (1); Machine Vision and Applications (Springer) (2); Neural Processing Letters (Springer) (3); Pattern Analysis and Applications (Springer) (1); Scientific Reports (Springer Nature) (6); Sensors (MDPI) (1); Signal, Image and Video Processing (Springer) (5).
 

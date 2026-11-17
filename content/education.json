@@ -20,7 +20,8 @@
       "Privacy Aware Computing",
       "Fundamentals of Data Science"
     ],
-    "note": "Dissertation: From Perception to Clinical Reasoning (see Research)."
+    "note": "Dissertation: From Perception to Clinical Reasoning (see Research).",
+    "logo": "/img/orgs/gsu.webp"
   },
   {
     "id": "ms",
@@ -41,7 +42,8 @@
       "Computational Intelligence",
       "Fundamentals of Data Science"
     ],
-    "note": "Thesis: Attentive Multi-modal Learning (see Research)."
+    "note": "Thesis: Attentive Multi-modal Learning (see Research).",
+    "logo": "/img/orgs/gsu.webp"
   },
   {
     "id": "btech",
@@ -62,6 +64,7 @@
       "Data Mining",
       "Optimization Techniques"
     ],
-    "note": "Chairman's Gold Medal; Best Outgoing Student of CSE."
+    "note": "Chairman's Gold Medal; Best Outgoing Student of CSE.",
+    "logo": "/img/orgs/vfstr.webp"
   }
 ]
