@@ -12,6 +12,7 @@ const me = (await getEntry("profile", "me"))!.data;
 const { dissertation: diss, thesis, themes } = (await getEntry("research", "research"))!.data;
 const people = (await getCollection("people")).sort(byOrder);
 const committee = people.filter((p) => p.data.group === "committee");
+const thesisCommittee = (thesis.committee ?? []).map((id) => people.find((p) => p.id === id)).filter((p): p is (typeof people)[number] => Boolean(p));
 const collaborators = people.filter((p) => p.data.group === "collaborator");
 const pubs = await getPublications();
 
@@ -129,11 +130,21 @@ const stages = diss.stages.map((s) => ({
     </div>
   </Section>
 
-  <Section id="thesis-h" title={`M.S. thesis, ${thesis.year}`} description={`Advisor: Dr. ${thesis.advisor}. Georgia State University.`}>
+  <Section id="thesis-h" title={`M.S. thesis, ${thesis.year}`} description="Georgia State University, Department of Computer Science.">
     <div class="grid gap-8 md:grid-cols-[minmax(0,1fr)_11rem]">
       <div class="min-w-0">
         <h3 class="font-display text-[1.5rem] leading-snug sm:text-[1.75rem]">{thesis.title}</h3>
-        <p class="mt-4 max-w-[66ch] text-[1.0625rem] leading-relaxed text-ink-2">{thesis.summary}</p>
+        <dl class="mt-6 grid gap-x-8 gap-y-3 border-t border-border pt-5 text-[1.0625rem] sm:grid-cols-[8rem_1fr]">
+          <dt class="text-muted">Degree</dt><dd class="text-ink">M.S. in Computer Science (Thesis), Georgia State University, May {thesis.year}</dd>
+          <dt class="text-muted">Chair</dt><dd><a href="#person-ye" class="link-quiet">Dr. {thesis.advisor}</a> <span class="text-muted">(advisor)</span></dd>
+          {thesisCommittee.length > 0 && (<>
+            <dt class="text-muted">Committee</dt>
+            <dd class="flex flex-wrap gap-x-2">{thesisCommittee.map((p, i) => (
+              <span><a href={`#person-${p.id}`} class="link-quiet">{p.data.name}</a>{i < thesisCommittee.length - 1 && ","}</span>
+            ))}</dd>
+          </>)}
+        </dl>
+        <p class="mt-5 max-w-[66ch] text-[1.0625rem] leading-relaxed text-ink-2">{thesis.summary}</p>
         <div class="mt-6 flex flex-wrap gap-2">
           {thesis.links.map((l, i) => (
             <a href={l.url} target="_blank" rel="noopener" class:list={["btn", i === 0 && "btn-primary"]}>

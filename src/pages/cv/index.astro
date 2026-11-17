@@ -14,6 +14,8 @@ const schools = (await getCollection("education")).sort((a, b) => b.data.end.loc
 const awards = (await getCollection("awards")).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0) || byOrder(a, b));
 const skills = (await getCollection("skills")).sort(byOrder);
 const pubs = await getPublications();
+const people = await getCollection("people");
+const nameOf = (id: string) => people.find((p) => p.id === id)?.data.name.replace(/^Dr\.\s*/, "") ?? id;
 const published = pubs.filter((p) => p.data.status === "published");
 const manuscripts = pubs.filter((p) => p.data.status !== "published");
 const site = Astro.site!.host;
@@ -54,7 +56,7 @@ const mark = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").repla
               <p class="font-semibold text-ink">{s.data.degree}</p>
               <p>{s.data.school}, {s.data.location} · GPA {s.data.gpa}</p>
               {s.id === "phd" && <p class="text-ink-2">Dissertation: <em>{dissertation.title}</em>. {dissertation.status}.</p>}
-              {s.id === "ms" && <p class="text-ink-2">Thesis: <em>{thesis.title}</em>.</p>}
+              {s.id === "ms" && <p class="text-ink-2">Thesis: <em>{thesis.title}</em>. Committee: {thesis.advisor} (chair){(thesis.committee ?? []).map((id) => `, ${nameOf(id)}`).join("")}.</p>}
               {s.id === "btech" && s.data.note && <p class="text-ink-2">{s.data.note}</p>}
             </div>
           </div>

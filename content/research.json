@@ -88,6 +88,10 @@
   "thesis": {
     "title": "Attentive Multi-modal Learning: Unifying Visual and Clinical Insights for Medical Image Classification and Report Generation",
     "advisor": "Dong Hye Ye",
+    "committee": [
+      "calhoun",
+      "venkateswara"
+    ],
     "year": 2025,
     "summary": "Integrates medical images, clinical text and genetics through scalable attention networks and vision-language models. Introduces Spatial Sequence Attention (SSA) for schizophrenia diagnosis from structural MRI, the Multi-modal Imaging Genomics Transformer (MIGTrans) that adds functional connectivity and SNP genomics, and the Multi-Modal Medical Transformer (M3T) for retinal report generation.",
     "links": [

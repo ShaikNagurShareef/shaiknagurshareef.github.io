@@ -239,7 +239,7 @@ const research = defineCollection({
         id: z.string(), n: z.number().int(), name: z.string(), question: z.string(), methods: z.array(z.string()),
       })).length(5),
     }),
-    thesis: z.object({ title: z.string(), advisor: z.string(), year: z.number(), summary: z.string(), links: z.array(link) }),
+    thesis: z.object({ title: z.string(), advisor: z.string(), committee: z.array(z.string()).optional(), year: z.number(), summary: z.string(), links: z.array(link) }),
     themes: z.array(z.object({ title: z.string(), text: z.string() })),
   }),
 });
