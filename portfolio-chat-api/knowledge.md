@@ -75,7 +75,7 @@ Systems Engineer | Analytics & Insights Business Unit Hyderabad, TS
 • Designed a log-based Bug Root Cause Prediction System with a n Attention LSTM in Azure ML Studio , cutting
 debugging eﬀort and saving 3 full-time equivalents a year.
 • Set up an Azure DevOps model-deployment pipeline that took deployment from 2 to 1.2 hours and raised system
-availability by 25%; received the Star of the Month Award.
+availability by 25%; named team Star Performer .
 Doctoral Dissertation
 From Perception to Clinical Reasoning: Structured & Disent angled Latent
 Modeling for Robust Multi-Modal Medical AI |Advisor: Dong Hye Ye
@@ -160,7 +160,7 @@ Accomplishments
 • Graduate Research Award 2026 , Georgia State University; winner, D3CODE Hackathon 2025 (US Region &
 Global), UST Global Inc., ahead of teams from the UK, Mexico, Malaysia, and India.
 • STELLER, NOV A Star and Super Star Awards, UST Global Inc.; Go Above – Impact Award , Elevance Health
-(Carelon Global Solutions); Star of the Month Award, Tata Consultancy Services.
+(Carelon Global Solutions); Star Performer Award , Tata Consultancy Services.
 • NeurIPS 2025 GenAI4Health and IEEE SPS (ICIP 2024) Travel Grants; 100% graduate scholarship ,
 Georgia State University; Chairman’s Gold Medal , Best Outgoing Student of CSE , and 4-year Academic
 Excellence Awards , VFSTR University.
@@ -345,20 +345,52 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 - Graduate Research Award, Department of Computer Science, Georgia State University (2026)
 - Global Champion and US Regional Winner, D3CODE 2025, UST Global Inc. (2025). Team Neural Navigators, for PRISM; first among 25,000+ students from five countries. USD 15,000 in prizes (USD 10,000 global, USD 5,000 US region).
 - NeurIPS 2025 GenAI4Health Travel Grant, NeurIPS 2025 GenAI4Health Workshop (2025)
-- IEEE SPS Travel Grant (ICIP 2024), IEEE Signal Processing Society (2024)
+- IEEE SPS Travel Grant (ICIP 2024), IEEE Signal Processing Society (2024). USD 500 to present at ICIP 2024, Abu Dhabi.
 - STELLAR, NOVA Star and Super Star Awards, UST Global Inc. (2026)
 - 100% graduate scholarship, Georgia State University (2023–2026)
 - Go Above – Impact Award, Elevance Health (Carelon Global Solutions) (2023). For fixing a critical production issue in the commissions calculation flow.
-- Star of the Month Award, Tata Consultancy Services (January 2022)
-- Chairman's Gold Medal, VFSTR University (2020). For overall excellence throughout the B.Tech.
-- Best Outgoing Student of CSE, VFSTR University (2020)
+- Star of the Month Award, Tata Consultancy Services (2022)
+- Chairman's Gold Medal, VFSTR University (2021). For overall excellence throughout the B.Tech; conferred at the 8th Convocation, August 2021.
+- Best Outgoing Student of CSE, VFSTR University (2021). Conferred at the 8th Convocation, August 2021.
 - Academic Excellence Awards (all four years), VFSTR University (2016–2020). Top-5 rank holder in CSE each year.
 
 ## PEER REVIEW AND SERVICE
 Reviewer for 25 journals and major conferences (AAAI, CVPR, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 80+ papers reviewed across AI/ML, biomedical imaging and computer vision.
 Currently an active reviewer for: AAAI 2027, ICLR 2027, EACL 2027, NeurIPS 2026 GenAI4Health Workshop, IEEE ISBI 2027, CVPR 2027.
-Completed conference reviewing: IEEE ISBI 2026 (9 papers); AAAI 2026 (4 papers); IEEE ISBI 2025 (9 papers); MICCAI 2025 (3 papers).
+Completed conference reviewing: NeurIPS 2026 (4 papers); IEEE ISBI 2026 (9 papers); AAAI 2026 (4 papers); IEEE ISBI 2025 (9 papers); MICCAI 2025 (3 papers).
 Journal reviewing (papers reviewed): Applied Sciences (MDPI) (2); Artificial Intelligence Review (Springer) (5); BMC Cancer (Springer) (1); BMC Medical Imaging (Springer) (1); Cognitive Computation (Springer) (1); Computer Methods in Biomechanics and Biomedical Engineering: Imaging & Visualization (1); Computers in Biology and Medicine (Elsevier) (1); Diagnostics (MDPI) (3); Evolutionary Intelligence (Springer) (2); IEEE Access (1); IEEE Transactions on Circuits and Systems for Video Technology (1); IEEE Transactions on Medical Imaging (3); International Journal of Data Science and Analytics (Springer) (2); International Journal of Information Management Data Insights (Elsevier) (2); International Journal of Machine Learning and Cybernetics (Springer) (1); Journal of Ambient Intelligence and Humanized Computing (Springer) (2); Journal of Big Data (Springer) (1); Knowledge and Information Systems (Springer) (1); Machine Vision and Applications (Springer) (2); Neural Processing Letters (Springer) (3); Pattern Analysis and Applications (Springer) (1); Plant Methods (BMC) (1); Scientific Reports (Springer Nature) (11); Sensors (MDPI) (2); Signal, Image and Video Processing (Springer) (6).
+Reviewer invitations received since 2021: 292, from 58 journals (log: /service/review-log/).
+
+## RECOGNITION AND MEDIA
+Media coverage (see the Recognition page, /recognition/):
+- Georgia State University News (University news, 2025-10-28): "Georgia State Ph.D. Student Wins Global Tech Innovation Award" https://news.gsu.edu/2025/10/28/georgia-state-ph-d-student-wins-global-tech-innovation-award/
+- EurekAlert! (AAAS) (Science news release, 2025-10-29): "Georgia State Ph.D. student wins Global Tech Innovation Award" https://www.eurekalert.org/news-releases/1103853
+- Rough Draft Atlanta (News, 2025-11-15): "Georgia State University student wins global AI innovation competition" https://roughdraftatlanta.com/2025/11/15/gsu-student-wins-ai-competition/
+- PR Newswire (UST) (Press release, 2025-10-15): "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference" https://www.prnewswire.com/news-releases/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-302583559.html
+- TechNode Global (News, 2025-10-15): "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference" https://technode.global/?p=109875
+- The Tribune (India) (News, 2025-10-15): "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference" https://www.tribuneindia.com/news/business/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-2
+- Stevens Institute of Technology News (University news): "Stevens Data Science Program Graduate Takes First Place at Global Competition" https://www.stevens.edu/news/stevens-data-science-program-graduate-takes-first-place-at-global
+- UST Insights (Company article): "UST at NeurIPS 2025: Advancing Frontier AI Through Research, Partnerships, and Real-World Impact" https://www.ust.com/en/insights/ust-at-neurips-2025-advancing-frontier-ai-through-research-partnerships-and-real-world-impact
+- UST Insights (Company article): "Multimodal AI for Radiology: Reducing Hallucinations with VLVAE" https://www.ust.com/en/insights/turning-multimodal-ai-into-clinical-reliability
+- UST Insights (Company article): "Text-to-SQL in the enterprise: Lessons from the BIRD Benchmark" https://www.ust.com/en/insights/text-to-sql-enterprise-natural-language-analytics
+Achievements with public evidence:
+- Global Champion and US Regional Winner, D3CODE 2025, UST (2025-10). UST's international student innovation challenge on AI, quantum computing and data ecosystems drew more than 25,000 students from Malaysia, India, Mexico, the United Kingdom and the United States. Team Neural Navigators (Nagur Shareef Shaik, Georgia State University; Vandna Rajpal, Stevens Institute of Technology) won the US regional round and then the global final with PRISM, an AI platform for no-code data analysis, ETL and predictive modeling, earning USD 15,000 in prizes (USD 5,000 for the US region and USD 10,000 as global winner) and an invitation to present at UST's D3 Conference in India. Evidence: UST press release: https://www.prnewswire.com/news-releases/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-302583559.html; Georgia State News: https://news.gsu.edu/2025/10/28/georgia-state-ph-d-student-wins-global-tech-innovation-award/; PRISM on GitHub: https://github.com/ShaikNagurShareef/PRISM/
+- AxisSQL on the BIRD-SQL Text-to-SQL leaderboard, BIRD benchmark (official leaderboard) (2026-08). AxisSQL, submitted under UST, is listed on the official BIRD-SQL leaderboard (Aug 3, 2026) with 76.86% test execution accuracy and a 68.35 test R-VES efficiency score; the entry links to the public code. The work came from a research program with Professor Tatsunori Hashimoto's group at Stanford, and UST reports the result as 12th worldwide at submission. Evidence: BIRD leaderboard: https://bird-bench.github.io/; AxisSQL on GitHub: https://github.com/ShaikNagurShareef/AxisSQL; UST article: https://www.ust.com/en/insights/text-to-sql-enterprise-natural-language-analytics
+- Graduate Research Award, Department of Computer Science, Georgia State University (2026). Selected by the Computer Science Honors and Awards Committee; the award was presented at the department's CS Demo Day awards ceremony.
+- USTAR Recognitions: STELLAR, NOVA STAR (two) and SUPER STAR, UST (2026). Company recognitions for advancing AI initiatives with clients (STELLAR), digital acumen and hackathon work (NOVA STAR), and the CardDemo COBOL modernization hackathon (SUPER STAR).
+- Go Above Award: Impact, Elevance Health (Carelon Global Solutions) (2023). Recognized for analyzing the commission process in detail to fix a critical issue; nominated for Lead with Purpose and Heart.
+- IEEE Signal Processing Society Travel Grant, IEEE Signal Processing Society (2024-07). Awarded USD 500 by the SPS Grant Selection Committee to present at the 2024 IEEE International Conference on Image Processing (ICIP 2024), Abu Dhabi. Evidence: Grant notification (PDF): /data/awards/IEEE-SPS-Travel-Grant-ICIP-2024.pdf
+- Chairman's Gold Medal and Best Outgoing Student, VFSTR (Vignan's Foundation for Science, Technology and Research) (2021-08). Received the Chairman's Gold Medal for overall excellence in the B.Tech in Computer Science and Engineering and the Best Outgoing Student award at the university's 8th Convocation on August 27, 2021. Evidence: Convocation video, 2:38:49: https://www.youtube.com/watch?v=iVxfVBQ_WXc&t=9529s; Convocation post (Instagram): https://www.instagram.com/p/CTbbNZNhzAO/
+
+## EVENTS AND HACKATHONS
+- 2nd Agentic AI Summit, Berkeley RDI, Berkeley, CA (August 1–2, 2026). 5,000+ attendees, 200+ speakers across 4 stages, and 200+ posters on agent frameworks, evaluation and deployment.
+- 2026 CSAIL Alliances Annual Meeting, MIT CSAIL Alliances, Cambridge, MA (April 27–29, 2026). Research updates, student poster sessions and startup pitches at the Stata Center and Schwarzman College of Computing.
+- CSAIL Agentic AI Hackathon, MIT CSAIL, Cambridge, MA (April 25–26, 2026). Building autonomous agents that plan, use tools and recover from failure, alongside 35 teams.
+- The Digitalist Papers, Volume 2: The Economics of Transformative AI (launch), Stanford Digital Economy Lab, Stanford, CA (December 11, 2025). Attended the in-person launch with UST; panels on the economics of transformative AI.
+
+## DISSERTATION
+Ph.D. dissertation: "From Perception to Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting". Advisor: Dong Hye Ye. Status: Defended November 16, 2026 · Ph.D. conferral December 2026. Full text: https://shaiknagurshareef.github.io/data/dissertation/NagurShareefShaik_PhD_Dissertation.pdf
+Reading a medical image involves five judgments: locating a finding, grading it, weighing it against clinical context, comparing it with earlier studies, and committing to a claim. This dissertation builds methods for each stage on two ideas: every stage carries a distribution rather than a point estimate, and evidence from different sources is represented separately so that losing one source does not corrupt the others. It is evaluated across endoscopy, whole-slide histology, retinal photography, brain MRI with genomics, and chest radiography.
 
 ## WEBSITE SECTIONS
 ### ABOUT

@@ -8,6 +8,7 @@ Sources (all relative to the repo root):
   - data/profile.json + content/experience.json (CURRENT PROFILE; newer than the PDFs)
   - content/awards.json (honors, with years)
   - content/service.json (peer review, including active reviewing roles)
+  - content/recognition.json, content/participations.json, content/research.json (media, evidence, events, dissertation)
   - selected <section> blocks of index.html
 
 Run from anywhere:  python3 portfolio-chat-api/build_knowledge.py
@@ -175,7 +176,39 @@ def service() -> str:
         lines.append("Currently an active reviewer for: " + ", ".join(active) + ".")
     lines.append("Completed conference reviewing: " + "; ".join(done) + ".")
     lines.append("Journal reviewing (papers reviewed): " + "; ".join(journals) + ".")
+    if d.get("invitations"):
+        inv = d["invitations"]
+        lines.append(f"Reviewer invitations received since {inv['since']}: {inv['total']}, from {inv['journals']} journals (log: /service/review-log/).")
     return "\n".join(lines)
+
+
+def recognition() -> str:
+    """Media coverage and evidenced achievements from content/recognition.json (the Recognition page)."""
+    d = json.loads((ROOT / "content/recognition.json").read_text())
+    lines = ["Media coverage (see the Recognition page, /recognition/):"]
+    for m in d["media"]:
+        lines.append(f"- {m['source']} ({m['kind']}{', ' + m['date'] if m.get('date') else ''}): \"{m['title']}\" {m['url']}")
+    lines.append("Achievements with public evidence:")
+    for a in d["awards"]:
+        links = "; ".join(f"{e['label']}: {e['url']}" for e in a["evidence"])
+        lines.append(f"- {a['title']}, {a['org']} ({a['date']}). {a['summary']}" + (f" Evidence: {links}" if links else ""))
+    return "\n".join(lines)
+
+
+def events() -> str:
+    """Events and hackathons from content/participations.json."""
+    items = sorted(json.loads((ROOT / "content/participations.json").read_text()), key=lambda e: e["date"], reverse=True)
+    return "\n".join(f"- {e['title']}, {e['host']}, {e['location']} ({e['dateLabel']}). {e['detail']}" for e in items)
+
+
+def dissertation() -> str:
+    """Ph.D. dissertation status from content/research.json."""
+    r = json.loads((ROOT / "content/research.json").read_text())["dissertation"]
+    line = f"Ph.D. dissertation: \"{r['title']}\". Advisor: {r['advisor']}. Status: {r['status']}."
+    doc = r.get("document") or {}
+    if doc.get("released") and doc.get("path"):
+        line += f" Full text: https://shaiknagurshareef.github.io{doc['path']}"
+    return line + "\n" + r["summary"]
 
 
 def main() -> int:
@@ -190,6 +223,9 @@ def main() -> int:
     blocks += ["## PUBLICATIONS", publications(), ""]
     blocks += ["## HONORS AND AWARDS", awards(), ""]
     blocks += ["## PEER REVIEW AND SERVICE", service(), ""]
+    blocks += ["## RECOGNITION AND MEDIA", recognition(), ""]
+    blocks += ["## EVENTS AND HACKATHONS", events(), ""]
+    blocks += ["## DISSERTATION", dissertation(), ""]
 
     html = (ROOT / "index.html").read_text()
     # Ignore commented-out markup so stale content never leaks into the knowledge base.
