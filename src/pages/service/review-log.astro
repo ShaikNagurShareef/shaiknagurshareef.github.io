@@ -1,0 +1,133 @@
+---
+/**
+ * Peer-review log: every reviewer invitation, accepted and completed review, and conference
+ * assignment from the reviewer correspondence (content/review-log.json). Manuscript titles and IDs,
+ * editors' names and email addresses are omitted; only date, venue and type are shown.
+ */
+import Base from "../../layouts/Base.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+type Entry = { date: string; venue: string; type: string };
+const log = JSON.parse(readFileSync(join(process.cwd(), "content/review-log.json"), "utf8")) as { entries: Entry[] };
+const entries = log.entries;
+const TYPES = ["Invitation", "Review accepted", "Review completed", "Conference review"];
+const count = (f: (e: Entry) => boolean) => entries.filter(f).length;
+const years = [...new Set(entries.map((e) => e.date.slice(0, 4)))].sort();
+const byYear = years.map((y) => ({ y, n: count((e) => e.date.startsWith(y)), inv: count((e) => e.date.startsWith(y) && e.type === "Invitation") }));
+const maxYear = Math.max(...byYear.map((d) => d.n));
+const venues = [...new Set(entries.map((e) => e.venue))]
+  .map((v) => ({ v, inv: count((e) => e.venue === v && e.type === "Invitation"), done: count((e) => e.venue === v && e.type === "Review completed"), all: count((e) => e.venue === v) }))
+  .sort((a, b) => b.all - a.all || a.v.localeCompare(b.v));
+const named = venues.filter((d) => !d.v.startsWith("Journal ("));
+const fmt = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" });
+---
+<Base title="Peer-review log" description="Reviewer invitations, accepted and completed reviews, and conference review assignments, 2021–2026.">
+  <PageHeader title="Peer-review log"
+    lead={`Every reviewer invitation and review recorded in my editorial correspondence since ${years[0]}. Manuscript titles, IDs and editors' details are confidential and omitted.`}>
+    <a href="/service/#review-h" class="btn">Back to Service</a>
+    <Fragment slot="meta">
+      <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
+        {[
+          { v: count((e) => e.type === "Invitation"), l: "Invitations" },
+          { v: count((e) => e.type === "Review completed"), l: "Completion confirmations" },
+          { v: count((e) => e.type === "Review accepted"), l: "Accepted assignments" },
+          { v: count((e) => e.type === "Conference review"), l: "Conference review threads" },
+          { v: named.length, l: "Journals and conferences" },
+        ].map((f) => (
+          <div class="flex flex-col-reverse justify-end">
+            <dt class="text-xs text-muted">{f.l}</dt>
+            <dd class="font-display text-[1.75rem] font-semibold tabular text-ink" data-count={f.v}>{f.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </Fragment>
+  </PageHeader>
+
+  <Section id="year-h" title="By year" icon="calendar-days">
+    <div class="yr-plot" role="img" aria-label={byYear.map((d) => `${d.y}: ${d.n} records, ${d.inv} invitations`).join("; ")}>
+      {byYear.map((d, i) => (
+        <div class="yr-bar" style={`--h:${(d.n / maxYear).toFixed(3)};--inv:${(d.inv / Math.max(d.n, 1)).toFixed(3)};--i:${i}`}>
+          <span class="mono text-xs text-ink-2">{d.n}</span>
+          <span class="yr-fill" aria-hidden="true"><span class="yr-inv"></span></span>
+          <span class="mono text-xs text-muted">{d.y}</span>
+        </div>
+      ))}
+    </div>
+    <p class="mt-3 flex items-center gap-4 text-xs text-muted">
+      <span class="inline-flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm bg-ink"></span>Invitations</span>
+      <span class="inline-flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm bg-border-strong"></span>Reviews and assignments</span>
+    </p>
+  </Section>
+
+  <Section id="venue-h" title="By venue" icon="library">
+    <div class="overflow-x-auto">
+      <table class="table">
+        <thead><tr><th scope="col">Journal or conference</th><th scope="col" class="num">Invitations</th><th scope="col" class="num">Completed</th><th scope="col" class="num">All records</th></tr></thead>
+        <tbody>
+          {venues.map((d) => (
+            <tr><td class="text-ink">{d.v}</td><td class="num">{d.inv || "–"}</td><td class="num">{d.done || "–"}</td><td class="num font-medium text-ink">{d.all}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <Section id="log-h" title="All records" icon="list">
+    <div data-log-filter hidden role="group" aria-label="Filter by type" class="mb-4 flex flex-wrap gap-2">
+      <button type="button" class="cert-chip" data-type="" aria-pressed="true">All <span>{entries.length}</span></button>
+      {TYPES.map((t) => <button type="button" class="cert-chip" data-type={t} aria-pressed="false">{t} <span>{count((e) => e.type === t)}</span></button>)}
+    </div>
+    <div class="overflow-x-auto">
+      <table class="table">
+        <thead><tr><th scope="col">Date</th><th scope="col">Journal or conference</th><th scope="col">Type</th></tr></thead>
+        <tbody>
+          {entries.map((e) => (
+            <tr data-row-type={e.type}>
+              <td class="mono whitespace-nowrap text-muted">{fmt(e.date)}</td>
+              <td class="text-ink">{e.venue}</td>
+              <td><span class:list={["badge", e.type === "Review completed" && "badge-ok", e.type === "Invitation" && "badge-info"]}>{e.type}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .yr-plot { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0.75rem; height: 11rem; align-items: end; border-bottom: 1px solid var(--border-strong); max-width: 40rem; }
+  .yr-bar { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 0.3rem; height: 100%; }
+  .yr-fill {
+    position: relative; display: flex; flex-direction: column-reverse; width: 100%; max-width: 3.25rem;
+    height: calc(var(--h) * (100% - 2.6rem)); min-height: 3px; background: var(--border-strong); border-radius: 4px 4px 0 0; overflow: hidden; transform-origin: bottom;
+  }
+  .yr-inv { display: block; height: calc(var(--inv) * 100%); background: var(--ink); }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .yr-fill { transform: scaleY(0); transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: calc(var(--i) * 80ms + 150ms); }
+    :global(.js .is-visible) .yr-fill { transform: none; }
+  }
+  .cert-chip {
+    display: inline-flex; align-items: center; gap: 0.35rem; height: 2rem; padding-inline: 0.75rem; border: 1px solid var(--border);
+    border-radius: 999px; font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); background: var(--surface);
+  }
+  .cert-chip span { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .cert-chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .cert-chip[aria-pressed="true"] span { color: inherit; opacity: 0.7; }
+</style>
+
+<script>
+  const bar = document.querySelector<HTMLElement>("[data-log-filter]");
+  if (bar) {
+    bar.hidden = false;
+    const rows = [...document.querySelectorAll<HTMLElement>("[data-row-type]")];
+    bar.addEventListener("click", (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>("button[data-type]");
+      if (!b) return;
+      bar.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      rows.forEach((r) => (r.hidden = Boolean(b.dataset.type) && r.dataset.rowType !== b.dataset.type));
+    });
+  }
+</script>

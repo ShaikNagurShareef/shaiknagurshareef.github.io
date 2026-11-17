@@ -20,15 +20,15 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
     <Fragment slot="meta">
       <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
         {[
-          { v: total, l: "Completed reviews" },
-          { v: counted.length, l: "Venues" },
-          { v: activeCount, l: "Active reviewing roles" },
-          ...(service.invitations ? [{ v: service.invitations.total, l: `Review invitations since ${service.invitations.since}` }] : []),
-          { v: awards.length, l: "Honors and awards" },
+          { v: total, l: "Completed reviews", href: "#review-h" },
+          { v: counted.length, l: "Venues", href: "#review-h" },
+          { v: activeCount, l: "Active reviewing roles", href: "#review-h" },
+          ...(service.invitations ? [{ v: service.invitations.total, l: `Review invitations since ${service.invitations.since}`, href: "/service/review-log/" }] : []),
+          { v: awards.length, l: "Honors and awards", href: "#awards-h" },
         ].map((f) => (
-          <div class="flex flex-col-reverse justify-end">
-            <dt class="text-xs text-muted">{f.l}</dt>
-            <dd class="font-display text-[1.75rem] font-semibold tabular text-ink">{f.v}</dd>
+          <div class="figure-link relative flex flex-col-reverse justify-end">
+            <dt class="flex items-center gap-1 text-xs text-muted">{f.l}<Icon name="arrow-right" size={11} class="figure-arrow" /></dt>
+            <dd class="font-display text-[1.75rem] font-semibold tabular text-ink"><a href={f.href} class="figure-a">{f.v}<span class="sr-only"> {f.l}</span></a></dd>
           </div>
         ))}
       </dl>
@@ -36,6 +36,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
   </PageHeader>
 
   <Section id="review-h" title="Peer review">
+    <a href="/service/review-log/" class="cert-link mb-6"><Icon name="list" size={14} />Full peer-review log ({service.invitations?.total ?? ""} invitations)</a>
     <h3 class="subhead">Conferences</h3>
     <table class="table mt-3">
       <thead><tr><th scope="col">Venue</th><th scope="col">Status</th><th scope="col" class="num">Reviews</th><th scope="col" class="num"><span class="sr-only">Record</span></th></tr></thead>
@@ -119,6 +120,11 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
 </Base>
 
 <style>
+  .figure-a { color: inherit; text-decoration: none; }
+  .figure-a::after { content: ""; position: absolute; inset: -0.25rem; }
+  .figure-link:hover .figure-a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+  .figure-link :global(.figure-arrow) { opacity: 0; transform: translateX(-3px); transition: opacity 150ms, transform 150ms; }
+  .figure-link:hover :global(.figure-arrow) { opacity: 1; transform: none; }
   .award-icon {
     display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: 2rem; height: 2rem; margin-top: 0.1rem;
     border-radius: 999px; background: var(--surface-2); color: var(--ink); border: 1px solid var(--border);
