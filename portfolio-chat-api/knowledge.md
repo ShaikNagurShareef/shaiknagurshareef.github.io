@@ -343,7 +343,7 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 
 ## HONORS AND AWARDS
 - Graduate Research Award, Department of Computer Science, Georgia State University (2026)
-- Winner, D3CODE Hackathon (US Region & Global), UST Global Inc. (2025). Ahead of teams from the UK, Mexico, Malaysia and India.
+- Global Champion and US Regional Winner, D3CODE 2025, UST Global Inc. (2025). Team Neural Navigators, for PRISM; first among 25,000+ students from five countries. USD 15,000 in prizes (USD 10,000 global, USD 5,000 US region).
 - NeurIPS 2025 GenAI4Health Travel Grant, NeurIPS 2025 GenAI4Health Workshop (2025)
 - IEEE SPS Travel Grant (ICIP 2024), IEEE Signal Processing Society (2024)
 - STELLER, NOVA Star and Super Star Awards, UST Global Inc. (2026)
