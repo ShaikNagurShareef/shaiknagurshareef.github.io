@@ -274,6 +274,8 @@ const service = defineCollection({
       name: z.string(), count: z.number().int().nullable(), url: z.string().nullable(), active: z.boolean().optional(),
     })),
     journals: z.array(z.object({ name: z.string(), count: z.number().int(), url: z.string().nullable() })),
+    /** Reviewer invitations received (counted from invitation emails; not published). */
+    invitations: z.object({ total: z.number().int(), since: z.number().int(), journals: z.number().int() }).optional(),
   }),
 });
 

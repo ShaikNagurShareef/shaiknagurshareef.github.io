@@ -1,5 +1,5 @@
 {
-  "summary": "Reviewer for 25+ journals and major conferences (AAAI, CVPR, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 60+ papers reviewed across AI/ML, biomedical imaging and computer vision.",
+  "summary": "Reviewer for 25 journals and major conferences (AAAI, CVPR, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 80+ papers reviewed across AI/ML, biomedical imaging and computer vision.",
   "conferences": [
     {
       "name": "AAAI 2027",
@@ -70,19 +70,19 @@
       "url": "/data/reviewer/RC_AIR.pdf"
     },
     {
-      "name": "BMC Medical Imaging (Springer)",
-      "count": 1,
-      "url": "/data/reviewer/RC_BMCMI.pdf"
-    },
-    {
       "name": "BMC Cancer (Springer)",
       "count": 1,
       "url": "/data/reviewer/RC_BMCC.pdf"
     },
     {
-      "name": "Computers in Biology and Medicine (Elsevier)",
+      "name": "BMC Medical Imaging (Springer)",
       "count": 1,
-      "url": "/data/reviewer/RC_CBM.pdf"
+      "url": "/data/reviewer/RC_BMCMI.pdf"
+    },
+    {
+      "name": "Cognitive Computation (Springer)",
+      "count": 1,
+      "url": "/data/reviewer/RC_CC.pdf"
     },
     {
       "name": "Computer Methods in Biomechanics and Biomedical Engineering: Imaging & Visualization",
@@ -90,9 +90,9 @@
       "url": null
     },
     {
-      "name": "Cognitive Computation (Springer)",
+      "name": "Computers in Biology and Medicine (Elsevier)",
       "count": 1,
-      "url": "/data/reviewer/RC_CC.pdf"
+      "url": "/data/reviewer/RC_CBM.pdf"
     },
     {
       "name": "Diagnostics (MDPI)",
@@ -110,13 +110,13 @@
       "url": null
     },
     {
-      "name": "IEEE Transactions on Medical Imaging",
+      "name": "IEEE Transactions on Circuits and Systems for Video Technology",
       "count": 1,
       "url": null
     },
     {
-      "name": "IEEE Transactions on Circuits and Systems for Video Technology",
-      "count": 1,
+      "name": "IEEE Transactions on Medical Imaging",
+      "count": 3,
       "url": null
     },
     {
@@ -135,14 +135,14 @@
       "url": "/data/reviewer/RC_IJMLC.pdf"
     },
     {
-      "name": "Journal of Big Data (Springer)",
-      "count": 1,
-      "url": "/data/reviewer/RC_JBD.pdf"
-    },
-    {
       "name": "Journal of Ambient Intelligence and Humanized Computing (Springer)",
       "count": 2,
       "url": null
+    },
+    {
+      "name": "Journal of Big Data (Springer)",
+      "count": 1,
+      "url": "/data/reviewer/RC_JBD.pdf"
     },
     {
       "name": "Knowledge and Information Systems (Springer)",
@@ -165,19 +165,29 @@
       "url": "/data/reviewer/RC_PAA.pdf"
     },
     {
+      "name": "Plant Methods (BMC)",
+      "count": 1,
+      "url": null
+    },
+    {
       "name": "Scientific Reports (Springer Nature)",
-      "count": 6,
+      "count": 11,
       "url": "/data/reviewer/RC_SR.pdf"
     },
     {
       "name": "Sensors (MDPI)",
-      "count": 1,
+      "count": 2,
       "url": "/data/reviewer/RC_MDPI.pdf"
     },
     {
       "name": "Signal, Image and Video Processing (Springer)",
-      "count": 5,
+      "count": 6,
       "url": "/data/reviewer/RC_SIVP.pdf"
     }
-  ]
+  ],
+  "invitations": {
+    "total": 292,
+    "since": 2021,
+    "journals": 39
+  }
 }
