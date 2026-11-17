@@ -254,7 +254,8 @@ const recognition = defineCollection({
   loader: () => [{ id: "recognition", ...(readJson("content/recognition.json") as object) }],
   schema: z.object({
     media: z.array(z.object({
-      source: z.string(), kind: z.string(), date: z.string(), title: z.string(), url: z.url(), quote: z.string().optional(),
+      group: z.enum(["press", "ust"]), source: z.string(), kind: z.string(), date: z.string().optional(),
+      title: z.string(), url: z.url(), quote: z.string().optional(),
     })),
     awards: z.array(z.object({
       id: z.string(), title: z.string(), org: z.string(), date: z.string(), summary: z.string(),

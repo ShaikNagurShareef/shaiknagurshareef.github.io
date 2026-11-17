@@ -12,7 +12,13 @@ import { getEntry, getCollection } from "astro:content";
 import { ym } from "../../lib/format";
 
 const rec = (await getEntry("recognition", "recognition"))!.data;
-const media = [...rec.media].sort((a, b) => b.date.localeCompare(a.date));
+// Dated items newest first; undated ones (sites that do not expose a date) after them.
+const byDate = (a: { date?: string }, b: { date?: string }) => (b.date ?? "").localeCompare(a.date ?? "");
+const media = [...rec.media].sort(byDate);
+const groups = [
+  { id: "press", title: "Press coverage", items: media.filter((m) => m.group === "press") },
+  { id: "ust", title: "Featured by UST", items: media.filter((m) => m.group === "ust") },
+].filter((g) => g.items.length);
 const fmtDate = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 const service = (await getEntry("service", "service"))!.data;
 const reviews = [...service.conferences, ...service.journals].filter((v) => v.count !== null).reduce((n, v) => n + (v.count ?? 0), 0);
@@ -39,22 +45,27 @@ const certCount = (await getCollection("certifications")).length;
   </PageHeader>
 
   <Section id="news-h" title="In the news" description="Coverage by universities, news outlets and organizers. Links open the original publication.">
-    <ol class="grid gap-3">
-      {media.map((m) => (
-        <li>
-          <a href={m.url} target="_blank" rel="noopener" class="media-card" data-spotlight>
-            <span class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-              <span class="font-semibold text-ink">{m.source}</span>
-              <span class="badge">{m.kind}</span>
-              <span class="mono text-muted">{fmtDate(m.date)}</span>
-            </span>
-            <span class="mt-1.5 block text-[1.125rem] font-semibold leading-snug text-ink">{m.title}</span>
-            {m.quote && <span class="mt-2 block border-l-2 border-border-strong pl-3 text-[0.9375rem] italic text-ink-2">“{m.quote}”</span>}
-            <span class="media-cta" aria-hidden="true">Read article <Icon name="arrow-up-right" size={14} /></span>
-          </a>
-        </li>
-      ))}
-    </ol>
+    {groups.map((g, gi) => (
+      <div class:list={[gi > 0 && "mt-10"]}>
+        <h3 class="subhead mb-3">{g.title} <span class="font-normal normal-case tracking-normal text-muted">· {g.items.length}</span></h3>
+        <ol class="grid gap-3">
+          {g.items.map((m) => (
+            <li>
+              <a href={m.url} target="_blank" rel="noopener" class="media-card" data-spotlight>
+                <span class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+                  <span class="font-semibold text-ink">{m.source}</span>
+                  <span class="badge">{m.kind}</span>
+                  {m.date && <span class="mono text-muted">{fmtDate(m.date)}</span>}
+                </span>
+                <span class="mt-1.5 block text-[1.125rem] font-semibold leading-snug text-ink">{m.title}</span>
+                {m.quote && <span class="mt-2 block border-l-2 border-border-strong pl-3 text-[0.9375rem] italic text-ink-2">{m.quote}</span>}
+                <span class="media-cta" aria-hidden="true">Read article <Icon name="arrow-up-right" size={14} /></span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    ))}
     {rec.profiles.length > 0 && (
       <p class="mt-5 text-sm text-muted">Also: {rec.profiles.map((p, i) => <>{i > 0 && " · "}<a href={p.url} target="_blank" rel="noopener" class="link-quiet">{p.label}</a></>)}</p>
     )}

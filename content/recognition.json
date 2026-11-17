@@ -6,35 +6,79 @@
       "date": "2025-10-28",
       "title": "Georgia State Ph.D. Student Wins Global Tech Innovation Award",
       "url": "https://news.gsu.edu/2025/10/28/georgia-state-ph-d-student-wins-global-tech-innovation-award/",
-      "quote": "PRISM brings the power of AI from research labs into real enterprise workflows."
+      "quote": "PRISM brings the power of AI from research labs into real enterprise workflows.",
+      "group": "press"
     },
     {
       "source": "EurekAlert! (AAAS)",
       "kind": "Science news release",
       "date": "2025-10-29",
       "title": "Georgia State Ph.D. student wins Global Tech Innovation Award",
-      "url": "https://www.eurekalert.org/news-releases/1103853"
+      "url": "https://www.eurekalert.org/news-releases/1103853",
+      "group": "press"
     },
     {
       "source": "Rough Draft Atlanta",
       "kind": "News",
       "date": "2025-11-15",
       "title": "Georgia State University student wins global AI innovation competition",
-      "url": "https://roughdraftatlanta.com/2025/11/15/gsu-student-wins-ai-competition/"
+      "url": "https://roughdraftatlanta.com/2025/11/15/gsu-student-wins-ai-competition/",
+      "group": "press"
     },
     {
       "source": "PR Newswire (UST)",
       "kind": "Press release",
       "date": "2025-10-15",
       "title": "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference",
-      "url": "https://www.prnewswire.com/news-releases/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-302583559.html"
+      "url": "https://www.prnewswire.com/news-releases/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-302583559.html",
+      "group": "press"
     },
     {
       "source": "TechNode Global",
       "kind": "News",
       "date": "2025-10-15",
       "title": "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference",
-      "url": "https://technode.global/?p=109875"
+      "url": "https://technode.global/?p=109875",
+      "group": "press"
+    },
+    {
+      "group": "press",
+      "source": "The Tribune (India)",
+      "kind": "News",
+      "date": "2025-10-15",
+      "title": "UST Names Global D3CODE 2025 Hackathon Winners and Honors Innovators Ahead of Annual D3 Technology Conference",
+      "url": "https://www.tribuneindia.com/news/business/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-2"
+    },
+    {
+      "group": "press",
+      "source": "Stevens Institute of Technology News",
+      "kind": "University news",
+      "title": "Stevens Data Science Program Graduate Takes First Place at Global Competition",
+      "url": "https://www.stevens.edu/news/stevens-data-science-program-graduate-takes-first-place-at-global"
+    },
+    {
+      "group": "ust",
+      "source": "UST Insights",
+      "kind": "Company article",
+      "title": "UST at NeurIPS 2025: Advancing Frontier AI Through Research, Partnerships, and Real-World Impact",
+      "url": "https://www.ust.com/en/insights/ust-at-neurips-2025-advancing-frontier-ai-through-research-partnerships-and-real-world-impact",
+      "quote": "At the center of UST's NeurIPS presence was the work of Nagur Shareef Shaik, Dr. Adnan Masood, and collaborators."
+    },
+    {
+      "group": "ust",
+      "source": "UST Insights",
+      "kind": "Company article",
+      "title": "Multimodal AI for Radiology: Reducing Hallucinations with VLVAE",
+      "url": "https://www.ust.com/en/insights/turning-multimodal-ai-into-clinical-reliability",
+      "quote": "Co-authored with Dr. Adnan Masood, Chief AI Architect, UST; on the DiA-gnostic VLVAE (AAAI 2026)."
+    },
+    {
+      "group": "ust",
+      "source": "UST Insights",
+      "kind": "Company article",
+      "title": "Text-to-SQL in the enterprise: Lessons from the BIRD Benchmark",
+      "url": "https://www.ust.com/en/insights/text-to-sql-enterprise-natural-language-analytics",
+      "quote": "UST ranked 12th in the world on BIRD-SQL through a research program with Professor Tatsunori Hashimoto's group at Stanford, led by Nagur Shareef Shaik."
     }
   ],
   "awards": [
@@ -45,9 +89,18 @@
       "date": "2025-10",
       "summary": "UST's international student innovation challenge on AI, quantum computing and data ecosystems drew more than 25,000 students from Malaysia, India, Mexico, the United Kingdom and the United States. The Grand Jury named team Neural Navigators (Nagur Shareef Shaik, Georgia State University; Vandna Rajpal, Stevens Institute of Technology) the global winner for PRISM, an AI platform for no-code data analysis, ETL and predictive modeling.",
       "evidence": [
-        { "label": "UST press release", "url": "https://www.prnewswire.com/news-releases/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-302583559.html" },
-        { "label": "Georgia State News", "url": "https://news.gsu.edu/2025/10/28/georgia-state-ph-d-student-wins-global-tech-innovation-award/" },
-        { "label": "PRISM on GitHub", "url": "https://github.com/ShaikNagurShareef/PRISM/" }
+        {
+          "label": "UST press release",
+          "url": "https://www.prnewswire.com/news-releases/ust-names-global-d3code-2025-hackathon-winners-and-honors-innovators-ahead-of-annual-d3-technology-conference-302583559.html"
+        },
+        {
+          "label": "Georgia State News",
+          "url": "https://news.gsu.edu/2025/10/28/georgia-state-ph-d-student-wins-global-tech-innovation-award/"
+        },
+        {
+          "label": "PRISM on GitHub",
+          "url": "https://github.com/ShaikNagurShareef/PRISM/"
+        }
       ],
       "images": []
     },
@@ -59,7 +112,10 @@
       "summary": "Selected by the Computer Science Honors and Awards Committee; the award was presented at the department's CS Demo Day awards ceremony.",
       "evidence": [],
       "images": [
-        { "src": "/img/recognition/gsu-graduate-research-award.webp", "caption": "Award notification from the Department of Computer Science (staff contact details redacted)" }
+        {
+          "src": "/img/recognition/gsu-graduate-research-award.webp",
+          "caption": "Award notification from the Department of Computer Science (staff contact details redacted)"
+        }
       ]
     },
     {
@@ -70,14 +126,29 @@
       "summary": "Company recognitions for advancing AI initiatives with clients (STELLAR), digital acumen and hackathon work (NOVA STAR), and the CardDemo COBOL modernization hackathon (SUPER STAR).",
       "evidence": [],
       "images": [
-        { "src": "/img/recognition/ust-stellar.webp", "caption": "STELLAR, Innovate (client account name redacted)" },
-        { "src": "/img/recognition/ust-super-star.webp", "caption": "SUPER STAR, Innovate: CardDemo COBOL hackathon" },
-        { "src": "/img/recognition/ust-nova-star-1.webp", "caption": "NOVA STAR, Digital Acumen" },
-        { "src": "/img/recognition/ust-nova-star-2.webp", "caption": "NOVA STAR, Digital Acumen: hackathon participation and work" }
+        {
+          "src": "/img/recognition/ust-stellar.webp",
+          "caption": "STELLAR, Innovate (client account name redacted)"
+        },
+        {
+          "src": "/img/recognition/ust-super-star.webp",
+          "caption": "SUPER STAR, Innovate: CardDemo COBOL hackathon"
+        },
+        {
+          "src": "/img/recognition/ust-nova-star-1.webp",
+          "caption": "NOVA STAR, Digital Acumen"
+        },
+        {
+          "src": "/img/recognition/ust-nova-star-2.webp",
+          "caption": "NOVA STAR, Digital Acumen: hackathon participation and work"
+        }
       ]
     }
   ],
   "profiles": [
-    { "label": "TReNDS Center profile", "url": "https://trendscenter.org/nagur-shareef-shaik/" }
+    {
+      "label": "TReNDS Center profile",
+      "url": "https://trendscenter.org/nagur-shareef-shaik/"
+    }
   ]
 }
