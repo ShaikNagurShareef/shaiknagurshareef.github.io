@@ -121,11 +121,6 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
 </Base>
 
 <style>
-  .figure-a { color: inherit; text-decoration: none; }
-  .figure-a::after { content: ""; position: absolute; inset: -0.25rem; }
-  .figure-link:hover .figure-a { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
-  .figure-link :global(.figure-arrow) { opacity: 0; transform: translateX(-3px); transition: opacity 150ms, transform 150ms; }
-  .figure-link:hover :global(.figure-arrow) { opacity: 1; transform: none; }
   .award-icon {
     display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: 2rem; height: 2rem; margin-top: 0.1rem;
     border-radius: 999px; background: var(--surface-2); color: var(--ink); border: 1px solid var(--border);

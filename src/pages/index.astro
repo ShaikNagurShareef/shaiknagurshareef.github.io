@@ -20,10 +20,10 @@ const news = (await getCollection("news")).sort((a, b) => sortKey(b.data.date).l
 const underReview = pubs.filter((p) => p.data.status !== "published").length;
 
 const stats = [
-  { value: String(me.stats.papers), label: "Peer-reviewed papers", icon: "file-text" },
-  { value: me.stats.citations, label: "Citations", icon: "quote" },
-  { value: String(me.stats.h_index), label: "h-index", icon: "trending-up" },
-  { value: String(underReview), label: "Manuscripts in review", icon: "hourglass" },
+  { value: String(me.stats.papers), label: "Peer-reviewed papers", icon: "file-text", href: "/publications/" },
+  { value: me.stats.citations, label: "Citations", icon: "quote", href: me.links.scholar!, external: true },
+  { value: String(me.stats.h_index), label: "h-index", icon: "trending-up", href: me.links.scholar!, external: true },
+  { value: String(underReview), label: "Manuscripts in review", icon: "hourglass", href: "/publications/#review-h" },
 ];
 // Headline under the name: identity · focus ("Applied Scientist · Multimodal Medical AI & Agentic Systems").
 const focus = me.headline;
@@ -99,9 +99,9 @@ const venues = [...new Set(pubs.filter((p) => p.data.status === "published")
       <h2 id="stats-h" class="sr-only">At a glance</h2>
       <dl class="grid grid-cols-2 gap-y-6 md:grid-cols-4">
         {stats.map((s, i) => (
-          <div class:list={["flex flex-col-reverse justify-end gap-1 pr-4", i % 2 === 1 && "border-l border-border pl-5 md:pl-6", i >= 2 && "md:border-l md:border-border md:pl-6"]}>
-            <dt class="flex items-center gap-1.5 text-sm text-muted"><Icon name={s.icon} size={14} />{s.label}</dt>
-            <dd class="font-display text-[2.5rem] font-semibold leading-none text-ink tabular" data-count={s.value}>{s.value}</dd>
+          <div class:list={["figure-link flex flex-col-reverse justify-end gap-1 pr-4", i % 2 === 1 && "border-l border-border pl-5 md:pl-6", i >= 2 && "md:border-l md:border-border md:pl-6"]}>
+            <dt class="flex items-center gap-1.5 text-sm text-muted"><Icon name={s.icon} size={14} />{s.label}<Icon name={s.external ? "arrow-up-right" : "arrow-right"} size={12} class="figure-arrow" /></dt>
+            <dd class="font-display text-[2.5rem] font-semibold leading-none text-ink tabular"><a href={s.href} class="figure-a" {...(s.external ? { target: "_blank", rel: "noopener" } : {})}><span data-count={s.value}>{s.value}</span><span class="sr-only"> {s.label}{s.external ? " (Google Scholar)" : ""}</span></a></dd>
           </div>
         ))}
       </dl>
