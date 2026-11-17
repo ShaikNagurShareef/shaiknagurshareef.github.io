@@ -6,7 +6,7 @@
 ---
 <dialog data-lightbox-dialog class="lightbox" aria-label="Figure viewer">
   <figure>
-    <img alt="" data-lightbox-img />
+    <div data-lightbox-media></div>
     <figcaption data-lightbox-caption></figcaption>
   </figure>
   <div class="lightbox-bar">
@@ -24,7 +24,7 @@
   .lightbox[open] { animation: lb-in 200ms cubic-bezier(0.2, 0.7, 0.2, 1); }
   @keyframes lb-in { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
   .lightbox figure { margin: 0; background: #fff; }
-  .lightbox img { display: block; width: 100%; max-height: calc(92vh - 7rem); object-fit: contain; padding: 1rem; }
+  .lightbox :global(img) { display: block; width: 100%; max-height: calc(92vh - 7rem); object-fit: contain; padding: 1rem; }
   .lightbox figcaption { padding: 0.75rem 1.25rem; font-size: 0.9375rem; color: var(--ink-2); background: var(--surface); border-top: 1px solid var(--border); }
   .lightbox-bar { display: flex; justify-content: flex-end; gap: 0.5rem; padding: 0 1rem 1rem; background: var(--surface); }
   .lightbox-btn {
@@ -38,13 +38,16 @@
 <script>
   const dlg = document.querySelector<HTMLDialogElement>("[data-lightbox-dialog]");
   if (dlg) {
-    const img = dlg.querySelector<HTMLImageElement>("[data-lightbox-img]")!;
+    // The <img> is created on first open so pages never carry an empty image element.
+    const media = dlg.querySelector<HTMLElement>("[data-lightbox-media]")!;
+    const img = document.createElement("img");
     const cap = dlg.querySelector<HTMLElement>("[data-lightbox-caption]")!;
     const open = dlg.querySelector<HTMLAnchorElement>("[data-lightbox-open]")!;
     document.addEventListener("click", (e) => {
       const a = (e.target as HTMLElement).closest<HTMLAnchorElement>("a[data-lightbox]");
       if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
       e.preventDefault();
+      if (!img.isConnected) media.append(img);
       img.src = a.href;
       img.alt = a.dataset.caption ?? "";
       cap.textContent = a.dataset.caption ?? "";
