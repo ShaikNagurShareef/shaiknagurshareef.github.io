@@ -8,6 +8,7 @@ import Base from "../../layouts/Base.astro";
 import PageHeader from "../../components/PageHeader.astro";
 import Section from "../../components/Section.astro";
 import Icon from "../../components/Icon.astro";
+import VideoClips from "../../components/VideoClips.astro";
 import { getEntry, getCollection } from "astro:content";
 import { ym } from "../../lib/format";
 
@@ -89,6 +90,7 @@ const certCount = (await getCollection("certifications")).length;
               ))}
             </div>
           )}
+          {a.video && <div class="mt-5"><VideoClips {...a.video} /></div>}
           {a.images.length > 0 && (
             <div class:list={["evidence-grid mt-5", a.images.length === 1 && "is-single"]}>
               {a.images.map((img) => (

@@ -262,6 +262,11 @@ const recognition = defineCollection({
     awards: z.array(z.object({
       id: z.string(), title: z.string(), org: z.string(), date: z.string(), summary: z.string(),
       evidence: z.array(linkItem), images: z.array(z.object({ src: z.string(), caption: z.string() })),
+      /** A YouTube recording with named clips (seconds); played in place, loaded only on demand. */
+      video: z.object({
+        id: z.string(), title: z.string(), poster: z.string(),
+        clips: z.array(z.object({ label: z.string(), start: z.number().int(), end: z.number().int().optional() })).min(1),
+      }).optional(),
     })),
     profiles: z.array(linkItem),
   }),

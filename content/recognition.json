@@ -216,10 +216,6 @@
       "summary": "Received the Chairman's Gold Medal for overall excellence in the B.Tech in Computer Science and Engineering and the Best Outgoing Student award at the university's 8th Convocation on August 27, 2021.",
       "evidence": [
         {
-          "label": "Convocation video, 2:38:49",
-          "url": "https://www.youtube.com/watch?v=iVxfVBQ_WXc&t=9529s"
-        },
-        {
           "label": "Convocation post (Instagram)",
           "url": "https://www.instagram.com/p/CTbbNZNhzAO/"
         }
@@ -229,7 +225,18 @@
           "src": "/img/recognition/vfstr-convocation-2021.webp",
           "caption": "8th Convocation, August 2021"
         }
-      ]
+      ],
+      "video": {
+        "id": "iVxfVBQ_WXc",
+        "title": "Vignan's Convocation 2020 & 2021 (August 27, 2021)",
+        "poster": "/img/recognition/vfstr-convocation-video.webp",
+        "clips": [
+          {
+            "label": "On stage",
+            "start": 9529
+          }
+        ]
+      }
     }
   ],
   "profiles": [
