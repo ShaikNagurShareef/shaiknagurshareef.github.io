@@ -105,6 +105,28 @@
       "images": []
     },
     {
+      "id": "axissql-bird",
+      "title": "AxisSQL on the BIRD-SQL Text-to-SQL leaderboard",
+      "org": "BIRD benchmark (official leaderboard)",
+      "date": "2026-08",
+      "summary": "AxisSQL, submitted under UST, is listed on the official BIRD-SQL leaderboard (Aug 3, 2026) with 76.86% test execution accuracy and a 68.35 test R-VES efficiency score; the entry links to the public code. The work came from a research program with Professor Tatsunori Hashimoto's group at Stanford, and UST reports the result as 12th worldwide at submission.",
+      "evidence": [
+        {
+          "label": "BIRD leaderboard",
+          "url": "https://bird-bench.github.io/"
+        },
+        {
+          "label": "AxisSQL on GitHub",
+          "url": "https://github.com/ShaikNagurShareef/AxisSQL"
+        },
+        {
+          "label": "UST article",
+          "url": "https://www.ust.com/en/insights/text-to-sql-enterprise-natural-language-analytics"
+        }
+      ],
+      "images": []
+    },
+    {
       "id": "gsu-graduate-research-award",
       "title": "Graduate Research Award",
       "org": "Department of Computer Science, Georgia State University",

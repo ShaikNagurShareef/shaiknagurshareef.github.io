@@ -1,5 +1,34 @@
 [
   {
+    "id": "axissql",
+    "title": "AxisSQL",
+    "stack": [
+      "Python",
+      "LLMs",
+      "Text-to-SQL",
+      "BIRD",
+      "Inference-time scaling"
+    ],
+    "description": "Controlled study of inference-time scaling for Text-to-SQL: varies five scaling knobs of a multi-stage pipeline and measures where extra compute turns into execution accuracy. Developed in a research collaboration with Professor Tatsunori Hashimoto's group at Stanford; listed on the official BIRD-SQL leaderboard at 76.86% test execution accuracy.",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/ShaikNagurShareef/AxisSQL"
+      },
+      {
+        "label": "BIRD leaderboard",
+        "url": "https://bird-bench.github.io/"
+      }
+    ],
+    "date": "2026-08",
+    "featured": true,
+    "tags": [
+      "llm",
+      "data"
+    ],
+    "source": "manual"
+  },
+  {
     "id": "pathpro",
     "title": "PathPro",
     "stack": [
