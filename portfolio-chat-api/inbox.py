@@ -76,6 +76,20 @@ async def _save(kind: str) -> None:
     api = visits._hf()
     if not api or kind not in _store:
         return
+    # Append-only: merge with what is saved right now (by id) so no stored message or feedback is ever dropped.
+    try:
+        files = await asyncio.to_thread(lambda: set(api.list_repo_files(visits.DATASET, repo_type="dataset")))
+        if _path(kind) in files:
+            from huggingface_hub import hf_hub_download
+
+            p = await asyncio.to_thread(hf_hub_download, visits.DATASET, _path(kind), repo_type="dataset", token=visits.HF_TOKEN, force_download=True)
+            saved = [json.loads(line) for line in Path(p).read_text().splitlines() if line.strip()]
+            local = {r.get("id"): r for r in _store[kind]}
+            merged = [local.pop(r.get("id"), r) for r in saved] + list(local.values())
+            _store[kind][:] = merged
+    except Exception as exc:  # cannot read the saved copy: do not overwrite it
+        log.warning("save %s skipped (could not read saved copy): %s", kind, exc)
+        return
     body = "\n".join(json.dumps(r, separators=(",", ":"), ensure_ascii=False) for r in _store[kind]) + "\n"
     try:
         await asyncio.to_thread(

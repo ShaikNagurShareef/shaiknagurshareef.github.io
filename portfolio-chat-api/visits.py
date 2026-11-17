@@ -174,6 +174,22 @@ def _fetch(day: str) -> list[dict] | None:
         return None
 
 
+def _union(saved: list[dict], local: list[dict]) -> list[dict]:
+    """Append-only merge: everything already saved is kept; local records are added once (by page-view id).
+    Later fields (e.g. time on page) from the local copy update the saved record but never remove it."""
+    by_pv = {r.get("pv"): r for r in saved if r.get("pv")}
+    out = list(saved)
+    for r in local:
+        pv = r.get("pv")
+        if pv and pv in by_pv:
+            by_pv[pv].update({k: v for k, v in r.items() if v not in (None, "")})
+        else:
+            out.append(r)
+            if pv:
+                by_pv[pv] = r
+    return out
+
+
 def _load_day(day: str) -> list[dict]:
     """Records for a day that is being written to, fetched from the dataset once."""
     if day in _loaded:
@@ -181,7 +197,7 @@ def _load_day(day: str) -> list[dict]:
     rows = _fetch(day)
     if rows is None:  # Hub unreachable: keep what we have, retry later
         return _days.setdefault(day, [])
-    rows.extend(_days.get(day, []))  # merge anything recorded before the load finished
+    rows = _union(rows, _days.get(day, []))  # merge anything recorded before the load finished
     _days[day] = rows
     _loaded.add(day)
     return rows
@@ -212,6 +228,14 @@ async def _flush() -> None:
         if day not in _loaded:  # could not read the existing file; never overwrite it blindly
             _dirty.add(day)
             continue
+        # Re-read the saved file right before writing and merge, so a record saved by anyone else
+        # (a backup, another instance) is never dropped: the audit log is append-only.
+        latest = await asyncio.to_thread(_fetch, day)
+        if latest is None:
+            _dirty.add(day)
+            continue
+        rows = _union(latest, rows)
+        _days[day] = rows
         body = "\n".join(json.dumps(r, separators=(",", ":"), ensure_ascii=False) for r in rows) + "\n"
         try:
             await asyncio.to_thread(

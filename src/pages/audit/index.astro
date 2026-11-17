@@ -50,6 +50,8 @@ import { SPACE_API } from "../../lib/api";
 
       <div id="panel-visitors" role="tabpanel" aria-labelledby="tab-visitors" data-panel="visitors">
       <p data-status class="mt-6 text-sm text-muted" aria-live="polite"></p>
+      <p data-storage-warning hidden class="form-error mt-3">Visits are kept only in the server's memory and are lost whenever it restarts. Add the HF_TOKEN storage secret to keep them permanently.</p>
+      <p data-hint hidden class="mt-3 rounded-[var(--radius)] border border-border bg-surface-2 px-3 py-2 text-sm text-ink-2"></p>
 
       <!-- Filters -->
       <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3 border-y border-border py-3 text-sm">
@@ -233,6 +235,7 @@ import { SPACE_API } from "../../lib/api";
       all = data.visits as Visit[];
       const notes = [];
       if (data.storage !== "ok") notes.push(`Storage: ${data.storage}.`);
+      $("[data-storage-warning]").hidden = data.storage === "ok";
       if (!data.geo) notes.push("Location lookup unavailable.");
       status.textContent = `Updated ${new Date().toLocaleTimeString()}. ${notes.join(" ")}`;
       page = 0;
@@ -273,6 +276,16 @@ import { SPACE_API } from "../../lib/api";
     renderBreakdowns(rows);
     renderVisitors(rows);
     renderLog(rows);
+    // Explain an empty view: say how many visits the filters are hiding (usually this browser's own).
+    const hint = $("[data-hint]");
+    const own = myVid ? all.filter((v) => v.vid === myVid).length : 0;
+    const bots = all.filter((v) => v.bot).length;
+    const meOn = $<HTMLInputElement>("[data-me]").checked, botsOff = !$<HTMLInputElement>("[data-bots]").checked;
+    const parts = [];
+    if (meOn && own) parts.push(`${own} visit${own === 1 ? "" : "s"} from this browser (yours) — untick "Exclude this browser" to see them`);
+    if (botsOff && bots) parts.push(`${bots} bot visit${bots === 1 ? "" : "s"} — tick "Include bots"`);
+    hint.hidden = !(all.length && parts.length && rows.length < all.length);
+    hint.textContent = `${all.length - rows.length} of ${all.length} visits are hidden by filters: ${parts.join("; ")}.`;
     const chip = $("[data-clear-visitor]");
     chip.hidden = !visitor;
     $("[data-visitor-label]").textContent = visitor ? short(visitor) : "";
