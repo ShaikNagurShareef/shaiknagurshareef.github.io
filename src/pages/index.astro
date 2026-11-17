@@ -88,12 +88,11 @@ const venues = [...new Set(pubs.filter((p) => p.data.status === "published")
           <img src="/img/Shareef-2026-hero.webp" alt={`Portrait of ${me.name}`} width="560" height="700"
                class="aspect-[4/5] w-full object-cover" loading="eager" fetchpriority="high" />
         </div>
-        <div class="portrait-badge">
-          <span class="portrait-badge-icon" aria-hidden="true"><Icon name="graduation-cap" size={16} /></span>
-          <span><strong>Ph.D., Computer Science</strong><span>Georgia State University · 2026</span></span>
-        </div>
+        <a href="/contact/" class="portrait-badge">
+          <span class="portrait-badge-icon" aria-hidden="true"><Icon name="map-pin" size={16} /></span>
+          <span><strong>{me.location}</strong><span>Get in touch</span></span>
+        </a>
       </div>
-      <p class="mt-4 text-center text-xs text-muted">{me.location} · <a href="/contact/" class="text-muted">Contact</a></p>
     </div>
   </section>
   </div>
@@ -190,7 +189,9 @@ const venues = [...new Set(pubs.filter((p) => p.data.status === "published")
     padding: 0.55rem 0.85rem 0.55rem 0.55rem; border-radius: 999px;
     background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border); box-shadow: 0 10px 28px -12px rgb(0 0 0 / 0.4);
+    text-decoration: none; transition: border-color 150ms, box-shadow 150ms;
   }
+  .portrait-badge:hover { border-color: var(--ink); box-shadow: 0 12px 30px -10px rgb(0 0 0 / 0.5); }
   .portrait-badge-icon { display: inline-flex; padding: 0.4rem; border-radius: 999px; background: var(--ink); color: var(--bg); }
   .portrait-badge strong { display: block; font-size: 0.8125rem; line-height: 1.2; color: var(--ink); }
   .portrait-badge span > span { display: block; font-size: 0.75rem; line-height: 1.25; color: var(--muted); }
