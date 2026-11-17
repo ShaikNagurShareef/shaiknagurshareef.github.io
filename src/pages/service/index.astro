@@ -4,7 +4,7 @@ import PageHeader from "../../components/PageHeader.astro";
 import Section from "../../components/Section.astro";
 import Icon from "../../components/Icon.astro";
 import { getCollection, getEntry } from "astro:content";
-import { byOrder, yearSpan } from "../../lib/format";
+import { byOrder, yearSpan, ym } from "../../lib/format";
 
 const service = (await getEntry("service", "service"))!.data;
 const awards = (await getCollection("awards")).sort((a, b) => (b.data.year ?? 0) - (a.data.year ?? 0) || byOrder(a, b));
@@ -96,17 +96,29 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
     </ol>
   </Section>
 
-  <Section id="certs-h" title="Certifications">
+  <Section id="certs-h" title="Certifications" description="Certificate PDFs are hosted here; where the issuer offers it, Verify opens the issuer's own record.">
     <ul class="rows -mt-3">
       {certs.map((c) => (
-        <li class="flex items-center justify-between gap-4 py-3">
-          <span>
+        <li class="flex flex-col gap-2 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <span class="min-w-0">
             <span class="block text-[1.0625rem] font-medium text-ink">{c.data.title}</span>
-            <span class="block text-sm text-muted">{c.data.issuer}</span>
+            <span class="block text-sm text-muted">{c.data.issuer}{c.data.date && <span class="mono"> · {ym(c.data.date)}</span>}{c.data.note && <span> · {c.data.note}</span>}</span>
           </span>
-          {c.data.url && <a href={c.data.url} target="_blank" rel="noopener" class="link-more shrink-0 !text-[0.875rem]">Credential<span class="sr-only"> for {c.data.title}</span></a>}
+          <span class="flex shrink-0 gap-2">
+            {c.data.url && <a href={c.data.url} target="_blank" rel="noopener" class="cert-link"><Icon name="file-text" size={14} />Certificate<span class="sr-only"> for {c.data.title}</span></a>}
+            {c.data.verify && <a href={c.data.verify} target="_blank" rel="noopener" class="cert-link"><Icon name="badge-check" size={14} />Verify<span class="sr-only"> {c.data.title} with the issuer</span></a>}
+          </span>
         </li>
       ))}
     </ul>
   </Section>
 </Base>
+
+<style>
+  .cert-link {
+    display: inline-flex; align-items: center; gap: 0.35rem; height: 2rem; padding-inline: 0.7rem;
+    border: 1px solid var(--border); border-radius: 999px; font-size: 0.8125rem; font-weight: 600;
+    color: var(--ink); text-decoration: none; transition: border-color 150ms, background-color 150ms;
+  }
+  .cert-link:hover { border-color: var(--ink); background: var(--surface-2); }
+</style>

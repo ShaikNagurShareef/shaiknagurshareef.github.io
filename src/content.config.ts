@@ -199,7 +199,11 @@ const awards = defineCollection({
 
 const certifications = defineCollection({
   loader: fromArray("content/certifications.json"),
-  schema: z.object({ order, title: z.string(), issuer: z.string(), url: z.string().nullable() }),
+  schema: z.object({
+    order, title: z.string(), issuer: z.string(), url: z.string().nullable(),
+    /** Issue month "YYYY-MM"; issuer-hosted verification page (Coursera, Credly); short public note. */
+    date: z.string().optional(), verify: z.string().nullable().optional(), note: z.string().optional(),
+  }),
 });
 
 const participations = defineCollection({

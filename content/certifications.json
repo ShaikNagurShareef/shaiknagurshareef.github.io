@@ -3,54 +3,103 @@
     "id": "ccar-p",
     "title": "Claude Certified Architect – Professional",
     "issuer": "Anthropic",
-    "url": "/data/certifications/CCAR-P.pdf"
+    "date": "2026-08",
+    "url": "/data/certifications/CCAR-P.pdf",
+    "verify": "https://www.credly.com/badges/b45c75c2-9e81-4af5-9597-be6134bd0805"
+  },
+  {
+    "id": "lca-ambient",
+    "title": "Ambient Agents with LangGraph (course project)",
+    "issuer": "LangChain Academy",
+    "date": "2026-02",
+    "url": "/data/certifications/LangChain-Academy-Ambient-Agents.pdf",
+    "verify": null
+  },
+  {
+    "id": "lca-deep-agents",
+    "title": "Deep Agents (course project)",
+    "issuer": "LangChain Academy",
+    "date": "2026-02",
+    "url": "/data/certifications/LangChain-Academy-Deep-Agents.pdf",
+    "verify": null
+  },
+  {
+    "id": "lca-deep-research",
+    "title": "Deep Research with LangGraph (course project)",
+    "issuer": "LangChain Academy",
+    "date": "2026-02",
+    "url": "/data/certifications/LangChain-Academy-Deep-Research.pdf",
+    "verify": null
+  },
+  {
+    "id": "lca-observability",
+    "title": "Foundation: Introduction to Agent Observability & Evaluations",
+    "issuer": "LangChain Academy",
+    "date": "2026-02",
+    "url": "/data/certifications/LangChain-Academy-Agent-Observability.pdf",
+    "verify": null
   },
   {
     "id": "langgraph",
     "title": "Introduction to LangGraph",
     "issuer": "LangChain Academy",
-    "url": "/data/certifications/Intro-to-LangGraph.pdf"
+    "date": "2025-06",
+    "url": "/data/certifications/Intro-to-LangGraph.pdf",
+    "verify": null
   },
   {
     "id": "azure-ai-900",
-    "title": "Microsoft Certified: Azure AI Fundamentals",
+    "title": "Microsoft Certified: Azure AI Fundamentals (AI-900)",
     "issuer": "Microsoft",
-    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDV0DQAAAAAB28WXUK8N_Lj2xU7CJFv2oQ?e=4yaM7n"
+    "date": "2021-07",
+    "url": "/data/certifications/Azure-AI-900-score-report-redacted.pdf",
+    "verify": null,
+    "note": "Score report, 935/1000; candidate and registration numbers redacted"
   },
   {
     "id": "ibm-tf",
     "title": "Building Deep Learning Models with TensorFlow",
     "issuer": "IBM · Coursera",
-    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDVzDQAAAAABvEYbYoipfb5laFSYA-oAcQ?e=jXQ0y3"
+    "date": "2020-05",
+    "url": "/data/certifications/Coursera-IBM-Deep-Learning-TensorFlow.pdf",
+    "verify": "https://coursera.org/verify/ZRYBXH8VEYDD"
   },
   {
     "id": "nptel-dl",
     "title": "Deep Learning Part 1 (Elite – Silver)",
     "issuer": "IIT Madras · NPTEL",
-    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDVxDQAAAAABWC-rWLtKT093gM0BCc4g8A?e=9xiSre"
-  },
-  {
-    "id": "dl-nn",
-    "title": "Neural Networks and Deep Learning",
-    "issuer": "DeepLearning.AI · Coursera",
-    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDV2DQAAAAAB49pyC2mOEeEzOLQYs-J9Mw?e=lv8V31"
+    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDVxDQAAAAABWC-rWLtKT093gM0BCc4g8A?e=9xiSre",
+    "verify": null
   },
   {
     "id": "dl-cnn",
     "title": "Convolutional Neural Networks",
     "issuer": "DeepLearning.AI · Coursera",
-    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDV1DQAAAAABIVK5DPtQLKXAoUREl6dz6w?e=4Xc4pr"
+    "date": "2019-08",
+    "url": "/data/certifications/Coursera-Convolutional-Neural-Networks.pdf",
+    "verify": "https://coursera.org/verify/BFKKHXAWKGE8"
   },
   {
     "id": "dl-structuring",
     "title": "Structuring Machine Learning Projects",
     "issuer": "DeepLearning.AI · Coursera",
-    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDVyDQAAAAABHXEZrsPMbY8FaY0mF-d2AQ?e=wPJTPZ"
+    "date": "2019-05",
+    "url": "/data/certifications/Coursera-Structuring-ML-Projects.pdf",
+    "verify": "https://coursera.org/verify/4BJNMKSZ279F"
+  },
+  {
+    "id": "dl-nn",
+    "title": "Neural Networks and Deep Learning",
+    "issuer": "DeepLearning.AI · Coursera",
+    "date": "2018-10",
+    "url": "/data/certifications/Coursera-Neural-Networks-and-Deep-Learning.pdf",
+    "verify": "https://coursera.org/verify/VSVEAU663PFT"
   },
   {
     "id": "py4e",
     "title": "Python for Everybody Specialization",
     "issuer": "University of Michigan · Coursera",
-    "url": "https://1drv.ms/b/c/350847148092e924/ESTpkoAURwgggDV3DQAAAAABhfjUvxLSv5miMm4gAAFhJQ?e=h56jaG"
+    "url": "/data/certifications/Coursera-Python-for-Everybody-Specialization.pdf",
+    "verify": "https://coursera.org/verify/specialization/32KLXDVGW68L"
   }
 ]
