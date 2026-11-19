@@ -201,7 +201,9 @@
       "data",
       "llm"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2026-03-28"
   },
   {
     "id": "agentkit",
