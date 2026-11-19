@@ -6,12 +6,17 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r /code/requirements.txt
 
+# Semantic search model (BAAI/bge-small-en-v1.5, ONNX), baked into the image so the Space never downloads it.
+ENV FASTEMBED_CACHE_PATH=/code/models
+RUN python -c "from fastembed import TextEmbedding; TextEmbedding('BAAI/bge-small-en-v1.5', cache_dir='/code/models')" && \
+    chmod -R a+rX /code/models
+
 # Offline IP -> city/country and network lookups for the visit log.
 # DB-IP Lite databases, CC BY 4.0 (https://db-ip.com). Uses this month's release, or last month's.
 COPY fetch_geo.py /code/
 RUN python /code/fetch_geo.py /code/geo
 
-COPY app.py visits.py inbox.py knowledge.md /code/
+COPY app.py visits.py inbox.py search.py knowledge.md /code/
 
 # Hugging Face Spaces run containers as uid 1000
 RUN useradd -m -u 1000 user

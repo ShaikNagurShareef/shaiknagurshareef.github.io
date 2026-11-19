@@ -23,7 +23,7 @@ from huggingface_hub import HfApi
 SPACE = "nagur-shareef-shaik/portfolio-chat-api"
 ROOT = Path(__file__).resolve().parent.parent
 APP_DIR = ROOT / "portfolio-chat-api"
-FILES = ["app.py", "visits.py", "inbox.py", "fetch_geo.py", "knowledge.md", "requirements.txt", "Dockerfile", "build_knowledge.py"]
+FILES = ["app.py", "visits.py", "inbox.py", "search.py", "fetch_geo.py", "knowledge.md", "requirements.txt", "Dockerfile", "build_knowledge.py"]
 
 
 def read_key() -> str | None:
@@ -86,7 +86,7 @@ def main() -> int:
         repo_type="space",
         folder_path=str(APP_DIR),
         allow_patterns=FILES,
-        commit_message="Deploy portfolio API (chat + private visit log)",
+        commit_message="Deploy portfolio API (chat, semantic search, private visit log)",
     )
     print(f"Uploaded: {commit.commit_url}")
     print("The Space rebuilds now; check https://nagur-shareef-shaik-portfolio-chat-api.hf.space/health in a few minutes.")

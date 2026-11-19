@@ -27,6 +27,7 @@ from google.genai import types
 from pydantic import BaseModel, Field
 
 import inbox
+import search
 import visits
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -88,8 +89,10 @@ from contextlib import asynccontextmanager
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     task = asyncio.create_task(visits.flush_loop())
+    search_task = asyncio.create_task(search.index_loop())  # /search answers 503 until it is ready
     yield
     task.cancel()
+    search_task.cancel()
     await visits.flush_now()  # save buffered visits before the container stops
 
 
@@ -103,6 +106,7 @@ app.add_middleware(
 )
 app.include_router(visits.router)
 app.include_router(inbox.router)
+app.include_router(search.router)
 
 
 # ---------------------------------------------------------------- schemas
