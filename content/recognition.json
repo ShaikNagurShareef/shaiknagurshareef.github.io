@@ -154,9 +154,14 @@
       "id": "gsu-graduate-research-award",
       "title": "Graduate Research Award",
       "org": "Department of Computer Science, Georgia State University",
-      "date": "2026",
+      "date": "2026-04",
       "summary": "Selected by the Computer Science Honors and Awards Committee; the award was presented at the department's CS Demo Day awards ceremony.",
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "GSU Computer Science announcement",
+          "url": "https://csds.gsu.edu/2026/04/26/department-announces-2026-student-award-winners/"
+        }
+      ],
       "images": [
         {
           "src": "/img/recognition/gsu-graduate-research-award.webp",
