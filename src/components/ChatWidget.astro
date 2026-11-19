@@ -251,6 +251,14 @@ import { SPACE_API as API } from "../lib/api";
     win.querySelector("[data-chat-clear]")!.addEventListener("click", reset);
     form.addEventListener("submit", (e) => { e.preventDefault(); ask(input.value); });
     win.addEventListener("keydown", (e) => { if (e.key === "Escape") { e.stopPropagation(); setOpen(false); } });
+    // "Ask the assistant" from the Ctrl/Cmd+K search.
+    document.addEventListener("chat:ask", (e) => {
+      const q = (e as CustomEvent<unknown>).detail;
+      if (typeof q !== "string" || !q.trim()) return;
+      setOpen(true);
+      if (busy) input.value = q.trim().slice(0, MAX_CHARS); // a reply is still streaming: leave the question ready to send
+      else ask(q);
+    });
 
     history = load();
     add("ai", GREETING);
