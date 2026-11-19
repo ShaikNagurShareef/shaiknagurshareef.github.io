@@ -2,30 +2,6 @@
   "summary": "Reviewer for 25 journals and major conferences (AAAI, CVPR, ICLR, MICCAI, NeurIPS, EACL, ISBI), with 90+ papers reviewed across AI/ML, biomedical imaging and computer vision.",
   "conferences": [
     {
-      "name": "AAAI 2027",
-      "count": 6,
-      "url": "/data/reviewer/RC_AAAI2027.webp",
-      "active": true
-    },
-    {
-      "name": "ICLR 2027",
-      "count": 3,
-      "url": "/data/reviewer/RC_ICLR2027.webp",
-      "active": true
-    },
-    {
-      "name": "EACL 2027",
-      "count": null,
-      "url": "/data/reviewer/RC_EACL2027.webp",
-      "active": true
-    },
-    {
-      "name": "NeurIPS 2026 GenAI4Health Workshop",
-      "count": null,
-      "url": "/data/reviewer/RC_NeurIPS2026_GenAI4Health.webp",
-      "active": true
-    },
-    {
       "name": "IEEE ISBI 2027",
       "count": null,
       "url": null,
@@ -36,6 +12,26 @@
       "count": null,
       "url": "/data/reviewer/RC_CVPR2027.webp",
       "active": true
+    },
+    {
+      "name": "AAAI 2027",
+      "count": 6,
+      "url": "/data/reviewer/RC_AAAI2027.webp"
+    },
+    {
+      "name": "ICLR 2027",
+      "count": 3,
+      "url": "/data/reviewer/RC_ICLR2027.webp"
+    },
+    {
+      "name": "EACL 2027",
+      "count": 3,
+      "url": "/data/reviewer/RC_EACL2027.webp"
+    },
+    {
+      "name": "NeurIPS 2026 GenAI4Health Workshop",
+      "count": null,
+      "url": "/data/reviewer/RC_NeurIPS2026_GenAI4Health.webp"
     },
     {
       "name": "NeurIPS 2026",
