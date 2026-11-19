@@ -5,8 +5,8 @@
  *   node scripts/fetch-citations.mjs
  *
  * Google Scholar has no public API (and blocks automated access), so OpenAlex is the source for the
- * citing-paper list; its h-index is computed here from the same records. The deploy workflow runs
- * this before each build and keeps the committed snapshot if OpenAlex is unreachable.
+ * citing-paper list; its h-index is computed here from the same records. The weekly portfolio agent
+ * (scripts/agent/run.mjs) runs this; a failed or implausible fetch keeps the committed snapshot.
  */
 import { writeFileSync, readFileSync, existsSync } from "node:fs";
 

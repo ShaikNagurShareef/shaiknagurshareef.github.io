@@ -225,7 +225,20 @@ def citations() -> str:
         return "No citation snapshot."
     d = json.loads(path.read_text())
     t = d["totals"]
-    lines = [
+    lines = []
+    gs_path = ROOT / "data/scholar.json"
+    if gs_path.exists():
+        gs = json.loads(gs_path.read_text())
+        g = gs["totals"]
+        lines += [
+            f"Google Scholar (read {gs['as_of']}; these are the official figures shown on the site): {g['citations']} citations, "
+            f"h-index {g['h_index']}, i10-index {g['i10_index']}"
+            + (f"; since {g['recent_since']}: {g['citations_recent']} citations" if g.get("recent_since") else "") + ".",
+            "Most-cited papers on Google Scholar:",
+        ]
+        lines += [f"- {w['title']} ({w.get('venue') or 'n/a'}, {w.get('year')}): {w['cited_by']} citations"
+                  for w in sorted(gs["works"], key=lambda w: -w["cited_by"])[:10]]
+    lines += [
         f"OpenAlex snapshot of {d['as_of']}: {t['citations']} citations from {t['citing_works']} citing papers "
         f"({t['citations'] - t['self_citations']} excluding self-citations), h-index {t['h_index']}, i10-index {t['i10_index']}. "
         "Google Scholar reports slightly higher counts (see CURRENT PROFILE). Full list of citing papers: "

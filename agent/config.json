@@ -1,0 +1,30 @@
+{
+  "enabled": true,
+  "identity": {
+    "name": "Nagur Shareef Shaik",
+    "orcid": "0000-0002-2432-7409",
+    "openalex": "A5027212073",
+    "scholar": "rkfPEjUAAAAJ",
+    "github": "ShaikNagurShareef",
+    "huggingface": "nagur-shareef-shaik"
+  },
+  "limits": {
+    "max_new_papers_per_run": 3,
+    "max_new_projects_per_run": 3,
+    "min_citation_ratio": 0.8
+  },
+  "ignore": {
+    "works": ["W3118925514"],
+    "titles": [],
+    "repos": [
+      "shaiknagurshareef.github.io",
+      "bird-bench.github.io",
+      "CSc8830-Computer-Vision",
+      "Hacklytics-2026",
+      "CSAIL-AI-Hackathon",
+      "recruitRight",
+      "AurdinoRemoteCodeUpdate"
+    ],
+    "spaces": ["portfolio-chat-api", "InsuCompass-API", "InsuCompass-v2.0", "Retinal-Health-Diagnostics"]
+  }
+}

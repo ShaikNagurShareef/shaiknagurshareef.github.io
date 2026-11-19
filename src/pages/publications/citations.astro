@@ -9,7 +9,7 @@ import PageHeader from "../../components/PageHeader.astro";
 import Section from "../../components/Section.astro";
 import Icon from "../../components/Icon.astro";
 import { getEntry } from "astro:content";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
 type Work = { id: string; title: string; year: number | null; venue: string | null; doi: string | null; url: string; cited_by: number };
@@ -18,12 +18,51 @@ type Data = { source: string; source_url: string; as_of: string; totals: { citat
 
 const me = (await getEntry("profile", "me"))!.data;
 const data = JSON.parse(readFileSync(join(process.cwd(), "data/citations.json"), "utf8")) as Data;
-const { totals } = data;
-const cited = data.works.filter((w) => w.cited_by > 0);
-const uncited = data.works.length - cited.length;
-const maxCites = Math.max(...cited.map((w) => w.cited_by));
 const nf = new Intl.NumberFormat("en-US");
-const asOf = new Date(`${data.as_of}T12:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+const longDate = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+const asOf = longDate(data.as_of);
+
+/*
+ * Figures and per-paper counts come from Google Scholar (data/scholar.json, read weekly from the public
+ * profile by the portfolio agent). Scholar's cited-by lists cannot be read automatically, so the citing
+ * papers come from OpenAlex; each Scholar paper is matched to its OpenAlex record by title so its count
+ * can open the citing papers OpenAlex found. Without a Scholar snapshot the page uses OpenAlex throughout.
+ */
+type Scholar = { as_of: string; source_url: string; totals: { citations: number; citations_recent: number; h_index: number; i10_index: number; recent_since: number | null }; works: { title: string; venue: string; year: number | null; cited_by: number }[] };
+const scholarPath = join(process.cwd(), "data/scholar.json");
+const scholar = existsSync(scholarPath) ? (JSON.parse(readFileSync(scholarPath, "utf8")) as Scholar) : null;
+const normT = (s: string) => s.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+const bigrams = (s: string) => { const w = s.split(" "); return w.slice(0, -1).map((x, i) => `${x} ${w[i + 1]}`); };
+const sim = (a: string, b: string) => {
+  if (a === b) return 1;
+  const A = bigrams(a), B = new Map<string, number>();
+  for (const g of bigrams(b)) B.set(g, (B.get(g) ?? 0) + 1);
+  let inter = 0;
+  for (const g of A) if (B.get(g)) { inter++; B.set(g, B.get(g)! - 1); }
+  return A.length + bigrams(b).length ? (2 * inter) / (A.length + bigrams(b).length) : 0;
+};
+const oaByTitle = data.works.map((w) => ({ w, t: normT(w.title) }));
+const matchOA = (title: string) => {
+  const t = normT(title);
+  const best = oaByTitle.map((o) => ({ o, s: sim(t, o.t) })).sort((a, b) => b.s - a.s)[0];
+  return best && best.s >= 0.8 ? best.o.w : null;
+};
+type Row = { title: string; url: string | null; venue: string | null; year: number | null; cited_by: number; oa: string | null };
+const rows: Row[] = scholar
+  ? scholar.works.filter((w) => w.cited_by > 0).sort((a, b) => b.cited_by - a.cited_by).map((w) => {
+      const oa = matchOA(w.title);
+      return { title: w.title, url: oa?.url ?? null, venue: w.venue || oa?.venue || null, year: w.year, cited_by: w.cited_by, oa: oa?.id ?? null };
+    })
+  : data.works.filter((w) => w.cited_by > 0).map((w) => ({ title: w.title, url: w.url, venue: w.venue, year: w.year, cited_by: w.cited_by, oa: w.id }));
+const totals = {
+  ...data.totals,
+  ...(scholar ? { citations: scholar.totals.citations, h_index: scholar.totals.h_index, i10_index: scholar.totals.i10_index } : {}),
+};
+const metricsSource = scholar ? "Google Scholar" : "OpenAlex";
+const metricsAsOf = scholar ? longDate(scholar.as_of) : asOf;
+const cited = data.works.filter((w) => w.cited_by > 0);
+const uncited = (scholar ? scholar.works.length : data.works.length) - rows.length;
+const maxCites = Math.max(...rows.map((w) => w.cited_by));
 
 /** A short name for a paper: the acronym before a colon when there is one, else the opening words. */
 const short = (t: string) => {
@@ -37,20 +76,22 @@ const perYear = [...years].reverse().map((y) => ({ y, n: data.citing.filter((c) 
 const maxYear = Math.max(...perYear.map((d) => d.n));
 const PAGE = 40;
 ---
-<Base title="Citations" description={`${nf.format(totals.citations)} citations from ${nf.format(totals.citing_works)} papers, with the h-index worked out paper by paper.`}>
+<Base title="Citations" description={`${nf.format(totals.citations)} citations (${metricsSource}), h-index ${totals.h_index}, with the h-index worked out paper by paper and the citing papers listed.`}>
   <PageHeader title="Citations"
-    lead={`Papers that cite my work, listed from OpenAlex, an open scholarly index (snapshot of ${asOf}). Google Scholar's counts run slightly higher because it also indexes theses, preprint servers and other sources.`}>
+    lead={scholar
+      ? `Citation counts and h-index from Google Scholar (updated weekly; last read ${metricsAsOf}). The citing papers below come from OpenAlex, an open scholarly index (snapshot of ${asOf}), which finds ${nf.format(data.totals.citing_works)} of them; Google Scholar does not allow its cited-by lists to be read automatically.`
+      : `Papers that cite my work, listed from OpenAlex, an open scholarly index (snapshot of ${asOf}). Google Scholar's counts run slightly higher because it also indexes theses, preprint servers and other sources.`}>
     <a href="/publications/" class="btn">Back to Publications</a>
     <a href={me.links.scholar!} target="_blank" rel="noopener" class="btn">Google Scholar<Icon name="arrow-up-right" size={14} /></a>
     <a href={data.source_url} target="_blank" rel="noopener" class="btn">OpenAlex profile<Icon name="arrow-up-right" size={14} /></a>
     <Fragment slot="meta">
       <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-border pt-5">
         {[
-          { v: nf.format(totals.citations), l: "Citations", href: "#citing-h", self: "" },
-          { v: nf.format(totals.citations - totals.self_citations), l: "Excluding self-citations", href: "#citing-h", self: "hide" },
-          { v: nf.format(totals.citing_works), l: "Citing papers", href: "#citing-h", self: "" },
+          { v: nf.format(totals.citations), l: scholar ? "Citations (Google Scholar)" : "Citations", href: scholar ? "#h-index-h" : "#citing-h", self: scholar ? null : "" },
+          ...(scholar?.totals.recent_since ? [{ v: nf.format(scholar.totals.citations_recent), l: `Since ${scholar.totals.recent_since}`, href: "#h-index-h", self: null }] : [{ v: nf.format(totals.citations - totals.self_citations), l: "Excluding self-citations", href: "#citing-h", self: "hide" }]),
           { v: totals.h_index, l: "h-index", href: "#h-index-h", self: null },
           { v: totals.i10_index, l: "i10-index", href: "#h-index-h", self: null },
+          { v: nf.format(data.totals.citing_works), l: scholar ? "Citing papers listed (OpenAlex)" : "Citing papers", href: "#citing-h", self: "" },
         ].map((f) => (
           <div class="figure-link flex flex-col-reverse justify-end">
             <dt class="flex items-center gap-1 text-xs text-muted">{f.l}<Icon name="arrow-right" size={11} class="figure-arrow" /></dt>
@@ -67,27 +108,33 @@ const PAGE = 40;
       The i10-index of {totals.i10_index} counts papers with ten or more citations. Select a count to see the papers behind it.
     </p>
     <ol class="hx" style={`--max:${maxCites}`}>
-      {cited.map((w, i) => (
+      {rows.map((w, i) => (
         <li class:list={["hx-row", i < totals.h_index && "in-h", i === totals.h_index - 1 && "h-edge"]}>
           <span class="hx-rank mono" aria-hidden="true">{i + 1}</span>
           <span class="min-w-0">
-            <a href={w.url} target="_blank" rel="noopener" class="hx-title">{w.title}</a>
+            {w.url ? <a href={w.url} target="_blank" rel="noopener" class="hx-title">{w.title}</a> : <span class="hx-title">{w.title}</span>}
             <span class="block text-xs text-muted">{[w.venue, w.year].filter(Boolean).join(" · ")}</span>
           </span>
-          <a href={`?paper=${w.id}#citing-h`} class="hx-count" data-set-paper={w.id} style={`--n:${w.cited_by}`}
-             aria-label={`${w.cited_by} citations: show the papers citing ${short(w.title)}`}>
-            <span class="hx-track" aria-hidden="true"><span class="hx-bar"></span></span><span class="mono tabular text-right">{w.cited_by}</span>
-          </a>
+          {w.oa
+            ? <a href={`?paper=${w.oa}#citing-h`} class="hx-count" data-set-paper={w.oa} style={`--n:${w.cited_by}`}
+                 aria-label={`${w.cited_by} citations: show the papers citing ${short(w.title)}`}>
+                <span class="hx-track" aria-hidden="true"><span class="hx-bar"></span></span><span class="mono tabular text-right">{w.cited_by}</span>
+              </a>
+            : <span class="hx-count" style={`--n:${w.cited_by}`}>
+                <span class="hx-track" aria-hidden="true"><span class="hx-bar"></span></span><span class="mono tabular text-right">{w.cited_by}<span class="sr-only"> citations</span></span>
+              </span>}
         </li>
       ))}
     </ol>
     <p class="mt-3 text-xs text-muted">
-      The line marks the h-index. {uncited > 0 && `${uncited} more ${uncited === 1 ? "paper has" : "papers have"} no citations yet, mostly recent preprints. `}
-      Counts come from the citing papers listed below.
+      The line marks the h-index. {uncited > 0 && `${uncited} more ${uncited === 1 ? "paper has" : "papers have"} no citations yet, mostly recent ones. `}
+      {scholar
+        ? `Counts are Google Scholar's as of ${metricsAsOf}; selecting one lists the citing papers OpenAlex has found, which can be fewer.`
+        : "Counts come from the citing papers listed below."}
     </p>
   </Section>
 
-  <Section id="cy-h" title="Citations per year" icon="calendar-days">
+  <Section id="cy-h" title="Citations per year" icon="calendar-days" description={scholar ? "Counted from the citing papers listed below (OpenAlex)." : undefined}>
     <div class="cy-plot" role="img" aria-label={perYear.map((d) => `${d.y}: ${d.n} citations`).join("; ")}>
       {perYear.map((d, i) => (
         <div class="cy-bar" style={`--h:${(d.n / maxYear).toFixed(3)};--i:${i}`}>
@@ -210,7 +257,7 @@ const PAGE = 40;
         r.hidden = !ok || shown >= limit;
         if (ok && shown < limit) shown++;
       }
-      countEl.textContent = `${nf.format(total)} paper${total === 1 ? "" : "s"}${!paper && cites !== total ? ` · ${nf.format(cites)} citations` : ""}${shown < total ? ` · showing ${nf.format(shown)}` : ""}`;
+      countEl.textContent = `${nf.format(total)} paper${total === 1 ? "" : "s"}${!paper && cites !== total ? ` · ${nf.format(cites)} citations among them` : ""}${shown < total ? ` · showing ${nf.format(shown)}` : ""}`;
       moreWrap.hidden = shown >= total;
       const url = new URL(location.href);
       for (const [k, v] of [["paper", paper], ["year", year], ["q", q], ["noself", noself ? "1" : ""]]) v ? url.searchParams.set(k, v) : url.searchParams.delete(k);

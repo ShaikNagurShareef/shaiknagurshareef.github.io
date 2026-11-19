@@ -1,0 +1,105 @@
+name: Portfolio agent
+
+# Weekly: brings citations (Google Scholar + OpenAlex), publications and GitHub projects up to date,
+# validates the site, commits the changes, redeploys the site and the chat assistant's knowledge, and
+# keeps one review issue (label "portfolio-agent") for anything that needs a person. See agent/README.md.
+on:
+  schedule:
+    - cron: "23 7 * * 1" # Mondays, 07:23 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Report only; change nothing"
+        type: boolean
+        default: false
+      scholar:
+        description: "Read the Google Scholar profile"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write # commit the updated data files
+  issues: write # the review issue
+  actions: write # start the deploy workflow (pushes made with GITHUB_TOKEN do not trigger it)
+
+concurrency:
+  group: portfolio-agent
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: vars.AGENT_ENABLED != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: pip install --quiet pypdf huggingface_hub
+
+      - name: Update research and projects
+        id: agent
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DRY_RUN: ${{ inputs.dry_run || 'false' }}
+          SCHOLAR: ${{ github.event_name == 'schedule' || inputs.scholar }}
+          AGENT_REPORT: ${{ runner.temp }}/report.md
+        run: node scripts/agent/run.mjs
+
+      - name: Rebuild the chat assistant's knowledge
+        if: inputs.dry_run != true
+        run: python3 portfolio-chat-api/build_knowledge.py
+
+      # Schema and content checks: a change that breaks the site is never committed.
+      - name: Validate the site
+        if: inputs.dry_run != true
+        run: npm run build
+
+      - name: Commit
+        id: commit
+        if: inputs.dry_run != true
+        run: |
+          git add data content agent portfolio-chat-api/knowledge.md
+          if git diff --cached --quiet; then echo "pushed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          git config user.name "portfolio-agent"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "Weekly update: citations, publications and projects" -m "$(sed -n '/### Applied/,/### Needs/p' "$RUNNER_TEMP/report.md" | grep '^- ' | head -40)"
+          git push -q origin HEAD:main
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy the site
+        if: steps.commit.outputs.pushed == 'true'
+        run: gh workflow run deploy.yml --ref main -f ref=main
+
+      - name: Update the chat assistant
+        if: steps.commit.outputs.pushed == 'true'
+        env:
+          HF_TOKEN: ${{ secrets.HF_SPACE_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then echo "::notice::HF_SPACE_TOKEN is not set; the chat assistant keeps its previous knowledge."; exit 0; fi
+          python3 scripts/deploy_space.py --code-only
+
+      - name: Review issue
+        if: always() && inputs.dry_run != true
+        env:
+          FAILED: ${{ job.status == 'failure' }}
+        run: |
+          report="$RUNNER_TEMP/report.md"
+          [ -f "$report" ] || echo "## Portfolio agent" > "$report"
+          if [ "$FAILED" = "true" ]; then
+            printf '\n### The run failed\nNothing was committed. Log: %s\n' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" >> "$report"
+          fi
+          gh label create portfolio-agent --color 000000 --description "Weekly portfolio agent" --force >/dev/null
+          issue=$(gh issue list --label portfolio-agent --state open --json number -q '.[0].number')
+          if grep -q '^- \[ \]' "$report" || [ "$FAILED" = "true" ]; then
+            if [ -n "$issue" ]; then gh issue edit "$issue" --body-file "$report" >/dev/null
+            else gh issue create --title "Portfolio agent: needs your review" --label portfolio-agent --body-file "$report" >/dev/null; fi
+          elif [ -n "$issue" ]; then
+            gh issue close "$issue" --comment "Nothing needs review this week." >/dev/null
+          fi
