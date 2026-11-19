@@ -257,7 +257,9 @@
       "rag",
       "healthcare"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2025-07-09"
   },
   {
     "id": "scholarpulse",
