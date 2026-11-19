@@ -11,8 +11,17 @@ import Icon from "../../components/Icon.astro";
 import VideoClips from "../../components/VideoClips.astro";
 import { getEntry, getCollection } from "astro:content";
 import { ym } from "../../lib/format";
+import sharp from "sharp";
+import { join } from "node:path";
 
 const rec = (await getEntry("recognition", "recognition"))!.data;
+// Aspect ratio of each award photo, so two or three photos sit in one row at equal height, uncropped.
+const ratio = new Map<string, number>();
+for (const a of rec.awards) for (const img of a.images) {
+  const m = await sharp(join(process.cwd(), img.src.slice(1))).metadata();
+  ratio.set(img.src, +((m.width ?? 4) / (m.height ?? 3)).toFixed(3));
+}
+const rowCols = (imgs: { src: string }[]) => imgs.map((i) => `${ratio.get(i.src)}fr`).join(" ");
 // Dated items newest first; undated ones (sites that do not expose a date) after them.
 const byDate = (a: { date?: string }, b: { date?: string }) => (b.date ?? "").localeCompare(a.date ?? "");
 const media = [...rec.media].sort(byDate);
@@ -109,7 +118,8 @@ const awardGroups = AWARD_GROUPS.map((g) => ({ ...g, items: rec.awards.filter((a
               )}
               {a.video && <div class="mt-5"><VideoClips {...a.video} /></div>}
               {(a.images.length > 0 || a.reels?.length) && (
-                <div class:list={["evidence-grid mt-5", a.images.length + (a.reels?.length ?? 0) === 1 && "is-single", a.reels?.length && "has-reel", !a.reels?.length && a.images.length === 4 && "is-four"]} style={a.reels?.length ? `--rows:${Math.max(1, a.images.length)}` : undefined}>
+                <div class:list={["evidence-grid mt-5", a.images.length + (a.reels?.length ?? 0) === 1 && "is-single", a.reels?.length && "has-reel", !a.reels?.length && a.images.length === 4 && "is-four", !a.reels?.length && (a.images.length === 2 || a.images.length === 3) && "is-row"]}
+                  style={a.reels?.length ? `--rows:${Math.max(1, a.images.length)}` : !a.reels?.length && (a.images.length === 2 || a.images.length === 3) ? `--cols:${rowCols(a.images)};--cols-sm:${rowCols(a.images.length === 3 ? a.images.slice(1) : a.images)}` : undefined}>
                   {a.reels?.map((r) => (
                     <figure class="reel">
                       <video class="reel-video" controls playsinline preload="none" poster={r.poster} aria-label={r.caption}>
@@ -178,6 +188,14 @@ const awardGroups = AWARD_GROUPS.map((g) => ({ ...g, items: rec.awards.filter((a
   .evidence-grid.is-single { grid-template-columns: minmax(0, 26rem); }
   .evidence-grid.is-four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (min-width: 900px) { .evidence-grid.is-four { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  /* Two or three photos: columns sized by aspect ratio, so every photo has the same height. On phones,
+     the first of three spans the row and the other two share the next. */
+  .evidence-grid.is-row { grid-template-columns: var(--cols-sm); align-items: start; }
+  .evidence-grid.is-row:has(> :nth-child(3)) > :first-child { grid-column: 1 / -1; }
+  @media (min-width: 640px) {
+    .evidence-grid.is-row { grid-template-columns: var(--cols); max-width: 52rem; }
+    .evidence-grid.is-row:has(> :nth-child(3)) > :first-child { grid-column: auto; }
+  }
   .evidence-thumb {
     display: block; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: #fff;
     cursor: zoom-in; box-shadow: var(--shadow-sm);
