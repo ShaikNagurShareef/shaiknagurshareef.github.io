@@ -26,6 +26,9 @@ with a full site build, commits any changes to `main`, redeploys the site and, w
 - **A project is added automatically** only if it is a public, non-fork repository owned by the
   account above, has a description, and has a demo (repository homepage, a same-name Hugging Face
   Space, or a demo link in the README) that responds.
+- **Deterministic first:** every step is plain code (APIs, parsing, matching, rules). The only model
+  call drafts a new project's description, and only when its repository has no usable description
+  or topic tags.
 - Hand-written text (descriptions, venues, curated demo links) is never overwritten; differences are
   reported instead. Nothing is deleted.
 - Anything uncertain goes into one GitHub issue labelled `portfolio-agent`, updated each run and
