@@ -70,7 +70,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
   <Section id="awards-h" title="Honors and awards">
     <ol class="rows -mt-3">
       {awards.map((a) => (
-        <li class="grid gap-1 py-4 sm:grid-cols-[6.5rem_1fr_auto] sm:gap-6">
+        <li id={`award-${a.id}`} class="grid gap-1 py-4 sm:grid-cols-[6.5rem_1fr_auto] sm:gap-6">
           <span class="mono pt-0.5 text-muted">{yearSpan(a.data)}</span>
           <div class="flex gap-3">
             <span class="award-icon" aria-hidden="true"><Icon name={a.data.category === "research" ? "award" : a.data.category === "industry" ? "trophy" : "graduation-cap"} size={16} /></span>
@@ -105,7 +105,7 @@ const CATEGORY: Record<string, string> = { research: "Research", industry: "Indu
   <Section id="certs-h" title="Certifications">
     <ul class="rows -mt-3">
       {certs.map((c) => (
-        <li class="flex flex-col gap-2 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <li id={`cert-${c.id}`} class="flex flex-col gap-2 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <span class="min-w-0">
             <span class="block text-[1.0625rem] font-medium text-ink">{c.data.title}</span>
             <span class="block text-sm text-muted">{c.data.issuer}{c.data.date && <span class="mono"> · {ym(c.data.date)}</span>}{c.data.note && <span> · {c.data.note}</span>}</span>

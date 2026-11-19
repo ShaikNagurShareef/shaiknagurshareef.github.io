@@ -22,7 +22,7 @@ const skills = (await getCollection("skills")).sort(byOrder);
   <Section id="work-h" title="Work">
     <ol class="timeline -mt-6">
       {jobs.map((j, i) => (
-        <li class:list={["grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8", !j.data.end && "is-current"]} style={`--i:${i}`}>
+        <li id={`exp-${j.id}`} class:list={["grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8", !j.data.end && "is-current"]} style={`--i:${i}`}>
           <span class="tl-dot" aria-hidden="true"></span>
           <p class="mono text-muted md:pt-1">
             {range(j.data.start, j.data.end)}
@@ -51,7 +51,7 @@ const skills = (await getCollection("skills")).sort(byOrder);
   <Section id="edu-h" title="Education">
     <ol class="timeline -mt-6">
       {schools.map((s, i) => (
-        <li class:list={["grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8", s.data.expected && "is-current"]} style={`--i:${i}`}>
+        <li id={`edu-${s.id}`} class:list={["grid gap-2 py-6 md:grid-cols-[10rem_1fr] md:gap-8", s.data.expected && "is-current"]} style={`--i:${i}`}>
           <span class="tl-dot" aria-hidden="true"></span>
           <p class="mono text-muted md:pt-1">{range(s.data.start, s.data.end, s.data.expected)}</p>
           <div>
