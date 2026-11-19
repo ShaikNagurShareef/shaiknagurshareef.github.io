@@ -79,8 +79,8 @@ const PAGE = 40;
 <Base title="Citations" description={`${nf.format(totals.citations)} citations (${metricsSource}), h-index ${totals.h_index}, with the h-index worked out paper by paper and the citing papers listed.`}>
   <PageHeader title="Citations"
     lead={scholar
-      ? `Citation counts and h-index from Google Scholar (updated weekly; last read ${metricsAsOf}). The citing papers below come from OpenAlex, an open scholarly index (snapshot of ${asOf}), which finds ${nf.format(data.totals.citing_works)} of them; Google Scholar does not allow its cited-by lists to be read automatically.`
-      : `Papers that cite my work, listed from OpenAlex, an open scholarly index (snapshot of ${asOf}). Google Scholar's counts run slightly higher because it also indexes theses, preprint servers and other sources.`}>
+      ? `Citation counts: Google Scholar, ${metricsAsOf}. Citing papers: OpenAlex, ${asOf}.`
+      : `Citing papers: OpenAlex, ${asOf}.`}>
     <a href="/publications/" class="btn">Back to Publications</a>
     <a href={me.links.scholar!} target="_blank" rel="noopener" class="btn">Google Scholar<Icon name="arrow-up-right" size={14} /></a>
     <a href={data.source_url} target="_blank" rel="noopener" class="btn">OpenAlex profile<Icon name="arrow-up-right" size={14} /></a>
@@ -91,7 +91,7 @@ const PAGE = 40;
           ...(scholar?.totals.recent_since ? [{ v: nf.format(scholar.totals.citations_recent), l: `Since ${scholar.totals.recent_since}`, href: "#h-index-h", self: null }] : [{ v: nf.format(totals.citations - totals.self_citations), l: "Excluding self-citations", href: "#citing-h", self: "hide" }]),
           { v: totals.h_index, l: "h-index", href: "#h-index-h", self: null },
           { v: totals.i10_index, l: "i10-index", href: "#h-index-h", self: null },
-          { v: nf.format(data.totals.citing_works), l: scholar ? "Citing papers listed (OpenAlex)" : "Citing papers", href: "#citing-h", self: "" },
+          { v: nf.format(data.totals.citing_works), l: scholar ? "Citing papers (OpenAlex)" : "Citing papers", href: "#citing-h", self: "" },
         ].map((f) => (
           <div class="figure-link flex flex-col-reverse justify-end">
             <dt class="flex items-center gap-1 text-xs text-muted">{f.l}<Icon name="arrow-right" size={11} class="figure-arrow" /></dt>
@@ -104,8 +104,7 @@ const PAGE = 40;
 
   <Section id="h-index-h" title="h-index, paper by paper" icon="trending-up">
     <p class="-mt-2 mb-5 max-w-[68ch] text-[1.0625rem] leading-relaxed text-ink-2">
-      An h-index of <strong class="text-ink">{totals.h_index}</strong> means {totals.h_index} papers have each been cited at least {totals.h_index} times.
-      The i10-index of {totals.i10_index} counts papers with ten or more citations. Select a count to see the papers behind it.
+      Select a count to see the citing papers.
     </p>
     <ol class="hx" style={`--max:${maxCites}`}>
       {rows.map((w, i) => (
@@ -127,14 +126,11 @@ const PAGE = 40;
       ))}
     </ol>
     <p class="mt-3 text-xs text-muted">
-      The line marks the h-index. {uncited > 0 && `${uncited} more ${uncited === 1 ? "paper has" : "papers have"} no citations yet, mostly recent ones. `}
-      {scholar
-        ? `Counts are Google Scholar's as of ${metricsAsOf}; selecting one lists the citing papers OpenAlex has found, which can be fewer.`
-        : "Counts come from the citing papers listed below."}
+      The line marks the h-index.{uncited > 0 && ` ${uncited} ${uncited === 1 ? "paper has" : "papers have"} no citations yet.`}
     </p>
   </Section>
 
-  <Section id="cy-h" title="Citations per year" icon="calendar-days" description={scholar ? "Counted from the citing papers listed below (OpenAlex)." : undefined}>
+  <Section id="cy-h" title="Citations per year" icon="calendar-days" description="OpenAlex">
     <div class="cy-plot" role="img" aria-label={perYear.map((d) => `${d.y}: ${d.n} citations`).join("; ")}>
       {perYear.map((d, i) => (
         <div class="cy-bar" style={`--h:${(d.n / maxYear).toFixed(3)};--i:${i}`}>
@@ -194,8 +190,7 @@ const PAGE = 40;
       <button type="button" class="btn btn-sm">Show more</button>
     </div>
     <p class="mt-6 text-xs text-muted">
-      Source: <a href={data.source_url} target="_blank" rel="noopener" class="link-quiet">OpenAlex</a> (CC0 open data), snapshot of {asOf}.
-      Indexes differ, and some citing papers may be missing or attributed imperfectly. The data is also available as <a href="/data/citations.json" class="link-quiet">JSON</a>.
+      Source: <a href={data.source_url} target="_blank" rel="noopener" class="link-quiet">OpenAlex</a>, {asOf}. <a href="/data/citations.json" class="link-quiet">JSON</a>
     </p>
   </Section>
 </Base>

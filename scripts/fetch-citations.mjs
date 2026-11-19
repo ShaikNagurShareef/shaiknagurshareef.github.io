@@ -27,14 +27,13 @@ async function get(path) {
   }
 }
 
-/** Every result of a filtered /works query, following the cursor. */
+/** Every result of a filtered /works query, page by page (cursor paging now needs an API key). */
 async function allWorks(filter, select) {
   const out = [];
-  let cursor = "*";
-  while (cursor) {
-    const d = await get(`/works?filter=${filter}&per-page=200&cursor=${encodeURIComponent(cursor)}&select=${select}`);
+  for (let page = 1; page <= 50; page++) {
+    const d = await get(`/works?filter=${filter}&per-page=200&page=${page}&select=${select}`);
     out.push(...d.results);
-    cursor = d.results.length ? d.meta.next_cursor : null;
+    if (d.results.length < 200 || out.length >= d.meta.count) break;
   }
   return out;
 }

@@ -355,16 +355,16 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 - Academic Excellence Awards (all four years), VFSTR University (2016–2020). Top-5 rank holder in CSE each year.
 
 ## CITATIONS
-OpenAlex snapshot of 2026-11-17: 1292 citations from 973 citing papers (1194 excluding self-citations), h-index 14, i10-index 17. Google Scholar reports slightly higher counts (see CURRENT PROFILE). Full list of citing papers: https://shaiknagurshareef.github.io/publications/citations/
+OpenAlex snapshot of 2026-11-19: 1293 citations from 975 citing papers (1195 excluding self-citations), h-index 14, i10-index 17. Google Scholar reports slightly higher counts (see CURRENT PROFILE). Full list of citing papers: https://shaiknagurshareef.github.io/publications/citations/
 Most-cited papers:
-- Composite deep neural network with gated-attention mechanism for diabetic retinopathy severity classification (Journal of Ambient Intelligence and Humanized Computing, 2021): 200 citations
+- Composite deep neural network with gated-attention mechanism for diabetic retinopathy severity classification (Journal of Ambient Intelligence and Humanized Computing, 2021): 201 citations
 - Blended Multi-Modal Deep ConvNet Features for Diabetic Retinopathy Severity Prediction (Electronics, 2020): 197 citations
-- Multi-level attention network: application to brain tumor classification (Signal Image and Video Processing, 2021): 167 citations
+- Multi-level attention network: application to brain tumor classification (Signal Image and Video Processing, 2021): 168 citations
 - Joint training of two-channel deep neural network for brain tumor classification (Signal Image and Video Processing, 2020): 120 citations
 - Deep convolution feature aggregation: an application to diabetic retinopathy severity level prediction (Signal Image and Video Processing, 2021): 96 citations
 - Transfer learning based novel ensemble classifier for COVID-19 detection from chest CT-scans (Computers in Biology and Medicine, 2021): 96 citations
 - Hinge attention network: A joint model for diabetic retinopathy severity grading (Applied Intelligence, 2022): 81 citations
-- Deep Convolution Features in Non-linear Embedding Space for Fundus Image Classification (Revue d intelligence artificielle, 2020): 70 citations
+- Deep Convolution Features in Non-linear Embedding Space for Fundus Image Classification (Revue d intelligence artificielle, 2020): 69 citations
 - Sentiment Analysis from Movie Reviews Using LSTMs (Ingénierie des systèmes d information, 2019): 69 citations
 - MSENet: Multi-Modal Squeeze-and-Excitation Network for Brain Tumor Severity Prediction (International Journal of Pattern Recognition and Artificial Intelligence, 2021): 43 citations
 

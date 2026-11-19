@@ -19,11 +19,10 @@ const clean = (s = "") => s.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
 async function openAlexWorks(author) {
   const out = [];
-  let cursor = "*";
-  while (cursor) {
-    const d = await getJson(`https://api.openalex.org/works?filter=author.id:${author}&per-page=200&cursor=${encodeURIComponent(cursor)}&select=id,doi,title,publication_year,type,primary_location,locations,authorships`);
+  for (let page = 1; page <= 10; page++) {
+    const d = await getJson(`https://api.openalex.org/works?filter=author.id:${author}&per-page=200&page=${page}&select=id,doi,title,publication_year,type,primary_location,locations,authorships`);
     out.push(...d.results);
-    cursor = d.results.length ? d.meta.next_cursor : null;
+    if (d.results.length < 200 || out.length >= d.meta.count) break;
   }
   return out;
 }

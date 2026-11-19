@@ -43,7 +43,7 @@ const AWARD_GROUPS = [
 const awardGroups = AWARD_GROUPS.map((g) => ({ ...g, items: rec.awards.filter((a) => a.category === g.id).sort((a, b) => b.date.localeCompare(a.date)) }))
   .filter((g) => g.items.length);
 ---
-<Base title="Recognition" description="Media coverage, awards and honors, with the public evidence behind each one.">
+<Base title="Recognition" description="Media coverage, awards and honors.">
   <PageHeader title="Recognition"
     lead="Media coverage, awards and achievements.">
     <Fragment slot="meta">
