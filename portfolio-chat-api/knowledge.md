@@ -21,149 +21,149 @@ The full dissertation PDF: https://shaiknagurshareef.github.io/data/dissertation
 ## RESEARCH RESUME
 Nagur Shareef Shaik
 Applied Scientist | Multimodal Medical AI & Agentic Systems
-404-203-9276 |shaiknagurshareef6@gmail.com |linkedin.com/in/nagur-shareef-shaik |github.com/ShaikNagurShareef
+404-203-9276 | shaiknagurshareef6@gmail.com | linkedin.com/in/nagur-shareef-shaik | github.com/ShaikNagurShareef
 Summary
-Applied Scientist with 6.5+ years building medical AI that h olds up on messy, incomplete patient data. My PhD research
-at Georgia State targets what breaks multi-modal models in p ractice: missing modalities , imbalanced classes , and
-predictions that ignore how a patient changes over time. Tha t work has led to 29 peer-reviewed papers (AAAI, NeurIPS,
+Applied Scientist with 6.5+ years building medical AI that holds up on messy, incomplete patient data. My PhD research
+at Georgia State targets what breaks multi-modal models in practice: missing modalities, imbalanced classes, and
+predictions that ignore how a patient changes over time. That work has led to 29 peer-reviewed papers (AAAI, NeurIPS,
 ICASSP, ICIP), 1.4K+ citations, and an H-index of 14. At UST, I lead an 18-person team that ships it: agentic and RAG
-systems across healthcare, retail, and ﬁnance, from claims and coding to AI-assisted pathology and legacy modernizati on.
+systems across healthcare, retail, and ﬁnance, from claims and coding to AI-assisted pathology and legacy modernization.
 Education
 Georgia State University Atlanta, GA
-Doctor of Philosophy in Computer Science| GPA: 4.23/4.30 Aug 2023 – Dec 2026
-Vignan’s Foundation for Science, Technology & Research Univ ersity Guntur, AP
+Doctor of Philosophy in Computer Science | GPA: 4.23/4.30 Aug 2023 – Dec 2026
+Vignan’s Foundation for Science, Technology & Research University Guntur, AP
 Bachelor of Technology (Honours) in Computer Science & Engineering | GPA: 3.92/4.0 Jun 2016 – May 2020
 Experience
 Georgia State University Aug 2025 – Present
-Graduate Research Assistant| TReNDS Center Atlanta, GA
-• Lead my doctoral research on multi-modal medical AI that holds up when data is incomplete : modality-
-aware perception, latent disentanglement under missing mo dalities, and longitudinal clinical reasoning that keeps
+Graduate Research Assistant | TReNDS Center Atlanta, GA
+• Lead my doctoral research on multi-modal medical AI that holds up when data is incomplete: modality-
+aware perception, latent disentanglement under missing modalities, and longitudinal clinical reasoning that keeps
 track of uncertainty.
-• Developed a probabilistic multi-modal framework (HSIC-constrained latent factorization plus a Self-Criti quing
-Mixture-of-Experts) that set SOTA across 7 systemic & ocular conditions .
+• Developed a probabilistic multi-modal framework (HSIC-constrained latent factorization plus a Self-Critiquing
+Mixture-of-Experts) that set SOTA across 7 systemic & ocular conditions.
 UST Global Inc. July 2024 – Present
-Machine Learning Engineer II| AI-CoE (Remote) Aliso Viejo, CA
-• Lead an 18-person AI team in the AI-CoE building UST Alpha AI , UST’s one-stop shop for AI workloads, and
+Machine Learning Engineer II | AI-CoE (Remote) Aliso Viejo, CA
+• Lead an 18-person AI team in the AI-CoE building UST Alpha AI, UST’s one-stop shop for AI workloads, and
 its platform-modernization tools. Led development of CodeCrafter; designed and built Orbit myself.
-• Run delivery on an AI-DLC approach: agents migrate legacy .NET 4 → 8 and COBOL monoliths to React/Java
-Spring Boot , generating NX monorepos from specs that land 95% functional, with delivery 70% faster at 60%
+• Run delivery on an AI-DLC approach: agents migrate legacy .NET 4→8 and COBOL monoliths to React/Java
+Spring Boot, generating NX monorepos from specs that land 95% functional, with delivery 70% faster at 60%
 of the cost. Now reimagining a NextGen Reinsurance Platform with SpecKit; the MVP already works.
 • Built PathForce, an AI-assisted anatomic-pathology LIS (rules-ﬁrst eligibility checks, eﬀort-weighted case dis-
 tribution, HL7/FHIR/X12, Part 11-grade audit trail), plus RiskIQ for ICD-10 coding & risk adjustment
 and PolicyIQ, which turns CMS/payer policy into SME-approved claim edits in minutes, not weeks.
-• Modernized a payer’s claims adjudication by re-engineering its extracts and reporting, which improv ed payment
-accuracy and audit-readiness and cut manual reconciliation and repr ocessing. Architected and led Call Analytics
-Agents that raise First-Call Resolution , reduce repeat contacts, and ﬂag quality & compliance issue s.
-• Architected BSA DataMap (agentic proﬁling into BigQuery, saving 2 FTEs /$250K) and an ETL Test Agent
+• Modernized a payer’s claims adjudication by re-engineering its extracts and reporting, which improved payment
+accuracy and audit-readiness and cut manual reconciliation and reprocessing. Architected and led Call Analytics
+Agents that raise First-Call Resolution, reduce repeat contacts, and ﬂag quality & compliance issues.
+• Architected BSA DataMap (agentic proﬁling into BigQuery, saving 2 FTEs/$250K) and an ETL Test Agent
 validated with LLM-as-a-Judge. Delivered RegView, natural-language search over regulatory documents, and a
 RAG-powered RFI/RFP engine that cut proposal time by 60%.
 Georgia State University Sep 2023 – May 2025
-Graduate Research Assistant| TReNDS Center Atlanta, GA
+Graduate Research Assistant | TReNDS Center Atlanta, GA
 • Customized multi-modal LLMs in PyTorch to generate reports from medical images and text: 13.4% higher
 BLEU-4 than VisionGPT, with inference down to 1.6 sec per image.
-• Built TensorFlow/Keras image classiﬁers for retinopathy, schizophrenia, breast c ancer, and colon cancer, cutting
+• Built TensorFlow/Keras image classiﬁers for retinopathy, schizophrenia, breast cancer, and colon cancer, cutting
 false negatives by 5%–7%.
 Carelon Global Solutions Sep 2022 – Aug 2023
-Software Engineer III| Elevance Health Hyderabad, TS
+Software Engineer III | Elevance Health Hyderabad, TS
 • Built REST APIs for the COmpensation INcentive System, a microservices application that validates, computes,
-and speeds up incentive payments, cutting processing time b y 10%. Wrote Python/SQL clean-up scripts that
+and speeds up incentive payments, cutting processing time by 10%. Wrote Python/SQL clean-up scripts that
 stopped over $500K in overpayments.
-• Fixed critical production issues in the commissions calcul ation ﬂow (agent advance computation), saving $1.5 million
-in historical overpayments; earned the Go Above – Impact Award .
+• Fixed critical production issues in the commissions calculation ﬂow (agent advance computation), saving $1.5 million
+in historical overpayments; earned the Go Above – Impact Award.
 Tata Consultancy Services Aug 2020 – Sep 2022
 Systems Engineer | Analytics & Insights Business Unit Hyderabad, TS
-• Designed a log-based Bug Root Cause Prediction System with a n Attention LSTM in Azure ML Studio , cutting
+• Designed a log-based Bug Root Cause Prediction System with an Attention LSTM in Azure ML Studio, cutting
 debugging eﬀort and saving 3 full-time equivalents a year.
 • Set up an Azure DevOps model-deployment pipeline that took deployment from 2 to 1.2 hours and raised system
-availability by 25%; named team Star Performer .
+availability by 25%; named team Star Performer.
 Doctoral Dissertation
-From Perception to Clinical Reasoning: Structured & Disent angled Latent
-Modeling for Robust Multi-Modal Medical AI |Advisor: Dong Hye Ye
+From Perception to Clinical Reasoning: Structured & Disentangled Latent
+Modeling for Robust Multi-Modal Medical AI | Advisor: Dong Hye Ye
 Aug 2023 – Dec 2026
-• Thesis: reliable clinical reasoning from incomplete, heterogeneo us, longitudinal data needs structured representations,
-uncertainty carried through time, and evaluation that sepa rates visual evidence from concept priors. Validated acros s
-7 clinical domains , 13 benchmarks , and 8 novel architectures (proposal defended Apr 2026).
+• Thesis: reliable clinical reasoning from incomplete, heterogeneous, longitudinal data needs structured representations,
+uncertainty carried through time, and evaluation that separates visual evidence from concept priors. Validated across
+7 clinical domains, 13 benchmarks, and 8 novel architectures (proposal defended Apr 2026).
 Structured Multi-Modal Perception Modality-aware attention & fusion
-• Designed modality-aware attention that respects how clinical data is structured, beating gene ric attention by
+• Designed modality-aware attention that respects how clinical data is structured, beating generic attention by
 2–7% across retinal, endoscopic, and neuroimaging tasks.
 • Built asymmetric vision–text–genomics fusion that reaches SOTA on report generation and classiﬁcation
 (0.231 BLEU-4; 86.05% accuracy).
 Robust Latent Disentanglement Missing modalities, imbalance, collapse
 • Introduced probabilistic latent disentanglement (VLVAE, WAE, Mixture-of-Experts) so models degrade grace-
-fully under missing modalities , class imbalance , and representation collapse .
+fully under missing modalities, class imbalance, and representation collapse.
 Uncertainty-Aware Longitudinal Reasoning Distributional temporal modeling
 • Developed uncertainty-aware longitudinal reasoning that treats disease progression as distributional change
 on statistical manifolds (Fisher–Rao), so diagnostic ambiguity survives and claims stay tied to image evidence;
 SOTA +7.4% CE-F1 on Longitudinal MIMIC-CXR. (Dist-RRG: ICLR 2027, under review; STRIDE: AAAI 2027,
 under review; DELTA-E: CVPR 2027, in preparation)
 Master’s Thesis
-Attentive Multi-modal Learning for Medical Image Analysis |Advisor: Dong Hye Ye Aug 2023 – May 2025
+Attentive Multi-modal Learning for Medical Image Analysis | Advisor: Dong Hye Ye Aug 2023 – May 2025
 • Advanced multi-modal LLMs and attention networks that combine medical images, clinical text, and genetics
-to improve schizophrenia diagnosis and automate report gen eration.
+to improve schizophrenia diagnosis and automate report generation.
 Skills
 Languages: Python, Java, SQL
-Technologies: LangGraph, LangChain, Flask, FastAPI, Streamlit, Tablea u, Spring Boot, REST APIs, Microservices
-Agentic Tools : Claude Code, Codex, Cursor, Windsurf, GitHub Copilot
-Libraries: PyTorch, torchtune, TensorFlow, Keras, Scikit-Learn, Op enCV, NLTK, NumPy, Pandas, Matplotlib
-Cloud & MLOps : MLﬂow, AWS (EC2, Lambda, SageMaker, Bedrock AgentCore), A zure (AI Services, DevOps), GCP
+Technologies: LangGraph, LangChain, Flask, FastAPI, Streamlit, Tableau, Spring Boot, REST APIs, Microservices
+Agentic Tools: Claude Code, Codex, Cursor, Windsurf, GitHub Copilot
+Libraries: PyTorch, torchtune, TensorFlow, Keras, Scikit-Learn, OpenCV, NLTK, NumPy, Pandas, Matplotlib
+Cloud & MLOps: MLﬂow, AWS (EC2, Lambda, SageMaker, Bedrock AgentCore), Azure (AI Services, DevOps), GCP
 (Agentspace, Gemini Enterprise), CI/CD, Git, Docker
-Research Interests: Deep Learning, Multi-modal Learning, Attention Networks , Large Language Models, Agentic AI
-Certiﬁcations : Azure AI Fundamentals, Deep Learning Specialization, Pyt hon for Everybody
+Research Interests: Deep Learning, Multi-modal Learning, Attention Networks, Large Language Models, Agentic AI
+Certiﬁcations: Azure AI Fundamentals, Deep Learning Specialization, Python for Everybody
 Projects
-PathPro |GitHub |Demo |Python, FastAPI, React, LightGBM, MapLibre Sep 2026
-• Built an explainable pedestrian traﬃc-risk forecaster for Atlanta (Poisson GLM + LightGBM , Empirical Bayes,
-weather-aware scoring) with risk-aware routing and citywi de maps. Reaches 0.869 ROC-AUC on the 2023 tem-
-poral holdout , with exact risk-factor decomposition and validated AI exp lanations.
-InTune |GitHub |Demo |Next.js, TypeScript, LangGraph.js, Gemini, LiveKit Sep 2026
-• Built a communication-support community for text, audio, and video . LangGraph.js and Gemini handle clari-
-ﬁcation, meaning-preserving rewrites, and private readin g aids; exact text-and-audience approval, critical-slot c hecks,
+PathPro | GitHub | Demo | Python, FastAPI, React, LightGBM, MapLibre Sep 2026
+• Built an explainable pedestrian traﬃc-risk forecaster for Atlanta (Poisson GLM + LightGBM, Empirical Bayes,
+weather-aware scoring) with risk-aware routing and citywide maps. Reaches 0.869 ROC-AUC on the 2023 tem-
+poral holdout, with exact risk-factor decomposition and validated AI explanations.
+InTune | GitHub | Demo | Next.js, TypeScript, LangGraph.js, Gemini, LiveKit Sep 2026
+• Built a communication-support community for text, audio, and video. LangGraph.js and Gemini handle clari-
+ﬁcation, meaning-preserving rewrites, and private reading aids; exact text-and-audience approval, critical-slot checks,
 and idempotent publishing keep it safe, and LiveKit powers calls with private AI interpretation.
-InsightRx |GitHub |Demo |DINOv2-L, LoRA, FastAPI, ONNX Sep 2026
-• Built a retinal screening and HCP collaboration workspace o n a DINOv2-L/LoRA ensemble (0.980 patient-
-level AUROC for referable DR on 247 held-out mBRSET patients ), with quality-gated two-eye assessment,
-attention maps, clinician-signed referrals, and traceabl e links to guideline therapy, protein targets, and drug evid ence.
-AURA |GitHub |Python, FastAPI, React/TypeScript, Vision Transformers,Gemini, ChromaDB Feb 2026
+InsightRx | GitHub | Demo | DINOv2-L, LoRA, FastAPI, ONNX Sep 2026
+• Built a retinal screening and HCP collaboration workspace on a DINOv2-L/LoRA ensemble (0.980 patient-
+level AUROC for referable DR on 247 held-out mBRSET patients), with quality-gated two-eye assessment,
+attention maps, clinician-signed referrals, and traceable links to guideline therapy, protein targets, and drug evidence.
+AURA | GitHub | Python, FastAPI, React/TypeScript, Vision Transformers, Gemini, ChromaDB Feb 2026
 • Built a multi-agent healthcare ecosystem where a master intent router hands oﬀ to specialist agents (diagnosis,
-CBT wellbeing, triage, nutrition, visualization), includ ing IRIS, a Vision Transformer that predicts systemic risk
+CBT wellbeing, triage, nutrition, visualization), including IRIS, a Vision Transformer that predicts systemic risk
 from a mobile retinal image, and COMPASS, an Agentic RAG insurance guide. Benchmarked on mBRSET,
 MIMIC-CXR, DeepEyeNet, and ROCO.
-PRISM |GitHub |Python, FastAPI, React, LangGraph, LLMs, Vector DB Oct 2025
+PRISM | GitHub | Python, FastAPI, React, LangGraph, LLMs, Vector DB Oct 2025
 • Built an AI-powered data-intelligence platform that combines NL2SQL, automated ETL, one-click ML pipelines,
 no-code RAG, and auditable agentic workﬂows.
-NL2Dash |GitHub |Python, NL2SQL, LLMs, FastAPI, React Sep 2025
-• Built a self-serve analytics tool that turns plain-English questions into governed SQL ( NL2SQL) and person-
-speciﬁc dashboards, so ad-hoc reporting no longer waits on t he BI team.
-AgentKit |GitHub |Python, LangGraph, Agentic Frameworks, Observability Aug 2025
+NL2Dash | GitHub | Python, NL2SQL, LLMs, FastAPI, React Sep 2025
+• Built a self-serve analytics tool that turns plain-English questions into governed SQL (NL2SQL) and person-
+speciﬁc dashboards, so ad-hoc reporting no longer waits on the BI team.
+AgentKit | GitHub | Python, LangGraph, Agentic Frameworks, Observability Aug 2025
 • Built an agent-orchestration library that adds a production harness, pluggable memory, observability, and
-evaluation to open-source agentic frameworks, shortening time-to-pr oduction across teams.
-InsuCompass |GitHub |Demo |Python, LangGraph, Streamlit, Groq, Gemini, ChromaDB May 2025
+evaluation to open-source agentic frameworks, shortening time-to-production across teams.
+InsuCompass | GitHub | Demo | Python, LangGraph, Streamlit, Groq, Gemini, ChromaDB May 2025
 • Built an Agentic RAG health-insurance advisor whose self-learning Search Agent retrieves, veriﬁes, and ingests
 new knowledge (CMS.gov, VA.gov); orchestrated in LangGraph on Llama 3 and Gemini.
-ScholarPulse |GitHub |Demo |Python, LangChain, Streamlit, ChromaDB, SentenceTransformers Apr 2025
-• Built an Advanced RAG research assistant ( LangChain, Llama-4 Maverick , Qwen-2.5) for paper Q&A, sum-
-marization, and code generation, cutting research compreh ension time by 50%.
-Retinal Health Diagnostics |GitHub |Demo |Python, TensorFlow, FastAPI, Streamlit May 2024
-• Developed a novel attention mechanism that uses global cont ext to learn localized, lesion-speciﬁc features: 97.5%
+ScholarPulse | GitHub | Demo | Python, LangChain, Streamlit, ChromaDB, SentenceTransformers Apr 2025
+• Built an Advanced RAG research assistant (LangChain, Llama-4 Maverick, Qwen-2.5) for paper Q&A, sum-
+marization, and code generation, cutting research comprehension time by 50%.
+Retinal Health Diagnostics | GitHub | Demo | Python, TensorFlow, FastAPI, Streamlit May 2024
+• Developed a novel attention mechanism that uses global context to learn localized, lesion-speciﬁc features: 97.5%
 (cataract), 85.6% (diabetic retinopathy), and 94.6% (macular edema) accuracy.
 Research & Publications
-• Published 29 peer-reviewed papers ( 9 conference; 20 journal and workshop; 1.4K+ citations , H-index 14 , Google Scholar ),
-with oral presentations at AAAI 2026 , EMBC 2025 & 2026 , MLSP 2026 , ICIP 2024 , and ISBI 2024 , plus
-papers at ICASSP 2025 , ISBI 2025 , and NeurIPS 2025 (GenAI4Health).
-• Collaborated with Dr. Tatsunori Hashimoto (Stanford AI Lab ) on AxisSQL (inference-time scaling ), a Text-
-to-SQL reasoning framework ranked #12 on the BIRD leaderboard at submission ( Leaderboard); submitted to
-EACL (Industry Track) .
+• Published 29 peer-reviewed papers (9 conference; 20 journal and workshop; 1.4K+ citations, H-index 14, Google Scholar),
+with oral presentations at AAAI 2026, EMBC 2025 & 2026, MLSP 2026, ICIP 2024, and ISBI 2024, plus
+papers at ICASSP 2025, ISBI 2025, and NeurIPS 2025 (GenAI4Health).
+• Collaborated with Dr. Tatsunori Hashimoto (Stanford AI Lab) on AxisSQL (inference-time scaling), a Text-
+to-SQL reasoning framework ranked #12 on the BIRD leaderboard at submission (Leaderboard); submitted to
+EACL (Industry Track).
 • Collaborated with Dr. Ehsan Adeli (Stanford; through UST) on work at the NeurIPS 2025 GenAI4Health
 Workshop.
 • Reviewer for 25+ journals and major conferences (AAAI, MICCAI, NeurIPS, EACL, ISBI), with 60+ papers
-reviewed across AI/ML, biomedical imaging, and computer vi sion.
+reviewed across AI/ML, biomedical imaging, and computer vision.
 Accomplishments
-• Graduate Research Award 2026 , Georgia State University; winner, D3CODE Hackathon 2025 (US Region &
+• Graduate Research Award 2026, Georgia State University; winner, D3CODE Hackathon 2025 (US Region &
 Global), UST Global Inc., ahead of teams from the UK, Mexico, Malaysia, and India.
-• STELLER, NOV A Star and Super Star Awards, UST Global Inc.; Go Above – Impact Award , Elevance Health
-(Carelon Global Solutions); Star Performer Award , Tata Consultancy Services.
-• NeurIPS 2025 GenAI4Health and IEEE SPS (ICIP 2024) Travel Grants; 100% graduate scholarship ,
-Georgia State University; Chairman’s Gold Medal , Best Outgoing Student of CSE , and 4-year Academic
-Excellence Awards , VFSTR University.
+• STELLER, NOVA Star and Super Star Awards, UST Global Inc.; Go Above – Impact Award, Elevance Health
+(Carelon Global Solutions); Star Performer Award, Tata Consultancy Services.
+• NeurIPS 2025 GenAI4Health and IEEE SPS (ICIP 2024) Travel Grants; 100% graduate scholarship,
+Georgia State University; Chairman’s Gold Medal, Best Outgoing Student of CSE, and 4-year Academic
+Excellence Awards, VFSTR University.
 
 ## RESEARCH STATEMENT
 Nagur Shareef Shaik shaiknagurshareef.github.io shaiknagurshareef6@gmail.com
@@ -177,17 +177,17 @@ every claim explicit enough to inspect: where the evidence lies, what it indicat
 has changed since the last study, and whether the image can bear the claim out. Deep learning systems usually fold
 these steps into a single prediction, and they fail in recognizable ways: attention drifts to artifacts, rare grades are
 absorbed by common ones, a missing clinical indication corrupts the output, and a report says “stable” because
-stability is the common case. My work rests on two ideas. First, each step should carry adistribution rather
-than a point estimate, so that uncertainty survives to the final sentence. Second,evidence from different
+stability is the common case. My work rests on two ideas. First, each step should carry a distribution rather
+than a point estimate, so that uncertainty survives to the final sentence. Second, evidence from different
 sources should be represented separately, so that losing one source does not corrupt the others. These ideas
 come from medicine, where data are incomplete, imbalanced and longitudinal, and they are tested there across
 endoscopy, whole-slide histology, retinal photography (including handheld oculomics), brain MRI with genomics, and
 chest radiography.
 Doctoral Research: From Perception to Clinical Reasoning
-My dissertation treats image interpretation as a five-stageinterpretation pathway(locate, characterize, contextualize,
+My dissertation treats image interpretation as a five-stage interpretation pathway (locate, characterize, contextualize,
 compare, commit) and builds and tests a method for each stage. In all, it is validated across 7 clinical domains, 13
 benchmarks and 8 novel architectures.
-1. Perception: locating and structuring visual evidence.I write attention pooling as an expectation under a
+1. Perception: locating and structuring visual evidence. I write attention pooling as an expectation under a
 learned spatial distribution, with global average pooling as its maximum-entropy case, so that attention mechanisms
 differ only in how they shape that distribution. Dynamic Contextual Attention shapes it for polyp diagnosis in
 colonoscopy [6]. For labels, ordinal grades receive asymmetric label distributions (CAP-WAE: quadratic weighted
@@ -196,7 +196,7 @@ routing whose routing depends on the disease far more than a permutation null pr
 benchmark it reached 0.912 macro AUC under patient-disjoint cross-validation. For chest radiographs, a learned
 label graph lends evidence from co-occurring findings [4]. This builds on earlier attention networks for brain MRI
 and retinal imaging [11, 10].
-2. Context: disentangled vision–language learning when context is missing.About 45% of MIMIC-CXR
+2. Context: disentangled vision–language learning when context is missing. About 45% of MIMIC-CXR
 test studies have no clinical indication, yet most report generators silently depend on it. DiA-gnostic VLVAE
 separates image-specific, context-specific and shared latent factors, with a mixture-of-experts posterior; when the
 missing indication receives no weight, its objective is a valid lower bound on the image likelihood, with no imputed
@@ -204,22 +204,22 @@ text [1]. DREAM handles the case where context is present [2]. The same decompos
 SC-CoMoE pairs HSIC-constrained latent factorization with a self-critiquing mixture of experts and sets state of
 the art across seven systemic and ocular conditions [15], and Oculo-MoE pursues the goal with a retina-anchored,
 interaction-gated design [16]. Both are submitted to ISBI 2027.
-3. Reasoning: tracking change and grounding claims in evidence.Dist-RRG treats each visit as a distribution
+3. Reasoning: tracking change and grounding claims in evidence. Dist-RRG treats each visit as a distribution
 and disease progression as distributional change on a statistical manifold (Fisher–Rao); moment-matched aggregation
 keeps each visit’s variance, which flags unreliable comparisons [12]. STRIDE ages each prior by its acquisition
 interval, can abstain from every prior, and re-reads the history under a progression hypothesis; it reaches 52.88
-macro CE-F1 against 51.47 for a reproduced iterative-refinement model (p <0.05) [13]. Together, this longitudinal
+macro CE-F1 against 51.47 for a reproduced iterative-refinement model (p < 0.05) [13]. Together, this longitudinal
 line of work reaches state of the art on Longitudinal MIMIC-CXR, with a 7.4% CE-F1 gain. The last step is
 commitment: DELTA rewards each temporal claim with image-pair evidence, cutting false reassurance from 0.203 to
 0.075 at unchanged CE-F1 and, on radiologist-verified MS-CXR-T labels, from 0.121 to 0.029, mostly by withholding
 unsupported claims at the cost of more false alarms [14]. A companion study shows what pooled report-auditing
 metrics actually measure [17].
-What the stages share.Three patterns recur. Thesecond moment carries clinical information: a model that
-passes only means forward cannot express the difference between a confident and an equivocal reading.Sources
+What the stages share. Three patterns recur. The second moment carries clinical information: a model that
+passes only means forward cannot express the difference between a confident and an equivocal reading. Sources
 1
 Nagur Shareef Shaik shaiknagurshareef.github.io shaiknagurshareef6@gmail.com
-of evidence should stay apartuntil the reason for combining them is clear, which is the same lesson for missing
-indications, noisy fundus images and copied priors. Andbase rates can pass for evidence, which is why I build tools
+of evidence should stay apart until the reason for combining them is clear, which is the same lesson for missing
+indications, noisy fundus images and copied priors. And base rates can pass for evidence, which is why I build tools
 that separate what the image supports from what the population predicts (image-shuffle and copy-the-prior controls,
 an image-free ceiling, stratified metrics).
 Foundations and Translation
@@ -235,22 +235,22 @@ claims that can be audited, behavior that degrades gracefully, and evaluation th
 base rate. These are the properties my dissertation formalizes.
 Research Agenda
 Each direction starts from a completed result.
-• Reader studies with radiologists.Dist-RRG specifies a blinded reader-study protocol, fixed before data
+• Reader studies with radiologists. Dist-RRG specifies a blinded reader-study protocol, fixed before data
 collection: three radiologists mark every comparative statement as supported, contradicted or unsupported by
 the images, which tests whether propagated variance tracks error severity. I will run it, and apply the same reads
 to DELTA’s temporal claims.
-• External validation.The matched comparisons in my work transfer unchanged to other institutions and to
+• External validation. The matched comparisons in my work transfer unchanged to other institutions and to
 MS-CXR-T and CheXpert Plus for cross-site tests; I will also test DiA on its converse case, a degraded image
 with the indication present.
-• Joining the two abstentions.Prior abstention decides which earlier studies to trust; claim abstention decides
+• Joining the two abstentions. Prior abstention decides which earlier studies to trust; claim abstention decides
 which statements to make. The change variance already links them, so I will set DELTA’s support margins from
 it, requiring more image evidence before “stable” is allowed when both films are equivocal.
-• Oculomics on handheld devices.I will compare SC-CoMoE and Oculo-MoE on one shared mBRSET protocol,
+• Oculomics on handheld devices. I will compare SC-CoMoE and Oculo-MoE on one shared mBRSET protocol,
 with latency and memory measured on a handheld device, bringing the models to the setting that motivated
 them.
-• Stratifiedauditingasthedefault.Scoringgeneratorsagainstanimage-freeceiling, andsplittingwithin-concept
+• Stratifiedauditingasthedefault. Scoringgeneratorsagainstanimage-freeceiling, andsplittingwithin-concept
 from between-concept evidence, should become the standard audit for report generators.
-• Verifiable clinical agents.The same principles, explicit uncertainty, separated evidence and claims checkable
+• Verifiable clinical agents. The same principles, explicit uncertainty, separated evidence and claims checkable
 against the source, apply to the agentic clinical workflows I build in industry, and I intend to study them there.
 I am committed to a research career where methods are held to clinical standards of evidence and then built into
 systems people can use. The models I build are drafting aids for the clinician who reads the image and signs the
@@ -258,44 +258,44 @@ report; they tie each claim to evidence read from the image and report uncertain
 diagnostic confidence.
 Selected Publications
 [1] N. S. Shaik, T. K. Cherukuri, A. Masood, D. H. Ye. DiA-gnostic VLVAE: Disentangled Alignment-Constrained Vision
-Language Variational AutoEncoder for Robust Radiology Reporting with Missing Modalities.AAAI-26, 2026.Oral.
+Language Variational AutoEncoder for Robust Radiology Reporting with Missing Modalities. AAAI-26, 2026. Oral.
 [2] N. S. Shaik*, T. K. Cherukuri*, D. H. Ye. DREAM: Dynamic Retinal Enhancement with Adaptive Multi-modal Fusion
-for Expert Precision Medical Report Generation.IEEE EMBC, 2026.Oral.arXiv:2604.17209.
+for Expert Precision Medical Report Generation. IEEE EMBC, 2026. Oral. arXiv:2604.17209.
 [3] N. S. Shaik, J. Park, Y.-J. Kim, J. Jung, H. Oh, D. H. Ye. Disentangling Co-Occurring Retinal Pathologies with
-Saliency-Guided Sparse Expert Routing.IEEE MLSP, 2026.Oral.arXiv:2608.09752.
-[4] A. Gogineni,N. S. Shaik, A. Mandava, A. Masood, D. H. Ye. C2A: Coupling Spatial Evidence with Clinical Priors via Co-
-occurrence Aware Class Attention for Multi-Label Chest X-Ray Classification.IEEE MLSP, 2026.Oral.arXiv:2608.09774.
+Saliency-Guided Sparse Expert Routing. IEEE MLSP, 2026. Oral. arXiv:2608.09752.
+[4] A. Gogineni, N. S. Shaik, A. Mandava, A. Masood, D. H. Ye. C2A: Coupling Spatial Evidence with Clinical Priors via Co-
+occurrence Aware Class Attention for Multi-Label Chest X-Ray Classification. IEEE MLSP, 2026. Oral. arXiv:2608.09774.
 2
 Nagur Shareef Shaik shaiknagurshareef.github.io shaiknagurshareef6@gmail.com
 [5] N. S. Shaik, T. K. Cherukuri, A. Masood, E. Adeli, D. H. Ye. Ordinal Label-Distribution Learning with Constrained
-Asymmetric Priors for Imbalanced Retinal Grading.NeurIPS 2025 Workshop on GenAI for Health, 2025.
-[6] T. K. Cherukuri*,N. S. Shaik*, S. R. Yellu, J.-W. Chung, D. H. Ye. Dynamic Contextual Attention Network:
-Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis.IEEE EMBC, 2025.Oral.
+Asymmetric Priors for Imbalanced Retinal Grading. NeurIPS 2025 Workshop on GenAI for Health, 2025.
+[6] T. K. Cherukuri*, N. S. Shaik*, S. R. Yellu, J.-W. Chung, D. H. Ye. Dynamic Contextual Attention Network:
+Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis. IEEE EMBC, 2025. Oral.
 doi.
 [7] N. S. Shaik, T. K. Cherukuri, V. D. Calhoun, D. H. Ye. Multi-modal Imaging Genomics Transformer: Attentive
-Integration of Imaging with Genomic Biomarkers for Schizophrenia Classification.IEEE ISBI, 2025. doi.
-[8] T. K. Cherukuri*,N. S. Shaik*, J. D. Bodapati, D. H. Ye. GCS-M3VLT: Guided Context Self-Attention based
-Multi-modal Medical Vision Language Transformer for Retinal Image Captioning.IEEE ICASSP, 2025. doi.
+Integration of Imaging with Genomic Biomarkers for Schizophrenia Classification. IEEE ISBI, 2025. doi.
+[8] T. K. Cherukuri*, N. S. Shaik*, J. D. Bodapati, D. H. Ye. GCS-M3VLT: Guided Context Self-Attention based
+Multi-modal Medical Vision Language Transformer for Retinal Image Captioning. IEEE ICASSP, 2025. doi.
 [9] N. S. Shaik, T. K. Cherukuri, D. H. Ye. M3T: Multi-Modal Medical Transformer to Bridge Clinical Context with Visual
-Insights for Retinal Image Medical Description Generation.IEEE ICIP, 2024.Oral.doi.
-[10] T. K. Cherukuri,N. S. Shaik, D. H. Ye. Guided Context Gating: Learning to Leverage Salient Lesions in Retinal
-Fundus Images.IEEE ICIP, 2024. doi.
+Insights for Retinal Image Medical Description Generation. IEEE ICIP, 2024. Oral. doi.
+[10] T. K. Cherukuri, N. S. Shaik, D. H. Ye. Guided Context Gating: Learning to Leverage Salient Lesions in Retinal
+Fundus Images. IEEE ICIP, 2024. doi.
 [11] N. S. Shaik, T. K. Cherukuri, V. D. Calhoun, D. H. Ye. Spatial Sequence Attention Network for Schizophrenia
-Classification from Structural Brain MR Images.IEEE ISBI, 2024.Oral.doi.
-[12] N. S. Shaiket al. Dist-RRG: Distributional Change Modeling on Statistical Manifolds for Longitudinal Radiology
-Report Generation.Under review, ICLR 2027.
-[13] N. S. Shaiket al. STRIDE: Stochastic Trajectory Reasoning via Iterative Distributional Evolution in Longitudinal
-Radiology Report Generation.Under review, AAAI 2027.
-[14] N. S. Shaiket al. Claims You Can See: Differential-Evidence Learning of Temporal Assertions for Longitudinal Radiology
-Report Generation (DELTA).Under review, CVPR 2027.
+Classification from Structural Brain MR Images. IEEE ISBI, 2024. Oral. doi.
+[12] N. S. Shaik et al. Dist-RRG: Distributional Change Modeling on Statistical Manifolds for Longitudinal Radiology
+Report Generation. Under review, ICLR 2027.
+[13] N. S. Shaik et al. STRIDE: Stochastic Trajectory Reasoning via Iterative Distributional Evolution in Longitudinal
+Radiology Report Generation. Under review, AAAI 2027.
+[14] N. S. Shaik et al. Claims You Can See: Differential-Evidence Learning of Temporal Assertions for Longitudinal Radiology
+Report Generation (DELTA). Under review, CVPR 2027.
 [15] N. S. Shaik, J. Park, Y.-J. Kim, J. Jung, H. Oh, D. H. Ye. SC-CoMoE: Self-Critiquing Cooperative Mixture-of-Experts
-for Multi-Modal Mobile Oculomics.Submitted, ISBI 2027.
+for Multi-Modal Mobile Oculomics. Submitted, ISBI 2027.
 [16] N. S. Shaik, J. Park, Y.-J. Kim, Y. Jo, D. H. Ye. Oculo-MoE: Retina-Anchored, Interaction-Gated Mixture-of-Experts
-for Bilateral Multimodal Oculomics.Submitted, ISBI 2027.
-[17] N. S. Shaiket al. Evidence That Can Contradict: What Report-Auditing Metrics Actually Measure in Medical Vision
-Language Models.Under review, ICLR 2027.
-* equal contribution. Full list of 29 peer-reviewed papers (including journal articles): Google Scholar. Dissertation:From Perception to
-Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting(expected
+for Bilateral Multimodal Oculomics. Submitted, ISBI 2027.
+[17] N. S. Shaik et al. Evidence That Can Contradict: What Report-Auditing Metrics Actually Measure in Medical Vision
+Language Models. Under review, ICLR 2027.
+* equal contribution. Full list of 29 peer-reviewed papers (including journal articles): Google Scholar. Dissertation: From Perception to
+Clinical Reasoning: Disentangled, Evidence-Grounded Multimodal Learning for Robust Medical Image Analysis and Reporting (expected
 December 2026). M.S. thesis: GSU ScholarWorks.
 3
 

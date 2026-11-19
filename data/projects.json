@@ -26,7 +26,9 @@
       "llm",
       "data"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 4,
+    "updatedAt": "2026-08-20"
   },
   {
     "id": "pathpro",
@@ -55,7 +57,9 @@
       "ml",
       "geospatial"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2026-09-27"
   },
   {
     "id": "intune",
@@ -84,7 +88,9 @@
       "agents",
       "accessibility"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2026-09-26"
   },
   {
     "id": "insightrx",
@@ -112,7 +118,9 @@
       "medical-ai",
       "vision"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2026-09-27"
   },
   {
     "id": "aura",
@@ -138,7 +146,9 @@
       "medical-ai",
       "agents"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2026-02-22"
   },
   {
     "id": "prism",
@@ -164,7 +174,9 @@
       "agents",
       "data"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2025-09-27"
   },
   {
     "id": "nl2dash",
@@ -213,7 +225,9 @@
       "agents",
       "tooling"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2026-06-24"
   },
   {
     "id": "insucompass",
@@ -271,7 +285,9 @@
     "tags": [
       "rag"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 2,
+    "updatedAt": "2025-04-21"
   },
   {
     "id": "rhd",
@@ -299,7 +315,9 @@
       "medical-ai",
       "vision"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2025-01-19"
   },
   {
     "id": "birthday-greetings",
@@ -325,6 +343,8 @@
     "tags": [
       "web"
     ],
-    "source": "manual"
+    "source": "manual",
+    "stars": 0,
+    "updatedAt": "2024-06-23"
   }
 ]
