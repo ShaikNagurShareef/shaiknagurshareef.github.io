@@ -77,8 +77,8 @@ const { email } = (await getEntry("profile", "me"))!.data;
 
 <script>
   import {
-    buildIndex, lexicalSearch, fuse, filterLabels, isQuestion,
-    type Index, type SearchItem, type FilterKey, type Filters, type SemanticHit,
+    buildIndex, lexicalSearch, parseQuery, fuse, lexicalPin, filterLabels, isQuestion,
+    type Index, type SearchItem, type Filters, type SemanticHit,
   } from "../lib/search";
 
   type Row = { kind: "item"; item: SearchItem } | { kind: "ask"; q: string };
@@ -121,9 +121,8 @@ const { email } = (await getEntry("profile", "me"))!.data;
   let active = 0;
   /** True once the user moved the selection with the keyboard for the current query. */
   let moved = false;
-  /** Filters the user cleared; they stay off while the query states the same filters. */
-  let off = new Set<FilterKey>();
-  let offSig = "";
+  /** Set when the user clears the filters: the query is read as plain text while it states the same filters. */
+  let plainSig: string | null = null;
 
   const norm = (q: string) => q.trim().toLowerCase().replace(/\s+/g, " ");
   const keyOf = (r?: Row) => (!r ? "" : r.kind === "ask" ? "ask:" : r.item.url);
@@ -199,14 +198,11 @@ const { email } = (await getEntry("profile", "me"))!.data;
         .map((item): Row => ({ kind: "item", item }));
       return { rows, labels: [], ai: false };
     }
-    let lex = lexicalSearch(idx, q, { off });
-    if (off.size && sig(lex.parsed.filters) !== offSig) {
-      off = new Set();
-      lex = lexicalSearch(idx, q);
-    }
+    if (plainSig !== null && sig(parseQuery(q).filters) !== plainSig) plainSig = null;
+    const lex = lexicalSearch(idx, q, { plain: plainSig !== null });
     let items = lex.results.map((r) => r.item);
     const hits = semCache.get(norm(q));
-    if (hits) items = fuse(idx, items, hits, lex.filters, { floor: FLOOR });
+    if (hits) items = fuse(idx, items, hits, lex.filters, { floor: FLOOR, pin: lexicalPin(lex.results) });
     const rows: Row[] = items.map((item) => ({ kind: "item", item }));
     if (hasChat() && isQuestion(q)) rows.push({ kind: "ask", q: q.trim() });
     const labels = filterLabels(lex.parsed.filters).filter((l) => !lex.off.has(l.key)).map((l) => l.label);
@@ -324,7 +320,7 @@ const { email } = (await getEntry("profile", "me"))!.data;
   async function open() {
     if (dialog.open) return;
     input.value = "";
-    active = 0; moved = false; off = new Set();
+    active = 0; moved = false; plainSig = null;
     dialog.showModal();
     input.focus();
     await load();
@@ -349,9 +345,7 @@ const { email } = (await getEntry("profile", "me"))!.data;
   });
   dialog.querySelector("[data-cmdk-filter-clear]")!.addEventListener("click", () => {
     if (!index) return;
-    const lex = lexicalSearch(index, input.value);
-    off = new Set<FilterKey>(["type", "year", "oral", "kind", "status"]);
-    offSig = sig(lex.parsed.filters);
+    plainSig = sig(parseQuery(input.value).filters);
     active = 0; moved = false;
     render();
     input.focus();

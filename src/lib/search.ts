@@ -205,7 +205,11 @@ export function isQuestion(q: string): boolean {
 
 const YEAR = "((?:19|20)\\d{2})";
 
-export function parseQuery(q: string, now: Date = new Date()): Omit<ParsedQuery, "concepts"> & { tokens: string[]; partial: string | null } {
+/**
+ * Reads filters and type words from the query; the remaining words become search tokens.
+ * `plain` skips that reading (every word is searched as text), used once the user clears the filters.
+ */
+export function parseQuery(q: string, now: Date = new Date(), plain = false): Omit<ParsedQuery, "concepts"> & { tokens: string[]; partial: string | null } {
   const filters: Filters = { types: [] };
   const thisYear = now.getFullYear();
   let s = " " + q.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "") + " ";
@@ -220,32 +224,34 @@ export function parseQuery(q: string, now: Date = new Date()): Omit<ParsedQuery,
   const setMin = (y: number) => { filters.yearMin = Math.max(filters.yearMin ?? -Infinity, y); };
   const setMax = (y: number) => { filters.yearMax = Math.min(filters.yearMax ?? Infinity, y); };
 
-  // Years and ranges.
-  take(new RegExp(`\\b(?:from|between)?\\s*${YEAR}\\s*(?:-|–|—|to|and|through|until)\\s*${YEAR}\\b`), (m) => {
-    const a = Number(m[1]), b = Number(m[2]);
-    setMin(Math.min(a, b)); setMax(Math.max(a, b));
-  });
-  take(new RegExp(`\\b(since|after|from|post)\\s+${YEAR}\\b`), (m) => setMin(Number(m[2]) + (m[1] === "after" ? 1 : 0)));
-  take(new RegExp(`\\b(before|until|till|prior to|pre)\\s+${YEAR}\\b`), (m) => setMax(Number(m[2]) - (m[1] === "until" || m[1] === "till" ? 0 : 1)));
-  take(/\b(?:in\s+|during\s+)?this\s+year\b/, () => { setMin(thisYear); setMax(thisYear); });
-  take(/\b(?:in\s+|during\s+)?last\s+year\b/, () => { setMin(thisYear - 1); setMax(thisYear - 1); });
-  take(new RegExp(`\\b(?:in|during|of|from)?\\s*${YEAR}\\b`), (m) => { setMin(Number(m[1])); setMax(Number(m[1])); });
+  if (!plain) {
+    // Years and ranges.
+    take(new RegExp(`\\b(?:from|between)?\\s*${YEAR}\\s*(?:-|–|—|to|and|through|until)\\s*${YEAR}\\b`), (m) => {
+      const a = Number(m[1]), b = Number(m[2]);
+      setMin(Math.min(a, b)); setMax(Math.max(a, b));
+    });
+    take(new RegExp(`\\b(since|after|from|post)\\s+${YEAR}\\b`), (m) => setMin(Number(m[2]) + (m[1] === "after" ? 1 : 0)));
+    take(new RegExp(`\\b(before|until|till|prior to|pre)\\s+${YEAR}\\b`), (m) => setMax(Number(m[2]) - (m[1] === "until" || m[1] === "till" ? 0 : 1)));
+    take(/\b(?:in\s+|during\s+)?this\s+year\b/, () => { setMin(thisYear); setMax(thisYear); });
+    take(/\b(?:in\s+|during\s+)?last\s+year\b/, () => { setMin(thisYear - 1); setMax(thisYear - 1); });
+    take(new RegExp(`\\b(?:in|during|of|from)?\\s*${YEAR}\\b`), (m) => { setMin(Number(m[1])); setMax(Number(m[1])); });
 
-  // Publication status, presentation and venue kind.
-  take(/\b(?:under|in)\s+(?:review|submission)\b|\bsubmitted\b|\bunder\s+consideration\b/, () => { filters.status = "review"; });
-  take(/\bin\s+preparation\b/, () => { filters.status = "in-preparation"; });
-  take(/\bpublished\b/, () => { filters.status ??= "published"; });
-  take(/\borals?\b(?:\s+presentations?|\s+talks?|\s+papers?)?/, () => { filters.oral = true; });
-  take(/\bjournals?\b/, () => { filters.kind = "journal"; });
-  take(/\bconferences?\b/, () => { filters.kind = "conference"; });
-  take(/\bworkshops?\b/, () => { filters.kind = "workshop"; });
+    // Publication status, presentation and venue kind.
+    take(/\b(?:under|in)\s+(?:review|submission)\b|\bsubmitted\b|\bunder\s+consideration\b/, () => { filters.status = "review"; });
+    take(/\bin\s+preparation\b/, () => { filters.status = "in-preparation"; });
+    take(/\bpublished\b/, () => { filters.status ??= "published"; });
+    take(/\borals?\b(?:\s+presentations?|\s+talks?|\s+papers?)?/, () => { filters.oral = true; });
+    take(/\bjournals?\b/, () => { filters.kind = "journal"; });
+    take(/\bconferences?\b/, () => { filters.kind = "conference"; });
+    take(/\bworkshops?\b/, () => { filters.kind = "workshop"; });
+  }
 
   const partial = /\s$/.test(q) ? null : (rawTokens(normalize(q)).pop() ?? null);
   const tokens: string[] = [];
   let intentWords = 0;
   for (const t of rawTokens(normalize(s))) {
     const st = stem(t);
-    const it = INTENT[st];
+    const it = plain ? undefined : INTENT[st];
     if (it) {
       intentWords++;
       if (!filters.types.includes(it.type)) filters.types.push(it.type);
@@ -437,10 +443,10 @@ export interface LexicalResult {
   results: Ranked[];
 }
 
-export function lexicalSearch(index: Index, q: string, opts: { now?: Date; off?: Set<FilterKey>; limit?: number } = {}): LexicalResult {
+export function lexicalSearch(index: Index, q: string, opts: { now?: Date; off?: Set<FilterKey>; plain?: boolean; limit?: number } = {}): LexicalResult {
   const now = opts.now ?? new Date();
   const thisYear = now.getFullYear();
-  const p = parseQuery(q, now);
+  const p = parseQuery(q, now, opts.plain);
   const off = opts.off ?? new Set<FilterKey>();
   const filters = withoutFilters(p.filters, off);
   const cs = concepts(index, p.tokens, p.partial);
@@ -490,13 +496,14 @@ export interface SemanticHit { url: string; score: number }
  * to everything. Items only the semantic ranking found are kept when their similarity clears `floor`
  * and is within `margin` of the best hit: bge-small similarities are compressed (unrelated items
  * often score 0.55-0.65), so closeness to the top separates matches better than a fixed floor.
+ * `pin` keeps that many leading lexical results in place (a clear exact match stays first).
  */
 export function fuse(
   index: Index,
   lexical: SearchItem[],
   semantic: SemanticHit[],
   filters: Filters,
-  opts: { floor?: number; margin?: number; k?: number; now?: Date; limit?: number } = {},
+  opts: { floor?: number; margin?: number; k?: number; now?: Date; limit?: number; pin?: number } = {},
 ): SearchItem[] {
   const k = opts.k ?? 60;
   const top = semantic.reduce((m, h) => Math.max(m, h.score), 0);
@@ -517,7 +524,13 @@ export function fuse(
     }
     score.set(h.url, (score.get(h.url) ?? 0) + 1 / (k + r));
   }
-  return [...items.values()]
-    .sort((a, b) => score.get(b.url)! - score.get(a.url)!)
-    .slice(0, opts.limit ?? 60);
+  const pinned = lexical.slice(0, opts.pin ?? 0);
+  const rest = [...items.values()].filter((i) => !pinned.includes(i)).sort((a, b) => score.get(b.url)! - score.get(a.url)!);
+  return [...pinned, ...rest].slice(0, opts.limit ?? 60);
+}
+
+/** How many lexical results to keep on top through fusion: the first one when it clearly beats the rest. */
+export function lexicalPin(results: Ranked[]): number {
+  const [a, b] = results;
+  return a && a.score > 0 && (!b || a.score >= 2 * b.score) ? 1 : 0;
 }
