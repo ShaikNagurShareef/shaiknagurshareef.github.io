@@ -1,0 +1,212 @@
+{
+  "source": "Google Scholar",
+  "source_url": "https://scholar.google.com/citations?user=rkfPEjUAAAAJ&hl=en",
+  "as_of": "2026-11-23",
+  "totals": {
+    "citations": 1417,
+    "citations_recent": 1400,
+    "h_index": 14,
+    "h_recent": 14,
+    "i10_index": 17,
+    "i10_recent": 17,
+    "recent_since": 2021
+  },
+  "works": [
+    {
+      "title": "Disentangling Co-Occurring Retinal Pathologies With Saliency-Guided Sparse Expert Routing",
+      "authors": "NS Shaik, J Park, YJ Kim, J Jung, H Oh, DH Ye",
+      "venue": "2026 IEEE 36th International Workshop on Machine Learning for Signal�…",
+      "year": 2026,
+      "cited_by": 0
+    },
+    {
+      "title": "C2 A: Coupling Spatial Evidence With Clinical Priors Via Co-Occurrence Aware Class Attention For Multi-Label Chest X-Ray Classification",
+      "authors": "A Gogineni, NS Shaik, A Mandava, A Masood, DH Ye",
+      "venue": "2026 IEEE 36th International Workshop on Machine Learning for Signal�…",
+      "year": 2026,
+      "cited_by": 0
+    },
+    {
+      "title": "DREAM: Dynamic Retinal Enhancement with Adaptive Multi-modal Fusion for Expert Precision Medical Report Generation",
+      "authors": "NS Shaik, TK Cherukuri, DH Ye",
+      "venue": "arXiv preprint arXiv:2604.17209",
+      "year": 2026,
+      "cited_by": 0
+    },
+    {
+      "title": "Region-Affinity Attention for Whole-Slide Breast Cancer Classification in Deep Ultraviolet Imaging",
+      "authors": "NS Shaik, TK Cherukuri, DH Ye",
+      "venue": "arXiv preprint arXiv:2604.17222",
+      "year": 2026,
+      "cited_by": 0
+    },
+    {
+      "title": "DiA-gnostic VLVAE: Disentangled Alignment-Constrained Vision Language Variational AutoEncoder for Robust Radiology Reporting with Missing Modalities",
+      "authors": "NS Shaik, TK Cherukuri, A Masood, DH Ye",
+      "venue": "Proceedings of the AAAI Conference on Artificial Intelligence 40 (11), 8814-8823",
+      "year": 2026,
+      "cited_by": 3
+    },
+    {
+      "title": "Ordinal Label-Distribution Learning with Constrained Asymmetric Priors for Imbalanced Retinal Grading",
+      "authors": "NS Shaik, TK Cherukuri, A Masood, E Adeli, DH Ye",
+      "venue": "39th Conference on Neural Information Processing Systems (NeurIPS 2025�…",
+      "year": 2025,
+      "cited_by": 6
+    },
+    {
+      "title": "Adaptive fusion attention for enhanced classification and interpretability in medical imaging",
+      "authors": "NS Shaik, N Veeranjaneulu, JD Bodapati",
+      "venue": "Machine Vision and Applications 36 (3), 56",
+      "year": 2025,
+      "cited_by": 14
+    },
+    {
+      "title": "Dynamic Contextual Attention Network: Transforming Spatial Representations into Adaptive Insights for Endoscopic Polyp Diagnosis",
+      "authors": "TK Cherukuri, NS Shaik, SR Yellu, JW Chung, DH Ye",
+      "venue": "47th Annual International Conference of the IEEE Engineering in Medicine and�…",
+      "year": 2025,
+      "cited_by": 3
+    },
+    {
+      "title": "GCS-M3VLT: Guided Context Self-Attention based Multi-modal Medical Vision Language Transformer for Retinal Image Captioning",
+      "authors": "TK Cherukuri, NS Shaik, JD Bodapati, DH Ye",
+      "venue": "2025 IEEE International Conference on Acoustics, Speech and Signal�…",
+      "year": 2025,
+      "cited_by": 13
+    },
+    {
+      "title": "Multi-modal Imaging Genomics Transformer: Attentive Integration of Imaging with Genomic Biomarkers for Schizophrenia Classification",
+      "authors": "NS Shaik, TK Cherukuri, VD Calhoun, DH Ye",
+      "venue": "2025 IEEE International Symposium on Biomedical Imaging (ISBI), 1-5",
+      "year": 2025,
+      "cited_by": 8
+    },
+    {
+      "title": "M3t: Multi-modal medical transformer to bridge clinical context with visual insights for retinal image medical description generation",
+      "authors": "NS Shaik, TK Cherukuri, DH Ye",
+      "venue": "2024 IEEE International Conference on Image Processing (ICIP), 3037-3043",
+      "year": 2024,
+      "cited_by": 7
+    },
+    {
+      "title": "Guided context gating: Learning to leverage salient lesions in retinal fundus images",
+      "authors": "TK Cherukuri, NS Shaik, DH Ye",
+      "venue": "2024 IEEE International Conference on Image Processing (ICIP), 3098-3104",
+      "year": 2024,
+      "cited_by": 11
+    },
+    {
+      "title": "Medtransnet: advanced gating transformer network for medical image classification: NS Shaik et al.",
+      "authors": "NS Shaik, TK Cherukuri, N Veeranjaneulu, JD Bodapati",
+      "venue": "Machine Vision and Applications 35 (4), 73",
+      "year": 2024,
+      "cited_by": 18
+    },
+    {
+      "title": "Spatial sequence attention network for schizophrenia classification from structural brain mr images",
+      "authors": "NS Shaik, TK Cherukuri, V Calhoun, DH Ye",
+      "venue": "2024 IEEE International Symposium on Biomedical Imaging (ISBI), 1-5",
+      "year": 2024,
+      "cited_by": 7
+    },
+    {
+      "title": "Gated contextual transformer network for multi-modal retinal image clinical description generation",
+      "authors": "NS Shaik, TK Cherukuri",
+      "venue": "Image and Vision Computing 143 (C)",
+      "year": 2024,
+      "cited_by": 14
+    },
+    {
+      "title": "Visual attention based composite dense neural network for facial expression recognition: NS Shaik, TK Cherukuri",
+      "authors": "NS Shaik, TK Cherukuri",
+      "venue": "Journal of Ambient Intelligence and Humanized Computing 14 (12), 16229-16242",
+      "year": 2023,
+      "cited_by": 23
+    },
+    {
+      "title": "Hinge attention network: A joint model for diabetic retinopathy severity grading: NS Shaik and TK Cherukuri",
+      "authors": "NS Shaik, TK Cherukuri",
+      "venue": "Applied Intelligence 52 (13), 15105-15121",
+      "year": 2022,
+      "cited_by": 89
+    },
+    {
+      "title": "Multi-level attention network: application to brain tumor classification",
+      "authors": "NS Shaik, TK Cherukuri",
+      "venue": "Signal, Image and Video Processing 16 (3), 817-824",
+      "year": 2022,
+      "cited_by": 176
+    },
+    {
+      "title": "Transfer learning based novel ensemble classifier for COVID-19 detection from chest CT-scans",
+      "authors": "NS Shaik, TK Cherukuri",
+      "venue": "Computers in Biology and Medicine 141, 105127",
+      "year": 2022,
+      "cited_by": 108
+    },
+    {
+      "title": "Lesion-aware attention with neural support vector machine for retinopathy diagnosis",
+      "authors": "NS Shaik, TK Cherukuri",
+      "venue": "Machine Vision and Applications 32 (6), 126",
+      "year": 2021,
+      "cited_by": 43
+    },
+    {
+      "title": "Composite deep neural network with gated-attention mechanism for diabetic retinopathy severity classification: JD Bodapati et al.",
+      "authors": "JD Bodapati, NS Shaik, V Naralasetti",
+      "venue": "Journal of Ambient Intelligence and Humanized Computing 12 (10), 9825-9839",
+      "year": 2021,
+      "cited_by": 234
+    },
+    {
+      "title": "Deep convolution feature aggregation: an application to diabetic retinopathy severity level prediction",
+      "authors": "JD Bodapati, NS Shaik, V Naralasetti",
+      "venue": "Signal, Image and Video Processing 15 (5), 923-930",
+      "year": 2021,
+      "cited_by": 100
+    },
+    {
+      "title": "Msenet: Multi-modal squeeze-and-excitation network for brain tumor severity prediction",
+      "authors": "JD Bodapati, SN Shareef, V Naralasetti, NB Mundukur",
+      "venue": "International Journal of Pattern Recognition and Artificial Intelligence 35�…",
+      "year": 2021,
+      "cited_by": 46
+    },
+    {
+      "title": "Joint training of two-channel deep neural network for brain tumor classification",
+      "authors": "JD Bodapati, NS Shaik, V Naralasetti, NB Mundukur",
+      "venue": "Signal, Image and Video Processing 15 (4), 753-760",
+      "year": 2021,
+      "cited_by": 131
+    },
+    {
+      "title": "Deep Convolution Features in Non-linear Embedding Space for Fundus Image Classification.",
+      "authors": "V Dondeti, JD Bodapati, NS Shaik, V Naralasetti",
+      "venue": "Rev. d'Intelligence Artif. 34 (3), 307-313",
+      "year": 2020,
+      "cited_by": 79
+    },
+    {
+      "title": "Blended multi-modal deep convnet features for diabetic retinopathy severity prediction",
+      "authors": "JD Bodapati, V Naralasetti, SN Shareef, S Hakak, M Bilal, ...",
+      "venue": "Electronics 9 (6), 914",
+      "year": 2020,
+      "cited_by": 217
+    },
+    {
+      "title": "Sentiment Analysis from Movie Reviews Using LSTMs.",
+      "authors": "JD Bodapati, N Veeranjaneyulu, NS Shaik",
+      "venue": "Ing�nierie des syst�mes d Inf. 24 (1), 125-129",
+      "year": 2019,
+      "cited_by": 67
+    },
+    {
+      "title": "Self-Critiquing Cooperative Mixture-of-Experts for Multi-Modal Mobile Oculomics",
+      "authors": "NS Shaik, J Park, YJ Kim, J Jung, H Oh, DH Ye",
+      "venue": "",
+      "year": null,
+      "cited_by": 0
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "date": "2026-11-23",
+    "changes": [
+      "OpenAlex: 1291 citations from 974 citing papers (was 1293), h-index 14",
+      "Google Scholar: 1417 citations (was not tracked), h-index 14, i10-index 17",
+      "Added the DOI 10.1109/mlsp68619.2026.11772568 to \"Disentangling Co-Occurring Retinal Pathologies with Saliency-Guided Sparse Expert Routing\""
+    ]
+  }
+]

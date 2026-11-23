@@ -355,17 +355,29 @@ December 2026). M.S. thesis: GSU ScholarWorks.
 - Academic Excellence Awards (all four years), VFSTR University (2016–2020). Top-5 rank holder in CSE each year.
 
 ## CITATIONS
-OpenAlex snapshot of 2026-11-19: 1293 citations from 975 citing papers (1195 excluding self-citations), h-index 14, i10-index 17. Google Scholar reports slightly higher counts (see CURRENT PROFILE). Full list of citing papers: https://shaiknagurshareef.github.io/publications/citations/
+Google Scholar (read 2026-11-23; these are the official figures shown on the site): 1417 citations, h-index 14, i10-index 17; since 2021: 1400 citations.
+Most-cited papers on Google Scholar:
+- Composite deep neural network with gated-attention mechanism for diabetic retinopathy severity classification: JD Bodapati et al. (Journal of Ambient Intelligence and Humanized Computing 12 (10), 9825-9839, 2021): 234 citations
+- Blended multi-modal deep convnet features for diabetic retinopathy severity prediction (Electronics 9 (6), 914, 2020): 217 citations
+- Multi-level attention network: application to brain tumor classification (Signal, Image and Video Processing 16 (3), 817-824, 2022): 176 citations
+- Joint training of two-channel deep neural network for brain tumor classification (Signal, Image and Video Processing 15 (4), 753-760, 2021): 131 citations
+- Transfer learning based novel ensemble classifier for COVID-19 detection from chest CT-scans (Computers in Biology and Medicine 141, 105127, 2022): 108 citations
+- Deep convolution feature aggregation: an application to diabetic retinopathy severity level prediction (Signal, Image and Video Processing 15 (5), 923-930, 2021): 100 citations
+- Hinge attention network: A joint model for diabetic retinopathy severity grading: NS Shaik and TK Cherukuri (Applied Intelligence 52 (13), 15105-15121, 2022): 89 citations
+- Deep Convolution Features in Non-linear Embedding Space for Fundus Image Classification. (Rev. d'Intelligence Artif. 34 (3), 307-313, 2020): 79 citations
+- Sentiment Analysis from Movie Reviews Using LSTMs. (Ing�nierie des syst�mes d Inf. 24 (1), 125-129, 2019): 67 citations
+- Msenet: Multi-modal squeeze-and-excitation network for brain tumor severity prediction (International Journal of Pattern Recognition and Artificial Intelligence 35�…, 2021): 46 citations
+OpenAlex snapshot of 2026-11-23: 1291 citations from 974 citing papers (1192 excluding self-citations), h-index 14, i10-index 17. Google Scholar reports slightly higher counts (see CURRENT PROFILE). Full list of citing papers: https://shaiknagurshareef.github.io/publications/citations/
 Most-cited papers:
-- Composite deep neural network with gated-attention mechanism for diabetic retinopathy severity classification (Journal of Ambient Intelligence and Humanized Computing, 2021): 201 citations
-- Blended Multi-Modal Deep ConvNet Features for Diabetic Retinopathy Severity Prediction (Electronics, 2020): 197 citations
-- Multi-level attention network: application to brain tumor classification (Signal Image and Video Processing, 2021): 168 citations
-- Joint training of two-channel deep neural network for brain tumor classification (Signal Image and Video Processing, 2020): 120 citations
-- Deep convolution feature aggregation: an application to diabetic retinopathy severity level prediction (Signal Image and Video Processing, 2021): 96 citations
-- Transfer learning based novel ensemble classifier for COVID-19 detection from chest CT-scans (Computers in Biology and Medicine, 2021): 96 citations
-- Hinge attention network: A joint model for diabetic retinopathy severity grading (Applied Intelligence, 2022): 81 citations
+- Composite deep neural network with gated-attention mechanism for diabetic retinopathy severity classification (Journal of Ambient Intelligence and Humanized Computing, 2021): 202 citations
+- Blended Multi-Modal Deep ConvNet Features for Diabetic Retinopathy Severity Prediction (Electronics, 2020): 198 citations
+- Multi-level attention network: application to brain tumor classification (Signal Image and Video Processing, 2021): 167 citations
+- Joint training of two-channel deep neural network for brain tumor classification (Signal Image and Video Processing, 2020): 118 citations
+- Transfer learning based novel ensemble classifier for COVID-19 detection from chest CT-scans (Computers in Biology and Medicine, 2021): 97 citations
+- Deep convolution feature aggregation: an application to diabetic retinopathy severity level prediction (Signal Image and Video Processing, 2021): 95 citations
+- Hinge attention network: A joint model for diabetic retinopathy severity grading (Applied Intelligence, 2022): 80 citations
 - Deep Convolution Features in Non-linear Embedding Space for Fundus Image Classification (Revue d intelligence artificielle, 2020): 69 citations
-- Sentiment Analysis from Movie Reviews Using LSTMs (Ingénierie des systèmes d information, 2019): 69 citations
+- Sentiment Analysis from Movie Reviews Using LSTMs (Ingénierie des systèmes d information, 2019): 68 citations
 - MSENet: Multi-Modal Squeeze-and-Excitation Network for Brain Tumor Severity Prediction (International Journal of Pattern Recognition and Artificial Intelligence, 2021): 43 citations
 
 ## PEER REVIEW AND SERVICE
